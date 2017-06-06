@@ -83,11 +83,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Dc1-5A-Cf0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qkr-jH-VYo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r31-o8-7RY">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="1136"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dmW-88-L4A" userLabel="Container">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="660"/>
@@ -222,7 +222,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ohD-Cs-CxB"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="667"/>
+                    <size key="freeformSize" width="375" height="1200"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdD-XR-OH4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
