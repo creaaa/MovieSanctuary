@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="h2p-ag-UFx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="b4R-wb-ub5">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -75,6 +75,160 @@
             <point key="canvasLocation" x="904.79999999999995" y="792.95352323838085"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="JhX-NA-nAK">
+            <objects>
+                <viewController id="qbU-1Z-50F" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LeS-5u-gX3"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dc1-5A-Cf0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qkr-jH-VYo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r31-o8-7RY">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dmW-88-L4A" userLabel="Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="660"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cnj-rb-dfM" userLabel="All Stack View">
+                                                <rect key="frame" x="8" y="30" width="359" height="600"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="E3y-3F-m6Q" userLabel="Stack View1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="359" height="150"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Obt-2P-1q5" userLabel="Button1">
+                                                                <rect key="frame" x="0.0" y="0.0" width="149.5" height="150"/>
+                                                                <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="150" id="i9u-Mn-KlY"/>
+                                                                    <constraint firstAttribute="height" constant="150" id="k9A-nP-ZSL"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q09-mu-qhq" userLabel="Button2">
+                                                                <rect key="frame" x="209.5" y="0.0" width="149.5" height="150"/>
+                                                                <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="150" id="G8p-XL-SoL"/>
+                                                                    <constraint firstAttribute="height" constant="150" id="llF-8p-EBI"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="3tZ-Rf-c9E" userLabel="Stack View2">
+                                                        <rect key="frame" x="0.0" y="150" width="359" height="150"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WU-dY-CXa" userLabel="Button1">
+                                                                <rect key="frame" x="0.0" y="0.0" width="149.5" height="150"/>
+                                                                <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="150" id="oiO-zz-o6y"/>
+                                                                    <constraint firstAttribute="height" constant="150" id="omj-Ep-En3"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJs-TB-nxw" userLabel="Button2">
+                                                                <rect key="frame" x="209.5" y="0.0" width="149.5" height="150"/>
+                                                                <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="150" id="HJC-xZ-fQp"/>
+                                                                    <constraint firstAttribute="height" constant="150" id="Tit-Wk-u1v"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="uK0-3O-3PS" userLabel="Stack View3">
+                                                        <rect key="frame" x="0.0" y="300" width="359" height="150"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZN-a9-65M" userLabel="Button1">
+                                                                <rect key="frame" x="0.0" y="0.0" width="149.5" height="150"/>
+                                                                <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="150" id="AEE-B6-hGd"/>
+                                                                    <constraint firstAttribute="width" constant="150" id="zlG-5I-2a0"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nPV-g2-Z6y" userLabel="Button2">
+                                                                <rect key="frame" x="209.5" y="0.0" width="149.5" height="150"/>
+                                                                <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="150" id="Dxj-uM-DgN"/>
+                                                                    <constraint firstAttribute="height" constant="150" id="f8k-RV-afw"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="k2e-d8-0Gv" userLabel="Stack View4">
+                                                        <rect key="frame" x="0.0" y="450" width="359" height="150"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZR-LN-xei" userLabel="Button1">
+                                                                <rect key="frame" x="0.0" y="0.0" width="149.5" height="150"/>
+                                                                <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="150" id="K9k-rA-RDT"/>
+                                                                    <constraint firstAttribute="width" constant="150" id="OFz-7c-242"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9lO-Wk-RYZ" userLabel="Button2">
+                                                                <rect key="frame" x="209.5" y="0.0" width="149.5" height="150"/>
+                                                                <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="150" id="U7D-6b-V4h"/>
+                                                                    <constraint firstAttribute="width" constant="150" id="Uii-cM-FGy"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.71738089940000005" green="1" blue="0.97303623829999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="cnj-rb-dfM" firstAttribute="top" secondItem="dmW-88-L4A" secondAttribute="top" constant="30" id="Ffr-PA-52N"/>
+                                            <constraint firstItem="cnj-rb-dfM" firstAttribute="trailing" secondItem="dmW-88-L4A" secondAttribute="trailingMargin" id="JSs-Wg-cl5"/>
+                                            <constraint firstItem="cnj-rb-dfM" firstAttribute="leading" secondItem="dmW-88-L4A" secondAttribute="leadingMargin" id="UM1-eq-IL5"/>
+                                            <constraint firstAttribute="bottom" secondItem="cnj-rb-dfM" secondAttribute="bottom" constant="30" id="Wtm-h1-72b"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="dmW-88-L4A" secondAttribute="trailing" id="GQt-jz-mHq"/>
+                                    <constraint firstItem="dmW-88-L4A" firstAttribute="width" secondItem="r31-o8-7RY" secondAttribute="width" id="LeR-CF-fPZ"/>
+                                    <constraint firstItem="dmW-88-L4A" firstAttribute="leading" secondItem="r31-o8-7RY" secondAttribute="leading" id="Pcp-u1-JTE"/>
+                                    <constraint firstItem="dmW-88-L4A" firstAttribute="top" secondItem="r31-o8-7RY" secondAttribute="top" id="YI3-hj-rmH"/>
+                                    <constraint firstAttribute="bottom" secondItem="dmW-88-L4A" secondAttribute="bottom" id="f6O-Pv-pXU"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="r31-o8-7RY" secondAttribute="trailing" id="DP2-TS-bRF"/>
+                            <constraint firstItem="r31-o8-7RY" firstAttribute="top" secondItem="LeS-5u-gX3" secondAttribute="bottom" id="ZSf-8P-j5t"/>
+                            <constraint firstItem="Dc1-5A-Cf0" firstAttribute="top" secondItem="r31-o8-7RY" secondAttribute="bottom" id="fVB-i2-hut"/>
+                            <constraint firstItem="r31-o8-7RY" firstAttribute="leading" secondItem="qkr-jH-VYo" secondAttribute="leading" id="t8q-gG-S36"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ohD-Cs-CxB"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bdD-XR-OH4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="905" y="1796"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="x2B-hG-YjO">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="k6U-Nw-PQs" sceneMemberID="viewController">
@@ -130,7 +284,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="120" id="Yv8-j5-vJW"/>
                                                 </constraints>
-                                                <mutableString key="text">Evan Treborn grows up in a small town with his single, working mother and his friends. He suffers from memory blackouts where he suddenly finds himself somewhere else, confused. Evan's friends and mother hardly believe him, thinking he makes it up just to get out of trouble. As Evan grows up he has fewer of these blackouts until he seems to have recovered. Since the age of seven he has written a diary of his blackout moments so he can remember what happens. One day at college he starts to read one of his old diaries, and suddenly a flashback hits him like a brick!</mutableString>
+                                                <string key="text">Evan Treborn grows up in a small town with his single, working mother and his friends. He suffers from memory blackouts where he suddenly finds himself somewhere else, confused. Evan's friends and mother hardly believe him, thinking he makes it up just to get out of trouble. As Evan grows up he has fewer of these blackouts until he seems to have recovered. Since the age of seven he has written a diary of his blackout moments so he can remember what happens. One day at college he starts to read one of his old diaries, and suddenly a flashback hits him like a brick!</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -196,6 +350,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4nU-tN-yGO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="168.80000000000001" y="792.95352323838085"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Jk1-JP-o8Y">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="b4R-wb-ub5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zNA-JK-CYs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qbU-1Z-50F" kind="relationship" relationship="rootViewController" id="5T4-Ic-TVR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1XB-CR-mMj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52" y="1796"/>
         </scene>
     </scenes>
     <resources>
