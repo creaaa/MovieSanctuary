@@ -13,6 +13,7 @@
 		44D9431B1EE22865004EF6A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44D9431A1EE22865004EF6A3 /* Assets.xcassets */; };
 		44D9431E1EE22865004EF6A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44D9431C1EE22865004EF6A3 /* LaunchScreen.storyboard */; };
 		44D943261EE234E4004EF6A3 /* readme.md in Sources */ = {isa = PBXBuildFile; fileRef = 44D943251EE234E4004EF6A3 /* readme.md */; };
+		49EF605D1EE629F70093B340 /* MovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EF605C1EE629F70093B340 /* MovieDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		44D9431D1EE22865004EF6A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		44D9431F1EE22865004EF6A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44D943251EE234E4004EF6A3 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = readme.md; path = ../readme.md; sourceTree = "<group>"; };
+		49EF605C1EE629F70093B340 /* MovieDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				44D943131EE22865004EF6A3 /* AppDelegate.swift */,
 				44D943151EE22865004EF6A3 /* SearchMovieViewController.swift */,
+				49EF605C1EE629F70093B340 /* MovieDetails.swift */,
 				44D943171EE22865004EF6A3 /* Main.storyboard */,
 				44D9431A1EE22865004EF6A3 /* Assets.xcassets */,
 				44D9431C1EE22865004EF6A3 /* LaunchScreen.storyboard */,
@@ -143,6 +146,7 @@
 				44D943161EE22865004EF6A3 /* SearchMovieViewController.swift in Sources */,
 				44D943261EE234E4004EF6A3 /* readme.md in Sources */,
 				44D943141EE22865004EF6A3 /* AppDelegate.swift in Sources */,
+				49EF605D1EE629F70093B340 /* MovieDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,10 +271,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L798W4XTQ6;
 				INFOPLIST_FILE = MovieSanctuary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.masa.MovieSanctuary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -280,10 +286,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L798W4XTQ6;
 				INFOPLIST_FILE = MovieSanctuary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.masa.MovieSanctuary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -306,6 +314,7 @@
 				44D943241EE22865004EF6A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
