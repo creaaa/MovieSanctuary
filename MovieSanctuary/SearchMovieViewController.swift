@@ -1,9 +1,7 @@
 
 import UIKit
-import Pastel
 
-
-extension UIScrollView {
+extension SearchVCCategoryScrollView {
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.next?.touchesBegan(touches, with: event)
     }
@@ -27,7 +25,7 @@ class SearchMovieViewController: UIViewController {
         
         
         self.scrollView = makeScrollView()
-        self.tableView  = makeTableView()
+        // self.tableView  = makeTableView()
         
         
         self.view.addSubview(scrollView)
@@ -92,8 +90,10 @@ class SearchMovieViewController: UIViewController {
     
     func buttonTapped() {
         
+        /*
         let scrollView = self.view.subviews[0]
         print(scrollView)
+        */
         
         makeTableView()
         
