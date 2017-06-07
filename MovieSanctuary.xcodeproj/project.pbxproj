@@ -18,6 +18,7 @@
 		44E3BE441EE73BB100466CF5 /* SearchVCCategoryScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E3BE431EE73BB100466CF5 /* SearchVCCategoryScrollView.swift */; };
 		44E3BE491EE7C12100466CF5 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E3BE471EE7C12100466CF5 /* TableViewCell.swift */; };
 		44E3BE4A1EE7C12100466CF5 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44E3BE481EE7C12100466CF5 /* TableViewCell.xib */; };
+		44E3BE4C1EE7EFC000466CF5 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E3BE4B1EE7EFC000466CF5 /* MyButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		44E3BE431EE73BB100466CF5 /* SearchVCCategoryScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVCCategoryScrollView.swift; sourceTree = "<group>"; };
 		44E3BE471EE7C12100466CF5 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		44E3BE481EE7C12100466CF5 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		44E3BE4B1EE7EFC000466CF5 /* MyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,17 +68,13 @@
 		44D943121EE22865004EF6A3 /* MovieSanctuary */ = {
 			isa = PBXGroup;
 			children = (
-				44E3BE391EE7124700466CF5 /* Resources */,
 				44D943131EE22865004EF6A3 /* AppDelegate.swift */,
 				44D943171EE22865004EF6A3 /* Main.storyboard */,
-				44E3BE411EE73AD000466CF5 /* SearchCategoryView.xib */,
-				44E3BE431EE73BB100466CF5 /* SearchVCCategoryScrollView.swift */,
-				44D943151EE22865004EF6A3 /* SearchMovieViewController.swift */,
-				44E3BE471EE7C12100466CF5 /* TableViewCell.swift */,
-				44E3BE481EE7C12100466CF5 /* TableViewCell.xib */,
+				44E3BE391EE7124700466CF5 /* Resources */,
+				44E3BE4D1EE7F42F00466CF5 /* Xib */,
+				44E3BE4E1EE7F44000466CF5 /* Views */,
+				44E3BE4F1EE7F46900466CF5 /* Controllers */,
 				44D9431A1EE22865004EF6A3 /* Assets.xcassets */,
-				44D9431C1EE22865004EF6A3 /* LaunchScreen.storyboard */,
-				44D9431F1EE22865004EF6A3 /* Info.plist */,
 				44D943251EE234E4004EF6A3 /* readme.md */,
 			);
 			path = MovieSanctuary;
@@ -85,9 +83,38 @@
 		44E3BE391EE7124700466CF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				44D9431F1EE22865004EF6A3 /* Info.plist */,
+				44D9431C1EE22865004EF6A3 /* LaunchScreen.storyboard */,
 				44E3BE3A1EE7127C00466CF5 /* Quicksand-Regular.ttf */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		44E3BE4D1EE7F42F00466CF5 /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				44E3BE411EE73AD000466CF5 /* SearchCategoryView.xib */,
+				44E3BE481EE7C12100466CF5 /* TableViewCell.xib */,
+			);
+			name = Xib;
+			sourceTree = "<group>";
+		};
+		44E3BE4E1EE7F44000466CF5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				44E3BE4B1EE7EFC000466CF5 /* MyButton.swift */,
+				44E3BE471EE7C12100466CF5 /* TableViewCell.swift */,
+				44E3BE431EE73BB100466CF5 /* SearchVCCategoryScrollView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		44E3BE4F1EE7F46900466CF5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				44D943151EE22865004EF6A3 /* SearchMovieViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,6 +198,7 @@
 				44E3BE441EE73BB100466CF5 /* SearchVCCategoryScrollView.swift in Sources */,
 				44D943261EE234E4004EF6A3 /* readme.md in Sources */,
 				44D943141EE22865004EF6A3 /* AppDelegate.swift in Sources */,
+				44E3BE4C1EE7EFC000466CF5 /* MyButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
