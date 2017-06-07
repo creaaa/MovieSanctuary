@@ -1,7 +1,7 @@
 
 import UIKit
 
-class GomiView: UIView {
+class SearchVCCategoryScrollView: UIView {
 
     override init(frame: CGRect) {
         
@@ -19,7 +19,7 @@ class GomiView: UIView {
     
     func loadNib() {
         
-        let view = Bundle.main.loadNibNamed("ToggledTableView", owner: self, options: nil)?.first as! UIView
+        let view = Bundle.main.loadNibNamed("SearchCategoryView", owner: self, options: nil)?.first as! UIView
         
         view.frame = self.bounds
         
