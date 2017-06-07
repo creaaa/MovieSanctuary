@@ -20,13 +20,16 @@ class SearchMovieViewController: UIViewController {
         
         super.viewDidLoad()
         
-        
         NotificationCenter.default.addObserver(self, selector: #selector(buttonTapped), name: Notification.Name("Toggle"), object: nil)
-        
         
         self.scrollView = makeScrollView()
         // self.tableView  = makeTableView()
         
+        
+        if let searchBar = scrollView.subviews[0].subviews[0].subviews[0] as? UISearchBar {
+            print("ほんとにきたよ...")
+            searchBar.delegate = self
+        }
         
         self.view.addSubview(scrollView)
         
@@ -138,6 +141,7 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
 extension SearchMovieViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
         self.view.endEditing(true)
         
         if searchBar.text?.characters.count == 0 {

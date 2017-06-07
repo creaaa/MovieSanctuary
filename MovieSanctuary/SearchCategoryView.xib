@@ -31,10 +31,10 @@
                     <rect key="frame" x="0.0" y="108" width="375" height="892"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lQp-vu-LAS" userLabel="Contents">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="718"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="738"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="V5g-We-fIF" userLabel="Whole Stack View">
-                                    <rect key="frame" x="8" y="0.0" width="359" height="690"/>
+                                    <rect key="frame" x="8" y="20" width="359" height="690"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="EoH-Vy-Lyc" userLabel="Stack View1">
                                             <rect key="frame" x="14.5" y="0.0" width="330" height="150"/>
@@ -139,7 +139,7 @@
                                 <constraint firstAttribute="trailingMargin" secondItem="V5g-We-fIF" secondAttribute="trailing" id="7fa-3J-PFY"/>
                                 <constraint firstAttribute="bottomMargin" secondItem="V5g-We-fIF" secondAttribute="bottom" constant="20" id="Ksv-Py-LvN"/>
                                 <constraint firstItem="V5g-We-fIF" firstAttribute="leading" secondItem="lQp-vu-LAS" secondAttribute="leadingMargin" id="fv2-yL-NSA"/>
-                                <constraint firstItem="V5g-We-fIF" firstAttribute="top" secondItem="lQp-vu-LAS" secondAttribute="top" id="pD7-v2-AUD"/>
+                                <constraint firstItem="V5g-We-fIF" firstAttribute="top" secondItem="lQp-vu-LAS" secondAttribute="top" constant="20" id="pD7-v2-AUD"/>
                             </constraints>
                         </view>
                     </subviews>
