@@ -1,5 +1,7 @@
 
 import UIKit
+import Pastel
+
 
 extension UIScrollView {
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -7,66 +9,34 @@ extension UIScrollView {
     }
 }
 
-//
-//extension UIButton {
-//    
-//    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if let touch = touches.first {
-//                       
-//            removeAllSubviews(parentView: parentViewControllerRootView()!)
-//            
-//            NotificationCenter.default.post(name: Notification.Name("Toggle"), object: nil)
-//            
-//        }
-//    }
-//
-//    func removeAllSubviews(parentView: UIView) {
-//        
-//        let subviews = parentView.subviews
-//        
-//        subviews.forEach{ $0.removeFromSuperview() }
-//        
-//    }
-//    
-//    
-//    func parentViewControllerRootView() -> UIView? {
-//        var parentResponder: UIResponder? = self
-//        while true {
-//            guard let nextResponder = parentResponder?.next else { return nil }
-//            if let viewController = nextResponder as? UIViewController {
-//                // return viewController.view.subviews[0] // こっちだとinsetが正しい
-//                return viewController.view  // こっちだとinsetがおかしい
-//            }
-//            parentResponder = nextResponder
-//        }
-//    }
-//    
-//}
-
-
 
 class SearchMovieViewController: UIViewController {
 
     let names = ["1", "2", "3", "4", "5"]
     
+    var scrollView: SearchVCCategoryScrollView!
+    var tableView:  UITableView!
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        
         NotificationCenter.default.addObserver(self, selector: #selector(buttonTapped), name: Notification.Name("Toggle"), object: nil)
         
-        self.view.addSubview(makeScrollView())
+        
+        self.scrollView = makeScrollView()
+        self.tableView  = makeTableView()
+        
+        
+        self.view.addSubview(scrollView)
         
     }
     
     
     func makeScrollView() -> SearchVCCategoryScrollView {
         return SearchVCCategoryScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-    }
-    
-    
-    func buttonTapped() {
-        makeTableView()
     }
     
     
@@ -114,6 +84,18 @@ class SearchMovieViewController: UIViewController {
         let xib = UINib(nibName: "TableViewCell", bundle: nil)
         
         tableView.register(xib, forCellReuseIdentifier: "Cell")
+        
+    }
+    
+    
+    /* observe method */
+    
+    func buttonTapped() {
+        
+        let scrollView = self.view.subviews[0]
+        print(scrollView)
+        
+        makeTableView()
         
     }
     
@@ -174,7 +156,6 @@ extension SearchMovieViewController: UISearchBarDelegate {
         self.view.endEditing(true)
         
         self.view.addSubview(makeScrollView())
-        
     }
     
 }

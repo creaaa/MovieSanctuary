@@ -36,21 +36,21 @@
                                             <subviews>
                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4b-s1-zFF" userLabel="Button1" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                                    <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="Lsx-lh-7Ti"/>
                                                         <constraint firstAttribute="width" secondItem="M4b-s1-zFF" secondAttribute="height" multiplier="1:1" id="jnr-2F-TtL"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Action"/>
                                                 </button>
                                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NG8-Fd-bTr" userLabel="Button2" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="180" y="0.0" width="150" height="150"/>
-                                                    <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="NG8-Fd-bTr" secondAttribute="height" multiplier="1:1" id="xgE-6R-POa"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Love Story"/>
                                                 </button>
                                             </subviews>
@@ -60,21 +60,21 @@
                                             <subviews>
                                                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfr-y6-L3K" userLabel="Button3" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                                    <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="8Gp-mG-169"/>
                                                         <constraint firstAttribute="width" secondItem="Dfr-y6-L3K" secondAttribute="height" multiplier="1:1" id="II7-n6-Dsh"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Sports"/>
                                                 </button>
                                                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="keM-L5-oKe" userLabel="Button4" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="180" y="0.0" width="150" height="150"/>
-                                                    <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="keM-L5-oKe" secondAttribute="height" multiplier="1:1" id="Jmq-qj-sWx"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Thriller"/>
                                                 </button>
                                             </subviews>
@@ -84,21 +84,21 @@
                                             <subviews>
                                                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqN-74-LQO" userLabel="Button5" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                                    <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="ZM9-5Q-afI"/>
                                                         <constraint firstAttribute="width" secondItem="oqN-74-LQO" secondAttribute="height" multiplier="1:1" id="igy-eN-uqT"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Documentary"/>
                                                 </button>
                                                 <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpM-UM-ZRG" userLabel="Button6" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="180" y="0.0" width="150" height="150"/>
-                                                    <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="YpM-UM-ZRG" secondAttribute="height" multiplier="1:1" id="QzP-OF-XaS"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Musical"/>
                                                 </button>
                                             </subviews>
@@ -108,21 +108,21 @@
                                             <subviews>
                                                 <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKQ-9o-cXa" userLabel="Button7" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                                    <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="oKQ-9o-cXa" secondAttribute="height" multiplier="1:1" id="QVB-v1-Gtp"/>
                                                         <constraint firstAttribute="height" constant="150" id="sKt-Xu-gDT"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Animation"/>
                                                 </button>
                                                 <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2B-we-DU1" userLabel="Button8" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="180" y="0.0" width="150" height="150"/>
-                                                    <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="V2B-we-DU1" secondAttribute="height" multiplier="1:1" id="x0n-6h-k3H"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Hardboiled"/>
                                                 </button>
                                             </subviews>
@@ -130,7 +130,6 @@
                                     </subviews>
                                 </stackView>
                             </subviews>
-                            <color key="backgroundColor" red="1" green="0.97385048119999995" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailingMargin" secondItem="V5g-We-fIF" secondAttribute="trailing" id="7fa-3J-PFY"/>
                                 <constraint firstAttribute="bottomMargin" secondItem="V5g-We-fIF" secondAttribute="bottom" constant="20" id="Ksv-Py-LvN"/>
@@ -139,7 +138,6 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="lQp-vu-LAS" secondAttribute="trailing" id="X3q-FD-bva"/>
                         <constraint firstAttribute="bottom" secondItem="lQp-vu-LAS" secondAttribute="bottom" id="XOv-9N-QKw"/>
@@ -149,7 +147,6 @@
                     </constraints>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" red="0.71738089940000005" green="1" blue="0.97303623829999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="eCS-JS-Emt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9Xc-9Z-cTS"/>
                 <constraint firstAttribute="bottom" secondItem="eCS-JS-Emt" secondAttribute="bottom" id="oAA-Gf-Cva"/>
