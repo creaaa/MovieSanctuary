@@ -37,8 +37,16 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Director}, {year}" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVV-gd-lnk">
-                        <rect key="frame" x="82" y="76.5" width="96" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVV-gd-lnk" userLabel="Genre1 Label">
+                        <rect key="frame" x="82" y="76.5" width="40.5" height="15"/>
+                        <color key="backgroundColor" red="1" green="0.64742231090000002" blue="0.26694221969999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBq-yD-GeY" userLabel="Genre2 Label">
+                        <rect key="frame" x="137.5" y="76" width="43.5" height="15"/>
+                        <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -46,16 +54,19 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="a10-sv-ddh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="20" id="BqQ-NQ-B8O"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="TBq-yD-GeY" secondAttribute="bottom" id="GNY-Iy-LNw"/>
                     <constraint firstAttribute="bottomMargin" secondItem="HVV-gd-lnk" secondAttribute="bottom" id="QIF-Jj-FyZ"/>
                     <constraint firstItem="gnY-mK-LoS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="bOP-Q0-BkY"/>
                     <constraint firstItem="gnY-mK-LoS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cZG-cV-tvF"/>
                     <constraint firstItem="a10-sv-ddh" firstAttribute="leading" secondItem="gnY-mK-LoS" secondAttribute="trailing" constant="10" id="ezR-mf-HmC"/>
+                    <constraint firstItem="TBq-yD-GeY" firstAttribute="leading" secondItem="HVV-gd-lnk" secondAttribute="trailing" constant="15" id="fyX-Au-neW"/>
                     <constraint firstItem="HVV-gd-lnk" firstAttribute="leading" secondItem="gnY-mK-LoS" secondAttribute="trailing" constant="10" id="lCm-Dz-t8T"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="genre1Label" destination="HVV-gd-lnk" id="isU-9K-fcd"/>
+                <outlet property="genre2Label" destination="TBq-yD-GeY" id="pwW-rJ-5n2"/>
                 <outlet property="posterImageView" destination="gnY-mK-LoS" id="4bB-eA-zr9"/>
-                <outlet property="subtitleLabel" destination="HVV-gd-lnk" id="2Sg-Jp-DKt"/>
                 <outlet property="titleLabel" destination="a10-sv-ddh" id="zmC-pk-i2u"/>
             </connections>
         </tableViewCell>

@@ -11,7 +11,7 @@ extension SearchVCCategoryScrollView {
 
 class SearchMovieViewController: UIViewController {
 
-    let names = ["1", "2", "3", "4", "5"]
+    let names = ["The Butterfly Effect", "Inception", "Star Wars 8", "Seven", "Citizen Kane"]
     
     var pastelView: PastelView = {
     
@@ -72,9 +72,15 @@ class SearchMovieViewController: UIViewController {
         pastelView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive     = true
         
         
-//        self.navigationItem.leftBarButtonItem =  UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(back))
-
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(back))
         
+        self.navigationItem.leftBarButtonItem?.isEnabled = false
+        self.navigationItem.leftBarButtonItem?.tintColor = .clear
+        
+        self.navigationController?.navigationBar.titleTextAttributes
+            = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
+        
+        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!], for: .normal)
         
     }
     
@@ -142,7 +148,10 @@ class SearchMovieViewController: UIViewController {
         // transiton時にツリー階層の位置関係が自動で変わるので、もうこれは必要ない
         // view.bringSubview(toFront: tableView)
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(back))
+        self.navigationItem.leftBarButtonItem?.isEnabled = true
+        self.navigationItem.leftBarButtonItem?.tintColor = .blue
+        
+        
         
     }
     
@@ -157,8 +166,8 @@ class SearchMovieViewController: UIViewController {
         // これやると、scrollViewがツリー階層から除去されるのがキツイ...
         UIView.transition(from: tableView,
                           to: scrollView,
-                          duration: 0.5,
-                          options: .transitionCrossDissolve,
+                          duration: 1.0,
+                          options: .transitionCurlDown,
                           completion: {_ in print("transition!") }
         )
         
@@ -187,7 +196,8 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         
         cell.titleLabel.text = self.names[indexPath.row]
-        cell.subtitleLabel.text = "Hello, World"
+        cell.genre1Label.text = "Thriller"
+        cell.genre2Label.text = "Mystery"
         
         return cell
         
@@ -215,7 +225,31 @@ extension SearchMovieViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         if searchBar.text?.characters.count != 0 {
-            print("遷移します")
+            
+            // TODO: DRYじゃねーからまとめとけ
+            
+            self.tableView.alpha  = 1
+            
+            // これやると、scrollViewがツリー階層から除去されるのがキツイ...
+            UIView.transition(from: scrollView,
+                              to: tableView,
+                              duration: 0.5,
+                              options: .transitionCrossDissolve,
+                              completion: {_ in print("transition!") }
+            )
+            
+            // ここじゃないとダメなのは、↑のメソッド実行するとscrollViewが消えるから
+            self.scrollView.alpha = 0
+            
+            self.view.insertSubview(scrollView, belowSubview: tableView)
+            
+            // transiton時にツリー階層の位置関係が自動で変わるので、もうこれは必要ない
+            // view.bringSubview(toFront: tableView)
+            
+            self.navigationItem.leftBarButtonItem?.isEnabled = true
+            self.navigationItem.leftBarButtonItem?.tintColor = .blue
+            
+            
         }
         
         self.view.endEditing(true)
@@ -224,24 +258,25 @@ extension SearchMovieViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         
-        self.view.endEditing(true)
-        
-        self.scrollView.alpha = 1
-        self.tableView.alpha  = 0
-        
-        // これやると、scrollViewがツリー階層から除去されるのがキツイ...
-        UIView.transition(from: tableView,
-                          to: scrollView,
-                          duration: 0.5,
-                          options: .transitionCrossDissolve,
-                          completion: {_ in print("transition!") }
-        )
-        
-        // ここじゃないとダメなのは、↑のメソッド実行するとscrollViewが消えるから
-        self.tableView.alpha = 0
-        
-        self.view.insertSubview(tableView, belowSubview: scrollView)
-        
+//        self.view.endEditing(true)
+//        
+//        self.scrollView.alpha = 1
+//        self.tableView.alpha  = 0
+//        
+//        // これやると、scrollViewがツリー階層から除去されるのがキツイ...
+//        UIView.transition(from: tableView,
+//                          to: scrollView,
+//                          duration: 1.5,
+//                          // transitionCrossDissolve 0.5
+//                          options: .transitionCurlUp,
+//                          completion: {_ in print("transition!") }
+//        )
+//        
+//        // ここじゃないとダメなのは、↑のメソッド実行するとscrollViewが消えるから
+//        self.tableView.alpha = 0
+//        
+//        self.view.insertSubview(tableView, belowSubview: scrollView)
+//        
         
     }
     
