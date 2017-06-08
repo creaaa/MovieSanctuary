@@ -3,17 +3,28 @@ import UIKit
 import Pastel
 
 
-class SearchVCCategoryScrollView: UIView {
+class SearchVCResultTableView: UIView {
 
     // コード時は、こっちだけが呼ばれる
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
+        
+        print("こっちきた1")
+        
         loadNib()
+        
     }
     
     required init(coder aDecoder: NSCoder) {
+        
         super.init(coder: aDecoder)!
+        
+        print("こっちきた2")
+
+        
         loadNib()
+        
     }
     
     func loadNib() {
@@ -39,9 +50,10 @@ class SearchVCCategoryScrollView: UIView {
         pastelView.startAnimation()
         
         self.addSubview(pastelView)
-        
  
-        let view = Bundle.main.loadNibNamed("SearchCategoryView", owner: self, options: nil)?.first as! UIView
+        
+        
+        let view = Bundle.main.loadNibNamed("ResultTableView", owner: self, options: nil)?.first as! UIView
         
         view.frame = self.bounds
         
@@ -51,6 +63,3 @@ class SearchVCCategoryScrollView: UIView {
     }
 
 }
-
-
-

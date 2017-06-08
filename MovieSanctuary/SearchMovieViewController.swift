@@ -13,7 +13,7 @@ class SearchMovieViewController: UIViewController {
     let names = ["1", "2", "3", "4", "5"]
     
     var scrollView: SearchVCCategoryScrollView!
-    var tableView:  UITableView!
+    var tableView:  SearchVCResultTableView!
     
     
     override func viewDidLoad() {
@@ -23,12 +23,16 @@ class SearchMovieViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(buttonTapped), name: Notification.Name("Toggle"), object: nil)
         
         self.scrollView = makeScrollView()
-        // self.tableView  = makeTableView()
+        self.tableView  = makeTableView()
         
-        
-        if let searchBar = scrollView.subviews[0].subviews[0].subviews[0] as? UISearchBar {
+        if let searchBar = scrollView.subviews[1].subviews[0] as? UISearchBar {
             print("ほんとにきたよ...")
             searchBar.delegate = self
+        }
+
+        if let searchBar2 = tableView.subviews[1].subviews[0] as? UISearchBar {
+            print("ほんとにきたよ2...")
+            searchBar2.delegate = self
         }
         
         self.view.addSubview(scrollView)
@@ -36,11 +40,13 @@ class SearchMovieViewController: UIViewController {
     }
     
     
+    
+    
     func makeScrollView() -> SearchVCCategoryScrollView {
         return SearchVCCategoryScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
     }
     
-    
+    /*
     func makeTableView() {
         
         print("ほえええええきたーーーー")
@@ -87,6 +93,27 @@ class SearchMovieViewController: UIViewController {
         tableView.register(xib, forCellReuseIdentifier: "Cell")
         
     }
+ 
+    */
+    
+    
+    func makeTableView() -> SearchVCResultTableView {
+        
+        let view = SearchVCResultTableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        
+        if let tableView = view.subviews[0] as? UITableView {
+            print("まじか。..")
+            tableView.delegate   = self
+            tableView.dataSource = self
+        }
+        
+        return view
+        
+    }
+
+    
+    
+    ////////////////
     
     
     /* observe method */
@@ -98,9 +125,22 @@ class SearchMovieViewController: UIViewController {
         print(scrollView)
         */
         
-        makeTableView()
+        self.view = self.tableView
+        // self.loadViewIfNeeded()
+        
+        
+     
         
     }
+    
+    
+    func setTableView() {
+        
+        
+        
+    }
+    
+    
     
 }
 
@@ -159,7 +199,10 @@ extension SearchMovieViewController: UISearchBarDelegate {
         
         self.view.endEditing(true)
         
-        self.view.addSubview(makeScrollView())
+        // self.view.addSubview(makeScrollView())
+        
+        self.view = self.scrollView
+        
     }
     
 }
