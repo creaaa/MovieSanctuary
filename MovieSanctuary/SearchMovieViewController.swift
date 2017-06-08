@@ -71,6 +71,11 @@ class SearchMovieViewController: UIViewController {
         pastelView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive           = true
         pastelView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive     = true
         
+        
+//        self.navigationItem.leftBarButtonItem =  UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(back))
+
+        
+        
     }
     
     
@@ -91,11 +96,13 @@ class SearchMovieViewController: UIViewController {
         
         let view = SearchVCResultTableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         
+        /*
         if let searchBar = view.subviews[0].subviews[0] as? UISearchBar {
             searchBar.delegate = self
         }
+        */
         
-        if let tableView = view.subviews[0].subviews[1] as? UITableView {
+        if let tableView = view.subviews[0].subviews[0] as? UITableView {
             
             tableView.delegate   = self
             tableView.dataSource = self
@@ -135,7 +142,36 @@ class SearchMovieViewController: UIViewController {
         // transiton時にツリー階層の位置関係が自動で変わるので、もうこれは必要ない
         // view.bringSubview(toFront: tableView)
         
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(back))
+        
     }
+    
+    
+    func back() {
+        
+        self.view.endEditing(true)
+        
+        self.scrollView.alpha = 1
+        self.tableView.alpha  = 0
+        
+        // これやると、scrollViewがツリー階層から除去されるのがキツイ...
+        UIView.transition(from: tableView,
+                          to: scrollView,
+                          duration: 0.5,
+                          options: .transitionCrossDissolve,
+                          completion: {_ in print("transition!") }
+        )
+        
+        // ここじゃないとダメなのは、↑のメソッド実行するとscrollViewが消えるから
+        self.tableView.alpha = 0
+        
+        self.view.insertSubview(tableView, belowSubview: scrollView)
+        
+        self.navigationItem.leftBarButtonItem?.isEnabled = false
+        self.navigationItem.leftBarButtonItem?.tintColor = .clear
+        
+    }
+    
     
 }
 

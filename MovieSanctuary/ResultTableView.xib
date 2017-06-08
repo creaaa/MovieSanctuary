@@ -15,25 +15,17 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JJB-FW-FBw">
-                    <rect key="frame" x="0.0" y="64" width="375" height="44"/>
-                    <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
                 <tableView clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ozJ-eQ-ILc">
-                    <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="JJB-FW-FBw" secondAttribute="trailing" id="7s7-qH-NHr"/>
-                <constraint firstItem="JJB-FW-FBw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="A62-eS-hhA"/>
-                <constraint firstItem="ozJ-eQ-ILc" firstAttribute="top" secondItem="JJB-FW-FBw" secondAttribute="bottom" id="Amk-OD-SOg"/>
+                <constraint firstItem="ozJ-eQ-ILc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="M4F-5d-mE3"/>
                 <constraint firstItem="ozJ-eQ-ILc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Thq-kb-Hev"/>
                 <constraint firstAttribute="trailing" secondItem="ozJ-eQ-ILc" secondAttribute="trailing" id="Vy9-hv-QXb"/>
                 <constraint firstAttribute="bottom" secondItem="ozJ-eQ-ILc" secondAttribute="bottom" id="W8Y-60-zhn"/>
-                <constraint firstItem="JJB-FW-FBw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="co5-1U-0Dr"/>
             </constraints>
         </view>
     </objects>
