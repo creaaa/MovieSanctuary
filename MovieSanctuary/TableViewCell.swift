@@ -8,7 +8,11 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var subtitleLabel: UILabel!
     
     override func awakeFromNib() {
+        
         super.awakeFromNib()
+        
+        self.backgroundColor = .clear
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

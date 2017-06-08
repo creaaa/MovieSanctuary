@@ -7,24 +7,13 @@ class SearchVCResultTableView: UIView {
 
     // コード時は、こっちだけが呼ばれる
     override init(frame: CGRect) {
-        
         super.init(frame: frame)
-        
-        print("こっちきた1")
-        
         loadNib()
-        
     }
     
     required init(coder aDecoder: NSCoder) {
-        
         super.init(coder: aDecoder)!
-        
-        print("こっちきた2")
-
-        
         loadNib()
-        
     }
     
     func loadNib() {

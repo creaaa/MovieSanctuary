@@ -25,26 +25,24 @@ class SearchMovieViewController: UIViewController {
         self.scrollView = makeScrollView()
         self.tableView  = makeTableView()
         
-        if let searchBar = scrollView.subviews[1].subviews[0] as? UISearchBar {
-            print("ほんとにきたよ...")
-            searchBar.delegate = self
-        }
-
-        if let searchBar2 = tableView.subviews[1].subviews[0] as? UISearchBar {
-            print("ほんとにきたよ2...")
-            searchBar2.delegate = self
-        }
-        
+        self.view.addSubview(tableView)
         self.view.addSubview(scrollView)
         
     }
     
     
-    
-    
     func makeScrollView() -> SearchVCCategoryScrollView {
-        return SearchVCCategoryScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        
+        let view = SearchVCCategoryScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        
+        if let searchBar = view.subviews[1].subviews[0] as? UISearchBar {
+            searchBar.delegate = self
+        }
+        
+        return view
+        
     }
+    
     
     /*
     func makeTableView() {
@@ -101,10 +99,19 @@ class SearchMovieViewController: UIViewController {
         
         let view = SearchVCResultTableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         
-        if let tableView = view.subviews[0] as? UITableView {
-            print("まじか。..")
+        if let searchBar = view.subviews[1].subviews[0] as? UISearchBar {
+            searchBar.delegate = self
+        }
+        
+        if let tableView = view.subviews[1].subviews[1] as? UITableView {
+            
             tableView.delegate   = self
             tableView.dataSource = self
+            
+            let xib = UINib(nibName: "TableViewCell", bundle: nil)
+            
+            tableView.register(xib, forCellReuseIdentifier: "Cell")
+            
         }
         
         return view
@@ -113,34 +120,11 @@ class SearchMovieViewController: UIViewController {
 
     
     
-    ////////////////
-    
-    
     /* observe method */
     
     func buttonTapped() {
-        
-        /*
-        let scrollView = self.view.subviews[0]
-        print(scrollView)
-        */
-        
         self.view = self.tableView
-        // self.loadViewIfNeeded()
-        
-        
-     
-        
     }
-    
-    
-    func setTableView() {
-        
-        
-        
-    }
-    
-    
     
 }
 
@@ -165,6 +149,7 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         // ここで indexPathつきのほうでやると無限ループになるので、こっちにしろ
+        // なお、もちろん、tableViewにregisterを忘れることで。ここがぬるぽとなる
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TableViewCell
         
         return cell.bounds.height
