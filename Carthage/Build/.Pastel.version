@@ -1,0 +1,9 @@
+{
+  "commitish" : "0.3.0",
+  "iOS" : [
+    {
+      "hash" : "4b0dd54354e0c8b03ad394669600959cabfcfafadf567a1da5d76d3d988a0f71",
+      "name" : "Pastel"
+    }
+  ]
+}

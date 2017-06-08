@@ -109,9 +109,9 @@
 		44E3BE4D1EE7F42F00466CF5 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
-				44E3BE481EE7C12100466CF5 /* TableViewCell.xib */,
 				44E3BE411EE73AD000466CF5 /* SearchCategoryView.xib */,
 				440C7BE81EE8CBF70050C90A /* ResultTableView.xib */,
+				44E3BE481EE7C12100466CF5 /* TableViewCell.xib */,
 			);
 			name = Xib;
 			sourceTree = "<group>";

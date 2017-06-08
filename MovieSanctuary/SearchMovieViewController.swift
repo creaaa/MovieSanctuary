@@ -1,5 +1,6 @@
 
 import UIKit
+import Pastel
 
 extension SearchVCCategoryScrollView {
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -11,6 +12,34 @@ extension SearchVCCategoryScrollView {
 class SearchMovieViewController: UIViewController {
 
     let names = ["1", "2", "3", "4", "5"]
+    
+    var pastelView: PastelView = {
+    
+        let pastelView = PastelView()
+        
+        // Custom Direction
+        pastelView.startPastelPoint = .bottomLeft
+        pastelView.endPastelPoint   = .topRight
+        
+        // Custom Duration
+        pastelView.animationDuration = 3.0
+        
+        // Custom Color
+        pastelView.setColors([UIColor(red: 156/255, green: 39/255, blue: 176/255, alpha: 1.0),
+                              UIColor(red: 255/255, green: 64/255, blue: 129/255, alpha: 1.0),
+                              UIColor(red: 123/255, green: 31/255, blue: 162/255, alpha: 1.0),
+                              UIColor(red: 32/255, green: 76/255, blue: 255/255, alpha: 1.0),
+                              UIColor(red: 32/255, green: 158/255, blue: 255/255, alpha: 1.0),
+                              UIColor(red: 90/255, green: 120/255, blue: 127/255, alpha: 1.0),
+                              UIColor(red: 58/255, green: 255/255, blue: 217/255, alpha: 1.0)])
+        
+        pastelView.startAnimation()
+        
+        pastelView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return pastelView
+        
+    }()
     
     var scrollView: SearchVCCategoryScrollView!
     var tableView:  SearchVCResultTableView!
@@ -25,8 +54,22 @@ class SearchMovieViewController: UIViewController {
         self.scrollView = makeScrollView()
         self.tableView  = makeTableView()
         
+        // isHiddenすると、「まじでビュー階層から除去される」から、これはダメ
+        // self.tableView.isHidden = true
+        
+        self.tableView.alpha = 0
+        
+        
+        self.view.addSubview(pastelView)
+        
         self.view.addSubview(tableView)
         self.view.addSubview(scrollView)
+        
+        
+        pastelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive   = true
+        pastelView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        pastelView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive           = true
+        pastelView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive     = true
         
     }
     
@@ -35,7 +78,7 @@ class SearchMovieViewController: UIViewController {
         
         let view = SearchVCCategoryScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         
-        if let searchBar = view.subviews[1].subviews[0] as? UISearchBar {
+        if let searchBar = view.subviews[0].subviews[0] as? UISearchBar {
             searchBar.delegate = self
         }
         
@@ -44,66 +87,15 @@ class SearchMovieViewController: UIViewController {
     }
     
     
-    /*
-    func makeTableView() {
-        
-        print("ほえええええきたーーーー")
-        
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44))
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.barStyle = .default
-        searchBar.showsCancelButton = true
-        searchBar.delegate = self
-        
-        
-        self.view.addSubview(searchBar)
-        
-        searchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        
-        searchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        
-        // tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        
-        // FIXME: - Emergency
-        searchBar.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 65).isActive = true
-        
-        let tableView = UITableView(frame: self.view.frame, style: .plain)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.view.addSubview(tableView)
-        
-        tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        
-        tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        
-        // tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        
-        // FIXME: - Emergency
-        tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
-        
-        tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        
-        tableView.delegate   = self
-        tableView.dataSource = self
-        
-        let xib = UINib(nibName: "TableViewCell", bundle: nil)
-        
-        tableView.register(xib, forCellReuseIdentifier: "Cell")
-        
-    }
- 
-    */
-    
-    
     func makeTableView() -> SearchVCResultTableView {
         
         let view = SearchVCResultTableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         
-        if let searchBar = view.subviews[1].subviews[0] as? UISearchBar {
+        if let searchBar = view.subviews[0].subviews[0] as? UISearchBar {
             searchBar.delegate = self
         }
         
-        if let tableView = view.subviews[1].subviews[1] as? UITableView {
+        if let tableView = view.subviews[0].subviews[1] as? UITableView {
             
             tableView.delegate   = self
             tableView.dataSource = self
@@ -123,7 +115,26 @@ class SearchMovieViewController: UIViewController {
     /* observe method */
     
     func buttonTapped() {
-        self.view = self.tableView
+        
+        // self.scrollView.alpha = 0
+        self.tableView.alpha  = 1
+
+        // これやると、scrollViewがツリー階層から除去されるのがキツイ...
+        UIView.transition(from: scrollView,
+                          to: tableView,
+                          duration: 0.5,
+                          options: .transitionCrossDissolve,
+                          completion: {_ in print("transition!") }
+                         )
+        
+        // ここじゃないとダメなのは、↑のメソッド実行するとscrollViewが消えるから
+        self.scrollView.alpha = 0
+        
+        self.view.insertSubview(scrollView, belowSubview: tableView)
+        
+        // transiton時にツリー階層の位置関係が自動で変わるので、もうこれは必要ない
+        // view.bringSubview(toFront: tableView)
+        
     }
     
 }
@@ -167,31 +178,37 @@ extension SearchMovieViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
+        if searchBar.text?.characters.count != 0 {
+            print("遷移します")
+        }
+        
         self.view.endEditing(true)
         
-        if searchBar.text?.characters.count == 0 {
-            print("owata")
-        } else {
-            print("non-non-non")
-        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         
-        print("cancel")
-        
-        // self.view = nil  // これやるとだめ
-        
         self.view.endEditing(true)
         
-        // self.view.addSubview(makeScrollView())
+        self.scrollView.alpha = 1
+        self.tableView.alpha  = 0
         
-        self.view = self.scrollView
+        // これやると、scrollViewがツリー階層から除去されるのがキツイ...
+        UIView.transition(from: tableView,
+                          to: scrollView,
+                          duration: 0.5,
+                          options: .transitionCrossDissolve,
+                          completion: {_ in print("transition!") }
+        )
+        
+        // ここじゃないとダメなのは、↑のメソッド実行するとscrollViewが消えるから
+        self.tableView.alpha = 0
+        
+        self.view.insertSubview(tableView, belowSubview: scrollView)
+        
         
     }
     
 }
-
-
 
 
