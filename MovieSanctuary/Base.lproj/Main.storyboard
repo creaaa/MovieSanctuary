@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Movie Detail View Controller-->
         <scene sceneID="siG-Cb-MkL">
             <objects>
-                <viewController id="GsP-Bk-dhP" sceneMemberID="viewController">
+                <viewController id="GsP-Bk-dhP" customClass="MovieDetailViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iJM-wv-jGi"/>
                         <viewControllerLayoutGuide type="bottom" id="So1-6U-nRd"/>
@@ -181,6 +181,18 @@
                             <constraint firstItem="WJr-9X-Oth" firstAttribute="bottom" secondItem="So1-6U-nRd" secondAttribute="top" id="q1l-jQ-GKL"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="directorMovie" destination="UqZ-Um-gwy" id="Db2-rt-uwK"/>
+                        <outlet property="genreMovie" destination="18p-QR-vYg" id="UK0-sI-sh1"/>
+                        <outlet property="imgMovie" destination="TLu-BK-wAU" id="i86-zr-9b2"/>
+                        <outlet property="movieDirector" destination="UqZ-Um-gwy" id="ghE-fB-gn9"/>
+                        <outlet property="movieImg" destination="TLu-BK-wAU" id="RtF-ZP-oku"/>
+                        <outlet property="movieTitle" destination="diC-ej-B18" id="OBR-hy-YM0"/>
+                        <outlet property="stackStar" destination="lb8-LM-Lma" id="VWH-Ms-Sph"/>
+                        <outlet property="starsMovie" destination="uSQ-eH-Ixv" id="3hM-xR-fz2"/>
+                        <outlet property="storyMovie" destination="1wj-5x-fTc" id="n2A-yA-As5"/>
+                        <outlet property="titleMovie" destination="diC-ej-B18" id="AY0-80-aL9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6dN-Au-frf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
