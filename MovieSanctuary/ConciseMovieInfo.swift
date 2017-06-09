@@ -11,8 +11,6 @@ struct ConciseMovieInfo: Decodable {
             results: e <|| ["results"]
         )
     }
-    
-    
 }
 
 
@@ -20,7 +18,7 @@ struct ConciseMovieInfoResult: Decodable {
     
     let name:        String
     let poster_path: String
-     let genres:      [Int]
+    let genres:      [Int]
     
     static func decode(_ e: Extractor) throws -> ConciseMovieInfoResult {
         return try ConciseMovieInfoResult (
@@ -29,7 +27,6 @@ struct ConciseMovieInfoResult: Decodable {
             genres:      e <|| "genre_ids"
         )
     }
-    
 }
 
 

@@ -6,7 +6,7 @@ import Himotoki
 
 struct TMDB_APIManager {
     
-    func request()  {
+    func request() {
         
         // SearchRepositoriesRequest conforms to Request protocol.
         let request = Request_TMDB()
@@ -17,13 +17,16 @@ struct TMDB_APIManager {
             switch result {
                 
                 case .success(let response):
-                    print(response)
-                    
+                    NotificationCenter.default.post(name: Notification.Name("JSONresult"), object: response)
+                
                 case .failure(let error):
                     print(error)
-                
             }
-            
         }
+        
+        
+        
+        
+        
     }
 }

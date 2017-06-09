@@ -11,7 +11,13 @@ extension SearchVCCategoryScrollView {
 
 class SearchMovieViewController: UIViewController {
 
+    // Model
     let names = ["The Butterfly Effect", "Inception", "Star Wars 8", "Seven", "Citizen Kane"]
+    
+    var movies: [ConciseMovieInfoResult] = []
+    
+    
+    
     
     var pastelView: PastelView = {
     
@@ -50,6 +56,10 @@ class SearchMovieViewController: UIViewController {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(buttonTapped), name: Notification.Name("Toggle"), object: nil)
+        
+        // APImanagerから送信されるNotifを受信
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
+        
         
         self.scrollView = makeScrollView()
         self.tableView  = makeTableView()
@@ -153,6 +163,31 @@ class SearchMovieViewController: UIViewController {
     }
     
     
+    func didReceiveJSON(sender: Notification) {
+        
+        switch sender.object {
+            
+            case let movie as ConciseMovieInfo:
+                
+                self.movies = movie.results
+                self.movies.forEach{ print($0) }
+            
+                if let tableView = self.tableView.subviews[0].subviews[0] as? UITableView {
+                    print("はいきたーーーーーー")
+                    print(self.movies)
+                    tableView.reloadData()
+                }
+            
+            
+            
+            default:
+                break
+            
+        }
+        
+    }
+    
+    
     func back() {
         
         self.view.endEditing(true)
@@ -179,22 +214,42 @@ class SearchMovieViewController: UIViewController {
     }
     
     
+    // API Connection
+    func connect(completion: @escaping () -> Void) {
+        
+        let apiManager = TMDB_APIManager()
+        
+        let queue = DispatchQueue.global(qos: .userInitiated)
+        
+        queue.async {
+            
+            apiManager.request()
+            
+            let queue = DispatchQueue.main
+            queue.async {
+                // completion()
+            }
+        }
+    }
+    
+    
 }
 
 
 extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.names.count
+        return self.movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         
-        cell.titleLabel.text = self.names[indexPath.row]
-        cell.genre1Label.text = "Thriller"
+        cell.titleLabel.text  = self.movies[indexPath.row].name
+        cell.genre1Label.text = self.movies[indexPath.row].genres.description
         cell.genre2Label.text = "Mystery"
+        
         
         return cell
         
@@ -214,12 +269,6 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         
         print("ほげーーーー")
         
-        let apiManager = TMDB_APIManager()
-        
-        apiManager.request()
-        
-        
-        
         
         
     }
@@ -232,7 +281,7 @@ extension SearchMovieViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         if searchBar.text?.characters.count != 0 {
-            
+
             // TODO: DRYじゃねーからまとめとけ
             
             self.tableView.alpha  = 1
@@ -256,35 +305,32 @@ extension SearchMovieViewController: UISearchBarDelegate {
             self.navigationItem.leftBarButtonItem?.isEnabled = true
             self.navigationItem.leftBarButtonItem?.tintColor = .blue
             
+          
+            connect {
+                // reload tableview callback
+                if let tableView = self.tableView.subviews[0].subviews[0] as? UITableView {
+                    print("はいきたーーーーーー")
+                    print(self.movies)
+                    tableView.reloadData()
+                }
+            }
+            
             
         }
         
+        searchBar.text = nil
         self.view.endEditing(true)
+        
+
+        
+        
+        
         
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
-//        self.view.endEditing(true)
-//        
-//        self.scrollView.alpha = 1
-//        self.tableView.alpha  = 0
-//        
-//        // これやると、scrollViewがツリー階層から除去されるのがキツイ...
-//        UIView.transition(from: tableView,
-//                          to: scrollView,
-//                          duration: 1.5,
-//                          // transitionCrossDissolve 0.5
-//                          options: .transitionCurlUp,
-//                          completion: {_ in print("transition!") }
-//        )
-//        
-//        // ここじゃないとダメなのは、↑のメソッド実行するとscrollViewが消えるから
-//        self.tableView.alpha = 0
-//        
-//        self.view.insertSubview(tableView, belowSubview: scrollView)
-//        
-        
+        searchBar.text = nil
+        self.view.endEditing(true)
     }
     
 }
