@@ -150,9 +150,6 @@ class SearchMovieViewController: UIViewController {
         
         self.navigationItem.leftBarButtonItem?.isEnabled = true
         self.navigationItem.leftBarButtonItem?.tintColor = .blue
-        
-        
-        
     }
     
     
@@ -214,7 +211,17 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         print("ほげーーーー")
+        
+        let apiManager = TMDB_APIManager()
+        
+        apiManager.request()
+        
+        
+        
+        
+        
     }
     
 }
