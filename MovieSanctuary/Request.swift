@@ -23,11 +23,9 @@ extension TMDBRequest {
 
 
 extension TMDBRequest where Response: Decodable {
-    
     func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
         return try decodeValue(object)
     }
-    
 }
 
 
@@ -47,11 +45,8 @@ struct Request_TMDB: TMDBRequest {
     
     var parameters: Any? {
         return ["api_key": "5f215b9dfac50de053affb4f9085e620",
-                "query": self.query  // "butterfly%20effect"
+                "query": self.query
                ]
     }
-    
 
 }
-
-

@@ -13,12 +13,7 @@ extension SearchVCCategoryScrollView {
 class SearchMovieViewController: UIViewController {
 
     // Model
-    let names = ["The Butterfly Effect", "Inception", "Star Wars 8", "Seven", "Citizen Kane"]
-    
     var movies: [ConciseMovieInfoResult] = []
-    
-    
-    
     
     var pastelView: PastelView = {
     
@@ -32,13 +27,13 @@ class SearchMovieViewController: UIViewController {
         pastelView.animationDuration = 3.0
         
         // Custom Color
-        pastelView.setColors([UIColor(red: 156/255, green: 39/255, blue: 176/255, alpha: 1.0),
-                              UIColor(red: 255/255, green: 64/255, blue: 129/255, alpha: 1.0),
-                              UIColor(red: 123/255, green: 31/255, blue: 162/255, alpha: 1.0),
-                              UIColor(red: 32/255, green: 76/255, blue: 255/255, alpha: 1.0),
-                              UIColor(red: 32/255, green: 158/255, blue: 255/255, alpha: 1.0),
-                              UIColor(red: 90/255, green: 120/255, blue: 127/255, alpha: 1.0),
-                              UIColor(red: 58/255, green: 255/255, blue: 217/255, alpha: 1.0)])
+        pastelView.setColors([UIColor(red: 156/255, green: 39/255,  blue: 176/255, alpha: 1.0),
+                              UIColor(red: 255/255, green: 64/255,  blue: 129/255, alpha: 1.0),
+                              UIColor(red: 123/255, green: 31/255,  blue: 162/255, alpha: 1.0),
+                              UIColor(red: 32/255,  green: 76/255,  blue: 255/255, alpha: 1.0),
+                              UIColor(red: 32/255,  green: 158/255, blue: 255/255, alpha: 1.0),
+                              UIColor(red: 90/255,  green: 120/255, blue: 127/255, alpha: 1.0),
+                              UIColor(red: 58/255,  green: 255/255, blue: 217/255, alpha: 1.0)])
         
         pastelView.startAnimation()
         
@@ -61,7 +56,6 @@ class SearchMovieViewController: UIViewController {
         // APImanagerから送信されるNotifを受信
          NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
         
-        
         self.scrollView = makeScrollView()
         self.tableView  = makeTableView()
         
@@ -70,11 +64,11 @@ class SearchMovieViewController: UIViewController {
         
         self.tableView.alpha = 0
         
-        
         self.view.addSubview(pastelView)
         
         self.view.addSubview(tableView)
         self.view.addSubview(scrollView)
+        
         
         
         pastelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive   = true
@@ -92,20 +86,7 @@ class SearchMovieViewController: UIViewController {
             = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
         
         self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!], for: .normal)
-        
     }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        
-        
-//        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
-        
-        
-    }
-    
     
     
     func makeScrollView() -> SearchVCCategoryScrollView {
@@ -113,7 +94,42 @@ class SearchMovieViewController: UIViewController {
         let view = SearchVCCategoryScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         
         if let searchBar = view.subviews[0].subviews[0] as? UISearchBar {
+            
             searchBar.delegate = self
+            
+            // text field
+            if let textField = searchBar.subviews[0].subviews[1] as? UITextField {
+                textField.clearButtonMode = .never
+                textField.font = UIFont(name: "Quicksand", size: 14)
+                
+                // I wanna change placeholder's color, doesn't work...
+//                  textField.textColor = .white
+                
+                print(textField.subviews.count)
+                
+            }
+            
+            // cancel button
+            if let button = searchBar.subviews[0].subviews[2] as? UIButton {
+                button.setTitleColor(.white, for: .normal)
+                button.setTitleShadowColor(.red, for: .normal)
+                button.titleLabel?.font = UIFont(name: "Quicksand", size: 14)
+            }
+            
+            // placeholder
+            if let placeholder = searchBar.subviews[0].subviews[1] as? UITextField {
+                placeholder.textColor = .white
+            } else {
+                print(searchBar.subviews[0].subviews[1])
+            }
+            
+            
+            if let searchField = searchBar.value(forKey: "_searchField") as? UITextField {
+                searchField.textColor = .white
+            }
+            
+            
+            
         }
         
         return view
@@ -124,12 +140,6 @@ class SearchMovieViewController: UIViewController {
     func makeTableView() -> SearchVCResultTableView {
         
         let view = SearchVCResultTableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-        
-        /*
-        if let searchBar = view.subviews[0].subviews[0] as? UISearchBar {
-            searchBar.delegate = self
-        }
-        */
         
         if let tableView = view.subviews[0].subviews[0] as? UITableView {
             
@@ -147,12 +157,28 @@ class SearchMovieViewController: UIViewController {
     }
 
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        // なぜ、これもviewDidLoadでやればよさそうなものを、わざわざここでやってるのか?
+        // なんと、 viewDidLoad時、viewDidAppear時で、UISearchBarのツリー状態が違うのだ！
+        // そしてなんと、viewDidLoad時には、プレースホルダーがまだ生成されていない！！
+        // だからここでやるしかないのだ。なんてこった。クソはまった。
+        if let searchBar = self.scrollView.subviews[0].subviews[0] as? UISearchBar {
+            if let textField = searchBar.subviews[0].subviews[1] as? UITextField {
+                if let placeHolder = textField.subviews[2] as? UILabel{
+                    placeHolder.textColor = .white
+                }
+            }
+        }
+    }
+    
     
     /* observe method */
     
     func buttonTapped() {
         
-        // self.scrollView.alpha = 0
         self.tableView.alpha  = 1
 
         // これやると、scrollViewがツリー階層から除去されるのがキツイ...
@@ -185,20 +211,12 @@ class SearchMovieViewController: UIViewController {
                 self.movies = movie.results
                 self.movies.forEach{ print($0) }
             
-                
                 if let tableView = self.tableView.subviews[0].subviews[0] as? UITableView {
-                    print("はいぼけーーーーーー")
-                    print(self.movies)
                     tableView.reloadData()
                 }
             
-            
-            
-            default:
-                break
-            
+            default: break
         }
-        
     }
     
     
@@ -237,20 +255,8 @@ class SearchMovieViewController: UIViewController {
         
         let text = (self.scrollView.subviews[0].subviews[0] as! UISearchBar).text
         
-        queue.async {
-            
-            apiManager.request(query: text!)
-            
-            let queue = DispatchQueue.main
-            queue.async {
-                // completion()
-            }
-            
-        }
-        
-        
+        queue.async { apiManager.request(query: text!) }
     }
-    
     
 }
 
@@ -269,11 +275,10 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         cell.genre1Label.text = self.movies[indexPath.row].genres.description
         cell.genre2Label.text = "Mystery"
         
-        
-        // let imagePath = self.movies[indexPath.row].poster_path
-        // let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
-        // cell.posterImageView.kf.setImage(with: url)
-        
+        if let imagePath = self.movies[indexPath.row].poster_path {
+            let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
+            cell.posterImageView.kf.setImage(with: url)
+        }
         
         return cell
         
@@ -328,9 +333,7 @@ extension SearchMovieViewController: UISearchBarDelegate {
             
           
             connect {
-                
                 // !!! ここに書いてもダメ！！まだ早い！！！
-                
                 /*
                 // reload tableview callback
                 if let tableView = self.tableView.subviews[0].subviews[0] as? UITableView {
@@ -339,24 +342,17 @@ extension SearchMovieViewController: UISearchBarDelegate {
                     tableView.reloadData()
                 }
                 */
-                
             }
-            
             
         }
         
         searchBar.text = nil
         self.view.endEditing(true)
-        
-
-        
-        
-        
-        
+    
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        // searchBar.text = nil
+         searchBar.text = nil
         self.view.endEditing(true)
     }
     

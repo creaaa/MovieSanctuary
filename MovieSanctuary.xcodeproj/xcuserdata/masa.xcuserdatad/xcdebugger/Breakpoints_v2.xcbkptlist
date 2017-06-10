@@ -9,22 +9,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MovieSanctuary/Request.swift"
-            timestampString = "518725689.750762"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "response(from:urlResponse:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MovieSanctuary/APIManager.swift"
             timestampString = "518726013.08106"
             startingColumnNumber = "9223372036854775807"
@@ -65,38 +49,6 @@
                   offsetFromSymbolStart = "26">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MovieSanctuary/Request.swift"
-            timestampString = "518742565.9678"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "Request_TMDB"
-            landmarkType = "14">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MovieSanctuary/SearchMovieViewController.swift"
-            timestampString = "518746410.286418"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
-            landmarkName = "didReceiveJSON(sender:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
