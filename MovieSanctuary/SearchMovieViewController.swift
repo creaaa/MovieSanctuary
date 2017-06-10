@@ -15,9 +15,8 @@ class SearchMovieViewController: UIViewController {
     // Model
     var movies: [ConciseMovieInfoResult] = []
     
-    var pastelView: UIView = {
+    var pastelView: PastelView = {
     
-        /*
         let pastelView = PastelView()
         
         // Custom Direction
@@ -26,7 +25,7 @@ class SearchMovieViewController: UIViewController {
         
         // Custom Duration
         pastelView.animationDuration = 3.0
-        
+
         // Custom Color
         pastelView.setColors([UIColor(red: 156/255, green: 39/255,  blue: 176/255, alpha: 1.0),
                               UIColor(red: 255/255, green: 64/255,  blue: 129/255, alpha: 1.0),
@@ -35,18 +34,19 @@ class SearchMovieViewController: UIViewController {
                               UIColor(red: 32/255,  green: 158/255, blue: 255/255, alpha: 1.0),
                               UIColor(red: 90/255,  green: 120/255, blue: 127/255, alpha: 1.0),
                               UIColor(red: 58/255,  green: 255/255, blue: 217/255, alpha: 1.0)])
+ 
+        
+        // pastelView.setPastelGradient(.juicyPeach)
         
         pastelView.startAnimation()
         
         pastelView.translatesAutoresizingMaskIntoConstraints = false
         
         return pastelView
-        */
-        
-        return UIView()
         
     }()
     
+ 
     var scrollView: SearchVCCategoryScrollView!
     var tableView:  SearchVCResultTableView!
     
@@ -68,18 +68,16 @@ class SearchMovieViewController: UIViewController {
         
         self.tableView.alpha = 0
         
-        // self.view.addSubview(pastelView)
+        self.view.addSubview(pastelView)
         
         self.view.addSubview(tableView)
         self.view.addSubview(scrollView)
         
         
-        /*
         pastelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive   = true
         pastelView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         pastelView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive           = true
         pastelView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive     = true
-        */
         
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(back))
@@ -129,9 +127,6 @@ class SearchMovieViewController: UIViewController {
             if let searchField = searchBar.value(forKey: "_searchField") as? UITextField {
                 searchField.textColor = .white
             }
-            
-            
-            
         }
         
         return view
@@ -262,43 +257,56 @@ class SearchMovieViewController: UIViewController {
     
     
     // convert genre ID to genre name
-    func genreIdToName(_ genreIDs: [Int]) -> String {
+    func genreIdToName(_ genreID: Int) -> String {
         
         func convert(ID: Int) -> String {
-            
             switch ID {
                 case 12:
-                    return "boke"
+                    return "Adventure"
+                case 14:
+                    return "Fantasy"
                 case 16:
-                    return "thriller"
+                    return "Animation"
+                case 18:
+                    return "Drama"
+                case 27:
+                    return "Horror"
                 case 28:
-                    return "drama"
+                    return "Action"
+                case 35:
+                    return "Comedy"
+                case 36:
+                    return "History"
+                case 37:
+                    return "Western"
+                case 53:
+                    return "Thriller"
+                case 80:
+                    return "Crime"
+                case 99:
+                    return "Documentary"
+                case 878:
+                    return "Science Fiction"
+                case 9648:
+                    return "Mystery"
+                case 10402:
+                    return "Music"
+                case 10749:
+                    return "Romance"
+                case 10751:
+                    return "Family"
+                case 10752:
+                    return "War"
+                case 10770:
+                    return "TV Movie"
                 default:
-                    return "boring"
+                    fatalError("Check ID")
             }
-  
-            
         }
         
-        switch genreIDs.count {
-            case 0:
-                return ""
-            case 1:
-                return convert(ID: genreIDs.first!)
-            case let no where no >= 2:
-            
-                let result = genreIDs[0...1].map{ convert(ID: $0) }
-            
-                return result.joined(separator: ", ")
-            
-            default:
-                return ""
-        }
+        return convert(ID: genreID)
         
     }
-    
-    
-    
     
 }
 
@@ -315,12 +323,13 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         
         cell.titleLabel.text  = self.movies[indexPath.row].name
         
-        cell.genre1Label.text = genreIdToName(self.movies[indexPath.row].genres)
+        if let genre1 = self.movies[indexPath.row].genres.first {
+            cell.genre1Label.text = genreIdToName(genre1)
+        }
         
-        
-        
-        
-        // cell.genre2Label.text = "Mystery"
+        if self.movies[indexPath.row].genres.count >= 2 {
+            cell.genre2Label.text = genreIdToName(self.movies[indexPath.row].genres[1])
+        }
         
         if let imagePath = self.movies[indexPath.row].poster_path {
             let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
