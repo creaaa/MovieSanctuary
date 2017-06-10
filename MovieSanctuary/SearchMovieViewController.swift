@@ -15,8 +15,9 @@ class SearchMovieViewController: UIViewController {
     // Model
     var movies: [ConciseMovieInfoResult] = []
     
-    var pastelView: PastelView = {
+    var pastelView: UIView = {
     
+        /*
         let pastelView = PastelView()
         
         // Custom Direction
@@ -40,6 +41,9 @@ class SearchMovieViewController: UIViewController {
         pastelView.translatesAutoresizingMaskIntoConstraints = false
         
         return pastelView
+        */
+        
+        return UIView()
         
     }()
     
@@ -64,17 +68,18 @@ class SearchMovieViewController: UIViewController {
         
         self.tableView.alpha = 0
         
-        self.view.addSubview(pastelView)
+        // self.view.addSubview(pastelView)
         
         self.view.addSubview(tableView)
         self.view.addSubview(scrollView)
         
         
-        
+        /*
         pastelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive   = true
         pastelView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         pastelView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive           = true
         pastelView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive     = true
+        */
         
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(back))
@@ -102,10 +107,7 @@ class SearchMovieViewController: UIViewController {
                 textField.clearButtonMode = .never
                 textField.font = UIFont(name: "Quicksand", size: 14)
                 
-                // I wanna change placeholder's color, doesn't work...
-//                  textField.textColor = .white
-                
-                print(textField.subviews.count)
+                // placeholderの設定は、まだここではできない。viewDidAppearでやる。
                 
             }
             
@@ -258,6 +260,46 @@ class SearchMovieViewController: UIViewController {
         queue.async { apiManager.request(query: text!) }
     }
     
+    
+    // convert genre ID to genre name
+    func genreIdToName(_ genreIDs: [Int]) -> String {
+        
+        func convert(ID: Int) -> String {
+            
+            switch ID {
+                case 12:
+                    return "boke"
+                case 16:
+                    return "thriller"
+                case 28:
+                    return "drama"
+                default:
+                    return "boring"
+            }
+  
+            
+        }
+        
+        switch genreIDs.count {
+            case 0:
+                return ""
+            case 1:
+                return convert(ID: genreIDs.first!)
+            case let no where no >= 2:
+            
+                let result = genreIDs[0...1].map{ convert(ID: $0) }
+            
+                return result.joined(separator: ", ")
+            
+            default:
+                return ""
+        }
+        
+    }
+    
+    
+    
+    
 }
 
 
@@ -272,8 +314,13 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         
         cell.titleLabel.text  = self.movies[indexPath.row].name
-        cell.genre1Label.text = self.movies[indexPath.row].genres.description
-        cell.genre2Label.text = "Mystery"
+        
+        cell.genre1Label.text = genreIdToName(self.movies[indexPath.row].genres)
+        
+        
+        
+        
+        // cell.genre2Label.text = "Mystery"
         
         if let imagePath = self.movies[indexPath.row].poster_path {
             let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)

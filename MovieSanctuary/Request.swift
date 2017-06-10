@@ -45,7 +45,7 @@ struct Request_TMDB: TMDBRequest {
     
     var parameters: Any? {
         return ["api_key": "5f215b9dfac50de053affb4f9085e620",
-                "query": self.query
+                "query":   self.query
                ]
     }
 
