@@ -270,9 +270,9 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         cell.genre2Label.text = "Mystery"
         
         
-        let imagePath = self.movies[indexPath.row].poster_path
-        let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
-        cell.posterImageView.kf.setImage(with: url)
+        // let imagePath = self.movies[indexPath.row].poster_path
+        // let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
+        // cell.posterImageView.kf.setImage(with: url)
         
         
         return cell
@@ -297,6 +297,7 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
 
 
 extension SearchMovieViewController: UISearchBarDelegate {
+    
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
@@ -355,7 +356,7 @@ extension SearchMovieViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = nil
+        // searchBar.text = nil
         self.view.endEditing(true)
     }
     
