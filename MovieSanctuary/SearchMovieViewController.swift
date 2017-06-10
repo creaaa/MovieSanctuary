@@ -1,6 +1,7 @@
 
 import UIKit
 import Pastel
+import Kingfisher
 
 extension SearchVCCategoryScrollView {
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -58,7 +59,7 @@ class SearchMovieViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(buttonTapped), name: Notification.Name("Toggle"), object: nil)
         
         // APImanagerから送信されるNotifを受信
-        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
+         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
         
         
         self.scrollView = makeScrollView()
@@ -93,6 +94,18 @@ class SearchMovieViewController: UIViewController {
         self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!], for: .normal)
         
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
+        
+        
+    }
+    
     
     
     func makeScrollView() -> SearchVCCategoryScrollView {
@@ -172,8 +185,9 @@ class SearchMovieViewController: UIViewController {
                 self.movies = movie.results
                 self.movies.forEach{ print($0) }
             
+                
                 if let tableView = self.tableView.subviews[0].subviews[0] as? UITableView {
-                    print("はいきたーーーーーー")
+                    print("はいぼけーーーーーー")
                     print(self.movies)
                     tableView.reloadData()
                 }
@@ -221,15 +235,20 @@ class SearchMovieViewController: UIViewController {
         
         let queue = DispatchQueue.global(qos: .userInitiated)
         
+        let text = (self.scrollView.subviews[0].subviews[0] as! UISearchBar).text
+        
         queue.async {
             
-            apiManager.request()
+            apiManager.request(query: text!)
             
             let queue = DispatchQueue.main
             queue.async {
                 // completion()
             }
+            
         }
+        
+        
     }
     
     
@@ -251,6 +270,11 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         cell.genre2Label.text = "Mystery"
         
         
+        let imagePath = self.movies[indexPath.row].poster_path
+        let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
+        cell.posterImageView.kf.setImage(with: url)
+        
+        
         return cell
         
     }
@@ -266,11 +290,7 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         print("ほげーーーー")
-        
-        
-        
     }
     
 }
@@ -307,12 +327,18 @@ extension SearchMovieViewController: UISearchBarDelegate {
             
           
             connect {
+                
+                // !!! ここに書いてもダメ！！まだ早い！！！
+                
+                /*
                 // reload tableview callback
                 if let tableView = self.tableView.subviews[0].subviews[0] as? UITableView {
                     print("はいきたーーーーーー")
                     print(self.movies)
                     tableView.reloadData()
                 }
+                */
+                
             }
             
             

@@ -17,7 +17,7 @@ struct ConciseMovieInfo: Decodable {
 struct ConciseMovieInfoResult: Decodable {
     
     let name:        String
-    let poster_path: String
+    let poster_path: String  // ここ、nilになる
     let genres:      [Int]
     
     static func decode(_ e: Extractor) throws -> ConciseMovieInfoResult {

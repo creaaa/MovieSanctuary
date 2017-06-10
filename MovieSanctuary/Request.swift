@@ -33,6 +33,8 @@ extension TMDBRequest where Response: Decodable {
 
 struct Request_TMDB: TMDBRequest {
  
+    let query: String
+    
     typealias Response = ConciseMovieInfo
     
     var method: HTTPMethod {
@@ -45,9 +47,10 @@ struct Request_TMDB: TMDBRequest {
     
     var parameters: Any? {
         return ["api_key": "5f215b9dfac50de053affb4f9085e620",
-                "query":   "butterfly%20effect"
+                "query": self.query  // "butterfly%20effect"
                ]
     }
+    
 
 }
 
