@@ -12,6 +12,16 @@ extension SearchVCCategoryScrollView {
 
 class SearchMovieViewController: UIViewController {
 
+    let hoge: Int
+
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.hoge = 3
+        super.init(coder: aDecoder)
+    }
+    
+    
+    
     // Model
     var movies: [ConciseMovieInfoResult] = []
     
@@ -55,6 +65,8 @@ class SearchMovieViewController: UIViewController {
         
         super.viewDidLoad()
         
+        print(hoge)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(buttonTapped), name: Notification.Name("Toggle"), object: nil)
         
         // APImanagerから送信されるNotifを受信
@@ -92,6 +104,7 @@ class SearchMovieViewController: UIViewController {
     }
     
     
+ 
     func makeScrollView() -> SearchVCCategoryScrollView {
         
         let view = SearchVCCategoryScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
@@ -154,6 +167,19 @@ class SearchMovieViewController: UIViewController {
     }
 
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        if let tableView = self.tableView.subviews[0].subviews[0] as? UITableView {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
+
+    }
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
@@ -169,6 +195,9 @@ class SearchMovieViewController: UIViewController {
                 }
             }
         }
+        
+
+        
     }
     
     
@@ -244,7 +273,7 @@ class SearchMovieViewController: UIViewController {
     
     
     // API Connection
-    func connect(completion: @escaping () -> Void) {
+    func connect() {
         
         let apiManager = TMDB_APIManager()
         
@@ -351,7 +380,20 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("ほげーーーー")
+
+        let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil)
+        
+        if let nextVC = storyboard.instantiateInitialViewController() as? MovieDetailViewController {
+            
+            // self.present(nextVC, animated: true, completion: nil)
+            
+            nextVC.tmdb_id = movies[indexPath.row].id
+            
+            self.navigationController?.pushViewController(nextVC, animated: true)
+            
+            
+        }
+    
     }
     
 }
@@ -387,18 +429,7 @@ extension SearchMovieViewController: UISearchBarDelegate {
             self.navigationItem.leftBarButtonItem?.tintColor = .blue
             
           
-            connect {
-                // !!! ここに書いてもダメ！！まだ早い！！！
-                /*
-                // reload tableview callback
-                if let tableView = self.tableView.subviews[0].subviews[0] as? UITableView {
-                    print("はいきたーーーーーー")
-                    print(self.movies)
-                    tableView.reloadData()
-                }
-                */
-            }
-            
+            connect()
         }
         
         searchBar.text = nil
