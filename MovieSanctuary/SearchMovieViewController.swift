@@ -359,7 +359,6 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
 
 extension SearchMovieViewController: UISearchBarDelegate {
     
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         if searchBar.text?.characters.count != 0 {
