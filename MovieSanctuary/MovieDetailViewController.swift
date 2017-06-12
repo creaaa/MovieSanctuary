@@ -15,7 +15,7 @@ class MovieDetailViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(completion(sender:)), name: Notification.Name("TMDB_OMDB1"), object: nil)
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(completion(sender:)), name: Notification.Name("TMDB_OMDB2"), object: nil)
         
         connect1()
         
@@ -33,6 +33,19 @@ class MovieDetailViewController: UIViewController {
     }
     
     
+    func connect2() {
+        
+        let apiManager = OMDB_APIManager()
+        
+        let queue = DispatchQueue.global(qos: .userInitiated)
+
+        queue.async {
+            apiManager.request(id: self.movieForIMDB_ID.imdb_id)  // このスレッドの値を、別スレッドに渡してるから落ちるんだ。
+        }
+        
+    }
+    
+    
     func completion(sender: Notification) {
         
         switch sender.object {
@@ -43,7 +56,7 @@ class MovieDetailViewController: UIViewController {
             
             print("はいきた、 ", self.movieForIMDB_ID)
             
-            
+            connect2()
             
         default: break
             
