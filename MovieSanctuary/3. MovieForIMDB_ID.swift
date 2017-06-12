@@ -6,7 +6,7 @@ struct OMDB_Movie: Decodable {
     let name:     String
     let director: String
     let actors:   String
-    let year:     Int
+    let year:     String
     let plot:     String
     let rate:     String
     
@@ -16,7 +16,7 @@ struct OMDB_Movie: Decodable {
             name:     e <| "Title",
             director: e <| "Director",
             actors:   e <| "Actors",
-            year:     Int(e <| "Year")!,
+            year:     e <| "Year", // Int(e <| "Year")! としないのは、"N/A"とかが来た場合、落ちるからだ。クソAPIが
             plot:     e <| "Plot",
             rate:     e <| "imdbRating"
         )

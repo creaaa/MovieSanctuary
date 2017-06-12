@@ -16,11 +16,31 @@ struct TMDB_OMDBidManager {
             
             switch result {
             case .success(let response):
-                NotificationCenter.default.post(name: Notification.Name("TMDB_OMDB1"), object: response)
+                self.success(response)
                 
             case .failure(let error):
-                print(error)
+                self.failure(error)
             }
         }
     }
+    
+    
+    func success(_ response: Request_TMDB_IMDBid.Response) {
+        
+        let apiManager = OMDB_APIManager()
+        
+        let queue = DispatchQueue.global(qos: .userInitiated)
+        
+        let id = response.imdb_id
+        
+        queue.async { apiManager.request(id: id) }
+        
+    }
+    
+    func failure(_ error: SessionTaskError) {
+        print(error)
+    }
+    
+    
+    
 }

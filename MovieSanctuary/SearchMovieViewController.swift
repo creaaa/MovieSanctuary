@@ -100,7 +100,7 @@ class SearchMovieViewController: UIViewController {
             if let textField = searchBar.subviews[0].subviews[1] as? UITextField {
                 textField.clearButtonMode = .never
                 textField.font = UIFont(name: "Quicksand", size: 14)
-                textField.textColor = .black
+                textField.textColor = .white
                 
                 // placeholderの設定は、まだここではできない。viewDidAppearでやる。
                 
@@ -351,7 +351,7 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         // ここで indexPathつきのほうでやると無限ループになるので、こっちにしろ
-        // なお、もちろん、tableViewにregisterを忘れることで。ここがぬるぽとなる
+        // なお、もちろん、tableViewにregisterを忘れることで、ここがぬるぽとなる
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TableViewCell
         
         return cell.bounds.height
@@ -364,12 +364,9 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         
         if let nextVC = storyboard.instantiateInitialViewController() as? MovieDetailViewController {
             
-            // self.present(nextVC, animated: true, completion: nil)
-            
             nextVC.tmdb_id = movies[indexPath.row].id
             
             self.navigationController?.pushViewController(nextVC, animated: true)
-            
             
         }
     

@@ -44,7 +44,8 @@ struct Request_OMDB: OMDBRequest {
     
     var parameters: Any? {
         return [
-            "i": self.movieID,
+            "i":      self.movieID,
+            "plot":   "full",
             "apikey": "f462ae21"
         ]
     }

@@ -192,9 +192,9 @@
 			isa = PBXGroup;
 			children = (
 				44E3BE4B1EE7EFC000466CF5 /* MyButton.swift */,
-				44E3BE471EE7C12100466CF5 /* TableViewCell.swift */,
 				44E3BE431EE73BB100466CF5 /* SearchVCCategoryScrollView.swift */,
 				440C7BE61EE8CABC0050C90A /* SearchVCResultTableView.swift */,
+				44E3BE471EE7C12100466CF5 /* TableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";

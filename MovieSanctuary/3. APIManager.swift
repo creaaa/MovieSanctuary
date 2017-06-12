@@ -17,7 +17,7 @@ struct OMDB_APIManager {
                         
             switch result {
             case .success(let response):
-                NotificationCenter.default.post(name: Notification.Name("TMDB_OMDB2"), object: response)
+                NotificationCenter.default.post(name: Notification.Name("TMDB_OMDB"), object: response)
                 
             case .failure(let error):
                 print(error)
