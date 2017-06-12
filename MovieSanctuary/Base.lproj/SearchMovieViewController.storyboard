@@ -17,7 +17,7 @@
                         <viewControllerLayoutGuide type="top" id="aHr-pp-CBW"/>
                         <viewControllerLayoutGuide type="bottom" id="VOd-80-Tfq"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="V4f-5N-Iv0" customClass="PastelView" customModule="Pastel">
+                    <view key="view" contentMode="scaleToFill" id="V4f-5N-Iv0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -33,7 +33,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4h3-w9-ikK" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hdD-zu-Jku">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hdD-zu-Jku">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

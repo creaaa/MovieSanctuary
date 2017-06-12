@@ -36,7 +36,6 @@ class MovieDetailViewController: UIViewController {
     func completion(sender: Notification) {
         
         switch sender.object {
-            
             case let movie as OMDB_Movie:
                 self.movie = movie
                 print(self.movie)
@@ -45,5 +44,6 @@ class MovieDetailViewController: UIViewController {
                 break
         }
     }
-    
 }
+
+

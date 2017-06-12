@@ -40,7 +40,8 @@ class SearchMovieViewController: UIViewController {
         
         return pastelView
         
-     }()
+    }()
+    
     
     var searchView: SearchView!
     var resultView: ResultView!
