@@ -399,7 +399,7 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         
         if let nextVC = storyboard.instantiateInitialViewController() as? MovieDetailViewController {
             
-            nextVC.tmdb_id = movies[indexPath.row].id
+            nextVC.tmdb_movie = movies[indexPath.row]
             
             self.navigationController?.pushViewController(nextVC, animated: true)
             

@@ -4,7 +4,7 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
 
-    var tmdb_id: Int!
+    var tmdb_movie: ConciseMovieInfoResult!
     
     var movie: OMDB_Movie!
     
@@ -13,7 +13,7 @@ class MovieDetailViewController: UIViewController {
         
         super.viewDidLoad()
         
-        print("前画面から来たID: ", tmdb_id)
+        print("前画面から来た tmdb_movie: ", tmdb_movie)
 
         NotificationCenter.default.addObserver(self, selector: #selector(completion(sender:)), name: Notification.Name("TMDB_OMDB"), object: nil)
         
@@ -28,7 +28,7 @@ class MovieDetailViewController: UIViewController {
         
         let queue = DispatchQueue.global(qos: .userInitiated)
         
-        queue.async { apiManager.request(id: self.tmdb_id) }
+        queue.async { apiManager.request(id: self.tmdb_movie.id) }
         
     }
     
