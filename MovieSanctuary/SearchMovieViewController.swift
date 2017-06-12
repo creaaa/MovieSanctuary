@@ -11,21 +11,11 @@ extension SearchVCCategoryScrollView {
 
 
 class SearchMovieViewController: UIViewController {
-
-    let hoge: Int
-
-    
-    required init?(coder aDecoder: NSCoder) {
-        self.hoge = 3
-        super.init(coder: aDecoder)
-    }
-    
-    
     
     // Model
     var movies: [ConciseMovieInfoResult] = []
     
-    var pastelView: PastelView = {
+    var pastelView: PastelView! = {
     
         let pastelView = PastelView()
         
@@ -35,8 +25,7 @@ class SearchMovieViewController: UIViewController {
         
         // Custom Duration
         pastelView.animationDuration = 3.0
-
-        // Custom Color
+        
         pastelView.setColors([UIColor(red: 156/255, green: 39/255,  blue: 176/255, alpha: 1.0),
                               UIColor(red: 255/255, green: 64/255,  blue: 129/255, alpha: 1.0),
                               UIColor(red: 123/255, green: 31/255,  blue: 162/255, alpha: 1.0),
@@ -44,9 +33,6 @@ class SearchMovieViewController: UIViewController {
                               UIColor(red: 32/255,  green: 158/255, blue: 255/255, alpha: 1.0),
                               UIColor(red: 90/255,  green: 120/255, blue: 127/255, alpha: 1.0),
                               UIColor(red: 58/255,  green: 255/255, blue: 217/255, alpha: 1.0)])
- 
-        
-        // pastelView.setPastelGradient(.juicyPeach)
         
         pastelView.startAnimation()
         
@@ -54,9 +40,8 @@ class SearchMovieViewController: UIViewController {
         
         return pastelView
         
-    }()
+     }()
     
- 
     var scrollView: SearchVCCategoryScrollView!
     var tableView:  SearchVCResultTableView!
     
@@ -65,9 +50,7 @@ class SearchMovieViewController: UIViewController {
         
         super.viewDidLoad()
         
-        print(hoge)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(buttonTapped), name: Notification.Name("Toggle"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(buttonTapped), name: Notification.Name("ResultByGenre"), object: nil)
         
         // APImanagerから送信されるNotifを受信
          NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
@@ -117,6 +100,7 @@ class SearchMovieViewController: UIViewController {
             if let textField = searchBar.subviews[0].subviews[1] as? UITextField {
                 textField.clearButtonMode = .never
                 textField.font = UIFont(name: "Quicksand", size: 14)
+                textField.textColor = .black
                 
                 // placeholderの設定は、まだここではできない。viewDidAppearでやる。
                 
@@ -129,17 +113,13 @@ class SearchMovieViewController: UIViewController {
                 button.titleLabel?.font = UIFont(name: "Quicksand", size: 14)
             }
             
-            // placeholder
-            if let placeholder = searchBar.subviews[0].subviews[1] as? UITextField {
-                placeholder.textColor = .white
-            } else {
-                print(searchBar.subviews[0].subviews[1])
-            }
-            
-            
+            // じつは、searchBarのtextFieldは、こうすることでも取れる
+            /*
             if let searchField = searchBar.value(forKey: "_searchField") as? UITextField {
-                searchField.textColor = .white
+                searchField.textColor = .black
             }
+            */
+            
         }
         
         return view
@@ -188,6 +168,7 @@ class SearchMovieViewController: UIViewController {
         // なんと、 viewDidLoad時、viewDidAppear時で、UISearchBarのツリー状態が違うのだ！
         // そしてなんと、viewDidLoad時には、プレースホルダーがまだ生成されていない！！
         // だからここでやるしかないのだ。なんてこった。クソはまった。
+        
         if let searchBar = self.scrollView.subviews[0].subviews[0] as? UISearchBar {
             if let textField = searchBar.subviews[0].subviews[1] as? UITextField {
                 if let placeHolder = textField.subviews[2] as? UILabel{
@@ -195,9 +176,6 @@ class SearchMovieViewController: UIViewController {
                 }
             }
         }
-        
-
-        
     }
     
     
@@ -225,6 +203,7 @@ class SearchMovieViewController: UIViewController {
         
         self.navigationItem.leftBarButtonItem?.isEnabled = true
         self.navigationItem.leftBarButtonItem?.tintColor = .blue
+        
     }
     
     

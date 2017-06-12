@@ -6,7 +6,7 @@ struct OMDB_Movie: Decodable {
     let name:     String
     let director: String
     let actors:   String
-    let year:     String
+    let year:     Int
     let plot:     String
     let rate:     String
     
@@ -16,7 +16,7 @@ struct OMDB_Movie: Decodable {
             name:     e <| "Title",
             director: e <| "Director",
             actors:   e <| "Actors",
-            year:     e <| "Year",
+            year:     Int(e <| "Year")!,
             plot:     e <| "Plot",
             rate:     e <| "imdbRating"
         )
