@@ -3,7 +3,7 @@ import UIKit
 import Pastel
 import Kingfisher
 
-extension SearchVCCategoryScrollView {
+extension SearchView {
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.next?.touchesBegan(touches, with: event)
     }
@@ -42,8 +42,8 @@ class SearchMovieViewController: UIViewController {
         
      }()
     
-    var scrollView: SearchVCCategoryScrollView!
-    var tableView:  SearchVCResultTableView!
+    var searchView: SearchView!
+    var resultView: ResultView!
     
     
     override func viewDidLoad() {
@@ -55,18 +55,18 @@ class SearchMovieViewController: UIViewController {
         // APImanagerから送信されるNotifを受信
          NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
         
-        self.scrollView = makeScrollView()
-        self.tableView  = makeTableView()
+        self.searchView = makeSearchView()
+        self.resultView = makeResultView()
         
         // isHiddenすると、「まじでビュー階層から除去される」から、これはダメ
         // self.tableView.isHidden = true
         
-        self.tableView.alpha = 0
+        self.resultView.alpha = 0
         
         self.view.addSubview(pastelView)
         
-        self.view.addSubview(tableView)
-        self.view.addSubview(scrollView)
+        self.view.addSubview(resultView)
+        self.view.addSubview(searchView)
         
         
         pastelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive   = true
@@ -88,10 +88,27 @@ class SearchMovieViewController: UIViewController {
     
     
  
-    func makeScrollView() -> SearchVCCategoryScrollView {
+    func makeSearchView() -> SearchView {
         
-        let view = SearchVCCategoryScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        let view = SearchView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         
+        view.searchBar.delegate = self
+        
+        if let textField = view.searchBar.subviews[0].subviews[1] as? UITextField {
+            textField.clearButtonMode = .never
+            textField.font = UIFont(name: "Quicksand", size: 14)
+            textField.textColor = .white
+            // placeholderの設定は、まだここではできない。viewDidAppearでやる。
+        }
+        
+        if let button = view.searchBar.subviews[0].subviews[2] as? UIButton {
+            button.setTitleColor(.white, for: .normal)
+            button.setTitleShadowColor(.red, for: .normal)
+            button.titleLabel?.font = UIFont(name: "Quicksand", size: 14)
+        }
+        
+        
+        /*
         if let searchBar = view.subviews[0].subviews[0] as? UISearchBar {
             
             searchBar.delegate = self
@@ -121,16 +138,25 @@ class SearchMovieViewController: UIViewController {
             */
             
         }
+        */
         
         return view
         
     }
     
     
-    func makeTableView() -> SearchVCResultTableView {
+    func makeResultView() -> ResultView {
         
-        let view = SearchVCResultTableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        let view = ResultView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         
+        view.tableView.delegate   = self
+        view.tableView.dataSource = self
+        
+        let xib = UINib(nibName: "TableViewCell", bundle: nil)
+        
+        view.tableView.register(xib, forCellReuseIdentifier: "Cell")
+        
+        /*
         if let tableView = view.subviews[0].subviews[0] as? UITableView {
             
             tableView.delegate   = self
@@ -141,6 +167,7 @@ class SearchMovieViewController: UIViewController {
             tableView.register(xib, forCellReuseIdentifier: "Cell")
             
         }
+        */
         
         return view
         
@@ -151,7 +178,7 @@ class SearchMovieViewController: UIViewController {
         
         super.viewWillAppear(animated)
         
-        if let tableView = self.tableView.subviews[0].subviews[0] as? UITableView {
+        if let tableView = self.resultView.subviews[0].subviews[0] as? UITableView {
             if let indexPath = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: indexPath, animated: true)
             }
@@ -169,11 +196,19 @@ class SearchMovieViewController: UIViewController {
         // そしてなんと、viewDidLoad時には、プレースホルダーがまだ生成されていない！！
         // だからここでやるしかないのだ。なんてこった。クソはまった。
         
-        if let searchBar = self.scrollView.subviews[0].subviews[0] as? UISearchBar {
+        /*
+        if let searchBar = self.searchView.subviews[0].subviews[0] as? UISearchBar {
             if let textField = searchBar.subviews[0].subviews[1] as? UITextField {
                 if let placeHolder = textField.subviews[2] as? UILabel{
                     placeHolder.textColor = .white
                 }
+            }
+        }
+        */
+        
+        if let textField = self.searchView.searchBar.subviews[0].subviews[1] as? UITextField {
+            if let placeHolder = textField.subviews[2] as? UILabel{
+                placeHolder.textColor = .white
             }
         }
     }
@@ -183,20 +218,20 @@ class SearchMovieViewController: UIViewController {
     
     func buttonTapped() {
         
-        self.tableView.alpha  = 1
+        self.resultView.alpha  = 1
 
         // これやると、scrollViewがツリー階層から除去されるのがキツイ...
-        UIView.transition(from: scrollView,
-                          to: tableView,
+        UIView.transition(from: searchView,
+                          to: resultView,
                           duration: 0.5,
                           options: .transitionCrossDissolve,
                           completion: {_ in print("transition!") }
                          )
         
         // ここじゃないとダメなのは、↑のメソッド実行するとscrollViewが消えるから
-        self.scrollView.alpha = 0
+        self.searchView.alpha = 0
         
-        self.view.insertSubview(scrollView, belowSubview: tableView)
+        self.view.insertSubview(searchView, belowSubview: resultView)
         
         // transiton時にツリー階層の位置関係が自動で変わるので、もうこれは必要ない
         // view.bringSubview(toFront: tableView)
@@ -216,7 +251,7 @@ class SearchMovieViewController: UIViewController {
                 self.movies = movie.results
                 self.movies.forEach{ print($0) }
             
-                if let tableView = self.tableView.subviews[0].subviews[0] as? UITableView {
+                if let tableView = self.resultView.subviews[0].subviews[0] as? UITableView {
                     tableView.reloadData()
                 }
             
@@ -229,21 +264,21 @@ class SearchMovieViewController: UIViewController {
         
         self.view.endEditing(true)
         
-        self.scrollView.alpha = 1
-        self.tableView.alpha  = 0
+        self.searchView.alpha = 1
+        self.resultView.alpha  = 0
         
         // これやると、scrollViewがツリー階層から除去されるのがキツイ...
-        UIView.transition(from: tableView,
-                          to: scrollView,
+        UIView.transition(from: resultView,
+                          to: searchView,
                           duration: 1.0,
                           options: .transitionCurlDown,
                           completion: {_ in print("transition!") }
         )
         
         // ここじゃないとダメなのは、↑のメソッド実行するとscrollViewが消えるから
-        self.tableView.alpha = 0
+        self.resultView.alpha = 0
         
-        self.view.insertSubview(tableView, belowSubview: scrollView)
+        self.view.insertSubview(resultView, belowSubview: searchView)
         
         self.navigationItem.leftBarButtonItem?.isEnabled = false
         self.navigationItem.leftBarButtonItem?.tintColor = .clear
@@ -258,7 +293,7 @@ class SearchMovieViewController: UIViewController {
         
         let queue = DispatchQueue.global(qos: .userInitiated)
         
-        let text = (self.scrollView.subviews[0].subviews[0] as! UISearchBar).text
+        let text = (self.searchView.subviews[0].subviews[0] as! UISearchBar).text
         
         queue.async { apiManager.request(query: text!) }
     }
@@ -329,7 +364,7 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         
-        cell.titleLabel.text  = self.movies[indexPath.row].name
+        cell.titleLabel.text = self.movies[indexPath.row].name
         
         if let genre1 = self.movies[indexPath.row].genres.first {
             cell.genre1Label.text = genreIdToName(genre1)
@@ -383,20 +418,20 @@ extension SearchMovieViewController: UISearchBarDelegate {
 
             // TODO: DRYじゃねーからまとめとけ
             
-            self.tableView.alpha  = 1
+            self.resultView.alpha  = 1
             
             // これやると、scrollViewがツリー階層から除去されるのがキツイ...
-            UIView.transition(from: scrollView,
-                              to: tableView,
+            UIView.transition(from: searchView,
+                              to: resultView,
                               duration: 0.5,
                               options: .transitionCrossDissolve,
                               completion: {_ in print("transition!") }
             )
             
             // ここじゃないとダメなのは、↑のメソッド実行するとscrollViewが消えるから
-            self.scrollView.alpha = 0
+            self.searchView.alpha = 0
             
-            self.view.insertSubview(scrollView, belowSubview: tableView)
+            self.view.insertSubview(searchView, belowSubview: resultView)
             
             // transiton時にツリー階層の位置関係が自動で変わるので、もうこれは必要ない
             // view.bringSubview(toFront: tableView)

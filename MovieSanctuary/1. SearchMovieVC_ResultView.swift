@@ -1,8 +1,11 @@
 
 import UIKit
 
-class SearchVCCategoryScrollView: UIView {
+class ResultView: UIView {
 
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     // コード時は、こっちだけが呼ばれる
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -16,14 +19,12 @@ class SearchVCCategoryScrollView: UIView {
     
     func loadNib() {
         
-        let view = Bundle.main.loadNibNamed("SearchCategoryView", owner: self, options: nil)?.first as! UIView
+        let view = Bundle.main.loadNibNamed("ResultView", owner: self, options: nil)?.first as! UIView
         
         view.frame = self.bounds
         
         self.addSubview(view)
+        
     }
 
 }
-
-
-

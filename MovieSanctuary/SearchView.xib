@@ -16,7 +16,12 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchVCCategoryScrollView" customModule="MovieSanctuary" customModuleProvider="target">
+            <connections>
+                <outlet property="scrollView" destination="eCS-JS-Emt" id="3ng-U2-RJ2"/>
+                <outlet property="searchBar" destination="3Ly-Ra-xZa" id="AP2-NM-MFB"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
