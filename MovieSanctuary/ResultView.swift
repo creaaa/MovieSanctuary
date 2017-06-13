@@ -5,6 +5,8 @@ final class ResultView: UIView, InstantiatableFromNib {
     
     @IBOutlet weak var tableView: UITableView!
     
+    
+    /*
     // コード時は、こっちだけが呼ばれる
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,5 +29,7 @@ final class ResultView: UIView, InstantiatableFromNib {
         */
         
     }
-
+    */
+    
+    
 }

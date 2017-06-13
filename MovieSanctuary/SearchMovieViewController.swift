@@ -15,16 +15,11 @@ final class SearchMovieViewController: UIViewController {
     // Model
     var movies: [ConciseMovieInfoResult] = []
     
-        /*
-    [
-        ConciseMovieInfoResult(id: 1, name: "hoge", poster_path: "", genres: [16])
-    ]
-    */
-    
+    // Views
     private lazy var pastelView: PastelView = {
     
         let pastelView = PastelView()
-                
+        
         // Custom Direction
         pastelView.startPastelPoint = .bottomLeft
         pastelView.endPastelPoint   = .topRight
@@ -49,8 +44,30 @@ final class SearchMovieViewController: UIViewController {
     }()
     
     
-    var searchView: SearchView!
-    var resultView: ResultView!
+    fileprivate lazy var searchView: SearchView = {
+        
+        let searchView = SearchView.instantiateFromNib()
+        
+        searchView.searchBar.delegate = self
+        
+        return searchView
+
+    }()
+    
+    
+    fileprivate lazy var resultView: ResultView = {
+        
+        let resultView = ResultView.instantiateFromNib()
+        
+        resultView.tableView.delegate = self
+        resultView.tableView.dataSource = self
+        
+        let xib = UINib(nibName: "TableViewCell", bundle: nil)
+        resultView.tableView.register(xib, forCellReuseIdentifier: "Cell")
+        
+        return resultView
+        
+    }()
     
     
     override func viewDidLoad() {
@@ -62,17 +79,6 @@ final class SearchMovieViewController: UIViewController {
         // APImanagerから送信されるNotifを受信
          NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
         
-        
-        self.resultView = ResultView.instantiateFromNib()
-        self.searchView = SearchView.instantiateFromNib()
-        
-        
-        self.searchView.searchBar.delegate = self
-        self.resultView.tableView.delegate = self
-        self.resultView.tableView.dataSource = self
-        
-        let xib = UINib(nibName: "TableViewCell", bundle: nil)
-        self.resultView.tableView.register(xib, forCellReuseIdentifier: "Cell")
         
         // isHiddenすると、「まじでビュー階層から除去される」から、これはダメ
         // self.tableView.isHidden = true
@@ -89,6 +95,7 @@ final class SearchMovieViewController: UIViewController {
         self.view.addSubview(self.searchView)
         
 
+        
         pastelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive   = true
         pastelView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         pastelView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive           = true
@@ -104,10 +111,11 @@ final class SearchMovieViewController: UIViewController {
             = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
         
         self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!], for: .normal)
+        
     }
     
     
- 
+    /*
     func makeSearchView() -> SearchView {
         
         let view = SearchView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
@@ -147,32 +155,10 @@ final class SearchMovieViewController: UIViewController {
         return view
         
     }
+ */
 
-    
-    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
-            
-            let nums = nums  // [2,5,7,9]
-            
-        for idx in 0..<nums.count {
-            for idx2 in idx+1..<nums.count {
-                if nums[idx] + nums[idx2] == target {
-                    return [idx, idx2]
-                }
-            }
-        }
-        
-        return []
-        
-    }
 
-    
     override func viewWillAppear(_ animated: Bool) {
-        
-        
-        
-        
-        
-        
         
         super.viewWillAppear(animated)
         
@@ -181,7 +167,6 @@ final class SearchMovieViewController: UIViewController {
                 tableView.deselectRow(at: indexPath, animated: true)
             }
         }
-
     }
     
     
@@ -213,9 +198,6 @@ final class SearchMovieViewController: UIViewController {
             }
         }
         */
-        
-        
-        
         
         
     }
@@ -260,14 +242,12 @@ final class SearchMovieViewController: UIViewController {
                 print("きてるか！？")
                 self.movies.forEach{ print($0) }
             
-                
-                
-                
-                if let tableView = self.resultView.subviews[0].subviews[0] as? UITableView {
+                if let tableView = self.resultView.tableView {
                     tableView.reloadData()
                 }
             
             default: break
+            
         }
     }
     

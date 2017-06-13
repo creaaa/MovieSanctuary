@@ -7,6 +7,9 @@ final class SearchView: UIView, InstantiatableFromNib {
     @IBOutlet weak var scrollView: UIScrollView!
     
   
+    
+    /*
+    
     // コード時は、こっちだけが呼ばれる
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,6 +32,11 @@ final class SearchView: UIView, InstantiatableFromNib {
         */
     }
      */
+ 
+ 
+ 
+    */
+ 
 
 }
 
