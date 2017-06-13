@@ -10,10 +10,8 @@ class TableViewCell: UITableViewCell {
     
     
     override func awakeFromNib() {
-        
         super.awakeFromNib()
         self.backgroundColor = .clear
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

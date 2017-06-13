@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		440C7BE41EE89F800050C90A /* Pastel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 440C7BE31EE89F800050C90A /* Pastel.framework */; };
-		440C7BE71EE8CABC0050C90A /* 1. SearchMovieVC_ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C7BE61EE8CABC0050C90A /* 1. SearchMovieVC_ResultView.swift */; };
+		440C7BE71EE8CABC0050C90A /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C7BE61EE8CABC0050C90A /* ResultView.swift */; };
 		440C7BE91EE8CBF70050C90A /* ResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440C7BE81EE8CBF70050C90A /* ResultView.xib */; };
 		4420E9831EEDF16500441917 /* 2. DetailMovieInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4420E9821EEDF16500441917 /* 2. DetailMovieInfo.swift */; };
 		4420E9851EEDF3D200441917 /* MovieDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4420E9841EEDF3D200441917 /* MovieDetail.storyboard */; };
@@ -24,6 +24,7 @@
 		442A8AFB1EE9D84100D12A60 /* 1. APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442A8AFA1EE9D84100D12A60 /* 1. APIManager.swift */; };
 		442A8AFD1EE9D94100D12A60 /* 1. Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442A8AFC1EE9D94100D12A60 /* 1. Request.swift */; };
 		442A8AFF1EE9DE2000D12A60 /* 1. ConciseMovieInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442A8AFE1EE9DE2000D12A60 /* 1. ConciseMovieInfo.swift */; };
+		4459C2591EEF6CBE00E963D8 /* NibUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4459C2581EEF6CBE00E963D8 /* NibUtil.swift */; };
 		448841CB1EEB53F0006758B7 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448841CA1EEB53F0006758B7 /* Kingfisher.framework */; };
 		44D943141EE22865004EF6A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D943131EE22865004EF6A3 /* AppDelegate.swift */; };
 		44D943161EE22865004EF6A3 /* SearchMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D943151EE22865004EF6A3 /* SearchMovieViewController.swift */; };
@@ -33,7 +34,7 @@
 		44D943261EE234E4004EF6A3 /* readme.md in Sources */ = {isa = PBXBuildFile; fileRef = 44D943251EE234E4004EF6A3 /* readme.md */; };
 		44E3BE3B1EE713F000466CF5 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44E3BE3A1EE7127C00466CF5 /* Quicksand-Regular.ttf */; };
 		44E3BE421EE73AD000466CF5 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44E3BE411EE73AD000466CF5 /* SearchView.xib */; };
-		44E3BE441EE73BB100466CF5 /* 1. SearchMovieVC_SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E3BE431EE73BB100466CF5 /* 1. SearchMovieVC_SearchView.swift */; };
+		44E3BE441EE73BB100466CF5 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E3BE431EE73BB100466CF5 /* SearchView.swift */; };
 		44E3BE491EE7C12100466CF5 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E3BE471EE7C12100466CF5 /* TableViewCell.swift */; };
 		44E3BE4A1EE7C12100466CF5 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44E3BE481EE7C12100466CF5 /* TableViewCell.xib */; };
 		44E3BE4C1EE7EFC000466CF5 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E3BE4B1EE7EFC000466CF5 /* MyButton.swift */; };
@@ -41,7 +42,7 @@
 
 /* Begin PBXFileReference section */
 		440C7BE31EE89F800050C90A /* Pastel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pastel.framework; path = Carthage/Build/iOS/Pastel.framework; sourceTree = "<group>"; };
-		440C7BE61EE8CABC0050C90A /* 1. SearchMovieVC_ResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "1. SearchMovieVC_ResultView.swift"; sourceTree = "<group>"; };
+		440C7BE61EE8CABC0050C90A /* ResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		440C7BE81EE8CBF70050C90A /* ResultView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultView.xib; sourceTree = "<group>"; };
 		4420E9821EEDF16500441917 /* 2. DetailMovieInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2. DetailMovieInfo.swift"; sourceTree = "<group>"; };
 		4420E9841EEDF3D200441917 /* MovieDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MovieDetail.storyboard; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 		442A8AFA1EE9D84100D12A60 /* 1. APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "1. APIManager.swift"; sourceTree = "<group>"; };
 		442A8AFC1EE9D94100D12A60 /* 1. Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "1. Request.swift"; sourceTree = "<group>"; };
 		442A8AFE1EE9DE2000D12A60 /* 1. ConciseMovieInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "1. ConciseMovieInfo.swift"; sourceTree = "<group>"; };
+		4459C2581EEF6CBE00E963D8 /* NibUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibUtil.swift; sourceTree = "<group>"; };
 		448841CA1EEB53F0006758B7 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		44D943101EE22865004EF6A3 /* MovieSanctuary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSanctuary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D943131EE22865004EF6A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +70,7 @@
 		44D943251EE234E4004EF6A3 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = readme.md; path = ../readme.md; sourceTree = "<group>"; };
 		44E3BE3A1EE7127C00466CF5 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
 		44E3BE411EE73AD000466CF5 /* SearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
-		44E3BE431EE73BB100466CF5 /* 1. SearchMovieVC_SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "1. SearchMovieVC_SearchView.swift"; sourceTree = "<group>"; };
+		44E3BE431EE73BB100466CF5 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		44E3BE471EE7C12100466CF5 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		44E3BE481EE7C12100466CF5 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		44E3BE4B1EE7EFC000466CF5 /* MyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
@@ -158,7 +160,7 @@
 				44D943171EE22865004EF6A3 /* SearchMovieViewController.storyboard */,
 				4420E9841EEDF3D200441917 /* MovieDetail.storyboard */,
 				44E3BE391EE7124700466CF5 /* Resources */,
-				44E3BE4D1EE7F42F00466CF5 /* Xib */,
+				44E3BE4D1EE7F42F00466CF5 /* Nib */,
 				44E3BE4E1EE7F44000466CF5 /* Views */,
 				442A8AF91EE9D82600D12A60 /* Model */,
 				44E3BE4F1EE7F46900466CF5 /* Controllers */,
@@ -178,22 +180,23 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		44E3BE4D1EE7F42F00466CF5 /* Xib */ = {
+		44E3BE4D1EE7F42F00466CF5 /* Nib */ = {
 			isa = PBXGroup;
 			children = (
+				4459C2581EEF6CBE00E963D8 /* NibUtil.swift */,
 				44E3BE411EE73AD000466CF5 /* SearchView.xib */,
 				440C7BE81EE8CBF70050C90A /* ResultView.xib */,
 				44E3BE481EE7C12100466CF5 /* TableViewCell.xib */,
 			);
-			name = Xib;
+			name = Nib;
 			sourceTree = "<group>";
 		};
 		44E3BE4E1EE7F44000466CF5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				44E3BE4B1EE7EFC000466CF5 /* MyButton.swift */,
-				44E3BE431EE73BB100466CF5 /* 1. SearchMovieVC_SearchView.swift */,
-				440C7BE61EE8CABC0050C90A /* 1. SearchMovieVC_ResultView.swift */,
+				44E3BE431EE73BB100466CF5 /* SearchView.swift */,
+				440C7BE61EE8CABC0050C90A /* ResultView.swift */,
 				44E3BE471EE7C12100466CF5 /* TableViewCell.swift */,
 			);
 			name = Views;
@@ -312,14 +315,15 @@
 				442A8AFB1EE9D84100D12A60 /* 1. APIManager.swift in Sources */,
 				44E3BE491EE7C12100466CF5 /* TableViewCell.swift in Sources */,
 				44D943161EE22865004EF6A3 /* SearchMovieViewController.swift in Sources */,
-				44E3BE441EE73BB100466CF5 /* 1. SearchMovieVC_SearchView.swift in Sources */,
+				44E3BE441EE73BB100466CF5 /* SearchView.swift in Sources */,
 				4420E9911EEE0A6000441917 /* 3. Request.swift in Sources */,
 				4420E9931EEE0B9F00441917 /* 3. APIManager.swift in Sources */,
 				4420E9871EEDF3EA00441917 /* MovieDetailViewController.swift in Sources */,
 				4420E98F1EEE01C300441917 /* 2. APIManager.swift in Sources */,
 				44D943261EE234E4004EF6A3 /* readme.md in Sources */,
 				442A8AFF1EE9DE2000D12A60 /* 1. ConciseMovieInfo.swift in Sources */,
-				440C7BE71EE8CABC0050C90A /* 1. SearchMovieVC_ResultView.swift in Sources */,
+				4459C2591EEF6CBE00E963D8 /* NibUtil.swift in Sources */,
+				440C7BE71EE8CABC0050C90A /* ResultView.swift in Sources */,
 				44D943141EE22865004EF6A3 /* AppDelegate.swift in Sources */,
 				4420E98B1EEE001000441917 /* 3. MovieForIMDB_ID.swift in Sources */,
 				442A8AFD1EE9D94100D12A60 /* 1. Request.swift in Sources */,

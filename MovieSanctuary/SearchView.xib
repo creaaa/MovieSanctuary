@@ -16,14 +16,9 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchVCCategoryScrollView" customModule="MovieSanctuary" customModuleProvider="target">
-            <connections>
-                <outlet property="scrollView" destination="eCS-JS-Emt" id="3ng-U2-RJ2"/>
-                <outlet property="searchBar" destination="3Ly-Ra-xZa" id="AP2-NM-MFB"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchView" customModule="MovieSanctuary" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SearchView" customModule="MovieSanctuary" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -167,6 +162,10 @@
                 <constraint firstItem="3Ly-Ra-xZa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="zlg-Kh-6CQ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="scrollView" destination="eCS-JS-Emt" id="Nes-cj-g5o"/>
+                <outlet property="searchBar" destination="3Ly-Ra-xZa" id="vHm-VU-ADR"/>
+            </connections>
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>
     </objects>

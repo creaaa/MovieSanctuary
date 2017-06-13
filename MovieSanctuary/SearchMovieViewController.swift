@@ -10,17 +10,21 @@ extension SearchView {
 }
 
 
-class SearchMovieViewController: UIViewController {
+final class SearchMovieViewController: UIViewController {
     
     // Model
     var movies: [ConciseMovieInfoResult] = []
     
+        /*
+    [
+        ConciseMovieInfoResult(id: 1, name: "hoge", poster_path: "", genres: [16])
+    ]
+    */
+    
     private lazy var pastelView: PastelView = {
     
         let pastelView = PastelView()
-        
-        pastelView.sizeToFit()
-        
+                
         // Custom Direction
         pastelView.startPastelPoint = .bottomLeft
         pastelView.endPastelPoint   = .topRight
@@ -58,8 +62,17 @@ class SearchMovieViewController: UIViewController {
         // APImanagerから送信されるNotifを受信
          NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
         
-        self.searchView = makeSearchView()
-        self.resultView = makeResultView()
+        
+        self.resultView = ResultView.instantiateFromNib()
+        self.searchView = SearchView.instantiateFromNib()
+        
+        
+        self.searchView.searchBar.delegate = self
+        self.resultView.tableView.delegate = self
+        self.resultView.tableView.dataSource = self
+        
+        let xib = UINib(nibName: "TableViewCell", bundle: nil)
+        self.resultView.tableView.register(xib, forCellReuseIdentifier: "Cell")
         
         // isHiddenすると、「まじでビュー階層から除去される」から、これはダメ
         // self.tableView.isHidden = true
@@ -70,12 +83,12 @@ class SearchMovieViewController: UIViewController {
         // self.view = pastelView
     
         // から、こうする...
-        self.view.addSubview(pastelView)
+        self.view.addSubview(self.pastelView)
         
-        self.view.addSubview(resultView)
-        self.view.addSubview(searchView)
+        self.view.addSubview(self.resultView)
+        self.view.addSubview(self.searchView)
         
-        
+
         pastelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive   = true
         pastelView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         pastelView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive           = true
@@ -115,38 +128,6 @@ class SearchMovieViewController: UIViewController {
         }
         
         
-        /*
-        if let searchBar = view.subviews[0].subviews[0] as? UISearchBar {
-            
-            searchBar.delegate = self
-            
-            // text field
-            if let textField = searchBar.subviews[0].subviews[1] as? UITextField {
-                textField.clearButtonMode = .never
-                textField.font = UIFont(name: "Quicksand", size: 14)
-                textField.textColor = .white
-                
-                // placeholderの設定は、まだここではできない。viewDidAppearでやる。
-                
-            }
-            
-            // cancel button
-            if let button = searchBar.subviews[0].subviews[2] as? UIButton {
-                button.setTitleColor(.white, for: .normal)
-                button.setTitleShadowColor(.red, for: .normal)
-                button.titleLabel?.font = UIFont(name: "Quicksand", size: 14)
-            }
-            
-            // じつは、searchBarのtextFieldは、こうすることでも取れる
-            /*
-            if let searchField = searchBar.value(forKey: "_searchField") as? UITextField {
-                searchField.textColor = .black
-            }
-            */
-            
-        }
-        */
-        
         return view
         
     }
@@ -162,26 +143,36 @@ class SearchMovieViewController: UIViewController {
         let xib = UINib(nibName: "TableViewCell", bundle: nil)
         
         view.tableView.register(xib, forCellReuseIdentifier: "Cell")
-        
-        /*
-        if let tableView = view.subviews[0].subviews[0] as? UITableView {
-            
-            tableView.delegate   = self
-            tableView.dataSource = self
-            
-            let xib = UINib(nibName: "TableViewCell", bundle: nil)
-            
-            tableView.register(xib, forCellReuseIdentifier: "Cell")
-            
-        }
-        */
-        
+
         return view
         
     }
 
     
+    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+            
+            let nums = nums  // [2,5,7,9]
+            
+        for idx in 0..<nums.count {
+            for idx2 in idx+1..<nums.count {
+                if nums[idx] + nums[idx2] == target {
+                    return [idx, idx2]
+                }
+            }
+        }
+        
+        return []
+        
+    }
+
+    
     override func viewWillAppear(_ animated: Bool) {
+        
+        
+        
+        
+        
+        
         
         super.viewWillAppear(animated)
         
@@ -213,11 +204,20 @@ class SearchMovieViewController: UIViewController {
         }
         */
         
-        if let textField = self.searchView.searchBar.subviews[0].subviews[1] as? UITextField {
+        // if let textField = self.searchView.searchBar.subviews[0].subviews[1] as? UITextField {
+        
+        /*
+        if let textField = self.searchView.searchBar.subviews[0].subviews[1] as? UITextField { 
             if let placeHolder = textField.subviews[2] as? UILabel{
                 placeHolder.textColor = .white
             }
         }
+        */
+        
+        
+        
+        
+        
     }
     
     
@@ -248,7 +248,7 @@ class SearchMovieViewController: UIViewController {
         
     }
     
-    
+
     func didReceiveJSON(sender: Notification) {
         
         switch sender.object {
@@ -256,8 +256,13 @@ class SearchMovieViewController: UIViewController {
             case let movie as ConciseMovieInfo:
                 
                 self.movies = movie.results
+                
+                print("きてるか！？")
                 self.movies.forEach{ print($0) }
             
+                
+                
+                
                 if let tableView = self.resultView.subviews[0].subviews[0] as? UITableView {
                     tableView.reloadData()
                 }
@@ -300,7 +305,9 @@ class SearchMovieViewController: UIViewController {
         
         let queue = DispatchQueue.global(qos: .userInitiated)
         
-        let text = (self.searchView.subviews[0].subviews[0] as! UISearchBar).text
+        // let text = (self.searchView.subviews[0].subviews[0] as! UISearchBar).text
+        
+        let text = self.searchView.searchBar.text
         
         queue.async { apiManager.request(query: text!) }
     }
