@@ -15,9 +15,11 @@ class SearchMovieViewController: UIViewController {
     // Model
     var movies: [ConciseMovieInfoResult] = []
     
-    var pastelView: PastelView! = {
+    private lazy var pastelView: PastelView = {
     
         let pastelView = PastelView()
+        
+        pastelView.sizeToFit()
         
         // Custom Direction
         pastelView.startPastelPoint = .bottomLeft
@@ -63,7 +65,11 @@ class SearchMovieViewController: UIViewController {
         // self.tableView.isHidden = true
         
         self.resultView.alpha = 0
-        
+    
+        // なんか、こうすると ambiguous...ってなる...
+        // self.view = pastelView
+    
+        // から、こうする...
         self.view.addSubview(pastelView)
         
         self.view.addSubview(resultView)
@@ -75,7 +81,7 @@ class SearchMovieViewController: UIViewController {
         pastelView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive           = true
         pastelView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive     = true
         
-        
+
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(back))
         
         self.navigationItem.leftBarButtonItem?.isEnabled = false
