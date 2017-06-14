@@ -118,6 +118,7 @@ final class SearchMovieViewController: UIViewController {
         
         super.viewDidLoad()
         
+<<<<<<< HEAD
         NotificationCenter.default.addObserver(self, selector: #selector(genreButtonTapped), name: Notification.Name("ResultByGenre"), object: nil)
         
         // APImanagerから送信されるNotifを受信
@@ -318,6 +319,8 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         }
         
         return cell
+=======
+>>>>>>> 4126459d04ac30e0d0b3722a23174fb77ae3c6c3
         
     }
     

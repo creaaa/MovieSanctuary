@@ -1,8 +1,8 @@
 
-
 import UIKit
 
 class MovieDetailViewController: UIViewController {
+
 
     var tmdb_movie: ConciseMovieInfoResult!
     var movie:      OMDB_Movie!
@@ -28,3 +28,15 @@ class MovieDetailViewController: UIViewController {
     
 }
 
+
+    @IBOutlet weak var imgMovie: UIImageView!
+    @IBOutlet weak var titleMovie: UITextView!
+    @IBOutlet weak var directorMovie: UITextView!
+    @IBOutlet weak var genreMovie: UITextView!
+    @IBOutlet weak var starsMovie: UITextView!
+    @IBOutlet weak var storyMovie: UITextView!
+    @IBOutlet weak var stackStar: UIStackView!
+    
+
+
+}
