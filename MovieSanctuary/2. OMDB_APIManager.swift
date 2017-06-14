@@ -1,11 +1,34 @@
 
-
 import APIKit
 import Result
 import Himotoki
 
 
 struct OMDB_APIManager {
+    
+    struct Request_OMDB: OMDBRequest {
+        
+        let movieID: String
+        
+        typealias Response = OMDB_Movie
+        
+        var method: HTTPMethod {
+            return .get
+        }
+        
+        var path: String {
+            return ""
+        }
+        
+        var parameters: Any? {
+            return [
+                "i":      self.movieID,
+                "plot":   "full",
+                "apikey": "f462ae21"
+            ]
+        }
+        
+    }
     
     func request(id: String) {
         
@@ -25,3 +48,4 @@ struct OMDB_APIManager {
         }
     }
 }
+

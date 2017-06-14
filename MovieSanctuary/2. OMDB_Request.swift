@@ -20,34 +20,9 @@ extension OMDBRequest {
     }
 }
 
-
 extension OMDBRequest where Response: Decodable {
     func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
         return try decodeValue(object)
     }
 }
 
-
-struct Request_OMDB: OMDBRequest {
-    
-    let movieID: String
-    
-    typealias Response = OMDB_Movie
-    
-    var method: HTTPMethod {
-        return .get
-    }
-    
-    var path: String {
-        return ""
-    }
-    
-    var parameters: Any? {
-        return [
-            "i":      self.movieID,
-            "plot":   "full",
-            "apikey": "f462ae21"
-        ]
-    }
-    
-}
