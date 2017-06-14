@@ -23,7 +23,7 @@ struct TMDB_APIManager {
         }
     }
     
-    func request(query: String) {
+    func request(query: String, _ comp: @escaping (Request_TMDB_Concise.Response) -> Void) {
         
         // SearchRepositoriesRequest conforms to Request protocol.
         let request = Request_TMDB_Concise(query: query)
@@ -32,20 +32,23 @@ struct TMDB_APIManager {
         Session.send(request) { result in
             switch result {
                 case .success(let response):
-                    self.success(response)
+                    comp(response)
                 case .failure(let error):
-                    self.failure(error)
+                    print(error)
             }
         }
     }
     
-    func success(_ response: Request_TMDB_Concise.Response) {
+    /*
+    func success(_ response: Request_TMDB_Concise.Response, _ comp: (TMDB_APIManager.Request_TMDB_Concise.Response) -> Void) {
         NotificationCenter.default.post(name: Notification.Name("JSONresult"), object: response)
+        comp(response)
     }
-    
+ 
     func failure(_ error: SessionTaskError) {
         print(error)
     }
+    */
     
 }
 

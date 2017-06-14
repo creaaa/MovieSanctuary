@@ -237,8 +237,16 @@ final class SearchMovieViewController: UIViewController {
         */
         
         let text = self.searchView.searchBar.text
-        TMDB_APIManager().request(query: text!)
         
+        TMDB_APIManager().request(query: text!) { res in
+            
+            self.movies = res.results
+                
+            if let tableView = self.resultView.tableView {
+                tableView.reloadData()
+            }
+            
+        }
     }
 
 }
