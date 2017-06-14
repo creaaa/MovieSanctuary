@@ -90,22 +90,22 @@ final class SearchMovieViewController: UIViewController {
     
         // から、こうする...
         self.view.addSubview(self.pastelView)
-        
         self.view.addSubview(self.resultView)
         self.view.addSubview(self.searchView)
         
 
-        
         pastelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive   = true
         pastelView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         pastelView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive           = true
         pastelView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive     = true
         
 
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(back))
-        
-        self.navigationItem.leftBarButtonItem?.isEnabled = false
-        self.navigationItem.leftBarButtonItem?.tintColor = .clear
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(back)).apply {
+            
+            $0.isEnabled = false
+            $0.tintColor = .clear
+            
+        }
         
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
@@ -257,7 +257,7 @@ final class SearchMovieViewController: UIViewController {
         self.view.endEditing(true)
         
         self.searchView.alpha = 1
-        self.resultView.alpha  = 0
+        self.resultView.alpha = 0
         
         // これやると、scrollViewがツリー階層から除去されるのがキツイ...
         UIView.transition(from: resultView,
@@ -346,6 +346,7 @@ final class SearchMovieViewController: UIViewController {
     }
     
 }
+
 
 
 extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate {
