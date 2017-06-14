@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GsP-Bk-dhP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GsP-Bk-dhP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -182,16 +182,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="directorMovie" destination="UqZ-Um-gwy" id="Db2-rt-uwK"/>
-                        <outlet property="genreMovie" destination="18p-QR-vYg" id="UK0-sI-sh1"/>
-                        <outlet property="imgMovie" destination="TLu-BK-wAU" id="i86-zr-9b2"/>
-                        <outlet property="movieDirector" destination="UqZ-Um-gwy" id="ghE-fB-gn9"/>
-                        <outlet property="movieImg" destination="TLu-BK-wAU" id="RtF-ZP-oku"/>
-                        <outlet property="movieTitle" destination="diC-ej-B18" id="OBR-hy-YM0"/>
-                        <outlet property="stackStar" destination="lb8-LM-Lma" id="VWH-Ms-Sph"/>
-                        <outlet property="starsMovie" destination="uSQ-eH-Ixv" id="3hM-xR-fz2"/>
-                        <outlet property="storyMovie" destination="1wj-5x-fTc" id="n2A-yA-As5"/>
-                        <outlet property="titleMovie" destination="diC-ej-B18" id="AY0-80-aL9"/>
+                        <outlet property="directorMovie" destination="UqZ-Um-gwy" id="NMq-FV-Drk"/>
+                        <outlet property="genreMovie" destination="18p-QR-vYg" id="gw1-ZL-0hT"/>
+                        <outlet property="imgMovie" destination="TLu-BK-wAU" id="nZY-cp-q7Q"/>
+                        <outlet property="stackStar" destination="lb8-LM-Lma" id="M2F-bx-Ex5"/>
+                        <outlet property="starsMovie" destination="uSQ-eH-Ixv" id="kgS-xN-V3w"/>
+                        <outlet property="storyMovie" destination="1wj-5x-fTc" id="Jg1-z1-lWA"/>
+                        <outlet property="titleMovie" destination="diC-ej-B18" id="dfH-oq-Dt1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6dN-Au-frf" userLabel="First Responder" sceneMemberID="firstResponder"/>
