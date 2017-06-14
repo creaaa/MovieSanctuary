@@ -49,6 +49,7 @@ final class SearchMovieViewController: UIViewController {
         
         let searchView = SearchView.instantiateFromNib()
         
+        
         searchView.searchBar.delegate = self
         
         if let textField = searchView.searchBar.subviews[0].subviews[1] as? UITextField {
@@ -359,7 +360,12 @@ extension SearchMovieViewController: UISearchBarDelegate {
         
         if searchBar.text?.characters.count != 0 {
 
+            hogehoge()
+            
+            
+            
             // TODO: DRYじゃねーからまとめとけ
+            
             
             self.resultView.alpha  = 1
             
@@ -378,7 +384,11 @@ extension SearchMovieViewController: UISearchBarDelegate {
             
             // transiton時にツリー階層の位置関係が自動で変わるので、もうこれは必要ない
             // view.bringSubview(toFront: tableView)
+ 
+ 
             
+ 
+ 
             self.navigationItem.leftBarButtonItem?.isEnabled = true
             self.navigationItem.leftBarButtonItem?.tintColor = .blue
           
@@ -389,6 +399,15 @@ extension SearchMovieViewController: UISearchBarDelegate {
         dismissKeyBoard(searchBar)
     
     }
+    
+    
+    func hogehoge() {
+        
+        
+      
+        
+    }
+    
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         dismissKeyBoard(searchBar)
