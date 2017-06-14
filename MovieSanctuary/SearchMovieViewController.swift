@@ -191,6 +191,10 @@ final class SearchMovieViewController: UIViewController {
     }
     
     func backToSearchView() {
+        
+        self.movies = []
+        self.resultView.tableView.reloadData()
+        
         toggleLeftBarButton()
         flipView()
     }
@@ -254,21 +258,21 @@ final class SearchMovieViewController: UIViewController {
         }
     }
     
-    let APIManager = TMDB_APIManager()
     
+    var APIManager = TMDB_APIManager(query: "")
     
     // API Connection
     func connect() {
         
         let text = self.searchView.searchBar.text
         
-        TMDB_APIManager().request(query: text!) { res in
-            self.movies = res.results
+        self.APIManager.request(query: text!) { res in
+            self.movies.append(contentsOf: res.results)
             self.resultView.tableView.reloadData()
         }
         
     }
-
+    
 }
 
 
@@ -278,7 +282,23 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         return self.movies.count
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // 下の方に来たら再読込(無限スクロール)
+        
+        if movies.count - indexPath.row <= 4 {
+            
+            print("はい無限スクロール~")
+            
+            // self.page += 1
+            
+            self.APIManager.page += 1
+            print("現在のページ", self.APIManager.page)
+            
+            connect()
+        }
+        
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         
@@ -339,8 +359,10 @@ extension SearchMovieViewController: UISearchBarDelegate {
             
         }
         
-        dismissKeyBoard(searchBar)
+        // dismissKeyBoard(searchBar)
     
+        self.view.endEditing(true)
+        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

@@ -12,7 +12,7 @@ class MovieDetailViewController: UIViewController {
         
         super.viewDidLoad()
         
-        print("前画面から来た tmdb_movie: ", tmdb_movie)
+        print("tmdb_movie from previous scene: ", tmdb_movie)
         TMDBconnect()
         
     }

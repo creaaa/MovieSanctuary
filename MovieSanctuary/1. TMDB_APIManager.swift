@@ -6,29 +6,17 @@ import Himotoki
 
 struct TMDB_APIManager {
     
-    struct Request_TMDB_Concise: TMDBRequest {
-        
-        let query: String
-        let page:  Int
-        
-        typealias Response = ConciseMovieInfo
-        
-        var path: String {
-            return "/3/search/movie"
-        }
-        
-        var parameters: Any? {
-            return ["api_key": "5f215b9dfac50de053affb4f9085e620",
-                    "query":   self.query,
-                    "page" :   self.page
-            ]
-        }
-    }
+    var query: String
+    var page:  Int    = 1
     
-    func request(query: String, page: Int = 1, _ completion: @escaping (Request_TMDB_Concise.Response) -> Void) {
+    mutating func request(query: String, _ completion: @escaping (Request_TMDB_Concise.Response) -> Void) {
+        
+        self.query = query
         
         // SearchRepositoriesRequest conforms to Request protocol.
-        let request = Request_TMDB_Concise(query: query, page: page)
+        let request = Request_TMDB_Concise(query: self.query, page: self.page)
+        
+        print("generated request: ", request)
         
         // Session receives an instance of a type that conforms to Request.
         Session.send(request) { result in
@@ -40,7 +28,44 @@ struct TMDB_APIManager {
             }
         }
     }
+    
+    init(query: String) {
+        self.query = query
+    }
+    
+    
 }
+
+
+struct Request_TMDB_Concise: TMDBRequest {
+    
+    let query: String
+    var page:  Int
+    
+    typealias Response = ConciseMovieInfo
+    
+    var path: String {
+        return "/3/search/movie"
+    }
+    
+    var parameters: Any? {
+        return ["api_key": "5f215b9dfac50de053affb4f9085e620",
+                "query":   self.query,
+                "page" :   self.page
+        ]
+    }
+    
+//    init(query: String, page: Int) {
+//        self.query = query
+//        self.page  = page
+//    }
+    
+}
+
+///////////////////////
+
+
+
 
 
 struct TMDB_OMDBidManager {
