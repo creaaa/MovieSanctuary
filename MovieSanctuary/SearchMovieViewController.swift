@@ -204,7 +204,6 @@ final class SearchMovieViewController: UIViewController {
     // MARK: - Observe Method
     //////////////////////////
     
-    
     func didReceiveJSON(sender: Notification) {
         
         switch sender.object {

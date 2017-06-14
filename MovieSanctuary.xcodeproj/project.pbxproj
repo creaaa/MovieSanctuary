@@ -133,6 +133,7 @@
 		4485FB261EF10D5C00C7C8F0 /* StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
+				44D9431C1EE22865004EF6A3 /* LaunchScreen.storyboard */,
 				44D943171EE22865004EF6A3 /* SearchMovieViewController.storyboard */,
 				4420E9841EEDF3D200441917 /* MovieDetail.storyboard */,
 			);
@@ -175,7 +176,6 @@
 			children = (
 				4485FB261EF10D5C00C7C8F0 /* StoryBoard */,
 				44D9431F1EE22865004EF6A3 /* Info.plist */,
-				44D9431C1EE22865004EF6A3 /* LaunchScreen.storyboard */,
 				44E3BE3A1EE7127C00466CF5 /* Quicksand-Regular.ttf */,
 			);
 			name = Resources;

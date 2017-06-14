@@ -30,4 +30,3 @@ extension TMDBRequest where Response: Decodable {
         return try decodeValue(object)
     }
 }
-

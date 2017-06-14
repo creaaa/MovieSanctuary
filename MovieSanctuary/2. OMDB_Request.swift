@@ -25,4 +25,3 @@ extension OMDBRequest where Response: Decodable {
         return try decodeValue(object)
     }
 }
-

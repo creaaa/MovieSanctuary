@@ -12,13 +12,9 @@ struct OMDB_APIManager {
         
         typealias Response = OMDB_Movie
         
-        var method: HTTPMethod {
-            return .get
-        }
+        var method: HTTPMethod { return .get }
         
-        var path: String {
-            return ""
-        }
+        var path:   String     { return "" }
         
         var parameters: Any? {
             return [
