@@ -25,5 +25,6 @@ class MovieDetailViewController: UIViewController {
             }
         }
     }
+    
 }
 

@@ -9,6 +9,7 @@ struct TMDB_APIManager {
     struct Request_TMDB_Concise: TMDBRequest {
         
         let query: String
+        let page:  Int
         
         typealias Response = ConciseMovieInfo
         
@@ -18,15 +19,16 @@ struct TMDB_APIManager {
         
         var parameters: Any? {
             return ["api_key": "5f215b9dfac50de053affb4f9085e620",
-                    "query":   self.query
+                    "query":   self.query,
+                    "page" :   self.page
             ]
         }
     }
     
-    func request(query: String, _ completion: @escaping (Request_TMDB_Concise.Response) -> Void) {
+    func request(query: String, page: Int = 1, _ completion: @escaping (Request_TMDB_Concise.Response) -> Void) {
         
         // SearchRepositoriesRequest conforms to Request protocol.
-        let request = Request_TMDB_Concise(query: query)
+        let request = Request_TMDB_Concise(query: query, page: page)
         
         // Session receives an instance of a type that conforms to Request.
         Session.send(request) { result in

@@ -1,0 +1,13 @@
+name: Result, nameSpecified: , owner: antitypical, version: 3.2.3
+
+name: Pastel, nameSpecified: , owner: cruisediary, version: 0.3.0
+
+name: Himotoki, nameSpecified: , owner: ikesyo, version: 3.1.0
+
+name: APIKit, nameSpecified: , owner: ishkawa, version: 3.1.2
+
+name: Kingfisher, nameSpecified: , owner: onevcat, version: 3.10.1
+
+add-version-numbers: false
+
+LicensePlist Version: 1.4.5

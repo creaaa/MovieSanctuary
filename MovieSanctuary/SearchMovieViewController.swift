@@ -10,8 +10,10 @@ final class SearchMovieViewController: UIViewController {
     var movies: [ConciseMovieInfoResult] = []
     
     // Views
-    private lazy var pastelView: PastelView = {
+    private lazy var pastelView: UIView = {
     
+        /*
+        
         // ここでframeを設定しさえすれば、viewDidLoad内で制約をかける必要はない
         let pastelView = PastelView(frame: self.view.bounds)
         
@@ -36,6 +38,36 @@ final class SearchMovieViewController: UIViewController {
         
         return pastelView
         
+        */
+        
+        
+        let view = UIView(frame: self.view.bounds)
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = view.bounds
+        gradient.colors = [
+            
+            /*
+            UIColor.white.cgColor,
+            UIColor.black.cgColor
+            */
+            
+            UIColor(red: 156/255, green: 39/255,  blue: 176/255, alpha: 1.0).cgColor,
+            UIColor(red: 255/255, green: 64/255,  blue: 129/255, alpha: 1.0).cgColor,
+            UIColor(red: 123/255, green: 31/255,  blue: 162/255, alpha: 1.0).cgColor,
+            UIColor(red: 32/255,  green: 76/255,  blue: 255/255, alpha: 1.0).cgColor,
+            UIColor(red: 32/255,  green: 158/255, blue: 255/255, alpha: 1.0).cgColor,
+            UIColor(red: 90/255,  green: 120/255, blue: 127/255, alpha: 1.0).cgColor,
+            UIColor(red: 58/255,  green: 255/255, blue: 217/255, alpha: 1.0).cgColor
+            
+            
+        ]
+        
+        view.layer.insertSublayer(gradient, at: 0)
+        
+        return view
+        
+ 
     }()
     
     
@@ -222,6 +254,8 @@ final class SearchMovieViewController: UIViewController {
         }
     }
     
+    let APIManager = TMDB_APIManager()
+    
     
     // API Connection
     func connect() {
@@ -232,6 +266,7 @@ final class SearchMovieViewController: UIViewController {
             self.movies = res.results
             self.resultView.tableView.reloadData()
         }
+        
     }
 
 }

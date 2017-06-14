@@ -57,6 +57,7 @@
 		4459C2581EEF6CBE00E963D8 /* NibUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibUtil.swift; sourceTree = "<group>"; };
 		4485FB241EF0B43400C7C8F0 /* ViewUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtil.swift; sourceTree = "<group>"; };
 		448841CA1EEB53F0006758B7 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		44A220E51EF1BC42004D9E8C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		44D943101EE22865004EF6A3 /* MovieSanctuary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSanctuary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D943131EE22865004EF6A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44D943151EE22865004EF6A3 /* SearchMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieViewController.swift; sourceTree = "<group>"; };
@@ -121,13 +122,13 @@
 			name = POJO;
 			sourceTree = "<group>";
 		};
-		442A8AF91EE9D82600D12A60 /* Model */ = {
+		442A8AF91EE9D82600D12A60 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				4420E9891EEDFFC300441917 /* POJO */,
 				4420E9881EEDFF6300441917 /* API */,
 			);
-			name = Model;
+			name = Models;
 			sourceTree = "<group>";
 		};
 		4485FB261EF10D5C00C7C8F0 /* StoryBoard */ = {
@@ -160,11 +161,12 @@
 		44D943121EE22865004EF6A3 /* MovieSanctuary */ = {
 			isa = PBXGroup;
 			children = (
+				44A220E51EF1BC42004D9E8C /* Settings.bundle */,
 				44D943131EE22865004EF6A3 /* AppDelegate.swift */,
 				44E3BE391EE7124700466CF5 /* Resources */,
 				44E3BE4D1EE7F42F00466CF5 /* Nib */,
 				44E3BE4E1EE7F44000466CF5 /* Views */,
-				442A8AF91EE9D82600D12A60 /* Model */,
+				442A8AF91EE9D82600D12A60 /* Models */,
 				44E3BE4F1EE7F46900466CF5 /* Controllers */,
 				44D9431A1EE22865004EF6A3 /* Assets.xcassets */,
 			);
