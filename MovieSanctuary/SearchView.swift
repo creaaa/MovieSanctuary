@@ -8,7 +8,6 @@ final class SearchView: UIView, InstantiatableFromNib {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        print("ちゃんときてはいる")
     }
     
     /*

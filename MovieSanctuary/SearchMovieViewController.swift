@@ -3,12 +3,6 @@ import UIKit
 import Pastel
 import Kingfisher
 
-extension SearchView {
-    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.next?.touchesBegan(touches, with: event)
-    }
-}
-
 
 final class SearchMovieViewController: UIViewController {
     
@@ -49,7 +43,6 @@ final class SearchMovieViewController: UIViewController {
         
         let searchView = SearchView.instantiateFromNib()
         
-        
         searchView.searchBar.delegate = self
         
         if let textField = searchView.searchBar.subviews[0].subviews[1] as? UITextField {
@@ -85,11 +78,15 @@ final class SearchMovieViewController: UIViewController {
     }()
     
     
+    ////////////////////////
+    // MARK: - Life Cycle
+    ////////////////////////
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(buttonTapped), name: Notification.Name("ResultByGenre"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(genreButtonTapped), name: Notification.Name("ResultByGenre"), object: nil)
         
         // APImanagerから送信されるNotifを受信
          NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
@@ -107,15 +104,8 @@ final class SearchMovieViewController: UIViewController {
         self.view.addSubview(self.resultView)
         self.view.addSubview(self.searchView)
         
-        /*
-        pastelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive   = true
-        pastelView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        pastelView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive           = true
-        pastelView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        */
-
         self.navigationItem.leftBarButtonItem = {
-            UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(back)).apply {
+            UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(backToSearchView)).apply {
                 $0.isEnabled = false
                 $0.tintColor = .clear
                 $0.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!], for: .normal)
@@ -158,34 +148,63 @@ final class SearchMovieViewController: UIViewController {
     }
     
     
-    /* observe method */
     
-    func buttonTapped() {
+    ////////////////////////
+    // MARK: - Change View
+    ////////////////////////
+    
+    func genreButtonTapped() {
+        toggleLeftBarButton()
+        flipView()
+    }
+    
+    func backToSearchView() {
+        toggleLeftBarButton()
+        flipView()
+    }
+    
+    func flipView() {
         
-        self.resultView.alpha  = 1
-
-        // これやると、scrollViewがツリー階層から除去されるのがキツイ...
-        UIView.transition(from: searchView,
-                          to: resultView,
+        // FIXME: もっとよい判定方法あれば教えてくれ
+        let isSearchViewFront = self.resultView.alpha == 0
+        
+        (isSearchViewFront ? resultView : searchView).alpha = 1
+        
+        UIView.transition(from: isSearchViewFront ? searchView : resultView,
+                          to:   isSearchViewFront ? resultView : searchView,
                           duration: 0.5,
                           options: .transitionCrossDissolve,
                           completion: {_ in print("transition!") }
-                         )
+        )
         
-        // ここじゃないとダメなのは、↑のメソッド実行するとscrollViewが消えるから
-        self.searchView.alpha = 0
+        (isSearchViewFront ? searchView : resultView).alpha = 0
         
-        self.view.insertSubview(searchView, belowSubview: resultView)
-        
-        // transiton時にツリー階層の位置関係が自動で変わるので、もうこれは必要ない
-        // view.bringSubview(toFront: tableView)
-        
-        self.navigationItem.leftBarButtonItem?.isEnabled = true
-        self.navigationItem.leftBarButtonItem?.tintColor = .blue
+        self.view.insertSubview(isSearchViewFront ? searchView : resultView,
+                                belowSubview: isSearchViewFront ? resultView : searchView)
         
     }
     
-
+    
+    func toggleLeftBarButton() {
+        
+        let isEnabled = self.navigationItem.leftBarButtonItem!.isEnabled
+        
+        if isEnabled {
+            self.navigationItem.leftBarButtonItem?.isEnabled = false
+            self.navigationItem.leftBarButtonItem?.tintColor = .clear
+        } else {
+            self.navigationItem.leftBarButtonItem?.isEnabled = true
+            self.navigationItem.leftBarButtonItem?.tintColor = .blue
+        }
+        
+    }
+    
+    
+    //////////////////////////
+    // MARK: - Observe Method
+    //////////////////////////
+    
+    
     func didReceiveJSON(sender: Notification) {
         
         switch sender.object {
@@ -205,32 +224,6 @@ final class SearchMovieViewController: UIViewController {
     }
     
     
-    func back() {
-        
-        self.view.endEditing(true)
-        
-        self.searchView.alpha = 1
-        self.resultView.alpha  = 0
-        
-        // これやると、scrollViewがツリー階層から除去されるのがキツイ...
-        UIView.transition(from: resultView,
-                          to: searchView,
-                          duration: 1.0,
-                          options: .transitionCurlDown,
-                          completion: {_ in print("transition!") }
-        )
-        
-        // ここじゃないとダメなのは、↑のメソッド実行するとscrollViewが消えるから
-        self.resultView.alpha = 0
-        
-        self.view.insertSubview(resultView, belowSubview: searchView)
-        
-        self.navigationItem.leftBarButtonItem?.isEnabled = false
-        self.navigationItem.leftBarButtonItem?.tintColor = .clear
-        
-    }
-    
-    
     // API Connection
     func connect() {
         
@@ -241,63 +234,63 @@ final class SearchMovieViewController: UIViewController {
         let text = self.searchView.searchBar.text
         
         queue.async { apiManager.request(query: text!) }
-    }
-    
-    
-    // convert genre ID to genre name
-    func genreIdToName(_ genreID: Int) -> String {
-        
-        func convert(ID: Int) -> String {
-            switch ID {
-                case 12:
-                    return "Adventure"
-                case 14:
-                    return "Fantasy"
-                case 16:
-                    return "Animation"
-                case 18:
-                    return "Drama"
-                case 27:
-                    return "Horror"
-                case 28:
-                    return "Action"
-                case 35:
-                    return "Comedy"
-                case 36:
-                    return "History"
-                case 37:
-                    return "Western"
-                case 53:
-                    return "Thriller"
-                case 80:
-                    return "Crime"
-                case 99:
-                    return "Documentary"
-                case 878:
-                    return "Science Fiction"
-                case 9648:
-                    return "Mystery"
-                case 10402:
-                    return "Music"
-                case 10749:
-                    return "Romance"
-                case 10751:
-                    return "Family"
-                case 10752:
-                    return "War"
-                case 10770:
-                    return "TV Movie"
-                default:
-                    fatalError("Check ID")
-            }
-        }
-        
-        return convert(ID: genreID)
         
     }
     
+    
+//    // convert genre ID to genre name
+//    func genreIdToName(_ genreID: Int) -> String {
+//        
+//        func convert(ID: Int) -> String {
+//            switch ID {
+//                case 12:
+//                    return "Adventure"
+//                case 14:
+//                    return "Fantasy"
+//                case 16:
+//                    return "Animation"
+//                case 18:
+//                    return "Drama"
+//                case 27:
+//                    return "Horror"
+//                case 28:
+//                    return "Action"
+//                case 35:
+//                    return "Comedy"
+//                case 36:
+//                    return "History"
+//                case 37:
+//                    return "Western"
+//                case 53:
+//                    return "Thriller"
+//                case 80:
+//                    return "Crime"
+//                case 99:
+//                    return "Documentary"
+//                case 878:
+//                    return "Science Fiction"
+//                case 9648:
+//                    return "Mystery"
+//                case 10402:
+//                    return "Music"
+//                case 10749:
+//                    return "Romance"
+//                case 10769:
+//                    return ""
+//                case 10751:
+//                    return "Family"
+//                case 10752:
+//                    return "War"
+//                case 10770:
+//                    return "TV Movie"
+//                default:
+//                    fatalError("Check ID \(ID)")
+//            }
+//        }
+//        
+//        return convert(ID: genreID)
+//    }
 }
-
 
 
 extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate {
@@ -313,11 +306,11 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         cell.titleLabel.text = self.movies[indexPath.row].name
         
         if let genre1 = self.movies[indexPath.row].genres.first {
-            cell.genre1Label.text = genreIdToName(genre1)
+            cell.genre1Label.text = SearchMovieViewController.genreIdToName(genre1)
         }
         
         if self.movies[indexPath.row].genres.count >= 2 {
-            cell.genre2Label.text = genreIdToName(self.movies[indexPath.row].genres[1])
+            cell.genre2Label.text = SearchMovieViewController.genreIdToName(self.movies[indexPath.row].genres[1])
         }
         
         if let imagePath = self.movies[indexPath.row].poster_path {
@@ -359,39 +352,10 @@ extension SearchMovieViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         if searchBar.text?.characters.count != 0 {
-
-            hogehoge()
             
+            flipView()
+            toggleLeftBarButton()
             
-            
-            // TODO: DRYじゃねーからまとめとけ
-            
-            
-            self.resultView.alpha  = 1
-            
-            // これやると、scrollViewがツリー階層から除去されるのがキツイ...
-            UIView.transition(from: searchView,
-                              to: resultView,
-                              duration: 0.5,
-                              options: .transitionCrossDissolve,
-                              completion: {_ in print("transition!") }
-            )
-            
-            // ここじゃないとダメなのは、↑のメソッド実行するとscrollViewが消えるから
-            self.searchView.alpha = 0
-            
-            self.view.insertSubview(searchView, belowSubview: resultView)
-            
-            // transiton時にツリー階層の位置関係が自動で変わるので、もうこれは必要ない
-            // view.bringSubview(toFront: tableView)
- 
- 
-            
- 
- 
-            self.navigationItem.leftBarButtonItem?.isEnabled = true
-            self.navigationItem.leftBarButtonItem?.tintColor = .blue
-          
             connect()
             
         }
@@ -399,15 +363,6 @@ extension SearchMovieViewController: UISearchBarDelegate {
         dismissKeyBoard(searchBar)
     
     }
-    
-    
-    func hogehoge() {
-        
-        
-      
-        
-    }
-    
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         dismissKeyBoard(searchBar)
@@ -417,32 +372,71 @@ extension SearchMovieViewController: UISearchBarDelegate {
         searchBar.text = nil
         self.view.endEditing(true)
     }
-    
-    
-    /////////////////////////////////////
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
+
+extension SearchMovieViewController {
+    
+    // convert genre ID to genre name
+    static func genreIdToName(_ genreID: Int) -> String {
+        
+        func convert(ID: Int) -> String {
+            switch ID {
+            case 12:
+                return "Adventure"
+            case 14:
+                return "Fantasy"
+            case 16:
+                return "Animation"
+            case 18:
+                return "Drama"
+            case 27:
+                return "Horror"
+            case 28:
+                return "Action"
+            case 35:
+                return "Comedy"
+            case 36:
+                return "History"
+            case 37:
+                return "Western"
+            case 53:
+                return "Thriller"
+            case 80:
+                return "Crime"
+            case 99:
+                return "Documentary"
+            case 878:
+                return "Science Fiction"
+            case 9648:
+                return "Mystery"
+            case 10402:
+                return "Music"
+            case 10749:
+                return "Romance"
+            case 10769:
+                return ""
+            case 10751:
+                return "Family"
+            case 10752:
+                return "War"
+            case 10770:
+                return "TV Movie"
+            default:
+                fatalError("Check ID \(ID)")
+            }
+        }
+        
+        return convert(ID: genreID)
+        
+    }
+}
+
+
+// disable scrollView from touch event
+extension SearchView {
+    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.next?.touchesBegan(touches, with: event)
+    }
+}
 
