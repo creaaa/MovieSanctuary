@@ -227,6 +227,7 @@ final class SearchMovieViewController: UIViewController {
     // API Connection
     func connect() {
         
+        /*
         let apiManager = TMDB_APIManager()
         
         let queue = DispatchQueue.global(qos: .userInitiated)
@@ -234,62 +235,13 @@ final class SearchMovieViewController: UIViewController {
         let text = self.searchView.searchBar.text
         
         queue.async { apiManager.request(query: text!) }
+        */
+        
+        let text = self.searchView.searchBar.text
+        TMDB_APIManager().request(query: text!)
         
     }
-    
-    
-//    // convert genre ID to genre name
-//    func genreIdToName(_ genreID: Int) -> String {
-//        
-//        func convert(ID: Int) -> String {
-//            switch ID {
-//                case 12:
-//                    return "Adventure"
-//                case 14:
-//                    return "Fantasy"
-//                case 16:
-//                    return "Animation"
-//                case 18:
-//                    return "Drama"
-//                case 27:
-//                    return "Horror"
-//                case 28:
-//                    return "Action"
-//                case 35:
-//                    return "Comedy"
-//                case 36:
-//                    return "History"
-//                case 37:
-//                    return "Western"
-//                case 53:
-//                    return "Thriller"
-//                case 80:
-//                    return "Crime"
-//                case 99:
-//                    return "Documentary"
-//                case 878:
-//                    return "Science Fiction"
-//                case 9648:
-//                    return "Mystery"
-//                case 10402:
-//                    return "Music"
-//                case 10749:
-//                    return "Romance"
-//                case 10769:
-//                    return ""
-//                case 10751:
-//                    return "Family"
-//                case 10752:
-//                    return "War"
-//                case 10770:
-//                    return "TV Movie"
-//                default:
-//                    fatalError("Check ID \(ID)")
-//            }
-//        }
-//        
-//        return convert(ID: genreID)
-//    }
+
 }
 
 
@@ -353,8 +305,8 @@ extension SearchMovieViewController: UISearchBarDelegate {
         
         if searchBar.text?.characters.count != 0 {
             
-            flipView()
             toggleLeftBarButton()
+            flipView()
             
             connect()
             

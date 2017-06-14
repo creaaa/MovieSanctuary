@@ -5,8 +5,7 @@ import UIKit
 class MovieDetailViewController: UIViewController {
 
     var tmdb_movie: ConciseMovieInfoResult!
-    var movie: OMDB_Movie!
-    
+    var movie:      OMDB_Movie!
     
     override func viewDidLoad() {
         
@@ -23,11 +22,12 @@ class MovieDetailViewController: UIViewController {
     
     func connect() {
         
-        let apiManager = TMDB_OMDBidManager()
+        // TMDB_OMDBidManager().request(id: self.tmdb_movie.id)
+        
         
         let queue = DispatchQueue.global(qos: .userInitiated)
+        queue.async { TMDB_OMDBidManager().request(id: self.tmdb_movie.id) }
         
-        queue.async { apiManager.request(id: self.tmdb_movie.id) }
         
     }
     
@@ -37,7 +37,6 @@ class MovieDetailViewController: UIViewController {
             case let movie as OMDB_Movie:
                 self.movie = movie
                 print(self.movie)
-            
             default:
                 break
         }

@@ -10,7 +10,6 @@ struct OMDB_Movie: Decodable {
     let plot:     String
     let rate:     String
     
-    
     static func decode(_ e: Extractor) throws -> OMDB_Movie {
         return try OMDB_Movie (
             name:     e <| "Title",
@@ -21,5 +20,4 @@ struct OMDB_Movie: Decodable {
             rate:     e <| "imdbRating"
         )
     }
-    
 }

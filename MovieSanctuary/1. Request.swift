@@ -6,7 +6,6 @@ import Himotoki
 
 protocol TMDBRequest: Request {}
 
-
 extension TMDBRequest {
     
     var baseURL: URL {

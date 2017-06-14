@@ -5,9 +5,7 @@ extension MyButton {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        guard let touch = touches.first else {
-            return
-        }
+        guard let touch = touches.first else { return }
         
         let point = touch.location(in: self)
         
@@ -20,12 +18,10 @@ extension MyButton {
         
     }
     
-    
+    /*
     func removeAllSubviews(parentView: UIView) {
-        
         let subviews = parentView.subviews
         subviews.forEach{ $0.removeFromSuperview() }
-        
     }
     
     
@@ -40,6 +36,7 @@ extension MyButton {
             parentResponder = nextResponder
         }
     }
+    */
     
 }
 

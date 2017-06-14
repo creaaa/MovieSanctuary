@@ -27,6 +27,7 @@ struct TMDB_OMDBidManager {
     
     func success(_ response: Request_TMDB_IMDBid.Response) {
         
+        /*
         let apiManager = OMDB_APIManager()
         
         let queue = DispatchQueue.global(qos: .userInitiated)
@@ -34,13 +35,16 @@ struct TMDB_OMDBidManager {
         let id = response.imdb_id
         
         queue.async { apiManager.request(id: id) }
+        */
+        
+        let id = response.imdb_id
+
+        OMDB_APIManager().request(id: id)
         
     }
     
     func failure(_ error: SessionTaskError) {
         print(error)
     }
-    
-    
     
 }
