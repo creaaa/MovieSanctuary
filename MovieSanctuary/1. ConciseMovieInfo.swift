@@ -12,6 +12,7 @@ struct ConciseMovieInfo: Decodable {
     }
 }
 
+
 struct ConciseMovieInfoResult: Decodable {
     
     let id:          Int

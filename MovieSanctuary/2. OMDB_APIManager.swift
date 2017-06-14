@@ -23,23 +23,21 @@ struct OMDB_APIManager {
                 "apikey": "f462ae21"
             ]
         }
-        
     }
     
-    func request(id: String) {
+    
+    func request(id: String, _ completion: @escaping (Request_OMDB.Response) -> Void) {
         
         // SearchRepositoriesRequest conforms to Request protocol.
         let request = Request_OMDB(movieID: id)
         
         // Session receives an instance of a type that conforms to Request.
         Session.send(request) { result in
-                        
             switch result {
-            case .success(let response):
-                NotificationCenter.default.post(name: Notification.Name("TMDB_OMDB"), object: response)
-                
-            case .failure(let error):
-                print(error)
+                case .success(let response):
+                    completion(response)
+                case .failure(let error):
+                    print(error)
             }
         }
     }

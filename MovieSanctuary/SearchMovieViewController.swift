@@ -226,26 +226,11 @@ final class SearchMovieViewController: UIViewController {
     // API Connection
     func connect() {
         
-        /*
-        let apiManager = TMDB_APIManager()
-        
-        let queue = DispatchQueue.global(qos: .userInitiated)
-        
-        let text = self.searchView.searchBar.text
-        
-        queue.async { apiManager.request(query: text!) }
-        */
-        
         let text = self.searchView.searchBar.text
         
         TMDB_APIManager().request(query: text!) { res in
-            
             self.movies = res.results
-                
-            if let tableView = self.resultView.tableView {
-                tableView.reloadData()
-            }
-            
+            self.resultView.tableView.reloadData()
         }
     }
 

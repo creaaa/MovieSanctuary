@@ -6,39 +6,23 @@ class MovieDetailViewController: UIViewController {
 
     var tmdb_movie: ConciseMovieInfoResult!
     var movie:      OMDB_Movie!
+
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         print("前画面から来た tmdb_movie: ", tmdb_movie)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(completion(sender:)), name: Notification.Name("TMDB_OMDB"), object: nil)
-        
-        connect()
+        TMDBconnect()
         
     }
     
-    
-    func connect() {
-        
-        // TMDB_OMDBidManager().request(id: self.tmdb_movie.id)
-        
-        
-        let queue = DispatchQueue.global(qos: .userInitiated)
-        queue.async { TMDB_OMDBidManager().request(id: self.tmdb_movie.id) }
-        
-        
-    }
-    
-    
-    func completion(sender: Notification) {
-        switch sender.object {
-            case let movie as OMDB_Movie:
-                self.movie = movie
+    func TMDBconnect() {
+        TMDB_OMDBidManager().request(id: self.tmdb_movie.id) { res1 in
+            OMDB_APIManager().request(id: res1.imdb_id) { res2 in
+                self.movie = res2
                 print(self.movie)
-            default:
-                break
+            }
         }
     }
 }

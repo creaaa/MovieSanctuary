@@ -30,6 +30,6 @@ final class ResultView: UIView, InstantiatableFromNib {
         
     }
     */
-    
-    
 }
+
+
