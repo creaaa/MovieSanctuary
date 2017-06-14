@@ -6,7 +6,10 @@ final class SearchView: UIView, InstantiatableFromNib {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var scrollView: UIScrollView!
     
-  
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        print("ちゃんときてはいる")
+    }
     
     /*
     
@@ -15,7 +18,6 @@ final class SearchView: UIView, InstantiatableFromNib {
         super.init(frame: frame)
         //loadNib()
     }
-    
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!

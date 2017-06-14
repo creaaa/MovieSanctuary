@@ -18,7 +18,8 @@ final class SearchMovieViewController: UIViewController {
     // Views
     private lazy var pastelView: PastelView = {
     
-        let pastelView = PastelView()
+        // ここでframeを設定しさえすれば、viewDidLoad内で制約をかける必要はない
+        let pastelView = PastelView(frame: self.view.bounds)
         
         // Custom Direction
         pastelView.startPastelPoint = .bottomLeft
@@ -50,6 +51,19 @@ final class SearchMovieViewController: UIViewController {
         
         searchView.searchBar.delegate = self
         
+        if let textField = searchView.searchBar.subviews[0].subviews[1] as? UITextField {
+            textField.clearButtonMode = .never
+            textField.font = UIFont(name: "Quicksand", size: 14)
+            textField.textColor = .white
+            // placeholderの設定は、まだここではできない。viewDidAppearでやる。
+        }
+        
+        if let button = searchView.searchBar.subviews[0].subviews[2] as? UIButton {
+            button.setTitleColor(.white, for: .normal)
+            button.setTitleShadowColor(.red, for: .normal)
+            button.titleLabel?.font = UIFont(name: "Quicksand", size: 14)
+        }
+        
         return searchView
 
     }()
@@ -79,7 +93,6 @@ final class SearchMovieViewController: UIViewController {
         // APImanagerから送信されるNotifを受信
          NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
         
-        
         // isHiddenすると、「まじでビュー階層から除去される」から、これはダメ
         // self.tableView.isHidden = true
         
@@ -93,70 +106,26 @@ final class SearchMovieViewController: UIViewController {
         self.view.addSubview(self.resultView)
         self.view.addSubview(self.searchView)
         
-
+        /*
         pastelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive   = true
         pastelView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         pastelView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive           = true
-        pastelView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive     = true
-        
+        pastelView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        */
 
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(back)).apply {
-            
-            $0.isEnabled = false
-            $0.tintColor = .clear
-            
-        }
+        self.navigationItem.leftBarButtonItem = {
+            UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(back)).apply {
+                $0.isEnabled = false
+                $0.tintColor = .clear
+                $0.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!], for: .normal)
+            }
+        }()
         
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
-        
-        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!], for: .normal)
-        
-    }
-    
-    
-    /*
-    func makeSearchView() -> SearchView {
-        
-        let view = SearchView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-        
-        view.searchBar.delegate = self
-        
-        if let textField = view.searchBar.subviews[0].subviews[1] as? UITextField {
-            textField.clearButtonMode = .never
-            textField.font = UIFont(name: "Quicksand", size: 14)
-            textField.textColor = .white
-            // placeholderの設定は、まだここではできない。viewDidAppearでやる。
-        }
-        
-        if let button = view.searchBar.subviews[0].subviews[2] as? UIButton {
-            button.setTitleColor(.white, for: .normal)
-            button.setTitleShadowColor(.red, for: .normal)
-            button.titleLabel?.font = UIFont(name: "Quicksand", size: 14)
-        }
-        
-        
-        return view
-        
-    }
-    
-    
-    func makeResultView() -> ResultView {
-        
-        let view = ResultView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-        
-        view.tableView.delegate   = self
-        view.tableView.dataSource = self
-        
-        let xib = UINib(nibName: "TableViewCell", bundle: nil)
-        
-        view.tableView.register(xib, forCellReuseIdentifier: "Cell")
 
-        return view
-        
     }
- */
-
+    
 
     override func viewWillAppear(_ animated: Bool) {
         
@@ -167,6 +136,7 @@ final class SearchMovieViewController: UIViewController {
                 tableView.deselectRow(at: indexPath, animated: true)
             }
         }
+        
     }
     
     
@@ -179,27 +149,11 @@ final class SearchMovieViewController: UIViewController {
         // そしてなんと、viewDidLoad時には、プレースホルダーがまだ生成されていない！！
         // だからここでやるしかないのだ。なんてこった。クソはまった。
         
-        /*
-        if let searchBar = self.searchView.subviews[0].subviews[0] as? UISearchBar {
-            if let textField = searchBar.subviews[0].subviews[1] as? UITextField {
-                if let placeHolder = textField.subviews[2] as? UILabel{
-                    placeHolder.textColor = .white
-                }
-            }
-        }
-        */
-        
-        // if let textField = self.searchView.searchBar.subviews[0].subviews[1] as? UITextField {
-        
-        /*
-        if let textField = self.searchView.searchBar.subviews[0].subviews[1] as? UITextField { 
-            if let placeHolder = textField.subviews[2] as? UILabel{
+        if let textField = self.searchView.searchBar.subviews[0].subviews[1] as? UITextField {
+            if let placeHolder = textField.subviews[2] as? UILabel {
                 placeHolder.textColor = .white
             }
         }
-        */
-        
-        
     }
     
     
@@ -238,8 +192,6 @@ final class SearchMovieViewController: UIViewController {
             case let movie as ConciseMovieInfo:
                 
                 self.movies = movie.results
-                
-                print("きてるか！？")
                 self.movies.forEach{ print($0) }
             
                 if let tableView = self.resultView.tableView {
@@ -257,7 +209,7 @@ final class SearchMovieViewController: UIViewController {
         self.view.endEditing(true)
         
         self.searchView.alpha = 1
-        self.resultView.alpha = 0
+        self.resultView.alpha  = 0
         
         // これやると、scrollViewがツリー階層から除去されるのがキツイ...
         UIView.transition(from: resultView,
@@ -284,8 +236,6 @@ final class SearchMovieViewController: UIViewController {
         let apiManager = TMDB_APIManager()
         
         let queue = DispatchQueue.global(qos: .userInitiated)
-        
-        // let text = (self.searchView.subviews[0].subviews[0] as! UISearchBar).text
         
         let text = self.searchView.searchBar.text
         
@@ -399,9 +349,7 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
             self.navigationController?.pushViewController(nextVC, animated: true)
             
         }
-    
     }
-    
 }
 
 
@@ -433,20 +381,48 @@ extension SearchMovieViewController: UISearchBarDelegate {
             
             self.navigationItem.leftBarButtonItem?.isEnabled = true
             self.navigationItem.leftBarButtonItem?.tintColor = .blue
-            
           
             connect()
+            
         }
         
-        searchBar.text = nil
-        self.view.endEditing(true)
+        dismissKeyBoard(searchBar)
     
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-         searchBar.text = nil
+        dismissKeyBoard(searchBar)
+    }
+    
+    func dismissKeyBoard(_ searchBar: UISearchBar) {
+        searchBar.text = nil
         self.view.endEditing(true)
     }
+    
+    
+    /////////////////////////////////////
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
 

@@ -5,7 +5,6 @@ import UIKit
 class MovieDetailViewController: UIViewController {
 
     var tmdb_movie: ConciseMovieInfoResult!
-    
     var movie: OMDB_Movie!
     
     
@@ -34,7 +33,6 @@ class MovieDetailViewController: UIViewController {
     
     
     func completion(sender: Notification) {
-        
         switch sender.object {
             case let movie as OMDB_Movie:
                 self.movie = movie
@@ -45,5 +43,4 @@ class MovieDetailViewController: UIViewController {
         }
     }
 }
-
 
