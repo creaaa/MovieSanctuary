@@ -12,7 +12,6 @@ final class SearchView: UIView, InstantiatableFromNib {
     
     /*
     
-    // コード時は、こっちだけが呼ばれる
     override init(frame: CGRect) {
         super.init(frame: frame)
         //loadNib()

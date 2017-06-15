@@ -14,7 +14,6 @@ final class SearchMovieViewController: UIViewController {
     
         /*
         
-        // ここでframeを設定しさえすれば、viewDidLoad内で制約をかける必要はない
         let pastelView = PastelView(frame: self.view.bounds)
         
         // Custom Direction
@@ -81,7 +80,7 @@ final class SearchMovieViewController: UIViewController {
             textField.clearButtonMode = .never
             textField.font = UIFont(name: "Quicksand", size: 14)
             textField.textColor = .white
-            // placeholderの設定は、まだここではできない。viewDidAppearでやる。
+            // can't set placeholder here yet; do in viewDidAppear
         }
         
         if let button = searchView.searchBar.subviews[0].subviews[2] as? UIButton {
@@ -99,7 +98,7 @@ final class SearchMovieViewController: UIViewController {
         
         let resultView = ResultView.instantiateFromNib()
         
-        resultView.tableView.delegate = self
+        resultView.tableView.delegate   = self
         resultView.tableView.dataSource = self
         
         let xib = UINib(nibName: "TableViewCell", bundle: nil)
@@ -120,18 +119,21 @@ final class SearchMovieViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(genreButtonTapped), name: Notification.Name("ResultByGenre"), object: nil)
         
-        // APImanagerから送信されるNotifを受信
+ 
+        // receive notif from APImanager
+        /*
          NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
+        */
         
-        // isHiddenすると、「まじでビュー階層から除去される」から、これはダメ
+        
+        // this is invalid cuz it's removed from view hierarchy
         // self.tableView.isHidden = true
         
         self.resultView.alpha = 0
     
-        // なんか、こうすると ambiguous...ってなる...
+        // cause ambiguity for some reason...😡
         // self.view = pastelView
     
-        // から、こうする...
         self.view.addSubview(self.pastelView)
         self.view.addSubview(self.resultView)
         self.view.addSubview(self.searchView)
@@ -154,10 +156,8 @@ final class SearchMovieViewController: UIViewController {
         
         super.viewWillAppear(animated)
         
-        if let tableView = self.resultView.subviews[0].subviews[0] as? UITableView {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                tableView.deselectRow(at: indexPath, animated: true)
-            }
+        if let indexPath = self.resultView.tableView.indexPathForSelectedRow {
+            self.resultView.tableView.deselectRow(at: indexPath, animated: true)
         }
         
     }
@@ -166,19 +166,14 @@ final class SearchMovieViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-        
-        // なぜ、これもviewDidLoadでやればよさそうなものを、わざわざここでやってるのか?
-        // なんと、 viewDidLoad時、viewDidAppear時で、UISearchBarのツリー状態が違うのだ！
-        // そしてなんと、viewDidLoad時には、プレースホルダーがまだ生成されていない！！
-        // だからここでやるしかないのだ。なんてこった。クソはまった。
-        
+
         if let textField = self.searchView.searchBar.subviews[0].subviews[1] as? UITextField {
             if let placeHolder = textField.subviews[2] as? UILabel {
                 placeHolder.textColor = .white
             }
         }
+        
     }
-    
     
     
     ////////////////////////
@@ -198,11 +193,12 @@ final class SearchMovieViewController: UIViewController {
         
         toggleLeftBarButton()
         flipView()
+        
     }
     
     func flipView() {
         
-        // FIXME: もっとよい判定方法あれば教えてくれ
+        // FIXME: tell me more better judging way🤔
         let isSearchViewFront = self.resultView.alpha == 0
         
         (isSearchViewFront ? resultView : searchView).alpha = 1
@@ -236,11 +232,7 @@ final class SearchMovieViewController: UIViewController {
         
     }
     
-    
-    //////////////////////////
-    // MARK: - Observe Method
-    //////////////////////////
-    
+    /*
     func didReceiveJSON(sender: Notification) {
         
         switch sender.object {
@@ -258,7 +250,11 @@ final class SearchMovieViewController: UIViewController {
             
         }
     }
+    */
     
+    //////////////////////////
+    // MARK: - API connection
+    //////////////////////////
     
     var APIManager = TMDB_APIManager(query: "")
     
@@ -271,11 +267,14 @@ final class SearchMovieViewController: UIViewController {
             self.movies.append(contentsOf: res.results)
             self.resultView.tableView.reloadData()
         }
-        
     }
     
 }
 
+
+////////////
+// MARK: -
+////////////
 
 extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -283,21 +282,17 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         return self.movies.count
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // 下の方に来たら再読込(無限スクロール)
-        
+        // infitite scroll
         if movies.count >= 20 && movies.count - indexPath.row <= 4 {
             
-            print("はい無限スクロール~")
-            
-            // self.page += 1
-            
             self.APIManager.page += 1
-            print("現在のページ", self.APIManager.page)
+            
+            print("current page", self.APIManager.page)
             
             connect()
+            
         }
         
         
@@ -324,8 +319,7 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        // ここで indexPathつきのほうでやると無限ループになるので、こっちにしろ
-        // なお、もちろん、tableViewにregisterを忘れることで、ここがぬるぽとなる
+        // dequeue(withIdentifier:indexPath) causes infinite roop...😨 so use this;
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TableViewCell
         
         return cell.bounds.height
@@ -360,8 +354,6 @@ extension SearchMovieViewController: UISearchBarDelegate {
             
         }
         
-        // dismissKeyBoard(searchBar)
-    
         self.view.endEditing(true)
         
     }

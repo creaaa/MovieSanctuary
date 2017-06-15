@@ -7,7 +7,6 @@ final class ResultView: UIView, InstantiatableFromNib {
     
     
     /*
-    // コード時は、こっちだけが呼ばれる
     override init(frame: CGRect) {
         super.init(frame: frame)
         // loadNib()
@@ -30,6 +29,7 @@ final class ResultView: UIView, InstantiatableFromNib {
         
     }
     */
+    
 }
 
 

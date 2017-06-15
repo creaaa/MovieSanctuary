@@ -30,8 +30,8 @@ extension MyButton {
         while true {
             guard let nextResponder = parentResponder?.next else { return nil }
             if let viewController = nextResponder as? UIViewController {
-                // return viewController.view.subviews[0] // こっちだとinsetが正しい
-                return viewController.view  // こっちだとinsetがおかしい
+                // return viewController.view.subviews[0]
+                return viewController.view
             }
             parentResponder = nextResponder
         }

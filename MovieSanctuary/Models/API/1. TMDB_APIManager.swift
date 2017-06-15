@@ -55,17 +55,7 @@ struct Request_TMDB_Concise: TMDBRequest {
         ]
     }
     
-//    init(query: String, page: Int) {
-//        self.query = query
-//        self.page  = page
-//    }
-    
 }
-
-///////////////////////
-
-
-
 
 
 struct TMDB_OMDBidManager {

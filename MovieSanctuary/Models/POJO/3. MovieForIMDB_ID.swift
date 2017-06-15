@@ -15,7 +15,7 @@ struct OMDB_Movie: Decodable {
             name:     e <| "Title",
             director: e <| "Director",
             actors:   e <| "Actors",
-            year:     e <| "Year", // Int(e <| "Year")! としないのは、"N/A"とかが来た場合、落ちるからだ。クソAPIが
+            year:     e <| "Year",
             plot:     e <| "Plot",
             rate:     e <| "imdbRating"
         )
