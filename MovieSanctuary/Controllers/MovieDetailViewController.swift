@@ -3,7 +3,6 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
 
-    
     @IBOutlet weak var imgMovie:      UIImageView!
     @IBOutlet weak var titleMovie:    UITextView!
     @IBOutlet weak var directorMovie: UITextView!
