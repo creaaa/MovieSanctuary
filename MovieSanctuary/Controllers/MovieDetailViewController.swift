@@ -15,7 +15,7 @@ class MovieDetailViewController: UIViewController {
     var tmdb_movie: ConciseMovieInfoResult!
     var movie:      OMDB_Movie!
 
-    
+     
     override func viewDidLoad() {
         
         super.viewDidLoad()
