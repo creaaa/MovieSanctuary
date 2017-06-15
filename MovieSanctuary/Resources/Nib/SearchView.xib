@@ -67,6 +67,7 @@
                                             <subviews>
                                                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfr-y6-L3K" userLabel="Button3" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                    <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="8Gp-mG-169"/>
                                                         <constraint firstAttribute="width" secondItem="Dfr-y6-L3K" secondAttribute="height" multiplier="1:1" id="II7-n6-Dsh"/>
