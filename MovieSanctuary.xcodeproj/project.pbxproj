@@ -27,6 +27,7 @@
 		447476121EF21D7600455293 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4474760F1EF21D7600455293 /* LaunchScreen.storyboard */; };
 		4485FB251EF0B43400C7C8F0 /* ViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4485FB241EF0B43400C7C8F0 /* ViewUtil.swift */; };
 		448841CB1EEB53F0006758B7 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448841CA1EEB53F0006758B7 /* Kingfisher.framework */; };
+		4498B87B1EF3067900D19F6F /* APIkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4498B87A1EF3067900D19F6F /* APIkey.swift */; };
 		44D943141EE22865004EF6A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D943131EE22865004EF6A3 /* AppDelegate.swift */; };
 		44D943161EE22865004EF6A3 /* SearchMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D943151EE22865004EF6A3 /* SearchMovieViewController.swift */; };
 		44D9431B1EE22865004EF6A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44D9431A1EE22865004EF6A3 /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 		4474760F1EF21D7600455293 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4485FB241EF0B43400C7C8F0 /* ViewUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtil.swift; sourceTree = "<group>"; };
 		448841CA1EEB53F0006758B7 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		4498B87A1EF3067900D19F6F /* APIkey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
 		44A220E51EF1BC42004D9E8C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		44D943101EE22865004EF6A3 /* MovieSanctuary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSanctuary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D943131EE22865004EF6A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,8 +157,8 @@
 				4474760D1EF21D7600455293 /* SearchMovieViewController.storyboard */,
 				4474760E1EF21D7600455293 /* MovieDetail.storyboard */,
 				4474760F1EF21D7600455293 /* LaunchScreen.storyboard */,
-				44D943131EE22865004EF6A3 /* AppDelegate.swift */,
 				44D9431F1EE22865004EF6A3 /* Info.plist */,
+				44D943131EE22865004EF6A3 /* AppDelegate.swift */,
 				44E3BE391EE7124700466CF5 /* Resources */,
 				44E3BE4E1EE7F44000466CF5 /* Views */,
 				442A8AF91EE9D82600D12A60 /* Models */,
@@ -171,6 +173,7 @@
 			children = (
 				44E3BE4D1EE7F42F00466CF5 /* Nib */,
 				44E3BE3A1EE7127C00466CF5 /* Quicksand-Regular.ttf */,
+				4498B87A1EF3067900D19F6F /* APIkey.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4498B87B1EF3067900D19F6F /* APIkey.swift in Sources */,
 				442A8AFB1EE9D84100D12A60 /* 1. TMDB_APIManager.swift in Sources */,
 				44E3BE491EE7C12100466CF5 /* TableViewCell.swift in Sources */,
 				44D943161EE22865004EF6A3 /* SearchMovieViewController.swift in Sources */,

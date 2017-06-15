@@ -49,7 +49,7 @@ struct Request_TMDB_Concise: TMDBRequest {
     }
     
     var parameters: Any? {
-        return ["api_key": "5f215b9dfac50de053affb4f9085e620",
+        return ["api_key": APIkey.TMDB_APIkey,
                 "query":   self.query,
                 "page" :   self.page
         ]

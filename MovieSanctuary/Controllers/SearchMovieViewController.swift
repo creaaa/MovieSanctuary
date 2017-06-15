@@ -148,7 +148,15 @@ final class SearchMovieViewController: UIViewController {
         
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
-
+        
+        // navibar's back button setting
+        let backButton = UIBarButtonItem(title: "back", style: .plain, target: nil, action: nil)
+        
+        backButton.setTitleTextAttributes(
+            [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!], for: .normal)
+        
+        self.navigationItem.backBarButtonItem = backButton
+        
     }
     
 

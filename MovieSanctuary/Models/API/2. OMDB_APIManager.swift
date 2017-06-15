@@ -20,7 +20,7 @@ struct OMDB_APIManager {
             return [
                 "i":      self.movieID,
                 "plot":   "full",
-                "apikey": "f462ae21"
+                "apikey": APIkey.OMDB_APIkey
             ]
         }
     }
