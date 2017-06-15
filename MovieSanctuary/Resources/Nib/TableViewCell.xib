@@ -32,7 +32,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Movie Title}" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="a10-sv-ddh">
-                        <rect key="frame" x="82" y="28" width="228" height="25"/>
+                        <rect key="frame" x="82" y="27.5" width="228" height="25"/>
                         <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -53,9 +53,9 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="a10-sv-ddh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="20" id="BqQ-NQ-B8O"/>
                     <constraint firstAttribute="bottomMargin" secondItem="TBq-yD-GeY" secondAttribute="bottom" id="GNY-Iy-LNw"/>
                     <constraint firstAttribute="bottomMargin" secondItem="HVV-gd-lnk" secondAttribute="bottom" id="QIF-Jj-FyZ"/>
+                    <constraint firstItem="a10-sv-ddh" firstAttribute="centerY" secondItem="gnY-mK-LoS" secondAttribute="centerY" constant="-10" id="XSe-Hc-cK3"/>
                     <constraint firstAttribute="trailing" secondItem="a10-sv-ddh" secondAttribute="trailing" constant="10" id="acS-YL-hAt"/>
                     <constraint firstItem="gnY-mK-LoS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="bOP-Q0-BkY"/>
                     <constraint firstItem="gnY-mK-LoS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cZG-cV-tvF"/>
