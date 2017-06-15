@@ -59,7 +59,6 @@ final class SearchMovieViewController: UIViewController {
             UIColor(red: 90/255,  green: 120/255, blue: 127/255, alpha: 1.0).cgColor,
             UIColor(red: 58/255,  green: 255/255, blue: 217/255, alpha: 1.0).cgColor
             
-            
         ]
         
         view.layer.insertSublayer(gradient, at: 0)
@@ -138,13 +137,17 @@ final class SearchMovieViewController: UIViewController {
         self.view.addSubview(self.resultView)
         self.view.addSubview(self.searchView)
         
-        self.navigationItem.leftBarButtonItem = {
-            UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(backToSearchView)).apply {
+        
+        /*
+         (barButtonSystemItem: .cancel, target: self, action: #selector(backToSearchView)
+         */
+        self.navigationItem.leftBarButtonItem =
+            UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(backToSearchView)).apply {
                 $0.isEnabled = false
                 $0.tintColor = .clear
                 $0.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!], for: .normal)
             }
-        }()
+        
         
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
