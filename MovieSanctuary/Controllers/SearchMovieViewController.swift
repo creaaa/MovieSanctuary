@@ -134,7 +134,7 @@ final class SearchMovieViewController: UIViewController {
         // cause ambiguity for some reason...😡
         // self.view = pastelView
     
-        // self.view.addSubview(self.pastelView)
+        self.view.addSubview(self.pastelView)
         self.view.addSubview(self.resultView)
         self.view.addSubview(self.searchView)
         
@@ -180,6 +180,9 @@ final class SearchMovieViewController: UIViewController {
             self.resultView.tableView.deselectRow(at: indexPath, animated: true)
         }
         
+//      doesn't work here
+//         self.searchView.scrollView.contentSize = CGSize(width: 375, height: 1050)
+        
     }
     
     
@@ -192,6 +195,8 @@ final class SearchMovieViewController: UIViewController {
                 placeHolder.textColor = .white
             }
         }
+        
+        print(self.searchView.scrollView.contentSize)
         
         self.searchView.scrollView.contentSize = CGSize(width: 375, height: 1050)
         
@@ -229,7 +234,12 @@ final class SearchMovieViewController: UIViewController {
                           to:   isSearchViewFront ? resultView : searchView,
                           duration: 0.5,
                           options: .transitionCrossDissolve,
-                          completion: {_ in print("transition!") }
+                          completion: {_ in
+                            print("transition!")
+                            if !isSearchViewFront {
+                                self.searchView.scrollView.contentSize = CGSize(width: 375, height: 1050)
+                            }
+                          }
         )
         
         (isSearchViewFront ? searchView : resultView).alpha = 0
@@ -458,9 +468,7 @@ extension SearchView {
         self.next?.touchesBegan(touches, with: event)
     }
 }
- */
-
-
+*/
 
 
 
