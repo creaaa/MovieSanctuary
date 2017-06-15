@@ -26,36 +26,6 @@ class MovieDetailViewController: UIViewController {
     }
     
     
-    func createButton() -> UIButton {
-        
-        let button: UIButton = UIButton(type: .system)
-
-        button.frame = CGRect(x: 0, y: 0, width: 80, height: 40)
-        
-        button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left;     //中身左寄せ
-        button.setTitle("タイトル", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.titleLabel?.font = UIFont(name:"HiraKakuProN-W3",size: 12)
-        button.setImage(UIImage(named: "leftArrow"), for: .normal)
-        button.titleEdgeInsets = UIEdgeInsetsMake(0, 7, 0, 0);     //テキストにマージン。左に7px
-        
-        return button
-    }
-    
-    
-    let backButton: UIButton = {
-        
-        let button: UIButton = UIButton(type: .system)
-        
-        button.setTitle("タイトル", for: .normal)
-        button.titleLabel?.font = UIFont(name:"Quicksand", size: 12)
-        
-        return UIButton()
-        
-    }()
-    
-    
-    
     func TMDBconnect() {
         TMDB_OMDBidManager().request(id: self.tmdb_movie.id) { res1 in
             OMDB_APIManager().request(id: res1.imdb_id) { res2 in

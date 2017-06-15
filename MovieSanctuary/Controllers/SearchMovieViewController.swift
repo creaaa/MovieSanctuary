@@ -118,7 +118,8 @@ final class SearchMovieViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(genreButtonTapped), name: Notification.Name("ResultByGenre"), object: nil)
         
- 
+        
+        
         // receive notif from APImanager
         /*
          NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
@@ -191,6 +192,8 @@ final class SearchMovieViewController: UIViewController {
                 placeHolder.textColor = .white
             }
         }
+        
+        self.searchView.scrollView.contentSize = CGSize(width: 375, height: 1050)
         
     }
     
