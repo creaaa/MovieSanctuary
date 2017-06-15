@@ -152,10 +152,10 @@
 		44D943121EE22865004EF6A3 /* MovieSanctuary */ = {
 			isa = PBXGroup;
 			children = (
+				44A220E51EF1BC42004D9E8C /* Settings.bundle */,
 				4474760D1EF21D7600455293 /* SearchMovieViewController.storyboard */,
 				4474760E1EF21D7600455293 /* MovieDetail.storyboard */,
 				4474760F1EF21D7600455293 /* LaunchScreen.storyboard */,
-				44A220E51EF1BC42004D9E8C /* Settings.bundle */,
 				44D943131EE22865004EF6A3 /* AppDelegate.swift */,
 				44D9431F1EE22865004EF6A3 /* Info.plist */,
 				44E3BE391EE7124700466CF5 /* Resources */,

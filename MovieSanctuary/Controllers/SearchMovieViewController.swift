@@ -193,6 +193,7 @@ final class SearchMovieViewController: UIViewController {
     func backToSearchView() {
         
         self.movies = []
+        self.APIManager.page = 1
         self.resultView.tableView.reloadData()
         
         toggleLeftBarButton()
@@ -287,7 +288,7 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         
         // 下の方に来たら再読込(無限スクロール)
         
-        if movies.count - indexPath.row <= 4 {
+        if movies.count >= 20 && movies.count - indexPath.row <= 4 {
             
             print("はい無限スクロール~")
             
