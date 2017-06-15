@@ -41,6 +41,7 @@
                                             <subviews>
                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4b-s1-zFF" userLabel="Button1" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                    <color key="backgroundColor" red="1" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="Lsx-lh-7Ti"/>
                                                         <constraint firstAttribute="width" secondItem="M4b-s1-zFF" secondAttribute="height" multiplier="1:1" id="jnr-2F-TtL"/>
@@ -51,6 +52,7 @@
                                                 </button>
                                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NG8-Fd-bTr" userLabel="Button2" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="180" y="0.0" width="150" height="150"/>
+                                                    <color key="backgroundColor" red="1" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="NG8-Fd-bTr" secondAttribute="height" multiplier="1:1" id="xgE-6R-POa"/>
                                                     </constraints>

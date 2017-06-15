@@ -133,7 +133,7 @@ final class SearchMovieViewController: UIViewController {
         // cause ambiguity for some reason...😡
         // self.view = pastelView
     
-        self.view.addSubview(self.pastelView)
+        // self.view.addSubview(self.pastelView)
         self.view.addSubview(self.resultView)
         self.view.addSubview(self.searchView)
         
