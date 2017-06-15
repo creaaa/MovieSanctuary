@@ -138,15 +138,6 @@ final class SearchMovieViewController: UIViewController {
         self.view.addSubview(self.resultView)
         self.view.addSubview(self.searchView)
         
-        
-        searchView.topAnchor.constraint(equalTo: (searchView.superview?.topAnchor)!).isActive = true
-        searchView.bottomAnchor.constraint(equalTo: (searchView.superview?.bottomAnchor)!).isActive = true
-        
-        searchView.leadingAnchor.constraint(equalTo: (searchView.superview?.leadingAnchor)!).isActive = true
-        searchView.trailingAnchor.constraint(equalTo: (searchView.superview?.trailingAnchor)!).isActive = true
-        
-        
-        
         /*
          (barButtonSystemItem: .cancel, target: self, action: #selector(backToSearchView)
          */

@@ -43,7 +43,7 @@ class MovieDetailViewController: UIViewController {
             self.imgMovie.kf.setImage(with: url)
         }
         
-        self.titleMovie.text    = self.movie.name
+        self.titleMovie.text    = self.tmdb_movie.name
         self.directorMovie.text = self.movie.director
         self.genreMovie.text    = genre()
         self.starsMovie.text    = self.movie.actors

@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movie Detail View Controller-->
+        <!--Movie Sanctuary-->
         <scene sceneID="siG-Cb-MkL">
             <objects>
-                <viewController id="GsP-Bk-dhP" customClass="MovieDetailViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Movie Sanctuary" id="GsP-Bk-dhP" customClass="MovieDetailViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iJM-wv-jGi"/>
                         <viewControllerLayoutGuide type="bottom" id="So1-6U-nRd"/>
