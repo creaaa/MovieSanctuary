@@ -55,6 +55,14 @@ class MovieDetailViewController: UIViewController {
         
         // self.stackStar
         
+        //Change text size if string is too long
+        
+        /*
+        if count(titleMovie) > 10 {
+            self.titleMovie =  UIFont(name: self.font.fontName, size: 14)!
+        }
+        */
+        
     }
     
     
