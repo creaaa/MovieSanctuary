@@ -13,7 +13,6 @@ final class SearchMovieViewController: UIViewController {
     private lazy var pastelView: UIView = {
     
         /*
-        
         let pastelView = PastelView(frame: self.view.bounds)
         
         // Custom Direction
@@ -36,7 +35,6 @@ final class SearchMovieViewController: UIViewController {
         pastelView.translatesAutoresizingMaskIntoConstraints = false
         
         return pastelView
-        
         */
         
         
@@ -64,7 +62,6 @@ final class SearchMovieViewController: UIViewController {
         view.layer.insertSublayer(gradient, at: 0)
         
         return view
-        
  
     }()
     
