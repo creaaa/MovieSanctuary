@@ -56,14 +56,77 @@ class MovieDetailViewController: UIViewController {
         // self.stackStar
         
         //Change text size if string is too long
+        let ary = [titleMovie, starsMovie,directorMovie,genreMovie]
         
-        /*
-        if count(titleMovie) > 10 {
-            self.titleMovie =  UIFont(name: self.font.fontName, size: 14)!
+        
+        for i in ary
+        {
+            if i?.tag == 1 {
+                setSizeViews(view: i!, base: 4)
+            }
+            else
+            {
+                setSizeViews(view: i!, base: 0)
+            }
+        
+            
         }
-        */
+        
+        renderStars()
+
         
     }
+    
+    func renderStars() {
+        
+        var rate =  Int(Double(self.movie.rate)!)
+        
+//        if let rate = Int(self.movie.rate) {
+//            print(rate)
+//        } else {
+//            print("")
+//        }
+        
+        
+            for star in stackStar.subviews {
+                if rate > 0 {
+                    star.alpha = 1
+                    rate -= 1
+                }
+        
+        }
+        
+        
+    }
+    
+    
+    func setSizeViews(view : UIView, base : Int) {
+        
+        let size = base
+        
+        if let textview = view as? UITextView {
+            
+            
+            if textview.text.characters.count < 12 {
+                textview.font = .systemFont(ofSize: CGFloat(size + 20))
+            }
+            else if textview.text.characters.count > 25 {
+                textview.font = .systemFont(ofSize: CGFloat(size + 12))
+            }
+            else if textview.text.characters.count > 18 {
+                textview.font = .systemFont(ofSize: CGFloat(size + 16))
+            }
+            else if textview.text.characters.count > 12 {
+                textview.font = .systemFont(ofSize: CGFloat(size + 18))
+            }
+            
+            
+
+        }
+        
+        
+        
+           }
     
     
     func genre() -> String {

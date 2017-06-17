@@ -30,7 +30,6 @@
 		4498B87D1EF32F3B00D19F6F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 44A220E51EF1BC42004D9E8C /* Settings.bundle */; };
 		44D943141EE22865004EF6A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D943131EE22865004EF6A3 /* AppDelegate.swift */; };
 		44D943161EE22865004EF6A3 /* SearchMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D943151EE22865004EF6A3 /* SearchMovieViewController.swift */; };
-		44D9431B1EE22865004EF6A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44D9431A1EE22865004EF6A3 /* Assets.xcassets */; };
 		44E3BE3B1EE713F000466CF5 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44E3BE3A1EE7127C00466CF5 /* Quicksand-Regular.ttf */; };
 		44E3BE421EE73AD000466CF5 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44E3BE411EE73AD000466CF5 /* SearchView.xib */; };
 		44E3BE441EE73BB100466CF5 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E3BE431EE73BB100466CF5 /* SearchView.swift */; };
@@ -38,6 +37,7 @@
 		44E3BE4A1EE7C12100466CF5 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44E3BE481EE7C12100466CF5 /* TableViewCell.xib */; };
 		44E3BE4C1EE7EFC000466CF5 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E3BE4B1EE7EFC000466CF5 /* MyButton.swift */; };
 		4902FD921EF4966700ED50A9 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4902FD911EF4966700ED50A9 /* APIKey.swift */; };
+		4902FD941EF4A77900ED50A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4902FD931EF4A77900ED50A9 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +65,6 @@
 		44D943101EE22865004EF6A3 /* MovieSanctuary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSanctuary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D943131EE22865004EF6A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44D943151EE22865004EF6A3 /* SearchMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieViewController.swift; sourceTree = "<group>"; };
-		44D9431A1EE22865004EF6A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44D9431F1EE22865004EF6A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44E3BE3A1EE7127C00466CF5 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
 		44E3BE411EE73AD000466CF5 /* SearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
@@ -74,6 +73,7 @@
 		44E3BE481EE7C12100466CF5 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		44E3BE4B1EE7EFC000466CF5 /* MyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
 		4902FD911EF4966700ED50A9 /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		4902FD931EF4A77900ED50A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,12 +158,12 @@
 				4474760E1EF21D7600455293 /* MovieDetail.storyboard */,
 				4474760F1EF21D7600455293 /* LaunchScreen.storyboard */,
 				44D9431F1EE22865004EF6A3 /* Info.plist */,
+				4902FD931EF4A77900ED50A9 /* Assets.xcassets */,
 				44D943131EE22865004EF6A3 /* AppDelegate.swift */,
 				44E3BE391EE7124700466CF5 /* Resources */,
 				44E3BE4E1EE7F44000466CF5 /* Views */,
 				442A8AF91EE9D82600D12A60 /* Models */,
 				44E3BE4F1EE7F46900466CF5 /* Controllers */,
-				44D9431A1EE22865004EF6A3 /* Assets.xcassets */,
 			);
 			path = MovieSanctuary;
 			sourceTree = "<group>";
@@ -277,8 +277,8 @@
 				447476101EF21D7600455293 /* SearchMovieViewController.storyboard in Resources */,
 				440C7BE91EE8CBF70050C90A /* ResultView.xib in Resources */,
 				447476111EF21D7600455293 /* MovieDetail.storyboard in Resources */,
-				44D9431B1EE22865004EF6A3 /* Assets.xcassets in Resources */,
 				4498B87D1EF32F3B00D19F6F /* Settings.bundle in Resources */,
+				4902FD941EF4A77900ED50A9 /* Assets.xcassets in Resources */,
 				44E3BE421EE73AD000466CF5 /* SearchView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
