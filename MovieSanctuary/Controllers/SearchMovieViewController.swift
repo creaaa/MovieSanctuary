@@ -49,13 +49,16 @@ final class SearchMovieViewController: UIViewController {
             UIColor.black.cgColor
             */
             
-            UIColor(red: 156/255, green: 39/255,  blue: 176/255, alpha: 1.0).cgColor,
-            UIColor(red: 255/255, green: 64/255,  blue: 129/255, alpha: 1.0).cgColor,
-            UIColor(red: 123/255, green: 31/255,  blue: 162/255, alpha: 1.0).cgColor,
-            UIColor(red: 32/255,  green: 76/255,  blue: 255/255, alpha: 1.0).cgColor,
-            UIColor(red: 32/255,  green: 158/255, blue: 255/255, alpha: 1.0).cgColor,
-            UIColor(red: 90/255,  green: 120/255, blue: 127/255, alpha: 1.0).cgColor,
-            UIColor(red: 58/255,  green: 255/255, blue: 217/255, alpha: 1.0).cgColor
+//            UIColor(red: 156/255, green: 39/255,  blue: 176/255, alpha: 1.0).cgColor,
+//            UIColor(red: 255/255, green: 64/255,  blue: 129/255, alpha: 1.0).cgColor,
+//            UIColor(red: 123/255, green: 31/255,  blue: 162/255, alpha: 1.0).cgColor,
+//            UIColor(red: 32/255,  green: 76/255,  blue: 255/255, alpha: 1.0).cgColor,
+//            UIColor(red: 32/255,  green: 158/255, blue: 255/255, alpha: 1.0).cgColor,
+//            UIColor(red: 90/255,  green: 120/255, blue: 127/255, alpha: 1.0).cgColor,
+//            UIColor(red: 58/255,  green: 255/255, blue: 217/255, alpha: 1.0).cgColor
+
+            UIColor(red:0.29, green:0.42, blue:0.72, alpha:1.0).cgColor,
+            UIColor(red:0.09, green:0.16, blue:0.28, alpha:1.0).cgColor
             
         ]
         
@@ -69,13 +72,15 @@ final class SearchMovieViewController: UIViewController {
     fileprivate lazy var searchView: SearchView = {
         
         let searchView = SearchView.instantiateFromNib()
-        
+        searchView.frame = self.view.bounds // If you miss this, HELL comes
+
         searchView.searchBar.delegate = self
         
         if let textField = searchView.searchBar.subviews[0].subviews[1] as? UITextField {
             textField.clearButtonMode = .never
             textField.font = UIFont(name: "Quicksand", size: 14)
             textField.textColor = .white
+            
             // can't set placeholder here yet; do in viewDidAppear
         }
         
@@ -93,6 +98,7 @@ final class SearchMovieViewController: UIViewController {
     fileprivate lazy var resultView: ResultView = {
         
         let resultView = ResultView.instantiateFromNib()
+        resultView.frame = self.view.bounds  // If you miss this, HELL comes
         
         resultView.tableView.delegate   = self
         resultView.tableView.dataSource = self
@@ -183,11 +189,6 @@ final class SearchMovieViewController: UIViewController {
                 placeHolder.textColor = .white
             }
         }
-        
-        print(self.searchView.scrollView.contentSize)
-        
-        self.searchView.scrollView.contentSize = CGSize(width: 375, height: 1050)
-        
     }
     
     
@@ -224,9 +225,9 @@ final class SearchMovieViewController: UIViewController {
                           options: .transitionCrossDissolve,
                           completion: {_ in
                             print("transition!")
-                            if !isSearchViewFront {
-                                self.searchView.scrollView.contentSize = CGSize(width: 375, height: 1050)
-                            }
+//                            if !isSearchViewFront {
+//                                self.searchView.scrollView.contentSize = CGSize(width: 375, height: 1050)
+//                            }
                           }
         )
         

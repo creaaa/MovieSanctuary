@@ -36,7 +36,7 @@
 		44E3BE491EE7C12100466CF5 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E3BE471EE7C12100466CF5 /* TableViewCell.swift */; };
 		44E3BE4A1EE7C12100466CF5 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44E3BE481EE7C12100466CF5 /* TableViewCell.xib */; };
 		44E3BE4C1EE7EFC000466CF5 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E3BE4B1EE7EFC000466CF5 /* MyButton.swift */; };
-		4902FD921EF4966700ED50A9 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4902FD911EF4966700ED50A9 /* APIKey.swift */; };
+		44ECFDFF1EF5E9D6008F8BA2 /* APIkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECFDFE1EF5E9D6008F8BA2 /* APIkey.swift */; };
 		4902FD941EF4A77900ED50A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4902FD931EF4A77900ED50A9 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -72,7 +72,7 @@
 		44E3BE471EE7C12100466CF5 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		44E3BE481EE7C12100466CF5 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		44E3BE4B1EE7EFC000466CF5 /* MyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
-		4902FD911EF4966700ED50A9 /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		44ECFDFE1EF5E9D6008F8BA2 /* APIkey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
 		4902FD931EF4A77900ED50A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,7 +174,7 @@
 				44E3BE4D1EE7F42F00466CF5 /* Nib */,
 				44A220E51EF1BC42004D9E8C /* Settings.bundle */,
 				44E3BE3A1EE7127C00466CF5 /* Quicksand-Regular.ttf */,
-				4902FD911EF4966700ED50A9 /* APIKey.swift */,
+				44ECFDFE1EF5E9D6008F8BA2 /* APIkey.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -311,6 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44ECFDFF1EF5E9D6008F8BA2 /* APIkey.swift in Sources */,
 				442A8AFB1EE9D84100D12A60 /* 1. TMDB_APIManager.swift in Sources */,
 				44E3BE491EE7C12100466CF5 /* TableViewCell.swift in Sources */,
 				44D943161EE22865004EF6A3 /* SearchMovieViewController.swift in Sources */,
@@ -327,7 +328,6 @@
 				442A8AFD1EE9D94100D12A60 /* 1. TMDB_Request.swift in Sources */,
 				44E3BE4C1EE7EFC000466CF5 /* MyButton.swift in Sources */,
 				4420E9831EEDF16500441917 /* 2. DetailMovieInfo.swift in Sources */,
-				4902FD921EF4966700ED50A9 /* APIKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
