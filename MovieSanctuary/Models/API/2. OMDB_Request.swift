@@ -21,7 +21,27 @@ extension OMDBRequest {
 }
 
 extension OMDBRequest where Response: Decodable {
+    
     func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
+        
         return try decodeValue(object)
+        
+//        do {
+//            return try Response.decodeValue(object)
+//        } catch let DecodeError.missingKeyPath(keyPath) {
+//            print(keyPath)
+//        }
+        
     }
 }
+
+
+
+
+
+
+
+
+
+
+

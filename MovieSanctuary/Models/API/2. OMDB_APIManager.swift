@@ -1,4 +1,5 @@
 
+import UIKit
 import APIKit
 import Result
 import Himotoki
@@ -37,7 +38,24 @@ struct OMDB_APIManager {
                 case .success(let response):
                     completion(response)
                 case .failure(let error):
-                    print(error)
+                    
+                print(error)
+                
+                /*
+                // アラートを作成
+                let alert = UIAlertController(
+                    title: "アラートのタイトル",
+                    message: "アラートの本文",
+                    preferredStyle: .alert)
+                
+                // アラートにボタンをつける
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                
+                // アラート表示
+                self.present(alert, animated: true, completion: nil)
+                */
+                
+                
             }
         }
     }
