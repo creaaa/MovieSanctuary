@@ -163,6 +163,8 @@ final class SearchMovieViewController: UIViewController {
         
         self.navigationItem.backBarButtonItem = backButton
         
+        
+        
     }
     
 
