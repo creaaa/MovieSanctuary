@@ -39,7 +39,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="EoH-Vy-Lyc" userLabel="Stack View1">
                                             <rect key="frame" x="14.5" y="0.0" width="330" height="150"/>
                                             <subviews>
-                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4b-s1-zFF" userLabel="Button1" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
+                                                <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4b-s1-zFF" userLabel="Button1" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="Lsx-lh-7Ti"/>
@@ -47,23 +47,23 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="Action"/>
+                                                    <state key="normal" title="Adventure"/>
                                                 </button>
-                                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NG8-Fd-bTr" userLabel="Button2" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
+                                                <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NG8-Fd-bTr" userLabel="Button2" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="180" y="0.0" width="150" height="150"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="NG8-Fd-bTr" secondAttribute="height" multiplier="1:1" id="xgE-6R-POa"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="Love Story"/>
+                                                    <state key="normal" title="Fantasy"/>
                                                 </button>
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="8jE-hy-D6Z" userLabel="Stack View2">
                                             <rect key="frame" x="14.5" y="180" width="330" height="150"/>
                                             <subviews>
-                                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfr-y6-L3K" userLabel="Button3" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
+                                                <button opaque="NO" tag="27" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfr-y6-L3K" userLabel="Button3" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="8Gp-mG-169"/>
@@ -71,23 +71,23 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="Sports"/>
+                                                    <state key="normal" title="Horror"/>
                                                 </button>
-                                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="keM-L5-oKe" userLabel="Button4" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
+                                                <button opaque="NO" tag="28" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="keM-L5-oKe" userLabel="Button4" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="180" y="0.0" width="150" height="150"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="keM-L5-oKe" secondAttribute="height" multiplier="1:1" id="Jmq-qj-sWx"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="Thriller"/>
+                                                    <state key="normal" title="Action"/>
                                                 </button>
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Kkh-EP-eCd" userLabel="Stack View3">
                                             <rect key="frame" x="14.5" y="360" width="330" height="150"/>
                                             <subviews>
-                                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqN-74-LQO" userLabel="Button5" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
+                                                <button opaque="NO" tag="35" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqN-74-LQO" userLabel="Button5" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="ZM9-5Q-afI"/>
@@ -95,23 +95,23 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="Documentary"/>
+                                                    <state key="normal" title="Comedy"/>
                                                 </button>
-                                                <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpM-UM-ZRG" userLabel="Button6" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
+                                                <button opaque="NO" tag="9648" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpM-UM-ZRG" userLabel="Button6" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="180" y="0.0" width="150" height="150"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="YpM-UM-ZRG" secondAttribute="height" multiplier="1:1" id="QzP-OF-XaS"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="Musical"/>
+                                                    <state key="normal" title="Mystery"/>
                                                 </button>
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="A40-Hx-Jtu" userLabel="Stack View4">
                                             <rect key="frame" x="14.5" y="540" width="330" height="150"/>
                                             <subviews>
-                                                <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKQ-9o-cXa" userLabel="Button7" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
+                                                <button opaque="NO" tag="10749" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKQ-9o-cXa" userLabel="Button7" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="oKQ-9o-cXa" secondAttribute="height" multiplier="1:1" id="QVB-v1-Gtp"/>
@@ -119,16 +119,16 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="Animation"/>
+                                                    <state key="normal" title="Romance"/>
                                                 </button>
-                                                <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2B-we-DU1" userLabel="Button8" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
+                                                <button opaque="NO" tag="10751" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2B-we-DU1" userLabel="Button8" customClass="MyButton" customModule="MovieSanctuary" customModuleProvider="target">
                                                     <rect key="frame" x="180" y="0.0" width="150" height="150"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="V2B-we-DU1" secondAttribute="height" multiplier="1:1" id="x0n-6h-k3H"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="18"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="Hardboiled"/>
+                                                    <state key="normal" title="Family"/>
                                                 </button>
                                             </subviews>
                                         </stackView>

@@ -227,11 +227,11 @@ final class SearchMovieViewController: UIViewController {
         toggleLeftBarButton()
         flipView()
         
-        if let tag = sender.userInfo?["buttonTag"] {
+        if let tag = sender.userInfo?["buttonTag"] as? Int {
             
             print(tag)
             
-            connect()
+            connect(btnTag: tag)
             
             
         }
@@ -314,17 +314,47 @@ final class SearchMovieViewController: UIViewController {
     // MARK: - API connection
     //////////////////////////
     
-    var APIManager = TMDB_APIManager(query: "")
+    var APIManager: Manager! // = TMDB_APIManager(query: "")
     
     // API Connection
-    func connect() {
+    func connect(btnTag: Int = 0) {
+        
+        if btnTag != 0 {
+            
+            // ここに通信処理を書く
+            /*
+            let APIManager = TMDB_Genre_Manager(genreID: btnTag)
+            
+            APIManager.request { res in
+                self.movies.append(contentsOf: res.results)
+                self.resultView.tableView.reloadData()
+            }
+            */
+            
+            return
+ 
+            
+        }
+        
         
         let text = self.searchView.searchBar.text
         
+        self.APIManager = TMDB_APIManager(query: text!)
+        
+        /*
         self.APIManager.request(query: text!) { res in
             self.movies.append(contentsOf: res.results)
             self.resultView.tableView.reloadData()
         }
+        */
+        
+        APIManager.request { res in
+            self.movies.append(contentsOf: res.results)
+            self.resultView.tableView.reloadData()
+        }
+        
+        
+        
     }
     
 }

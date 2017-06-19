@@ -4,14 +4,23 @@ import Result
 import Himotoki
 
 
-struct TMDB_APIManager {
+protocol Manager {
+    var page: Int { get set }
+    // func request(completion: @escaping (Response) -> Void)
+}
+
+/* 1 */
+
+struct TMDB_APIManager: Manager {
     
     var query: String
-    var page:  Int    = 1
+    var page:  Int = 1
     
-    mutating func request(query: String, _ completion: @escaping (Request_TMDB_Concise.Response) -> Void) {
+    // func request(_ completion: @escaping (Request_TMDB_Concise.Response) -> Void) {
+    
+    func request(_ completion: @escaping (TMDBRequest.Response) -> Void) {
         
-        self.query = query
+        // self.query = query
         
         // SearchRepositoriesRequest conforms to Request protocol.
         let request = Request_TMDB_Concise(query: self.query, page: self.page)
@@ -21,13 +30,14 @@ struct TMDB_APIManager {
         // Session receives an instance of a type that conforms to Request.
         Session.send(request) { result in
             switch result {
-                case .success(let response):
-                    completion(response)
-                case .failure(let error):
-                    print(error)
+            case .success(let response):
+                completion(response)
+            case .failure(let error):
+                print(error)
             }
         }
     }
+    
     
     init(query: String) {
         self.query = query
@@ -58,6 +68,9 @@ struct Request_TMDB_Concise: TMDBRequest {
 }
 
 
+
+/* 2 */
+
 struct TMDB_OMDBidManager {
     
     struct Request_TMDB_IMDBid: TMDBRequest {
@@ -84,12 +97,62 @@ struct TMDB_OMDBidManager {
         // Session receives an instance of a type that conforms to Request.
         Session.send(request) { result in
             switch result {
-                case .success(let response):
-                    completion(response)
-                case .failure(let error):
-                    print(error)
+            case .success(let response):
+                completion(response)
+            case .failure(let error):
+                print(error)
             }
         }
     }
 }
+
+
+/* 3 */
+
+struct TMDB_Genre_Manager: Manager {
+    
+    struct Request_TMDB_Genre: TMDBRequest {
+        
+        let genreID: Int
+        
+        typealias Response = ConciseMovieInfo
+        
+        var path: String {
+            return "/3/discover/movie"
+        }
+        
+        var parameters: Any? {
+            return ["api_key": APIkey.TMDB_APIkey,
+                    "with_genres" : self.genreID,
+                    "sort_by": "popularity.desc"
+            ]
+        }
+        
+    }
+    
+    var page: Int = 1
+    let genreID: Int
+    
+    
+    func request(completion: @escaping (Request_TMDB_Genre.Response) -> Void) {
+        
+        let request = Request_TMDB_Genre(genreID: self.genreID)
+        
+        Session.send(request) { result in
+            switch result {
+            case .success(let response):
+                completion(response)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+}
+
+
+
+
+
+
 
