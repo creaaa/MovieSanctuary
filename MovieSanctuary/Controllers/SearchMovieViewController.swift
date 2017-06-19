@@ -119,7 +119,31 @@ final class SearchMovieViewController: UIViewController {
         
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(genreButtonTapped), name: Notification.Name("ResultByGenre"), object: nil)
+        // まあこれでもいいからめんどかったら素直にこれ使え
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(genreButtonTapped(sender:)), name: Notification.Name("ResultByGenre"), object: nil)
+        
+        
+        
+        
+        
+        /*
+        // stack view 4個
+        let buttons = self.searchView.scrollView.subviews[0].subviews[0].subviews
+
+        print(buttons)
+        
+        
+        buttons.forEach {
+            
+            let innerStackView = ($0 as! UIStackView).subviews
+            
+            innerStackView.forEach {
+                ($0 as! UIButton).addTarget(self, action: #selector(genreButtonTapped(sender:)), for: .touchUpInside)
+            }
+            
+        }
+        */
         
         
         
@@ -198,9 +222,20 @@ final class SearchMovieViewController: UIViewController {
     // MARK: - Change View
     ////////////////////////
     
-    func genreButtonTapped() {
+    func genreButtonTapped(sender: Notification) {
+        
         toggleLeftBarButton()
         flipView()
+        
+        if let tag = sender.userInfo?["buttonTag"] {
+            
+            print(tag)
+            
+            connect()
+            
+            
+        }
+
     }
     
     func backToSearchView() {
