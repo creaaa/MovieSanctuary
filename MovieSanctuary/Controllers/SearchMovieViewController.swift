@@ -1,6 +1,5 @@
 
 import UIKit
-import Pastel
 import Kingfisher
 
 
@@ -11,55 +10,14 @@ final class SearchMovieViewController: UIViewController {
     
     // Views
     private lazy var pastelView: UIView = {
-    
-        /*
-        let pastelView = PastelView(frame: self.view.bounds)
-        
-        // Custom Direction
-        pastelView.startPastelPoint = .bottomLeft
-        pastelView.endPastelPoint   = .topRight
-        
-        // Custom Duration
-        pastelView.animationDuration = 3.0
-        
-        pastelView.setColors([UIColor(red: 156/255, green: 39/255,  blue: 176/255, alpha: 1.0),
-                              UIColor(red: 255/255, green: 64/255,  blue: 129/255, alpha: 1.0),
-                              UIColor(red: 123/255, green: 31/255,  blue: 162/255, alpha: 1.0),
-                              UIColor(red: 32/255,  green: 76/255,  blue: 255/255, alpha: 1.0),
-                              UIColor(red: 32/255,  green: 158/255, blue: 255/255, alpha: 1.0),
-                              UIColor(red: 90/255,  green: 120/255, blue: 127/255, alpha: 1.0),
-                              UIColor(red: 58/255,  green: 255/255, blue: 217/255, alpha: 1.0)])
-        
-        pastelView.startAnimation()
-        
-        pastelView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return pastelView
-        */
-        
-        
+
         let view = UIView(frame: self.view.bounds)
         
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
         gradient.colors = [
-            
-            /*
-            UIColor.white.cgColor,
-            UIColor.black.cgColor
-            */
-            
-//            UIColor(red: 156/255, green: 39/255,  blue: 176/255, alpha: 1.0).cgColor,
-//            UIColor(red: 255/255, green: 64/255,  blue: 129/255, alpha: 1.0).cgColor,
-//            UIColor(red: 123/255, green: 31/255,  blue: 162/255, alpha: 1.0).cgColor,
-//            UIColor(red: 32/255,  green: 76/255,  blue: 255/255, alpha: 1.0).cgColor,
-//            UIColor(red: 32/255,  green: 158/255, blue: 255/255, alpha: 1.0).cgColor,
-//            UIColor(red: 90/255,  green: 120/255, blue: 127/255, alpha: 1.0).cgColor,
-//            UIColor(red: 58/255,  green: 255/255, blue: 217/255, alpha: 1.0).cgColor
-
             UIColor(red:0.29, green:0.42, blue:0.72, alpha:1.0).cgColor,
             UIColor(red:0.09, green:0.16, blue:0.28, alpha:1.0).cgColor
-            
         ]
         
         view.layer.insertSublayer(gradient, at: 0)
@@ -119,39 +77,7 @@ final class SearchMovieViewController: UIViewController {
         
         super.viewDidLoad()
         
-        // まあこれでもいいからめんどかったら素直にこれ使え
-        
         NotificationCenter.default.addObserver(self, selector: #selector(genreButtonTapped(sender:)), name: Notification.Name("ResultByGenre"), object: nil)
-        
-        
-        
-        
-        
-        /*
-        // stack view 4個
-        let buttons = self.searchView.scrollView.subviews[0].subviews[0].subviews
-
-        print(buttons)
-        
-        
-        buttons.forEach {
-            
-            let innerStackView = ($0 as! UIStackView).subviews
-            
-            innerStackView.forEach {
-                ($0 as! UIButton).addTarget(self, action: #selector(genreButtonTapped(sender:)), for: .touchUpInside)
-            }
-            
-        }
-        */
-        
-        
-        
-        // receive notif from APImanager
-        /*
-         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveJSON(sender:)), name: Notification.Name("JSONresult"), object: nil)
-        */
-        
         
         // this is invalid cuz it's removed from view hierarchy
         // self.tableView.isHidden = true
@@ -165,16 +91,12 @@ final class SearchMovieViewController: UIViewController {
         self.view.addSubview(self.resultView)
         self.view.addSubview(self.searchView)
         
-        /*
-         (barButtonSystemItem: .cancel, target: self, action: #selector(backToSearchView)
-         */
         self.navigationItem.leftBarButtonItem =
             UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(backToSearchView)).apply {
                 $0.isEnabled = false
                 $0.tintColor = .clear
                 $0.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!], for: .normal)
             }
-        
         
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
@@ -187,8 +109,6 @@ final class SearchMovieViewController: UIViewController {
         
         self.navigationItem.backBarButtonItem = backButton
         
-        
-        
     }
     
 
@@ -199,9 +119,6 @@ final class SearchMovieViewController: UIViewController {
         if let indexPath = self.resultView.tableView.indexPathForSelectedRow {
             self.resultView.tableView.deselectRow(at: indexPath, animated: true)
         }
-        
-//      doesn't work here
-//         self.searchView.scrollView.contentSize = CGSize(width: 375, height: 1050)
         
     }
     
@@ -218,6 +135,10 @@ final class SearchMovieViewController: UIViewController {
     }
     
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
     ////////////////////////
     // MARK: - Change View
     ////////////////////////
@@ -228,20 +149,18 @@ final class SearchMovieViewController: UIViewController {
         flipView()
         
         if let tag = sender.userInfo?["buttonTag"] as? Int {
-            
             print(tag)
-            
             connect(btnTag: tag)
-
         }
-
     }
+    
+
     
     func backToSearchView() {
         
         self.movies = []
-        // self.APIManager.page = 1
         self.APIManager = nil
+        
         self.resultView.tableView.reloadData()
         
         toggleLeftBarButton()
@@ -260,12 +179,7 @@ final class SearchMovieViewController: UIViewController {
                           to:   isSearchViewFront ? resultView : searchView,
                           duration: 0.5,
                           options: .transitionCrossDissolve,
-                          completion: {_ in
-                            print("transition!")
-//                            if !isSearchViewFront {
-//                                self.searchView.scrollView.contentSize = CGSize(width: 375, height: 1050)
-//                            }
-                          }
+                          completion: {_ in print("transition!") }
         )
         
         (isSearchViewFront ? searchView : resultView).alpha = 0
@@ -290,34 +204,20 @@ final class SearchMovieViewController: UIViewController {
         
     }
     
-    /*
-    func didReceiveJSON(sender: Notification) {
-        
-        switch sender.object {
-            
-            case let movie as ConciseMovieInfo:
-                
-                self.movies = movie.results
-                self.movies.forEach{ print($0) }
-            
-                if let tableView = self.resultView.tableView {
-                    tableView.reloadData()
-                }
-            
-            default: break
-            
-        }
-    }
-    */
     
     //////////////////////////
     // MARK: - API connection
     //////////////////////////
     
-    var APIManager: Manager! // = TMDB_APIManager(query: "")
+    var APIManager: Manager!
     
     // API Connection
     func connect(btnTag: Int = 0) {
+        
+        guard self.movies.count <= 90 else {
+            print("can't get data over 100")
+            return
+        }
         
         // ジャンル
         if btnTag != 0 {
@@ -334,8 +234,6 @@ final class SearchMovieViewController: UIViewController {
                 }
             }
             
-            return
-            
         } else {  // キーワード
             
             let text = self.searchView.searchBar.text
@@ -350,10 +248,8 @@ final class SearchMovieViewController: UIViewController {
                     self.resultView.tableView.reloadData()
                 }
             }
-            
         }
     }
-    
 }
 
 
@@ -374,13 +270,13 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
             
             self.APIManager.page += 1
             
-            print("current page", self.APIManager)
-            
             if let mng = self.APIManager as? TMDB_Genre_Manager {
                 connect(btnTag: mng.genreID)
             } else if let _ = self.APIManager as? TMDB_APIManager {
                 connect()
             }
+            
+            print("current page", self.APIManager)
             
         } else {
             print(indexPath.row)
@@ -388,14 +284,22 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         
+        
+        
+        
+        
         cell.titleLabel.text = self.movies[indexPath.row].name
         
         if let genre1 = self.movies[indexPath.row].genres.first {
             cell.genre1Label.text = SearchMovieViewController.genreIdToName(genre1)
+        } else {
+            cell.genre1Label.isHidden = true
         }
         
         if self.movies[indexPath.row].genres.count >= 2 {
             cell.genre2Label.text = SearchMovieViewController.genreIdToName(self.movies[indexPath.row].genres[1])
+        } else {
+            cell.genre2Label.isHidden = true
         }
         
         if let imagePath = self.movies[indexPath.row].poster_path {
@@ -413,6 +317,7 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TableViewCell
         
         return cell.bounds.height
+ 
         
     }
     
@@ -456,6 +361,7 @@ extension SearchMovieViewController: UISearchBarDelegate {
         searchBar.text = nil
         self.view.endEditing(true)
     }
+    
 }
 
 
@@ -527,6 +433,5 @@ extension SearchView {
     }
 }
 */
-
 
 
