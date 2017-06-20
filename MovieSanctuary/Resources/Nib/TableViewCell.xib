@@ -32,7 +32,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Movie Title}" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="a10-sv-ddh">
-                        <rect key="frame" x="82" y="28" width="228" height="25"/>
+                        <rect key="frame" x="82" y="27.5" width="228" height="25"/>
                         <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>

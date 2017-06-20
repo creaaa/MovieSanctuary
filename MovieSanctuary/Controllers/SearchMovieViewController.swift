@@ -61,8 +61,11 @@ final class SearchMovieViewController: UIViewController {
         resultView.tableView.delegate   = self
         resultView.tableView.dataSource = self
         
+        
         let xib = UINib(nibName: "TableViewCell", bundle: nil)
         resultView.tableView.register(xib, forCellReuseIdentifier: "Cell")
+        
+        // resultView.tableView.register(TableViewCell.self)
         
         return resultView
         
@@ -87,10 +90,21 @@ final class SearchMovieViewController: UIViewController {
         // cause ambiguity for some reason...😡
         // self.view = pastelView
     
-        self.view.addSubview(self.pastelView)
+        //self.view.addSubview(self.pastelView)
+        
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = view.bounds
+        gradient.colors = [
+            UIColor(red:0.29, green:0.42, blue:0.72, alpha:1.0).cgColor,
+            UIColor(red:0.09, green:0.16, blue:0.28, alpha:1.0).cgColor
+        ]
+        
+        view.layer.insertSublayer(gradient, at: 0)
+        
         self.view.addSubview(self.resultView)
         self.view.addSubview(self.searchView)
-        
+                
         self.navigationItem.leftBarButtonItem =
             UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(backToSearchView)).apply {
                 $0.isEnabled = false
@@ -126,12 +140,13 @@ final class SearchMovieViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-
+        
         if let textField = self.searchView.searchBar.subviews[0].subviews[1] as? UITextField {
             if let placeHolder = textField.subviews[2] as? UILabel {
                 placeHolder.textColor = .white
             }
         }
+        
     }
     
     
@@ -284,9 +299,7 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         
-        
-        
-        
+        // let cell = tableView.dequeueReusableCell(with: TableViewCell.self, for: indexPath)
         
         cell.titleLabel.text = self.movies[indexPath.row].name
         
@@ -314,7 +327,10 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         // dequeue(withIdentifier:indexPath) causes infinite roop...😨 so use this;
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TableViewCell
+        
+        // let cell = tableView.dequeueReusableCell(with: TableViewCell.self, for: indexPath)
         
         return cell.bounds.height
  
