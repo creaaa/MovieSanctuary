@@ -6,24 +6,57 @@ import Himotoki
 
 protocol Manager {
     var page: Int { get set }
-    // func request(completion: @escaping (Response) -> Void)
 }
 
 /* 1 */
 
 struct TMDB_APIManager: Manager {
     
+    func request(completion: @escaping (Request_TMDB.Response) -> Void) {
+        
+        let request = Request_TMDB(query: self.query, page: self.page)
+        
+        print("generated request: ", request)
+        
+        Session.send(request) { result in
+            switch result {
+            case .success(let response):
+                completion(response)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+    }
+
+    struct Request_TMDB: TMDBRequest {
+        
+        let query: String
+        var page:  Int
+        
+        typealias Response = ConciseMovieInfo
+        
+        var path: String {
+            return "/3/search/movie"
+        }
+        
+        var parameters: Any? {
+            return ["api_key": APIkey.TMDB_APIkey,
+                    "query":   self.query,
+                    "page" :   self.page
+            ]
+        }
+        
+    }
+    
     var query: String
     var page:  Int = 1
     
-    // func request(_ completion: @escaping (Request_TMDB_Concise.Response) -> Void) {
-    
-    func request(_ completion: @escaping (TMDBRequest.Response) -> Void) {
-        
-        // self.query = query
+    /*
+    func request(_ completion: @escaping (Request_TMDB.Response) -> Void) {
         
         // SearchRepositoriesRequest conforms to Request protocol.
-        let request = Request_TMDB_Concise(query: self.query, page: self.page)
+        let request = Request_TMDB(query: self.query, page: self.page)
         
         print("generated request: ", request)
         
@@ -37,6 +70,8 @@ struct TMDB_APIManager: Manager {
             }
         }
     }
+    */
+  
     
     
     init(query: String) {
@@ -47,25 +82,25 @@ struct TMDB_APIManager: Manager {
 }
 
 
-struct Request_TMDB_Concise: TMDBRequest {
-    
-    let query: String
-    var page:  Int
-    
-    typealias Response = ConciseMovieInfo
-    
-    var path: String {
-        return "/3/search/movie"
-    }
-    
-    var parameters: Any? {
-        return ["api_key": APIkey.TMDB_APIkey,
-                "query":   self.query,
-                "page" :   self.page
-        ]
-    }
-    
-}
+//struct Request_TMDB_Concise: TMDBRequest {
+//    
+//    let query: String
+//    var page:  Int
+//    
+//    typealias Response = ConciseMovieInfo
+//    
+//    var path: String {
+//        return "/3/search/movie"
+//    }
+//    
+//    var parameters: Any? {
+//        return ["api_key": APIkey.TMDB_APIkey,
+//                "query":   self.query,
+//                "page" :   self.page
+//        ]
+//    }
+//    
+//}
 
 
 
@@ -111,8 +146,9 @@ struct TMDB_OMDBidManager {
 
 struct TMDB_Genre_Manager: Manager {
     
-    struct Request_TMDB_Genre: TMDBRequest {
+    struct Request_TMDB: TMDBRequest {
         
+        var page:  Int
         let genreID: Int
         
         typealias Response = ConciseMovieInfo
@@ -124,7 +160,8 @@ struct TMDB_Genre_Manager: Manager {
         var parameters: Any? {
             return ["api_key": APIkey.TMDB_APIkey,
                     "with_genres" : self.genreID,
-                    "sort_by": "popularity.desc"
+                    "sort_by": "popularity.desc",
+                    "page" :   self.page
             ]
         }
         
@@ -133,10 +170,14 @@ struct TMDB_Genre_Manager: Manager {
     var page: Int = 1
     let genreID: Int
     
+    init(genreID: Int) {
+        self.genreID = genreID
+    }
     
-    func request(completion: @escaping (Request_TMDB_Genre.Response) -> Void) {
+    
+    func request(completion: @escaping (Request_TMDB.Response) -> Void) {
         
-        let request = Request_TMDB_Genre(genreID: self.genreID)
+        let request = Request_TMDB(page: self.page, genreID: self.genreID) // Request_TMDB(genreID: self.genreID)
         
         Session.send(request) { result in
             switch result {

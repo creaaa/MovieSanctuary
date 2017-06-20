@@ -232,8 +232,7 @@ final class SearchMovieViewController: UIViewController {
             print(tag)
             
             connect(btnTag: tag)
-            
-            
+
         }
 
     }
@@ -241,7 +240,8 @@ final class SearchMovieViewController: UIViewController {
     func backToSearchView() {
         
         self.movies = []
-        self.APIManager.page = 1
+        // self.APIManager.page = 1
+        self.APIManager = nil
         self.resultView.tableView.reloadData()
         
         toggleLeftBarButton()
@@ -319,42 +319,39 @@ final class SearchMovieViewController: UIViewController {
     // API Connection
     func connect(btnTag: Int = 0) {
         
+        // ジャンル
         if btnTag != 0 {
             
-            // ここに通信処理を書く
-            /*
-            let APIManager = TMDB_Genre_Manager(genreID: btnTag)
-            
-            APIManager.request { res in
-                self.movies.append(contentsOf: res.results)
-                self.resultView.tableView.reloadData()
+            // APIManagerがなければ生成
+            if self.APIManager == nil {
+                self.APIManager = TMDB_Genre_Manager(genreID: btnTag) as Manager
             }
-            */
+
+            if let APIManager = self.APIManager as? TMDB_Genre_Manager {
+                APIManager.request { res in
+                    self.movies.append(contentsOf: res.results)
+                    self.resultView.tableView.reloadData()
+                }
+            }
             
             return
- 
+            
+        } else {  // キーワード
+            
+            let text = self.searchView.searchBar.text
+            
+            if self.APIManager == nil {
+                self.APIManager = TMDB_APIManager(query: text!) as Manager
+            }
+
+            if let APIManager = self.APIManager as? TMDB_APIManager {
+                APIManager.request { res in
+                    self.movies.append(contentsOf: res.results)
+                    self.resultView.tableView.reloadData()
+                }
+            }
             
         }
-        
-        
-        let text = self.searchView.searchBar.text
-        
-        self.APIManager = TMDB_APIManager(query: text!)
-        
-        /*
-        self.APIManager.request(query: text!) { res in
-            self.movies.append(contentsOf: res.results)
-            self.resultView.tableView.reloadData()
-        }
-        */
-        
-        APIManager.request { res in
-            self.movies.append(contentsOf: res.results)
-            self.resultView.tableView.reloadData()
-        }
-        
-        
-        
     }
     
 }
@@ -377,12 +374,17 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
             
             self.APIManager.page += 1
             
-            print("current page", self.APIManager.page)
+            print("current page", self.APIManager)
             
-            connect()
+            if let mng = self.APIManager as? TMDB_Genre_Manager {
+                connect(btnTag: mng.genreID)
+            } else if let _ = self.APIManager as? TMDB_APIManager {
+                connect()
+            }
             
+        } else {
+            print(indexPath.row)
         }
-        
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         
