@@ -20,6 +20,11 @@ class MovieDetailViewController: UIViewController {
         
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg")!)
+            
+            
+        // [UIColor colorWithPatternImage:[UIImage imageNamed:@"viewBgImage"]];
+        
         print("tmdb_movie from previous scene: ", tmdb_movie)
         TMDBconnect()
         
@@ -79,7 +84,9 @@ class MovieDetailViewController: UIViewController {
     
     func renderStars() {
         
-        var rate =  Int(Double(self.movie.rate)!)
+        // var rate =  Int(Double(self.movie.rate)!)
+        
+        let rate = Double(self.movie.rate).map{ Int($0 + 0.5) }
         
 //        if let rate = Int(self.movie.rate) {
 //            print(rate)
@@ -87,15 +94,22 @@ class MovieDetailViewController: UIViewController {
 //            print("")
 //        }
         
-        
+        if var rate = rate {
             for star in stackStar.subviews {
                 if rate > 0 {
                     star.alpha = 1
                     rate -= 1
                 }
-        
+            }
         }
         
+        
+//        for star in stackStar.subviews {
+//            if rate > 0 {
+//                star.alpha = 1
+//                rate -= 1
+//            }
+//        }
         
     }
     
@@ -119,14 +133,9 @@ class MovieDetailViewController: UIViewController {
             else if textview.text.characters.count > 12 {
                 textview.font = .systemFont(ofSize: CGFloat(size + 18))
             }
-            
-            
-
         }
         
-        
-        
-           }
+    }
     
     
     func genre() -> String {

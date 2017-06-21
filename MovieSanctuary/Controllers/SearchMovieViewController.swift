@@ -89,9 +89,7 @@ final class SearchMovieViewController: UIViewController {
     
         // cause ambiguity for some reason...😡
         // self.view = pastelView
-    
         //self.view.addSubview(self.pastelView)
-        
         
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
@@ -101,6 +99,7 @@ final class SearchMovieViewController: UIViewController {
         ]
         
         view.layer.insertSublayer(gradient, at: 0)
+        
         
         self.view.addSubview(self.resultView)
         self.view.addSubview(self.searchView)
@@ -249,7 +248,7 @@ final class SearchMovieViewController: UIViewController {
                 }
             }
             
-        } else {  // キーワード
+        } else {
             
             let text = self.searchView.searchBar.text
             

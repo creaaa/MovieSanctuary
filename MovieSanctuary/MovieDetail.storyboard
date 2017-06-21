@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GsP-Bk-dhP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GsP-Bk-dhP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -30,7 +30,7 @@
                                             <constraint firstAttribute="width" constant="128" id="ghd-2Z-Iid"/>
                                         </constraints>
                                     </imageView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" editable="NO" text="Inception (2010)" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="diC-ej-B18" userLabel="Title">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" tag="1" contentMode="scaleToFill" editable="NO" text="Inception (2010)" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="diC-ej-B18" userLabel="Title">
                                         <rect key="frame" x="146" y="40" width="221" height="41"/>
                                         <color key="backgroundColor" red="0.98809333509999997" green="1" blue="0.98323765240000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -39,7 +39,7 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" editable="NO" text="Director: Massa, Mattia" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UqZ-Um-gwy" userLabel="Director">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" tag="2" contentMode="scaleToFill" editable="NO" text="Director: Massa, Mattia" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UqZ-Um-gwy" userLabel="Director">
                                         <rect key="frame" x="146" y="88" width="221" height="50"/>
                                         <color key="backgroundColor" red="0.98809333509999997" green="1" blue="0.98323765240000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -48,7 +48,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="3" contentMode="scaleToFill" editable="NO" text="Genre: adventure, comic, horror" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="18p-QR-vYg" userLabel="Genre">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" tag="3" contentMode="scaleToFill" editable="NO" text="Genre: adventure, comic, horror" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="18p-QR-vYg" userLabel="Genre">
                                         <rect key="frame" x="146" y="146" width="221" height="49"/>
                                         <color key="backgroundColor" red="0.98809333509999997" green="1" blue="0.98323765240000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -57,7 +57,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="4" contentMode="scaleToFill" editable="NO" text="Stars: Massa, Mattia, Ko, Mitch" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uSQ-eH-Ixv" userLabel="Stars">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" tag="4" contentMode="scaleToFill" editable="NO" text="Stars: Massa, Mattia, Ko, Mitch" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uSQ-eH-Ixv" userLabel="Stars">
                                         <rect key="frame" x="146" y="202" width="221" height="50"/>
                                         <color key="backgroundColor" red="0.98809333509999997" green="1" blue="0.98323765240000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -66,7 +66,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="5" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1wj-5x-fTc" userLabel="story text">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" tag="5" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1wj-5x-fTc" userLabel="story text">
                                         <rect key="frame" x="10" y="317" width="357" height="212"/>
                                         <color key="backgroundColor" red="0.98809333509999997" green="1" blue="0.98323765240000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -94,7 +94,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4K5-9i-ZiS">
                                         <rect key="frame" x="8" y="568" width="359" height="49"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="lb8-LM-Lma">
+                                            <stackView opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="lb8-LM-Lma">
                                                 <rect key="frame" x="0.0" y="0.0" width="359" height="49"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stars" translatesAutoresizingMaskIntoConstraints="NO" id="MpC-te-IsL">
@@ -141,7 +141,6 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.69850095714891824" green="0.8190658669614308" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="4K5-9i-ZiS" firstAttribute="centerX" secondItem="WJr-9X-Oth" secondAttribute="centerX" id="0X6-Vf-Ehc"/>
                                     <constraint firstItem="TLu-BK-wAU" firstAttribute="leading" secondItem="WJr-9X-Oth" secondAttribute="leading" constant="10" id="1nT-Qz-K6x"/>
@@ -173,7 +172,6 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="WJr-9X-Oth" firstAttribute="leading" secondItem="BZC-09-L0h" secondAttribute="leading" id="UM6-Aq-t5b"/>
                             <constraint firstItem="WJr-9X-Oth" firstAttribute="top" secondItem="BZC-09-L0h" secondAttribute="top" id="YS9-wU-lRV"/>
@@ -198,6 +196,6 @@
     </scenes>
     <resources>
         <image name="poster1" width="300" height="444"/>
-        <image name="stars" width="640" height="589"/>
+        <image name="stars" width="320" height="294"/>
     </resources>
 </document>
