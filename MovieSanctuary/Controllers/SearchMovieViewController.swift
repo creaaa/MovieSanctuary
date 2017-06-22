@@ -1,6 +1,7 @@
 
 import UIKit
 import Kingfisher
+import SystemConfiguration
 
 
 final class SearchMovieViewController: UIViewController {
@@ -359,6 +360,11 @@ extension SearchMovieViewController: UISearchBarDelegate {
         
         if searchBar.text?.characters.count != 0 {
             
+            guard SearchMovieViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
+                print("no network. try later...")
+                return
+            }
+            
             toggleLeftBarButton()
             flipView()
             
@@ -439,4 +445,5 @@ extension SearchMovieViewController {
     }
     
 }
+
 

@@ -52,7 +52,7 @@ struct TMDB_APIManager: Manager {
                 case .failure(let error):
                     switch error {
                         case .connectionError(_):
-                            print("ネットがないよ")
+                            print("no ネット")
                         default:
                             print(error)
                     }
