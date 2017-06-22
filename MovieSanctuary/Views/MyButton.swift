@@ -10,9 +10,10 @@ extension MyButton {
         let point = touch.location(in: self)
         
         if self.bounds.contains(point) {
-            // NotificationCenter.default.post(name: Notification.Name("ResultByGenre"), object: self)
             
-            NotificationCenter.default.post(name: Notification.Name("ResultByGenre"), object: nil, userInfo: ["buttonTag": self.tag])
+            NotificationCenter.default.post(name: Notification.Name("ResultByGenre"),
+                                            object: nil,
+                                            userInfo: ["buttonTag": self.tag])
             
         }
         
@@ -21,29 +22,7 @@ extension MyButton {
         
     }
     
-    /*
-    func removeAllSubviews(parentView: UIView) {
-        let subviews = parentView.subviews
-        subviews.forEach{ $0.removeFromSuperview() }
-    }
-    
-    
-    func parentViewControllerRootView() -> UIView? {
-        var parentResponder: UIResponder? = self
-        while true {
-            guard let nextResponder = parentResponder?.next else { return nil }
-            if let viewController = nextResponder as? UIViewController {
-                // return viewController.view.subviews[0]
-                return viewController.view
-            }
-            parentResponder = nextResponder
-        }
-    }
-    */
-    
 }
 
-
-class MyButton: UIButton {
-}
+class MyButton: UIButton {}
 

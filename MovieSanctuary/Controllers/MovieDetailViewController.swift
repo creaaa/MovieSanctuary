@@ -16,20 +16,26 @@ class MovieDetailViewController: UIViewController {
     var movie:      OMDB_Movie!
     
     
+    ////////////////////////
+    // MARK: - Life Cycle
+    ////////////////////////
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg")!)
-            
-            
-        // [UIColor colorWithPatternImage:[UIImage imageNamed:@"viewBgImage"]];
         
         print("tmdb_movie from previous scene: ", tmdb_movie)
+        
         TMDBconnect()
         
     }
     
+    
+    //////////////////////////
+    // MARK: - API connection
+    //////////////////////////
     
     func TMDBconnect() {
         TMDB_OMDBidManager().request(id: self.tmdb_movie.id) { res1 in
@@ -40,6 +46,11 @@ class MovieDetailViewController: UIViewController {
             }
         }
     }
+    
+    
+    ///////////////////////////////////
+    // MARK: - Configure & Render View
+    ///////////////////////////////////
     
     func render() {
         
@@ -54,27 +65,16 @@ class MovieDetailViewController: UIViewController {
         self.starsMovie.text    = self.movie.actors
         self.storyMovie.text    = self.movie.plot
         
-        
-        // TODO: changes depending on rate
-        // use 'self.movie.rate' property to get rate
-        
-        // self.stackStar
-        
         //Change text size if string is too long
         let ary = [titleMovie, starsMovie,directorMovie,genreMovie]
         
         
-        for i in ary
-        {
+        for i in ary {
             if i?.tag == 1 {
                 setSizeViews(view: i!, base: 4)
-            }
-            else
-            {
+            } else {
                 setSizeViews(view: i!, base: 0)
             }
-        
-            
         }
         
         renderStars()
@@ -83,15 +83,7 @@ class MovieDetailViewController: UIViewController {
     
     func renderStars() {
         
-        // var rate =  Int(Double(self.movie.rate)!)
-        
         let rate = Double(self.movie.rate).map{ Int($0 + 0.5) }
-        
-//        if let rate = Int(self.movie.rate) {
-//            print(rate)
-//        } else {
-//            print("")
-//        }
         
         if var rate = rate {
             for star in stackStar.subviews {
@@ -102,23 +94,13 @@ class MovieDetailViewController: UIViewController {
             }
         }
         
-        
-//        for star in stackStar.subviews {
-//            if rate > 0 {
-//                star.alpha = 1
-//                rate -= 1
-//            }
-//        }
-        
     }
-    
     
     func setSizeViews(view : UIView, base : Int) {
         
         let size = base
         
         if let textview = view as? UITextView {
-            
             
             if textview.text.characters.count < 12 {
                 textview.font = .systemFont(ofSize: CGFloat(size + 20))
@@ -135,7 +117,6 @@ class MovieDetailViewController: UIViewController {
         }
         
     }
-    
     
     func genre() -> String {
         
@@ -154,8 +135,6 @@ class MovieDetailViewController: UIViewController {
         return result
         
     }
-    
 
 }
-
 

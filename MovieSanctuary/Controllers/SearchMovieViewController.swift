@@ -9,24 +9,6 @@ final class SearchMovieViewController: UIViewController {
     var movies: [ConciseMovieInfoResult] = []
     
     // Views
-    private lazy var pastelView: UIView = {
-
-        let view = UIView(frame: self.view.bounds)
-        
-        let gradient = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [
-            UIColor(red:0.29, green:0.42, blue:0.72, alpha:1.0).cgColor,
-            UIColor(red:0.09, green:0.16, blue:0.28, alpha:1.0).cgColor
-        ]
-        
-        view.layer.insertSublayer(gradient, at: 0)
-        
-        return view
- 
-    }()
-    
-    
     fileprivate lazy var searchView: SearchView = {
         
         let searchView = SearchView.instantiateFromNib()
@@ -36,9 +18,8 @@ final class SearchMovieViewController: UIViewController {
         
         if let textField = searchView.searchBar.subviews[0].subviews[1] as? UITextField {
             textField.clearButtonMode = .never
-            textField.font = UIFont(name: "Quicksand", size: 14)
-            textField.textColor = .white
-            
+            textField.font            = UIFont(name: "Quicksand", size: 14)
+            textField.textColor       = .white
             // can't set placeholder here yet; do in viewDidAppear
         }
         
@@ -61,12 +42,9 @@ final class SearchMovieViewController: UIViewController {
         resultView.tableView.delegate   = self
         resultView.tableView.dataSource = self
         
-        
         let xib = UINib(nibName: "TableViewCell", bundle: nil)
         resultView.tableView.register(xib, forCellReuseIdentifier: "Cell")
-        
-        // resultView.tableView.register(TableViewCell.self)
-        
+    
         return resultView
         
     }()
@@ -80,18 +58,18 @@ final class SearchMovieViewController: UIViewController {
         
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(genreButtonTapped(sender:)), name: Notification.Name("ResultByGenre"), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(genreButtonTapped(sender:)),
+                                               name: Notification.Name("ResultByGenre"),
+                                               object: nil)
         
         // this is invalid cuz it's removed from view hierarchy
         // self.tableView.isHidden = true
         
         self.resultView.alpha = 0
-    
-        // cause ambiguity for some reason...😡
-        // self.view = pastelView
-        //self.view.addSubview(self.pastelView)
         
         let gradient = CAGradientLayer()
+        
         gradient.frame = view.bounds
         gradient.colors = [
             UIColor(red:0.29, green:0.42, blue:0.72, alpha:1.0).cgColor,
@@ -99,7 +77,6 @@ final class SearchMovieViewController: UIViewController {
         ]
         
         view.layer.insertSublayer(gradient, at: 0)
-        
         
         self.view.addSubview(self.resultView)
         self.view.addSubview(self.searchView)
@@ -135,7 +112,6 @@ final class SearchMovieViewController: UIViewController {
         
     }
     
-    
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
@@ -148,14 +124,13 @@ final class SearchMovieViewController: UIViewController {
         
     }
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    ////////////////////////
-    // MARK: - Change View
-    ////////////////////////
+    ////////////////////////////////////
+    // MARK: - Configure & Render View
+    ////////////////////////////////////
     
     func genreButtonTapped(sender: Notification) {
         
@@ -166,9 +141,8 @@ final class SearchMovieViewController: UIViewController {
             print(tag)
             connect(btnTag: tag)
         }
+        
     }
-    
-
     
     func backToSearchView() {
         
@@ -218,6 +192,33 @@ final class SearchMovieViewController: UIViewController {
         
     }
     
+    func configureCell(_ tableView: UITableView, _ indexPath: IndexPath) -> TableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
+        
+        cell.titleLabel.text = self.movies[indexPath.row].name
+        
+        if let genre1 = self.movies[indexPath.row].genres.first {
+            cell.genre1Label.text = SearchMovieViewController.genreIdToName(genre1)
+        } else {
+            cell.genre1Label.isHidden = true
+        }
+        
+        if self.movies[indexPath.row].genres.count >= 2 {
+            cell.genre2Label.text = SearchMovieViewController.genreIdToName(self.movies[indexPath.row].genres[1])
+        } else {
+            cell.genre2Label.isHidden = true
+        }
+        
+        if let imagePath = self.movies[indexPath.row].poster_path {
+            let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
+            cell.posterImageView.kf.setImage(with: url)
+        }
+        
+        return cell
+        
+    }
+    
     
     //////////////////////////
     // MARK: - API connection
@@ -233,10 +234,10 @@ final class SearchMovieViewController: UIViewController {
             return
         }
         
-        // ジャンル
+        // search by genre
         if btnTag != 0 {
             
-            // APIManagerがなければ生成
+            // yield APIManager if not exist
             if self.APIManager == nil {
                 self.APIManager = TMDB_Genre_Manager(genreID: btnTag) as Manager
             }
@@ -247,7 +248,8 @@ final class SearchMovieViewController: UIViewController {
                     self.resultView.tableView.reloadData()
                 }
             }
-            
+         
+        // search by query(movie title)
         } else {
             
             let text = self.searchView.searchBar.text
@@ -262,6 +264,7 @@ final class SearchMovieViewController: UIViewController {
                     self.resultView.tableView.reloadData()
                 }
             }
+            
         }
     }
 }
@@ -296,9 +299,8 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
             print(indexPath.row)
         }
         
+        /*
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
-        
-        // let cell = tableView.dequeueReusableCell(with: TableViewCell.self, for: indexPath)
         
         cell.titleLabel.text = self.movies[indexPath.row].name
         
@@ -320,6 +322,9 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         }
         
         return cell
+        */
+        
+        return configureCell(tableView, indexPath)
         
     }
     
@@ -329,10 +334,7 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TableViewCell
         
-        // let cell = tableView.dequeueReusableCell(with: TableViewCell.self, for: indexPath)
-        
         return cell.bounds.height
- 
         
     }
     
@@ -435,18 +437,6 @@ extension SearchMovieViewController {
         return convert(ID: genreID)
         
     }
+    
 }
-
-
-
-// disable scrollView from touch event
-
-/*
-extension SearchView {
-    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.next?.touchesBegan(touches, with: event)
-    }
-}
-*/
-
 
