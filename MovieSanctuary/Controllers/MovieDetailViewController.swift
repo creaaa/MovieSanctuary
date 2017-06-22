@@ -18,7 +18,7 @@ class MovieDetailViewController: UIViewController {
     
     ////////////////////////
     // MARK: - Life Cycle
-    ////////////////////////c
+    ////////////////////////
     
     override func viewDidLoad() {
         
@@ -32,6 +32,9 @@ class MovieDetailViewController: UIViewController {
         
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     //////////////////////////
     // MARK: - API connection

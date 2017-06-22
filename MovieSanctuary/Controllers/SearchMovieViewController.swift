@@ -127,6 +127,7 @@ final class SearchMovieViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        print("called")
     }
     
     ////////////////////////////////////
@@ -341,6 +342,15 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
+        guard SearchMovieViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
+            
+            print("no network. try later...")
+            
+            showAlert(title: "No network", message: "try again later...")
+            
+            return
+        }
+        
         let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil)
         
         if let nextVC = storyboard.instantiateInitialViewController() as? MovieDetailViewController {
@@ -362,6 +372,9 @@ extension SearchMovieViewController: UISearchBarDelegate {
             
             guard SearchMovieViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
                 print("no network. try later...")
+                
+                showAlert(title: "No network", message: "try again later...")
+                
                 return
             }
             
