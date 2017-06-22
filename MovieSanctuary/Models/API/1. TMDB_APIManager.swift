@@ -50,7 +50,12 @@ struct TMDB_APIManager: Manager {
                 case .success(let response):
                     completion(response)
                 case .failure(let error):
-                    print(error)
+                    switch error {
+                        case .connectionError(_):
+                            print("ネットがないよ")
+                        default:
+                            print(error)
+                    }
             }
         }
     }
