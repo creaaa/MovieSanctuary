@@ -18,7 +18,7 @@ class MovieDetailViewController: UIViewController {
     
     ////////////////////////
     // MARK: - Life Cycle
-    ////////////////////////
+    ////////////////////////c
     
     override func viewDidLoad() {
         
@@ -39,11 +39,22 @@ class MovieDetailViewController: UIViewController {
     
     func TMDBconnect() {
         TMDB_OMDBidManager().request(id: self.tmdb_movie.id) { res1 in
+            
+            /*
             OMDB_APIManager().request(id: res1.imdb_id) { res2 in
                 self.movie = res2
                 print(self.movie)
                 self.render()
             }
+            */
+            
+            OMDB_APIManager().request(id: res1.imdb_id,
+                                      { res2 in
+                                        self.movie = res2
+                                        print(self.movie)
+                                        self.render()
+                                      }, self.showAlert)
+            
         }
     }
     
@@ -51,6 +62,16 @@ class MovieDetailViewController: UIViewController {
     ///////////////////////////////////
     // MARK: - Configure & Render View
     ///////////////////////////////////
+    
+    func showAlert() {
+        
+        let alert = UIAlertController(title: "No data", message: "No data for this movie", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
     
     func render() {
         

@@ -20,5 +20,6 @@ struct OMDB_Movie: Decodable {
             plot:     e <| "Plot",
             rate:     e <| "imdbRating"
         )
+        
     }
 }

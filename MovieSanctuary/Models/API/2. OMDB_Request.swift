@@ -13,9 +13,11 @@ extension OMDBRequest {
     }
     
     func intercept(object: Any, urlResponse: HTTPURLResponse) throws -> Any {
+        
         guard (200..<300).contains(urlResponse.statusCode) else {
             throw ResponseError.unacceptableStatusCode(urlResponse.statusCode)
         }
+        
         return object
     }
 }
@@ -27,4 +29,10 @@ extension OMDBRequest where Response: Decodable {
     }
     
 }
+
+
+
+
+
+
 

@@ -23,7 +23,9 @@ struct OMDB_APIManager {
         }
     }
     
-    func request(id: String, _ completion: @escaping (Request_OMDB.Response) -> Void) {
+    func request(id: String,
+                 _ completion:   @escaping (Request_OMDB.Response) -> Void,
+                 _ errorHundler: @escaping () -> Void) {
         
         let request = Request_OMDB(movieID: id)
         
@@ -31,25 +33,19 @@ struct OMDB_APIManager {
             switch result {
                 case .success(let response):
                     completion(response)
+                case .failure(.responseError(let keyPathError as DecodeError)):
+                    switch keyPathError {
+                        case .missingKeyPath(_):
+                            print(keyPathError.description)
+                            errorHundler()
+                        default:
+                            break
+                    }
                 case .failure(let error):
-                    print(error)
-                
-                // アラートを作成
-                /*
-                let alert = UIAlertController(
-                    title: "アラートのタイトル",
-                    message: "アラートの本文",
-                    preferredStyle: .alert)
-                
-                // アラートにボタンをつける
-                alert.addAction(UIAlertAction(title: "OK", style: .default))
-                
-                // アラート表示
-                self.present(alert, animated: true, completion: nil)
-                */
-                
+                    print("Unknown error: \(error)")
             }
         }
     }
+    
 }
 
