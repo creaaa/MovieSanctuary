@@ -78,7 +78,6 @@ class MovieDetailViewController: UIViewController {
         }
         
         renderStars()
-
         
     }
     

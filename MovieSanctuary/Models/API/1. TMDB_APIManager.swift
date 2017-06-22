@@ -20,10 +20,10 @@ struct TMDB_APIManager: Manager {
         
         Session.send(request) { result in
             switch result {
-            case .success(let response):
-                completion(response)
-            case .failure(let error):
-                print(error)
+                case .success(let response):
+                    completion(response)
+                case .failure(let error):
+                    print(error)
             }
         }
         
@@ -190,10 +190,5 @@ struct TMDB_Genre_Manager: Manager {
     }
     
 }
-
-
-
-
-
 
 

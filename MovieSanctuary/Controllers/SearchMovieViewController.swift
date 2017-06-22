@@ -242,8 +242,8 @@ final class SearchMovieViewController: UIViewController {
             }
 
             if let APIManager = self.APIManager as? TMDB_Genre_Manager {
-                APIManager.request { res in
-                    self.movies.append(contentsOf: res.results)
+                APIManager.request { result in
+                    self.movies.append(contentsOf: result.results)
                     self.resultView.tableView.reloadData()
                 }
             }
@@ -257,8 +257,8 @@ final class SearchMovieViewController: UIViewController {
             }
 
             if let APIManager = self.APIManager as? TMDB_APIManager {
-                APIManager.request { res in
-                    self.movies.append(contentsOf: res.results)
+                APIManager.request { result in
+                    self.movies.append(contentsOf: result.results)
                     self.resultView.tableView.reloadData()
                 }
             }
