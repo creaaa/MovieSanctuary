@@ -24,11 +24,21 @@ extension InstantiatableFromNib where Self: UIView {
 /* StoryBoard */
 
 extension NSObjectProtocol {
+    
+    // static内のselfは、クラス自身 = つまりメタタイプそのものを表す
+    // その証拠に、インスタンスを表すselfと違い、返り値の型が違ってる！
+    
+    // 1. ふつう
+    // let hoge: Person = self
+    // 2. ↓
+    // let hoge: Person.Type = self
+    
     static var className: String { return String(describing: self) }
+    
 }
 
 protocol Storyboardable: NSObjectProtocol {
-    static var storyboardName: String { get }
+    static var  storyboardName: String { get }
     static func instantiate() -> Self
 }
 
@@ -81,24 +91,4 @@ extension UITableView {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

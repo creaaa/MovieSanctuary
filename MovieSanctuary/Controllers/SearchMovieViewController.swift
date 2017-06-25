@@ -301,31 +301,6 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
             print(indexPath.row)
         }
         
-        /*
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
-        
-        cell.titleLabel.text = self.movies[indexPath.row].name
-        
-        if let genre1 = self.movies[indexPath.row].genres.first {
-            cell.genre1Label.text = SearchMovieViewController.genreIdToName(genre1)
-        } else {
-            cell.genre1Label.isHidden = true
-        }
-        
-        if self.movies[indexPath.row].genres.count >= 2 {
-            cell.genre2Label.text = SearchMovieViewController.genreIdToName(self.movies[indexPath.row].genres[1])
-        } else {
-            cell.genre2Label.isHidden = true
-        }
-        
-        if let imagePath = self.movies[indexPath.row].poster_path {
-            let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
-            cell.posterImageView.kf.setImage(with: url)
-        }
-        
-        return cell
-        */
-        
         return configureCell(tableView, indexPath)
         
     }
@@ -342,12 +317,10 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        guard SearchMovieViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
-            
+        guard SearchMovieViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") &&
+              SearchMovieViewController.isNetworkAvailable(host_name: "https://www.omdbapi.com/") else {
             print("no network. try later...")
-            
             showAlert(title: "No network", message: "try again later...")
-            
             return
         }
         
@@ -372,9 +345,7 @@ extension SearchMovieViewController: UISearchBarDelegate {
             
             guard SearchMovieViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
                 print("no network. try later...")
-                
                 showAlert(title: "No network", message: "try again later...")
-                
                 return
             }
             
@@ -382,6 +353,8 @@ extension SearchMovieViewController: UISearchBarDelegate {
             flipView()
             
             connect()
+            
+            
             
         }
         
