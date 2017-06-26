@@ -70,6 +70,10 @@ extension Nibable {
     
 }
 
+
+
+
+
 extension UITableViewCell {
     static var identifier: String { return className }
 }
@@ -80,7 +84,7 @@ extension UITableView {
         register(T.self, forCellReuseIdentifier: T.identifier)
     }
     
-    func register<T: UITableViewCell>(_ cellType: T.Type) where T: Nibable {
+    func register<T: UITableViewCell>(nibCell: T.Type) where T: Nibable {
         register(T.nib, forCellReuseIdentifier: T.identifier)
     }
     

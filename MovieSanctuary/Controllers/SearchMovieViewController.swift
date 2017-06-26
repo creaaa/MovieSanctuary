@@ -43,9 +43,13 @@ final class SearchMovieViewController: UIViewController {
         resultView.tableView.delegate   = self
         resultView.tableView.dataSource = self
         
+        /*
         let xib = UINib(nibName: "TableViewCell", bundle: nil)
         resultView.tableView.register(xib, forCellReuseIdentifier: "Cell")
-    
+        */
+        
+        resultView.tableView.register(nibCell: TableViewCell.self)
+        
         return resultView
         
     }()
@@ -196,7 +200,12 @@ final class SearchMovieViewController: UIViewController {
     
     func configureCell(_ tableView: UITableView, _ indexPath: IndexPath) -> TableViewCell {
         
+        /*
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
+        */
+        
+        let cell = tableView.dequeueReusableCell(with: TableViewCell.self, for: indexPath)
+        
         
         cell.titleLabel.text = self.movies[indexPath.row].name
         
@@ -305,11 +314,12 @@ extension SearchMovieViewController: UITableViewDataSource, UITableViewDelegate 
         
     }
     
+    // need this if you use xib for cell
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         // dequeue(withIdentifier:indexPath) causes infinite roop...😨 so use this;
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell") as! TableViewCell
         
         return cell.bounds.height
         
