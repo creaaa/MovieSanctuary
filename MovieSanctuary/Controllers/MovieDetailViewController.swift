@@ -3,13 +3,13 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
 
-    @IBOutlet weak var imgMovie:      UIImageView!
-    @IBOutlet weak var titleMovie:    UILabel!
-    @IBOutlet weak var directorMovie: UILabel!
-    @IBOutlet weak var genreMovie:    UILabel!
-    @IBOutlet weak var starsMovie:    UILabel!
-    @IBOutlet weak var storyMovie:    UILabel!
-    @IBOutlet weak var stackStar:     UIStackView!
+    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var titleLabel:      UILabel!
+    @IBOutlet weak var directorLabel:   UILabel!
+    @IBOutlet weak var genresLabel:     UILabel!
+    @IBOutlet weak var actorsLabel:     UILabel!
+    @IBOutlet weak var plotLabel:       UILabel!
+    @IBOutlet weak var rateStackView:   UIStackView!
     
     // passed from privious ViewController
     var tmdb_movie: ConciseMovieInfoResult!
@@ -67,14 +67,14 @@ class MovieDetailViewController: UIViewController {
         
         if let imagePath = self.tmdb_movie.poster_path {
             let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
-            self.imgMovie.kf.setImage(with: url)
+            self.posterImageView.kf.setImage(with: url)
         }
         
-        self.titleMovie.text    = self.tmdb_movie.name
-        self.directorMovie.text = self.movie.director
-        self.genreMovie.text    = genre()
-        self.starsMovie.text    = self.movie.actors
-        self.storyMovie.text    = self.movie.plot
+        self.titleLabel.text    = self.tmdb_movie.name
+        self.directorLabel.text = self.movie.director
+        self.genresLabel.text   = genre()
+        self.actorsLabel.text   = self.movie.actors
+        self.plotLabel.text     = self.movie.plot
         
         renderStars()
         
@@ -105,7 +105,7 @@ class MovieDetailViewController: UIViewController {
 
         rateScore.map { rate in
             var rate = rate
-            self.stackStar.subviews.forEach { starImg in
+            self.rateStackView.subviews.forEach { starImg in
                 starImg.alpha = rate > 0 ? 1 : 0
                 rate -= 1
             }
