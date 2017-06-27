@@ -50,11 +50,9 @@ struct TMDB_APIManager: Manager {
                 case .success(let response):
                     completion(response)
                 case .failure(let error):
-                    switch error {
-                        case .connectionError(_):
-                            print("no ネット")
-                        default:
-                            print(error)
+                    // no need to write switch any more if I use "if case" 😋
+                    if case .connectionError = error {
+                        print("No network...")
                     }
             }
         }
