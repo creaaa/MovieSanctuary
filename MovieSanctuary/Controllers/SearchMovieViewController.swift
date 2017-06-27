@@ -1,6 +1,10 @@
 
 import UIKit
 import Kingfisher
+
+import APIKit
+import Himotoki
+
 import SystemConfiguration
 
 
@@ -240,43 +244,45 @@ final class SearchMovieViewController: UIViewController {
     // API Connection
     func connect(btnTag: Int = 0) {
         
+        func request() {
+
+            if case let mng1 as TMDB_Genre_Manager = self.APIManager {
+                mng1.request { result in
+                    self.movies.append(contentsOf: result.results)
+                    self.resultView.tableView.reloadData()
+                }
+            }
+            
+            else if case let mng2 as TMDB_APIManager = self.APIManager {
+                mng2.request { result in
+                    self.movies.append(contentsOf: result.results)
+                    self.resultView.tableView.reloadData()
+                }
+            }
+
+        }
+        
         guard self.movies.count <= 90 else {
             print("can't get data over 100")
             return
         }
         
-        // search by genre
-        if btnTag != 0 {
-            
-            // yield APIManager if not exist
-            if self.APIManager == nil {
-                self.APIManager = TMDB_Genre_Manager(genreID: btnTag) as Manager
-            }
-
-            if let APIManager = self.APIManager as? TMDB_Genre_Manager {
-                APIManager.request { result in
-                    self.movies.append(contentsOf: result.results)
-                    self.resultView.tableView.reloadData()
+        switch btnTag {
+            case 0:  // by query
+                let text = self.searchView.searchBar.text
+                // yield APIManager if not exist
+                if self.APIManager == nil {
+                    self.APIManager = TMDB_APIManager(query: text!)
                 }
-            }
-         
-        // search by query(movie title)
-        } else {
-            
-            let text = self.searchView.searchBar.text
-            
-            if self.APIManager == nil {
-                self.APIManager = TMDB_APIManager(query: text!) as Manager
-            }
-
-            if let APIManager = self.APIManager as? TMDB_APIManager {
-                APIManager.request { result in
-                    self.movies.append(contentsOf: result.results)
-                    self.resultView.tableView.reloadData()
+            case _:  // by genre
+                // yield APIManager if not exist
+                if self.APIManager == nil {
+                    self.APIManager = TMDB_Genre_Manager(genreID: btnTag)
                 }
-            }
-            
         }
+        
+        request()
+        
     }
 }
 

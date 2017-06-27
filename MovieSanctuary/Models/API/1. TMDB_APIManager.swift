@@ -13,7 +13,7 @@ protocol Manager {
 /* search by query(movie title) */
 
 struct TMDB_APIManager: Manager {
-    
+
     struct Request_TMDB: TMDBRequest {
         
         typealias Response = ConciseMovieInfo
@@ -39,6 +39,7 @@ struct TMDB_APIManager: Manager {
         self.query = query
     }
     
+    
     func request(completion: @escaping (Request_TMDB.Response) -> Void) {
         
         let request = Request_TMDB(query: self.query, page: self.page)
@@ -57,6 +58,8 @@ struct TMDB_APIManager: Manager {
             }
         }
     }
+    
+    
 }
 
 
