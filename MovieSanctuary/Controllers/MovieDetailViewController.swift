@@ -4,37 +4,32 @@ import UIKit
 class MovieDetailViewController: UIViewController {
 
     @IBOutlet weak var imgMovie:      UIImageView!
-    @IBOutlet weak var titleMovie:    UITextView!
-    @IBOutlet weak var directorMovie: UITextView!
-    @IBOutlet weak var genreMovie:    UITextView!
-    @IBOutlet weak var starsMovie:    UITextView!
-    @IBOutlet weak var storyMovie:    UITextView!
+    @IBOutlet weak var titleMovie:    UILabel!
+    @IBOutlet weak var directorMovie: UILabel!
+    @IBOutlet weak var genreMovie:    UILabel!
+    @IBOutlet weak var starsMovie:    UILabel!
+    @IBOutlet weak var storyMovie:    UILabel!
     @IBOutlet weak var stackStar:     UIStackView!
     
     // passed from privious ViewController
     var tmdb_movie: ConciseMovieInfoResult!
     var movie:      OMDB_Movie!
     
-    
+
     ////////////////////////
     // MARK: - Life Cycle
     ////////////////////////
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg")!)
-        
         print("tmdb_movie from previous scene: ", tmdb_movie)
-        
         TMDBconnect()
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
     
     //////////////////////////
     // MARK: - API connection
@@ -43,20 +38,12 @@ class MovieDetailViewController: UIViewController {
     func TMDBconnect() {
         TMDB_OMDBidManager().request(id: self.tmdb_movie.id) { res1 in
             
-            /*
-            OMDB_APIManager().request(id: res1.imdb_id) { res2 in
-                self.movie = res2
-                print(self.movie)
-                self.render()
-            }
-            */
-            
             OMDB_APIManager().request(id: res1.imdb_id,
                                       { res2 in
                                         self.movie = res2
                                         print(self.movie)
                                         self.render()
-                                      }, self.showAlert)
+            }, self.showAlert)
             
         }
     }
@@ -89,56 +76,7 @@ class MovieDetailViewController: UIViewController {
         self.starsMovie.text    = self.movie.actors
         self.storyMovie.text    = self.movie.plot
         
-        //Change text size if string is too long
-        let ary = [titleMovie, starsMovie,directorMovie,genreMovie]
-        
-        
-        for i in ary {
-            if i?.tag == 1 {
-                setSizeViews(view: i!, base: 4)
-            } else {
-                setSizeViews(view: i!, base: 0)
-            }
-        }
-        
         renderStars()
-        
-    }
-    
-    func renderStars() {
-        
-        let rate = Double(self.movie.rate).map{ Int($0 + 0.5) }
-        
-        if var rate = rate {
-            for star in stackStar.subviews {
-                if rate > 0 {
-                    star.alpha = 1
-                    rate -= 1
-                }
-            }
-        }
-        
-    }
-    
-    func setSizeViews(view : UIView, base : Int) {
-        
-        let size = base
-        
-        if let textview = view as? UITextView {
-            
-            if textview.text.characters.count < 12 {
-                textview.font = .systemFont(ofSize: CGFloat(size + 20))
-            }
-            else if textview.text.characters.count > 25 {
-                textview.font = .systemFont(ofSize: CGFloat(size + 12))
-            }
-            else if textview.text.characters.count > 18 {
-                textview.font = .systemFont(ofSize: CGFloat(size + 16))
-            }
-            else if textview.text.characters.count > 12 {
-                textview.font = .systemFont(ofSize: CGFloat(size + 18))
-            }
-        }
         
     }
     
@@ -159,6 +97,37 @@ class MovieDetailViewController: UIViewController {
         return result
         
     }
+    
+    
+    func renderStars() {
+        
+        /*
+        let rate = Double(self.movie.rate).map{ Int($0 + 0.5) }
+        
+        if var rate = rate {
+            for star in stackStar.subviews {
+                if rate > 0 {
+                    star.alpha = 1
+                    rate -= 1
+                }
+            }
+        }
+        */
+        
+        
+        let rateScore: Int? = Double(self.movie.rate).map{ Int($0 + 0.5) }
 
+        rateScore.map { rate in
+            var rate = rate
+            self.stackStar.subviews.forEach { starImg in
+                starImg.alpha = rate > 0 ? 1 : 0
+                rate -= 1
+            }
+        }
+        
+        
+        
+    }
+    
 }
 
