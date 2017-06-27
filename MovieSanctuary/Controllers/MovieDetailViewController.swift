@@ -100,21 +100,7 @@ class MovieDetailViewController: UIViewController {
     
     
     func renderStars() {
-        
-        /*
-        let rate = Double(self.movie.rate).map{ Int($0 + 0.5) }
-        
-        if var rate = rate {
-            for star in stackStar.subviews {
-                if rate > 0 {
-                    star.alpha = 1
-                    rate -= 1
-                }
-            }
-        }
-        */
-        
-        
+
         let rateScore: Int? = Double(self.movie.rate).map{ Int($0 + 0.5) }
 
         rateScore.map { rate in
@@ -124,9 +110,7 @@ class MovieDetailViewController: UIViewController {
                 rate -= 1
             }
         }
-        
-        
-        
+
     }
     
 }
