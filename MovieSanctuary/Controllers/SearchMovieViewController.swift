@@ -16,7 +16,7 @@ final class SearchMovieViewController: UIViewController {
     // Views
     fileprivate lazy var searchView: SearchView = {
         
-        let searchView = SearchView.instantiateFromNib()
+        let searchView   = SearchView.instantiateFromNib()
         searchView.frame = self.view.bounds // If you miss this, HELL comes
 
         searchView.searchBar.delegate = self
@@ -135,7 +135,6 @@ final class SearchMovieViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        print("called")
     }
     
     ////////////////////////////////////
@@ -204,12 +203,7 @@ final class SearchMovieViewController: UIViewController {
     
     func configureCell(_ tableView: UITableView, _ indexPath: IndexPath) -> TableViewCell {
         
-        /*
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
-        */
-        
         let cell = tableView.dequeueReusableCell(with: TableViewCell.self, for: indexPath)
-        
         
         cell.titleLabel.text = self.movies[indexPath.row].name
         

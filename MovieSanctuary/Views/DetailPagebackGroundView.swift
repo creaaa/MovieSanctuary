@@ -4,37 +4,11 @@ import UIKit
 class DetailPagebackGroundView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
-        
         super.init(coder: aDecoder)
-        
-        /*
-        let gradient = CAGradientLayer()
-        
-        gradient.frame = self.bounds
-        gradient.colors = [
-            UIColor(red:0.29, green:0.42, blue:0.72, alpha:1.0).cgColor,
-            UIColor(red:0.09, green:0.16, blue:0.28, alpha:1.0).cgColor
-        ]
-        
-        self.layer.insertSublayer(gradient, at: 0)
-        */
     }
     
     override func awakeFromNib() {
-        
-        /*
-        let gradient = CAGradientLayer()
-        
-        gradient.frame = self.bounds
-        gradient.colors = [
-            UIColor(red:0.29, green:0.42, blue:0.72, alpha:1.0).cgColor,
-            UIColor(red:0.09, green:0.16, blue:0.28, alpha:1.0).cgColor
-        ]
-        
-        self.layer.insertSublayer(gradient, at: 0)
-        */
     }
-    
     
     override func layoutSubviews() {
         
