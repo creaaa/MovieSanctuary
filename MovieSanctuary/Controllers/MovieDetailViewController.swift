@@ -36,6 +36,7 @@ class MovieDetailViewController: UIViewController {
     //////////////////////////
     
     func TMDBconnect() {
+        
         TMDB_OMDBidManager().request(id: self.tmdb_movie.id) { res1 in
             
             OMDB_APIManager().request(id: res1.imdb_id,
