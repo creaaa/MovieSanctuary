@@ -117,45 +117,52 @@ final class MovieListViewController: UIViewController {
             return
         }
         
-        let queue1 = DispatchQueue.global()
+        let queue  = DispatchQueue(label: "fetchMovieData")
+        
         let manager = MovieDetailManager()
         
         let id = 550
         
-        queue1.sync {
+        
+        // やばい！グローバルキューでも、syncだと syncの{}の中は常にmainスレッドになる。注意!!!
+        // async だと ちゃんとグローバルスレッドになる
+        
+        // ↓からわかること
+        // {}が mainとglobalを分かつ、というわけではない(∵ forEachのクロージャ内はまだglobal)
+        // おそらく、@escaping指定されたクロージャがmainスレッドになる
+        
+        // 並列 × 同期
+        
+        // print(Thread.isMainThread)
+
+        queue.async {
+            
             (1...10).forEach { _ in
+            /// この行はまだglobalスレッド ///
                 manager.request(id: id) { result in
-//                    print(result)
-                     DispatchQueue.main.sync {
-                        self.movies.append(result)
-                        print("done")
-                     }
-                }
-            }
-        }
-        
-        self.resultView.tableView.reloadData()
-        print("これ最後に出てないとダメ")
-        
-        
-        /*
-        queue2.async(group: group) {
-            manager.request(id: id) { result in
-                print(result)
-                DispatchQueue.main.async {
+                    print(result)
+                    /// この行はもう既にmainスレッドです ///
                     self.movies.append(result)
+                    print(Thread.isMainThread)//
                     self.resultView.tableView.reloadData()
                 }
             }
+            
+            /// この行は再び globalスレッドなので、、、 ///
+            /// UI更新は当然mainスレッドでやらないとダメ。てわけでここで明示的にmain呼ぶわけです。こんなふうに↓↓
+            /*
+            DispatchQueue.main.async {
+                self.resultView.tableView.reloadData()
+            }
+            */
+            
+            // ...気づいたか?? だめなんだ。なぜなら↑のrequest処理が終了する前にこの行に来てしまうから。
+            // そんなわけで、みんな async {} の中で mainを呼び出し、ビューの更新をしていた、というわけなのか...
+            // みんなすごい！...でもこれだと10回reloadしてるのでナンセンスなので何か考えろや。
+            
         }
-        
-        group.notify(queue: DispatchQueue.main) {
-            print("おわった")
-        }
-        */
-        
-        
     }
+    
 }
 
 
