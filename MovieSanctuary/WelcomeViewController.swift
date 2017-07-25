@@ -88,28 +88,64 @@ extension WelcomeViewController: UITableViewDelegate, UITableViewDataSource {
         storedOffsets[indexPath.row] = tableViewCell.collectionViewOffset
     }
     
+    
+    /// header ///
+    
+    // 注意) おそらく、↓のviewForHeaderを実装した場合は、こっちはシカトされる
     /*
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    }
+    */
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
      
         let view = UIView()
+        view.backgroundColor = .black
         
-        if section % 2 == 0 {
-            view.backgroundColor = .cyan
-        } else {
-            view.backgroundColor = .orange
-        }
+        let label = UILabel(frame: .zero)
+        label.text = {
+            switch section {
+            case 0:
+                return "NOW ON AIR"
+            case 1:
+                return "MASTERPIECE"
+            case 2:
+                return "MADE 4 YOU"
+            case 3:
+                return "ACTION"
+            case 4:
+                return "SUSPENSE"
+            case 5:
+                return "KIDS"
+            default:
+                fatalError()
+            }
+        }()
+        label.font = UIFont(name: "Quicksand", size: 18)
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(label)
+        
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
         return view
         
     }
     
+    /*
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
+    */
     
+    /// footer
+    /*
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return "ffff"
     }
-    
+ 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 30
     }
