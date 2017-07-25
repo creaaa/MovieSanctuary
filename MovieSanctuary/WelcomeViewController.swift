@@ -30,9 +30,6 @@ class WelcomeViewController: UIViewController {
         self.img = try! fetchImgFromUrlStr(urlStr: "https://pbs.twimg.com/media/Cwf3zVcUUAA61Wi.jpg")
         // tableView.reloadData()  // viewDidLoad = まだappearしてないので、書かなくてもよい
         
-        
-        
-        
     }
     
     

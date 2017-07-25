@@ -112,10 +112,29 @@
             </objects>
             <point key="canvasLocation" x="-4306" y="-581"/>
         </scene>
-        <!--View Controller-->
+        <!--Movie List View Controller-->
+        <scene sceneID="UuO-3Q-CeW">
+            <objects>
+                <viewController id="hMh-6r-kYZ" customClass="MovieListViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IoU-od-0pN"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ovn-Xj-I5J"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="w6W-hY-SgE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fmo-wf-4Y3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4306" y="-1343"/>
+        </scene>
+        <!--Movie List View Controller-->
         <scene sceneID="caw-TH-jpu">
             <objects>
-                <viewController id="WzH-Lg-VBe" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="WzH-Lg-VBe" customClass="MovieListViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="B9E-fF-8jf"/>
                         <viewControllerLayoutGuide type="bottom" id="faH-Gd-6RL"/>
@@ -149,11 +168,11 @@
             </objects>
             <point key="canvasLocation" x="-6225" y="-190"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="70k-Zg-d3S">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XYH-Rn-ahi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="pYw-VQ-m9u"/>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="pYw-VQ-m9u"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="9Uu-aY-2uD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -168,11 +187,11 @@
             </objects>
             <point key="canvasLocation" x="-5274" y="-580"/>
         </scene>
-        <!--Item 2-->
+        <!--Navigation Controller-->
         <scene sceneID="xE4-C7-ZnA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2vz-yF-YDw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 2" id="W8S-am-ot7"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="W8S-am-ot7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yd2-Ks-7T0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
