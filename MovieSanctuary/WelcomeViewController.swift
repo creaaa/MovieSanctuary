@@ -6,7 +6,7 @@ import UIKit
 class WelcomeViewController: UIViewController {
 
     let model: [[UIColor]] = generateRandomData()
-    var storedOffsets      = [Int:CGFloat]()
+    var storedOffsets      = [Int : CGFloat]()
 
     var img: UIImage?
 
@@ -20,9 +20,15 @@ class WelcomeViewController: UIViewController {
         tableView.delegate   = self
         tableView.dataSource = self
         
-        self.img = try! fetchImgFromUrlStr(urlStr: "https://pbs.twimg.com/media/Cwf3zVcUUAA61Wi.jpg")
+        let searchBar = UISearchBar(frame: .zero)
+        searchBar.showsCancelButton = true
+        searchBar.searchBarStyle = .minimal
+        searchBar.delegate = self
         
-        // tableView.reloadData()
+        self.navigationItem.titleView = searchBar
+
+        self.img = try! fetchImgFromUrlStr(urlStr: "https://pbs.twimg.com/media/Cwf3zVcUUAA61Wi.jpg")
+        // tableView.reloadData()  // viewDidLoad = まだappearしてないので、書かなくてもよい
         
     }
     
@@ -180,4 +186,16 @@ extension WelcomeViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
 }
+
+
+extension WelcomeViewController: UISearchBarDelegate {
+    
+    
+    
+}
+
+
+
+
+
 
