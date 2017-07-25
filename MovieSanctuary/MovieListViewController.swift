@@ -81,21 +81,17 @@ final class MovieListViewController: UIViewController {
         
         cell.titleLabel.text = self.movies[indexPath.row].title
         
-        
-        /*
         if let genre1 = self.movies[indexPath.row].genres.first {
-            cell.genre1Label.text = MovieListViewController.genreIdToName(genre1)
+            cell.genre1Label.text = genre1.name
         } else {
             cell.genre1Label.isHidden = true
         }
         
         if self.movies[indexPath.row].genres.count >= 2 {
-            cell.genre2Label.text = MovieListViewController.genreIdToName(self.movies[indexPath.row].genres[1])
+            cell.genre2Label.text = self.movies[indexPath.row].genres[1].name
         } else {
             cell.genre2Label.isHidden = true
         }
-        */
-        
         
         if let imagePath = self.movies[indexPath.row].poster_path {
             let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
@@ -110,30 +106,54 @@ final class MovieListViewController: UIViewController {
     //////////////////////////
     // MARK: - API connection
     //////////////////////////
-    
-    private func insertMock() {
-        
-        
-        
-    }
-    
+
     
     
     // API Connection
     func connect() {
      
-        let manager = MovieDetailManager()
-        
         guard self.movies.count <= 90 else {
             print("can't get data over 100")
             return
         }
         
+        let queue1 = DispatchQueue.global()
+        let manager = MovieDetailManager()
+        
         let id = 550
         
-        manager.request(id: id) { result in
-            print(result)
+        queue1.sync {
+            (1...10).forEach { _ in
+                manager.request(id: id) { result in
+//                    print(result)
+                     DispatchQueue.main.sync {
+                        self.movies.append(result)
+                        print("done")
+                     }
+                }
+            }
         }
+        
+        self.resultView.tableView.reloadData()
+        print("これ最後に出てないとダメ")
+        
+        
+        /*
+        queue2.async(group: group) {
+            manager.request(id: id) { result in
+                print(result)
+                DispatchQueue.main.async {
+                    self.movies.append(result)
+                    self.resultView.tableView.reloadData()
+                }
+            }
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            print("おわった")
+        }
+        */
+        
         
     }
 }
