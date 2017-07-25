@@ -1,0 +1,4 @@
+
+CollectionViewのItemには制約付けなくても、OK、ぴったんこになる
+(CollectionViewの方の設定で、Itemのサイズが68と指定されているため)
+

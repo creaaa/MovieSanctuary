@@ -33,7 +33,7 @@ struct TMDB_APIManager: Manager {
     }
     
     var query: String
-    var page:  Int    = 1
+    var page:  Int = 1
 
     init(query: String) {
         self.query = query

@@ -14,10 +14,10 @@ struct OMDB_Movie: Decodable {
         
         return try OMDB_Movie (
             name:     e <| "Title",
-            director: e <| "Director",
-            actors:   e <| "Actors",
+            director: e <| "Director",    // 特有
+            actors:   e <| "Actors",      // 特有
             year:     e <| "Year",
-            plot:     e <| "Plot",
+            plot:     e <| "Plot",        // 特有
             rate:     e <| "imdbRating"
         )
         
