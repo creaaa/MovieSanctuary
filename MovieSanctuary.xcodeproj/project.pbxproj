@@ -20,6 +20,7 @@
 		442A8AFB1EE9D84100D12A60 /* 1. TMDB_APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442A8AFA1EE9D84100D12A60 /* 1. TMDB_APIManager.swift */; };
 		442A8AFD1EE9D94100D12A60 /* 1. TMDB_Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442A8AFC1EE9D94100D12A60 /* 1. TMDB_Request.swift */; };
 		442A8AFF1EE9DE2000D12A60 /* 1. ConciseMovieInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442A8AFE1EE9DE2000D12A60 /* 1. ConciseMovieInfo.swift */; };
+		44547B741F27A64600FB493B /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44547B731F27A64600FB493B /* MovieListViewController.swift */; };
 		4459C2591EEF6CBE00E963D8 /* TypeSafeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4459C2581EEF6CBE00E963D8 /* TypeSafeUtil.swift */; };
 		445C36991F26707900B7D920 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C36951F26707900B7D920 /* Helper.swift */; };
 		445C369A1F26707900B7D920 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C36961F26707900B7D920 /* WelcomeViewController.swift */; };
@@ -64,6 +65,7 @@
 		442A8AFA1EE9D84100D12A60 /* 1. TMDB_APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "1. TMDB_APIManager.swift"; sourceTree = "<group>"; };
 		442A8AFC1EE9D94100D12A60 /* 1. TMDB_Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "1. TMDB_Request.swift"; sourceTree = "<group>"; };
 		442A8AFE1EE9DE2000D12A60 /* 1. ConciseMovieInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "1. ConciseMovieInfo.swift"; sourceTree = "<group>"; };
+		44547B731F27A64600FB493B /* MovieListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		4459C2581EEF6CBE00E963D8 /* TypeSafeUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeSafeUtil.swift; sourceTree = "<group>"; };
 		445C36951F26707900B7D920 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		445C36961F26707900B7D920 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +156,23 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		44547B711F27A49C00FB493B /* Neo */ = {
+			isa = PBXGroup;
+			children = (
+				445C368A1F266FA600B7D920 /* Welcome VC */,
+				44547B721F27A62B00FB493B /* MovieList VC */,
+			);
+			name = Neo;
+			sourceTree = "<group>";
+		};
+		44547B721F27A62B00FB493B /* MovieList VC */ = {
+			isa = PBXGroup;
+			children = (
+				44547B731F27A64600FB493B /* MovieListViewController.swift */,
+			);
+			name = "MovieList VC";
+			sourceTree = "<group>";
+		};
 		445C368A1F266FA600B7D920 /* Welcome VC */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,11 +212,11 @@
 				44D9431F1EE22865004EF6A3 /* Info.plist */,
 				4902FD931EF4A77900ED50A9 /* Assets.xcassets */,
 				44D943131EE22865004EF6A3 /* AppDelegate.swift */,
-				445C368A1F266FA600B7D920 /* Welcome VC */,
 				44E3BE391EE7124700466CF5 /* Resources */,
 				44E3BE4E1EE7F44000466CF5 /* Views */,
 				442A8AF91EE9D82600D12A60 /* Models */,
 				44E3BE4F1EE7F46900466CF5 /* Controllers */,
+				44547B711F27A49C00FB493B /* Neo */,
 			);
 			path = MovieSanctuary;
 			sourceTree = "<group>";
@@ -357,6 +376,7 @@
 				44982C8C1F0313BC007B9EAA /* MyLabel.swift in Sources */,
 				44C0F6751EFC60AF008D575C /* ViewControllerExtension.swift in Sources */,
 				445C369A1F26707900B7D920 /* WelcomeViewController.swift in Sources */,
+				44547B741F27A64600FB493B /* MovieListViewController.swift in Sources */,
 				44E3BE491EE7C12100466CF5 /* TableViewCell.swift in Sources */,
 				44D943161EE22865004EF6A3 /* SearchMovieViewController.swift in Sources */,
 				44E3BE441EE73BB100466CF5 /* SearchView.swift in Sources */,
