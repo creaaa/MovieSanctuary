@@ -58,6 +58,29 @@ class WelcomeViewController: UIViewController {
         
     }
     
+
+    // API Connection
+    /*
+    func connectForMovieSearch(query: String) {
+        
+        guard self.movies.count <= 90 else {
+            print("can't get data over 100")
+            return
+        }
+        
+        let manager = MovieSearchManager()
+        
+        DispatchQueue.global().async {
+            manager.request(query: query) { result in
+                self.movies.append(result)
+                
+                // self.resultView.tableView.reloadData()
+                
+            }
+        }
+    }
+    */
+    
 }
 
 

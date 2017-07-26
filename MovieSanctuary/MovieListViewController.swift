@@ -13,7 +13,7 @@ final class MovieListViewController: UIViewController {
     
     // このVCがタブ2で使われる場合: お気に入り追加した映画たちが入る(APIコールなし)
     // このVCがキーワード検索で使われる場合: 検索結果の映画たちが入る
-    var movies: [Movie] = []
+    var movies: [ConciseMovie] = []
     
     fileprivate lazy var resultView: ResultView = {
         
@@ -53,7 +53,9 @@ final class MovieListViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
         
-        connectForMovieDetail(movieID: 550)
+        // connectForMovieDetail(movieID: 550)
+        
+        connectForMovieSearch(query: "Zootopia")
         
     }
     
@@ -86,17 +88,21 @@ final class MovieListViewController: UIViewController {
         
         cell.titleLabel.text = self.movies[indexPath.row].title
         
+        /*
         if let genre1 = self.movies[indexPath.row].genres.first {
             cell.genre1Label.text = genre1.name
         } else {
             cell.genre1Label.isHidden = true
         }
+        */
         
+        /*
         if self.movies[indexPath.row].genres.count >= 2 {
             cell.genre2Label.text = self.movies[indexPath.row].genres[1].name
         } else {
             cell.genre2Label.isHidden = true
         }
+        */
         
         if let imagePath = self.movies[indexPath.row].poster_path {
             let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
@@ -113,25 +119,34 @@ final class MovieListViewController: UIViewController {
     //////////////////////////
     
     // API Connection
-    func connectForMovieDetail(movieID: Int) {
-     
+    
+    func connectForMovieSearch(query: String) {
+        
         guard self.movies.count <= 90 else {
             print("can't get data over 100")
             return
         }
         
-        let manager = MovieDetailManager()
+        let manager = MovieSearchManager()
         
-        // 並列 × 同期
         DispatchQueue.global().async {
-            manager.request(id: movieID) { result in
+            manager.request(query: query) { result in
                 self.movies.append(result)
                 
-                print(result.credits.casts)
-                print(result.credits.crews)
+                // self.resultView.tableView.reloadData()
                 
+            }
+        }
+    }
+    
+    func connectForMovieDetail(movieID: Int) {
+     
+        let manager = MovieDetailManager()
+        
+        DispatchQueue.global().async {
+            manager.request(id: movieID) { result in
+                // self.movies.append(result)
                 self.resultView.tableView.reloadData()
-                
             }
         }
     }

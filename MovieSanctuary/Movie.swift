@@ -4,10 +4,8 @@ import Himotoki
 struct Movie: Decodable {
     
     struct Genre: Decodable {
-        
         let id:   Int
         let name: String
-        
         static func decode(_ e: Extractor) throws -> Genre {
             return try Genre(
                 id:   e <|  "id",
@@ -38,7 +36,7 @@ struct Movie: Decodable {
         }
     }
     
-    
+    // movie/{movie_id}/credits で取れるやつ
     struct Credits: Decodable {
         
         struct Cast: Decodable {
@@ -72,9 +70,10 @@ struct Movie: Decodable {
                 crews: e <|| "crew"
             )
         }
-        
-        
     }
+    
+    // movie/{movie_id}/ で取れるやつ
+
     
     
     

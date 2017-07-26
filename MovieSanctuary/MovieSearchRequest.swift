@@ -5,9 +5,9 @@ import Himotoki
 
 /* Request */
 
-protocol MovieDetailRequest: Request {}
+protocol MovieSearchRequest: Request {}
 
-extension MovieDetailRequest {
+extension MovieSearchRequest {
     
     var baseURL: URL {
         return URL(string: "https://api.themoviedb.org")!
@@ -26,7 +26,7 @@ extension MovieDetailRequest {
     
 }
 
-extension MovieDetailRequest where Response: Decodable {
+extension MovieSearchRequest where Response: Decodable {
     func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
         return try decodeValue(object)
     }
@@ -35,30 +35,31 @@ extension MovieDetailRequest where Response: Decodable {
 
 /* Manager */
 
-struct MovieDetailManager {
+struct MovieSearchManager {
     
-    struct StandardRequest: MovieDetailRequest {
+    struct StandardRequest: MovieSearchRequest {
         
-        typealias Response = Movie // HimotokiのDecodable準拠なデータモデル
-        let movieID: Int
-        var path:    String {
-            return "/3/movie/" + movieID.description
+        typealias Response = ConciseMovie // HimotokiのDecodable準拠なデータモデル
+        let query: String
+        var path:  String {
+            return "/3/search/movie"
         }
         var parameters: Any? {
             return [
-                "api_key":            APIkey.TMDB_APIkey,
-                "append_to_response": "videos,credits" // recommendations
+                "api_key": APIkey.TMDB_APIkey
             ]
         }
     }
     
-    func request(id: Int, _ completion: @escaping (StandardRequest.Response) -> Void) {
+    
+    func request(query: String, _ completion: @escaping (StandardRequest.Response) -> Void) {
         
-        let request = StandardRequest(movieID: id)
+        let request = StandardRequest(query: query)
         
         Session.send(request) { result in
             switch result {
             case .success(let response):
+                print(response)
                 completion(response)
             case .failure(let error):
                 print(error)
@@ -66,3 +67,6 @@ struct MovieDetailManager {
         }
     }
 }
+
+
+
