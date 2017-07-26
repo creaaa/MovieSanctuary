@@ -13,7 +13,7 @@ final class MovieListViewController: UIViewController {
     
     // このVCがタブ2で使われる場合: お気に入り追加した映画たちが入る(APIコールなし)
     // このVCがキーワード検索で使われる場合: 検索結果の映画たちが入る
-    var movies: [ConciseMovie] = []
+    var movies: [ConciseMovie.Movie] = []
     
     fileprivate lazy var resultView: ResultView = {
         
@@ -88,6 +88,18 @@ final class MovieListViewController: UIViewController {
         
         cell.titleLabel.text = self.movies[indexPath.row].title
         
+        if let genre1 = self.movies[indexPath.row].genreName.first {
+            cell.genre1Label.text = genre1
+        } else {
+            cell.genre1Label.isHidden = true
+        }
+        
+        if self.movies[indexPath.row].genreName.count >= 2 {
+            cell.genre2Label.text = self.movies[indexPath.row].genreName[1]
+        } else {
+            cell.genre2Label.isHidden = true
+        }
+        
         /*
         if let genre1 = self.movies[indexPath.row].genres.first {
             cell.genre1Label.text = genre1.name
@@ -103,6 +115,7 @@ final class MovieListViewController: UIViewController {
             cell.genre2Label.isHidden = true
         }
         */
+        
         
         if let imagePath = self.movies[indexPath.row].poster_path {
             let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
@@ -131,10 +144,8 @@ final class MovieListViewController: UIViewController {
         
         DispatchQueue.global().async {
             manager.request(query: query) { result in
-                self.movies.append(result)
-                
-                // self.resultView.tableView.reloadData()
-                
+                self.movies = result.results
+                self.resultView.tableView.reloadData()
             }
         }
     }

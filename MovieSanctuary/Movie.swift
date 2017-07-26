@@ -72,9 +72,16 @@ struct Movie: Decodable {
         }
     }
     
-    // movie/{movie_id}/ で取れるやつ
 
     
+    /*
+    let id:           Int
+    let title:        String
+    let poster_path:  String?
+    let genres:       [Int]
+    let vote_average: Float
+    let vote_count:   Int
+    */
     
     
     // searchでも取れるやつ

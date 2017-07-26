@@ -46,7 +46,8 @@ struct MovieSearchManager {
         }
         var parameters: Any? {
             return [
-                "api_key": APIkey.TMDB_APIkey
+                "api_key": APIkey.TMDB_APIkey,
+                "query"  : query
             ]
         }
     }
