@@ -11,7 +11,7 @@ final class MovieListViewController: UIViewController {
     
     // Model
     
-    // このVCがタブ2で使われる場合: お気に入り追加した映画たちが入る
+    // このVCがタブ2で使われる場合: お気に入り追加した映画たちが入る(APIコールなし)
     // このVCがキーワード検索で使われる場合: 検索結果の映画たちが入る
     var movies: [Movie] = []
     
@@ -44,11 +44,16 @@ final class MovieListViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.addSubview(self.resultView)
-
+        
+        // tableViewがナビゲーションバーに食い込まないようにする設定
+        let edgeInsets = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+        resultView.tableView.contentInset          = edgeInsets
+        resultView.tableView.scrollIndicatorInsets = edgeInsets
+        
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
         
-        connect()
+        connectForMovieDetail(movieID: 550)
         
     }
     
@@ -106,60 +111,27 @@ final class MovieListViewController: UIViewController {
     //////////////////////////
     // MARK: - API connection
     //////////////////////////
-
-    
     
     // API Connection
-    func connect() {
+    func connectForMovieDetail(movieID: Int) {
      
         guard self.movies.count <= 90 else {
             print("can't get data over 100")
             return
         }
         
-        let queue  = DispatchQueue(label: "fetchMovieData")
-        
         let manager = MovieDetailManager()
         
-        let id = 550
-        
-        
-        // やばい！グローバルキューでも、syncだと syncの{}の中は常にmainスレッドになる。注意!!!
-        // async だと ちゃんとグローバルスレッドになる
-        
-        // ↓からわかること
-        // {}が mainとglobalを分かつ、というわけではない(∵ forEachのクロージャ内はまだglobal)
-        // おそらく、@escaping指定されたクロージャがmainスレッドになる
-        
         // 並列 × 同期
-        
-        // print(Thread.isMainThread)
-
-        queue.async {
-            
-            (1...10).forEach { _ in
-            /// この行はまだglobalスレッド ///
-                manager.request(id: id) { result in
-                    print(result)
-                    /// この行はもう既にmainスレッドです ///
-                    self.movies.append(result)
-                    print(Thread.isMainThread)//
-                    self.resultView.tableView.reloadData()
-                }
-            }
-            
-            /// この行は再び globalスレッドなので、、、 ///
-            /// UI更新は当然mainスレッドでやらないとダメ。てわけでここで明示的にmain呼ぶわけです。こんなふうに↓↓
-            /*
-            DispatchQueue.main.async {
+        DispatchQueue.global().async {
+            manager.request(id: movieID) { result in
+                self.movies.append(result)
+                
+                print(result.videos.results.count)
+                
                 self.resultView.tableView.reloadData()
+                
             }
-            */
-            
-            // ...気づいたか?? だめなんだ。なぜなら↑のrequest処理が終了する前にこの行に来てしまうから。
-            // そんなわけで、みんな async {} の中で mainを呼び出し、ビューの更新をしていた、というわけなのか...
-            // みんなすごい！...でもこれだと10回reloadしてるのでナンセンスなので何か考えろや。
-            
         }
     }
     
@@ -238,61 +210,5 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 
-extension MovieListViewController {
-    
-    // convert genre ID to genre name
-    static func genreIdToName(_ genreID: Int) -> String {
-        
-        func convert(ID: Int) -> String {
-            switch ID {
-            case 12:
-                return "Adventure"
-            case 14:
-                return "Fantasy"
-            case 16:
-                return "Animation"
-            case 18:
-                return "Drama"
-            case 27:
-                return "Horror"
-            case 28:
-                return "Action"
-            case 35:
-                return "Comedy"
-            case 36:
-                return "History"
-            case 37:
-                return "Western"
-            case 53:
-                return "Thriller"
-            case 80:
-                return "Crime"
-            case 99:
-                return "Documentary"
-            case 878:
-                return "Science Fiction"
-            case 9648:
-                return "Mystery"
-            case 10402:
-                return "Music"
-            case 10749:
-                return "Romance"
-            case 10769:
-                return ""
-            case 10751:
-                return "Family"
-            case 10752:
-                return "War"
-            case 10770:
-                return "TV Movie"
-            default:
-                fatalError("Check ID \(ID)")
-            }
-        }
-        
-        return convert(ID: genreID)
-        
-    }
-    
-}
+extension MovieListViewController {}
 

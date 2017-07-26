@@ -50,9 +50,11 @@ struct MovieDetailManager {
             return "/3/movie/" + movieID.description
         }
         var parameters: Any? {
-            return ["api_key": APIkey.TMDB_APIkey]
+            return [
+                "api_key":            APIkey.TMDB_APIkey,
+                "append_to_response": "videos" // recommendations,credits
+            ]
         }
-        
     }
     
     func request(id: Int, _ completion: @escaping (StandardRequest.Response) -> Void) {

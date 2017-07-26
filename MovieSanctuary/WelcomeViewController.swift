@@ -10,20 +10,21 @@ class WelcomeViewController: UIViewController {
 
     var img: UIImage?
 
-    
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        print("きた")
+        
         tableView.delegate   = self
         tableView.dataSource = self
         
         let searchBar = UISearchBar(frame: .zero)
         searchBar.showsCancelButton = true
-        searchBar.searchBarStyle = .minimal
-        searchBar.delegate = self
+        searchBar.searchBarStyle    = .minimal
+        searchBar.delegate          = self
         
         self.navigationItem.titleView = searchBar
 
