@@ -1,4 +1,4 @@
-github "cruisediary/Pastel"
 github "ishkawa/APIKit"
 github "ikesyo/Himotoki"
 github "onevcat/Kingfisher"
+github "realm/realm-cocoa"

@@ -60,8 +60,8 @@ struct ConciseMovie: Decodable {
                 10770: "TV Movie"
             ]
             
-            (1...self.genres.count).forEach {
-                if let val = dict[$0] {
+            (0..<self.genres.count).forEach {
+                if let val = dict[genres[$0]] {
                     results.append(val)
                 }
             }

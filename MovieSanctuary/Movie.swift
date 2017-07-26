@@ -1,6 +1,13 @@
 
-import Himotoki
+import Foundation
 
+import Himotoki
+import Realm
+import RealmSwift
+
+
+/*
+// *** 詳細版モデル *** ///
 struct Movie: Decodable {
     
     struct Genre: Decodable {
@@ -73,17 +80,6 @@ struct Movie: Decodable {
     }
     
 
-    
-    /*
-    let id:           Int
-    let title:        String
-    let poster_path:  String?
-    let genres:       [Int]
-    let vote_average: Float
-    let vote_count:   Int
-    */
-    
-    
     // searchでも取れるやつ
     let id:           Int
     let title:        String
@@ -112,8 +108,53 @@ struct Movie: Decodable {
             
         )
     }
-  
 }
+*/
+
+/////////////////////////////////////////////////////////
+
+// 上記モデルのRealm用 // 
+
+class RLMMovie: Object {
+    
+    class RLMGenre: Object {
+    }
+    
+    class RLMVideos: Object {
+        class RLMVideo: Object {
+        }
+    }
+    
+    class RLMCredits: Object {
+        class RLMCast: Object {
+        }
+        
+        class RLMCrew: Object {
+        }
+    }
+    
+    // searchでも取れるやつ
+    dynamic var id:           Int
+    dynamic var title:        String
+    dynamic var poster_path:  String?
+    dynamic var genres:       [RLMGenre]
+    dynamic var vote_average: Float
+    dynamic var vote_count:   Int
+    
+    // movie/{movie_id}/videos で取れるやつ
+    dynamic var videos:       RLMVideos
+    dynamic var credits:      RLMCredits
+    
+    
+    
+    
+}
+
+
+
+
+
+
 
 
 

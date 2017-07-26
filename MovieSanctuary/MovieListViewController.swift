@@ -3,6 +3,7 @@ import UIKit
 import Kingfisher
 import APIKit
 import Himotoki
+import RealmSwift
 
 import SystemConfiguration
 
@@ -11,8 +12,8 @@ final class MovieListViewController: UIViewController {
     
     // Model
     
-    // このVCがタブ2で使われる場合: お気に入り追加した映画たちが入る(APIコールなし)
-    // このVCがキーワード検索で使われる場合: 検索結果の映画たちが入る
+    // このVCがタブ2で使われる場合: お気に入り追加した映画たちが入る(Realmから取得、APIコールなし)
+    // このVCがキーワード検索で使われる場合: 検索結果の映画たちが入る(APIコールあり)
     var movies: [ConciseMovie.Movie] = []
     
     fileprivate lazy var resultView: ResultView = {
@@ -53,6 +54,8 @@ final class MovieListViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
         
+        
+        
         // connectForMovieDetail(movieID: 550)
         
         connectForMovieSearch(query: "Zootopia")
@@ -88,6 +91,7 @@ final class MovieListViewController: UIViewController {
         
         cell.titleLabel.text = self.movies[indexPath.row].title
         
+        
         if let genre1 = self.movies[indexPath.row].genreName.first {
             cell.genre1Label.text = genre1
         } else {
@@ -99,24 +103,7 @@ final class MovieListViewController: UIViewController {
         } else {
             cell.genre2Label.isHidden = true
         }
-        
-        /*
-        if let genre1 = self.movies[indexPath.row].genres.first {
-            cell.genre1Label.text = genre1.name
-        } else {
-            cell.genre1Label.isHidden = true
-        }
-        */
-        
-        /*
-        if self.movies[indexPath.row].genres.count >= 2 {
-            cell.genre2Label.text = self.movies[indexPath.row].genres[1].name
-        } else {
-            cell.genre2Label.isHidden = true
-        }
-        */
-        
-        
+ 
         if let imagePath = self.movies[indexPath.row].poster_path {
             let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
             cell.posterImageView.kf.setImage(with: url)
@@ -150,6 +137,7 @@ final class MovieListViewController: UIViewController {
         }
     }
     
+    /*
     func connectForMovieDetail(movieID: Int) {
      
         let manager = MovieDetailManager()
@@ -161,6 +149,7 @@ final class MovieListViewController: UIViewController {
             }
         }
     }
+    */
     
 }
 
@@ -218,21 +207,14 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
                 showAlert(title: "No network", message: "try again later...")
                 return
         }
+        
         print("タッチ")
         
-        
-        // FIXME: - なおせ
-        
-        /*
         let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil)
-        if let nextVC = storyboard.instantiateInitialViewController() as? MovieDetailViewController {
-            
-            nextVC.tmdb_movie = movies[indexPath.row]
-            
-            self.navigationController?.pushViewController(nextVC, animated: true)
-            
-        }
-        */
+        let vc         = storyboard.instantiateInitialViewController() as! MovieDetailViewController
+        vc.movieID = self.movies[indexPath.row].id
+        self.navigationController?.pushViewController(vc, animated: true)
+   
     }
 }
 
