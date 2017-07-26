@@ -52,7 +52,7 @@ struct MovieDetailManager {
         var parameters: Any? {
             return [
                 "api_key":            APIkey.TMDB_APIkey,
-                "append_to_response": "videos" // recommendations,credits
+                "append_to_response": "videos,credits" // recommendations
             ]
         }
     }

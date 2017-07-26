@@ -36,9 +36,47 @@ struct Movie: Decodable {
             )
 
         }
+    }
+    
+    
+    struct Credits: Decodable {
+        
+        struct Cast: Decodable {
+            let name:  String
+            let order: Int
+            static func decode(_ e: Extractor) throws -> Cast {
+                return try Cast(
+                    name:  e <| "name",
+                    order: e <| "order"
+                )
+            }
+        }
+        
+        struct Crew: Decodable {
+            let job:  String
+            let name: String
+            static func decode(_ e: Extractor) throws -> Crew {
+                return try Crew(
+                    job:  e <| "job",
+                    name: e <| "name"
+                )
+            }
+        }
+        
+        let casts:  [Cast]
+        let crews:  [Crew]
+        
+        static func decode(_ e: Extractor) throws -> Credits {
+            return try Credits(
+                casts: e <|| "cast",
+                crews: e <|| "crew"
+            )
+        }
         
         
     }
+    
+    
     
     // searchでも取れるやつ
     let id:           Int
@@ -50,6 +88,7 @@ struct Movie: Decodable {
     
     // movie/{movie_id}/videos で取れるやつ
     let videos:       Videos
+    let credits:      Credits
     
     static func decode(_ e: Extractor) throws -> Movie {
         
@@ -62,7 +101,8 @@ struct Movie: Decodable {
             vote_average: e <|  "vote_average",
             vote_count:   e <|  "vote_count",
             
-            videos:       e <|  "videos"
+            videos:       e <|  "videos",
+            credits:      e <|  "credits"
             
         )
     }

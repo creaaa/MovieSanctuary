@@ -127,7 +127,8 @@ final class MovieListViewController: UIViewController {
             manager.request(id: movieID) { result in
                 self.movies.append(result)
                 
-                print(result.videos.results.count)
+                print(result.credits.casts)
+                print(result.credits.crews)
                 
                 self.resultView.tableView.reloadData()
                 
