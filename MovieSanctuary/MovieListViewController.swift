@@ -62,7 +62,7 @@ final class MovieListViewController: UIViewController {
         
         
         // テーブル内のモデル取得方法の分岐
-        
+        // この画面がお気に入り画面なら
         if self.tabBarController?.selectedIndex == 0 {
             
             let realm = try! Realm()
@@ -73,9 +73,11 @@ final class MovieListViewController: UIViewController {
             
         }
         // ウェルカム画面内検索からの遷移なら、そのクエリを元にAPIコール
+        /*
         else if self.tabBarController?.selectedIndex == 1 {
             connectForMovieSearch(query: "Saw")
         }
+        */
         
     }
     

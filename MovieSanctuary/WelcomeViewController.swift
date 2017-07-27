@@ -217,8 +217,8 @@ extension WelcomeViewController: UISearchBarDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         let vc         = storyboard.instantiateViewController(withIdentifier: "SearchResult") as! MovieListViewController
-        
-        //vc.movieID = self.movies[indexPath.row].id
+                
+        vc.connectForMovieSearch(query: "Inception")
         
         self.navigationController?.pushViewController(vc, animated: true)
         
