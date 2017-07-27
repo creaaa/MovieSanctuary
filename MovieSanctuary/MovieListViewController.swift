@@ -71,8 +71,12 @@ final class MovieListViewController: UIViewController {
             // Results<RLMMovie> → [Movieable]
             res.forEach {self.movies.append($0) }
             
+            // 編集ボタン
+            self.navigationItem.leftBarButtonItem = editButtonItem
+            
         }
-        // ウェルカム画面内検索からの遷移なら、そのクエリを元にAPIコール
+        
+        // 検索からの遷移時( ↓のコード)は、前の画面で呼ぶことにしました
         /*
         else if self.tabBarController?.selectedIndex == 1 {
             connectForMovieSearch(query: "Saw")
@@ -153,7 +157,7 @@ final class MovieListViewController: UIViewController {
         }
         
         let manager = MovieSearchManager()
-        
+                
         DispatchQueue.global().async {
             manager.request(query: query) { result in
                 self.movies = result.results
@@ -169,7 +173,7 @@ final class MovieListViewController: UIViewController {
 // MARK: -
 ////////////
 
-extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
+extension MovieListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.movies.count
@@ -210,8 +214,38 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    /* delete */
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: true)
+        self.resultView.tableView.isEditing = editing
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if case .delete = editingStyle {
+            try! Realm().write {
+                try! Realm().delete(self.movies[indexPath.row])
+            }
+            self.resultView.tableView.reloadData()
+        }
+    }
+    
+    
+}
 
+
+extension MovieListViewController:  UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         print("タッチ")
         
         guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
@@ -224,18 +258,19 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
         let vc         = storyboard.instantiateInitialViewController() as! MovieDetailViewController
         
         /*
-        // FIXME: もし、遷移元(この画面)が「検索結果一覧VC」だったら
-        // 本来はここ 0ではなく、1です。お間違えなきよう...
-        if self.tabBarController?.selectedIndex == 0 {
-            vc.movieID = self.movies[indexPath.row].id
-        }
-        */
+         // FIXME: もし、遷移元(この画面)が「検索結果一覧VC」だったら
+         // 本来はここ 0ではなく、1です。お間違えなきよう...
+         if self.tabBarController?.selectedIndex == 0 {
+         vc.movieID = self.movies[indexPath.row].id
+         }
+         */
         
-        vc.connectForMovieDetail()
+        vc.connectForMovieDetail(movieID: self.movies[indexPath.row].id)
         
         self.navigationController?.pushViewController(vc, animated: true)
-   
+        
     }
+    
 }
 
 

@@ -16,14 +16,6 @@ final class MovieDetailViewController: UIViewController {
     // 上記の、Realmナイズされたモデル
     var myRLMMovie: RLMMovie!
     
-    
-    // 遷移元の画面が「検索結果一覧VC」だった場合は、ここに映画IDがセットされるため、
-    // このIDを元に search/movie APIをコールします。
-    // 逆に、ここがnilの場合、遷移元はお気に入り一覧VCだったことになります。
-    // その場合は、↑の myRLMMovie に値が入ります。
-    var movieID: Int?
-    
-
     ////////////////////////
     // MARK: - Life Cycle
     ////////////////////////
@@ -32,10 +24,8 @@ final class MovieDetailViewController: UIViewController {
         
         super.viewDidLoad()
         
-        /* if セルタップからの遷移なら */
-        if let _ = self.movieID {
-            connectForMovieDetail()
-        }
+        self.navigationItem.rightBarButtonItem =
+            UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addFavorite))
         
     }
 
@@ -50,7 +40,7 @@ final class MovieDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    private func addFavorite() {
+    func addFavorite() {
         try! Realm().write {
             // これ、update = trueって明示しないと落ちる。
             // よって、defaultはfalseってことか...
@@ -67,19 +57,18 @@ final class MovieDetailViewController: UIViewController {
     // MARK: - API connection
     //////////////////////////
 
-    func connectForMovieDetail() {
+    func connectForMovieDetail(movieID: Int) {
         
         let manager = MovieDetailManager()
         
         DispatchQueue.global().async {
-            manager.request(id: self.movieID!) { result in
+            manager.request(id: movieID) { result in
                 self.myRLMMovie = result
                 print(self.myRLMMovie)
                 self.render()
             }
         }
     }
-
 
     ///////////////////////////////////
     // MARK: - Configure & Render View
@@ -110,6 +99,4 @@ final class MovieDetailViewController: UIViewController {
         
     }
 
-
 }
-

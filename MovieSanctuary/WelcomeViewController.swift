@@ -224,11 +224,11 @@ extension WelcomeViewController: UISearchBarDelegate {
         
         let vc         = storyboard.instantiateViewController(withIdentifier: "SearchResult") as! MovieListViewController
                 
-        vc.connectForMovieSearch(query: "Inception")
+        vc.connectForMovieSearch(query: searchBar.text!)
         
         self.navigationController?.pushViewController(vc, animated: true)
         
-        // 遷移後、searchBarTextDidEndEditingも呼ばれる
+        // 遷移後、なにげにsearchBarTextDidEndEditingも呼ばれます
         
     }
     

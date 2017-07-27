@@ -184,7 +184,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XYH-Rn-ahi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="pYw-VQ-m9u"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Uu-aY-2uD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="9Uu-aY-2uD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -203,7 +203,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2vz-yF-YDw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="W8S-am-ot7"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yd2-Ks-7T0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yd2-Ks-7T0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
