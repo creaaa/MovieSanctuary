@@ -42,6 +42,7 @@ final class MovieDetailViewController: UIViewController {
 
     func addFavorite() {
         try! Realm().write {
+            
             // これ、update = trueって明示しないと落ちる。
             // よって、defaultはfalseってことか...
             // true = 既存のオブジェクトを参照し、存在すればそれに対しアップデートをかける。
@@ -49,6 +50,15 @@ final class MovieDetailViewController: UIViewController {
             // もちろんそのとき、既にあるprimary key で作成しようとすると実行時エラーとなる。
             try! Realm().add(self.myRLMMovie, update: true)
             print("保存した")
+            
+            // この書き方で大丈夫け??
+            guard let navVC = self.tabBarController?.viewControllers?[0] as? UINavigationController,
+                let vc = navVC.viewControllers.first as? MovieListViewController else {
+                return
+            }
+            
+            vc.reload()
+            
         }
     }
     

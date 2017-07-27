@@ -16,7 +16,10 @@ final class MovieListViewController: UIViewController {
     // このVCがキーワード検索で使われる場合: 検索結果の映画たちが入る(APIコールあり)
     var movies: [Movieable] = []
     
-    fileprivate lazy var resultView: ResultView = {
+    // ここ、fileprivateだったのに、internalにしちゃった理由はなに??
+    // → もう片方のタブからここを操作したかったから。
+    // やばかったら元に戻す。
+    lazy var resultView: ResultView = {
         
         let resultView = ResultView.instantiateFromNib()
         resultView.frame = self.view.bounds  // If you miss this, HELL comes
@@ -76,12 +79,15 @@ final class MovieListViewController: UIViewController {
             
         }
         
-        // 検索からの遷移時( ↓のコード)は、前の画面で呼ぶことにしました
+        // 検索からの遷移時(↓のコード)は、前の画面で呼ぶことにしました
         /*
         else if self.tabBarController?.selectedIndex == 1 {
             connectForMovieSearch(query: "Saw")
         }
         */
+        
+        
+        
         
     }
     
@@ -114,7 +120,6 @@ final class MovieListViewController: UIViewController {
         
         cell.titleLabel.text = self.movies[indexPath.row].title
         
-        
         if let genre1 = self.movies[indexPath.row].genres.first {
             cell.genre1Label.text = genre1.name
         } else {
@@ -135,6 +140,20 @@ final class MovieListViewController: UIViewController {
         return cell
         
     }
+    
+    func reload() {
+        
+        let res: Results<RLMMovie> = try! Realm().objects(RLMMovie.self)
+
+        // 整合性を保つ
+        // Results<RLMMovie> → [Movieable]
+        self.movies = []
+        res.forEach {self.movies.append($0) }
+        
+        self.resultView.tableView.reloadData()
+        
+    }
+    
     
     
     //////////////////////////
@@ -231,10 +250,29 @@ extension MovieListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if case .delete = editingStyle {
-            try! Realm().write {
-                try! Realm().delete(self.movies[indexPath.row])
+            
+            let realm = try! Realm()
+            
+            try! realm.write {
+            
+                let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
+                realm.delete(res[indexPath.row])
+                
+                reload()
+                
+                /*
+                // 整合性を保つ
+                // Results<RLMMovie> → [Movieable]
+                
+                self.movies = []
+                
+                res.forEach {self.movies.append($0) }
+                
+                self.resultView.tableView.reloadData()
+                */
+                
             }
-            self.resultView.tableView.reloadData()
+            
         }
     }
     
@@ -274,5 +312,5 @@ extension MovieListViewController:  UITableViewDelegate {
 }
 
 
-extension MovieListViewController {}
+
 

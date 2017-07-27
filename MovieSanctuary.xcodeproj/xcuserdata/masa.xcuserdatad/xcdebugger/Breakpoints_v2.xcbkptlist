@@ -102,11 +102,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieSanctuary/ConciseMovie.swift"
-            timestampString = "522832569.636111"
+            timestampString = "522871395.087745"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "Movie"
             landmarkType = "14">
          </BreakpointContent>
@@ -125,6 +125,54 @@
             endingLineNumber = "154"
             landmarkName = "decode(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieSanctuary/MovieDetailViewController.swift"
+            timestampString = "522873232.007228"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "addFavorite()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieSanctuary.MovieDetailViewController.(addFavorite () -&gt; ()).(closure #1)"
+                  moduleName = "MovieSanctuary"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/masa/Downloads/MovieSanctuary/MovieSanctuary/MovieDetailViewController.swift"
+                  timestampString = "522873232.150575"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "378">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieSanctuary.MovieDetailViewController.(addFavorite () -&gt; ()).(closure #1)"
+                  moduleName = "MovieSanctuary"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/masa/Downloads/MovieSanctuary/MovieSanctuary/MovieDetailViewController.swift"
+                  timestampString = "522873232.153428"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "944">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
