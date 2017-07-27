@@ -56,11 +56,11 @@ struct MovieSearchManager {
         }
     }
     
-    struct UpcomingRequest: MovieDetailRequest {
+    struct NowPlayingRequest: MovieDetailRequest {
         
         typealias Response = SearchMovieResult // HimotokiのDecodable準拠なデータモデル
-        var path:    String {
-            return "/3/movie/upcoming"
+        var path: String {
+            return "/3/movie/now_playing"
         }
         var parameters: Any? {
             return [
@@ -88,7 +88,7 @@ struct MovieSearchManager {
     // upcoming
     func request(_ completion: @escaping (StandardRequest.Response) -> Void) {
         
-        let request = UpcomingRequest()
+        let request = NowPlayingRequest()
         
         Session.send(request) { result in
             switch result {

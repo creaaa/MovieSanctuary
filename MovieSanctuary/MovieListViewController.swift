@@ -231,7 +231,6 @@ extension MovieListViewController: UITableViewDataSource {
             print("無限スクロール発動！")
             self.page += 1
             connectForMovieSearch(query: self.query, page: self.page)
-            
         } else {
             print(indexPath.row)
         }
