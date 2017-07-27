@@ -102,6 +102,7 @@ struct Movie: Decodable, Movieable {
 
 // 上記モデルのRealm用 // 
 
+// 0. ジャンル用
 
 final class RLMGenre: Object, Decodable {
     
@@ -123,9 +124,6 @@ final class RLMGenre: Object, Decodable {
  
 }
 
-////////////
-
-
 // 1. ビデオ用
 
 final class RLMVideo: Object, Decodable {
@@ -143,7 +141,7 @@ final class RLMVideo: Object, Decodable {
         self.init()
         self.key = key
     }
-    
+ 
 }
 
 final class RLMVideos: Object, Decodable {
@@ -259,8 +257,12 @@ final class RLMMovie: Object, Movieable, Decodable {
     dynamic var vote_count   = 0
     
     // movie/{movie_id}/videos で取れるやつ
-    let videos               = List<RLMVideos>()
-    let credits              = List<RLMCredits>()
+    
+    // なんかここ、オプショナル型じゃないと実行時エラー！
+    // property must be marked as optional... みたいなメッセージ見たら、
+    // ここをオプショナルにすると通る...はず。
+    var videos: RLMVideos!   = RLMVideos()
+    var credits              = List<RLMCredits>()
     
     /**
      id をプライマリーキーとして設定
@@ -293,6 +295,16 @@ final class RLMMovie: Object, Movieable, Decodable {
             genres.append($0)
         }
         
+        // videos
+        //let videos = List<RLMVideos>()
+        
+        let tmpVideos: RLMVideos = try! e <| "videos"
+        
+//        tmpVideos.forEach {
+//            videos.append($0)
+//        }
+//        
+        
         return try RLMMovie(
             
             id:           e <|  "id",
@@ -301,14 +313,14 @@ final class RLMMovie: Object, Movieable, Decodable {
             vote_average: e <|  "vote_average",
             vote_count:   e <|  "vote_count",
             // ↑ ここまではよい。
-            genres: genres
-            
+            genres: genres,
+            videos: tmpVideos
         )
     }
     
     required convenience init(id: Int, title: String, poster_path: String?,
                               vote_average: Float, vote_count: Int,
-                              genres: List<RLMGenre>) {
+                              genres: List<RLMGenre>, videos: RLMVideos) {
         self.init()
         self.id = id
         self.title = title
@@ -317,6 +329,8 @@ final class RLMMovie: Object, Movieable, Decodable {
         self.vote_count = vote_count
         //
         self.genres = genres
+        self.videos = videos
+
     }
     
 }
