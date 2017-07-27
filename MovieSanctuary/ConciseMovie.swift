@@ -1,20 +1,22 @@
 
+import RealmSwift
 import Himotoki
 
 protocol Movieable {
-    var id:           Int     { get }
-    var title:        String  { get }
-    var poster_path:  String? { get }
-    var genres:       [Genre] { get }
-    var vote_average: Float   { get }
-    var vote_count:   Int     { get }
+    var id:           Int     { get set }
+    var title:        String  { get set }
+    var poster_path:  String? { get set }
+    var genres: List<RLMGenre>{ get }
+    var vote_average: Float   { get set }
+    var vote_count:   Int     { get set }
 }
 
 
-struct Genre: Decodable {
+/*
+final class Genre: Object, Decodable {
     
-    let id:   Int
-    let name: String
+    var id   = 0
+    var name = ""
     
     static func decode(_ e: Extractor) throws -> Genre {
         return try Genre(
@@ -23,65 +25,50 @@ struct Genre: Decodable {
         )
     }
     
-    init(id: Int, name: String) {
+    required convenience init(id: Int, name: String) {
+        self.init()
         self.id   = id
         self.name = name
     }
     
 }
-
+*/
 
 
 struct ConciseMovie: Decodable {
     
     struct Movie: Decodable, Movieable {
         
-//        struct Genre: Decodable {
-//            let id:   Int
-//            let name: String
-//            
-//            static func decode(_ e: Extractor) throws -> Genre {
-//                return try Genre(
-//                    id:   e <|  "id",
-//                    name: e <|  "name"
-//                )
-//            }
-//            
-//            init(id: Int, name: String) {
-//                self.id   = id
-//                self.name = name
-//            }
-//            
-//        }
-        
-        let id:           Int
-        let title:        String
-        let poster_path:  String?
-        /*
-        let genres:       [Int]
-        */
-        let genres:       [Genre]
-        let vote_average: Float
-        let vote_count:   Int
+        var id:           Int
+        var title:        String
+        var poster_path:  String?
+        // var genres:       [Genre]
+        var genres: List<RLMGenre>
+        var vote_average: Float
+        var vote_count:   Int
         
         static func decode(_ e: Extractor) throws -> Movie {
             
             let derivedData: [Int] = try! e <|| "genre_ids"
             
-            let genres: [Genre] = derivedData.map { id in
+            let tmpGenres: [RLMGenre] = derivedData.map { id in
                 switch id {
                     case 12:
-                        return Genre(id: id, name: "Adventure")
+                        return RLMGenre(id: id, name: "Adventure")
                     default:
-                        return Genre(id: id, name: "Adventure")
+                        return RLMGenre(id: id, name: "Adventure")
                 }
+            }
+
+            let genres = List<RLMGenre>()
+            (0..<tmpGenres.count).forEach {
+                genres.append(tmpGenres[$0])
             }
             
             return try Movie (
                 id:           e <|  "id",
                 title:        e <|  "title",
                 poster_path:  e <|? "poster_path",
-                //genres:       e <|| "genre_ids",
                 genres:       genres,
                 vote_average: e <|  "vote_average",
                 vote_count:   e <|  "vote_count"
@@ -90,6 +77,9 @@ struct ConciseMovie: Decodable {
         
         
         var genreName: [String] {
+            
+            
+            
             
             var results: [String] = []
             
@@ -136,6 +126,7 @@ struct ConciseMovie: Decodable {
             results: e <|| ["results"]
         )
     }
+    
 }
 
 

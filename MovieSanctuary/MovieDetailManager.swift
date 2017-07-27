@@ -39,7 +39,7 @@ struct MovieDetailManager {
     
     struct StandardRequest: MovieDetailRequest {
         
-        typealias Response = Movie // HimotokiのDecodable準拠なデータモデル
+        typealias Response = RLMMovie // HimotokiのDecodable準拠なデータモデル
         let movieID: Int
         var path:    String {
             return "/3/movie/" + movieID.description

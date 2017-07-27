@@ -102,11 +102,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieSanctuary/ConciseMovie.swift"
-            timestampString = "522817698.689043"
+            timestampString = "522824438.428378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "genreName"
             landmarkType = "24">
          </BreakpointContent>

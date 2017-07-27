@@ -6,21 +6,11 @@ import Realm
 import RealmSwift
 
 
-
 // *** 詳細版モデル *** ///
+
+/*
 struct Movie: Decodable, Movieable {
     
-//    struct Genre: Decodable {
-//        let id:   Int
-//        let name: String
-//        static func decode(_ e: Extractor) throws -> Genre {
-//            return try Genre(
-//                id:   e <| "id",
-//                name: e <| "name"
-//            )
-//        }
-//    }
-
     // movie/{movie_id}/videos で取れるやつ
     struct Videos: Decodable {
         
@@ -93,61 +83,165 @@ struct Movie: Decodable, Movieable {
     let credits:      Credits
     
     static func decode(_ e: Extractor) throws -> Movie {
-        
         return try Movie (
-            
             id:           e <|  "id",
             title:        e <|  "title",
             poster_path:  e <|? "poster_path",
-            
-            // 
             genres:       e <|| "genres",
-            
-            
             vote_average: e <|  "vote_average",
             vote_count:   e <|  "vote_count",
             videos:       e <|  "videos",
             credits:      e <|  "credits"
-            
         )
     }
 }
+*/
 
 
 /////////////////////////////////////////////////////////
 
 // 上記モデルのRealm用 // 
 
-class RLMMovie: Object {
+
+final class RLMGenre: Object, Decodable {
     
-    class RLMGenre: Object {
-        dynamic var id   = 0
-        dynamic var name = ""
+    dynamic var id   = 0
+    dynamic var name = ""
+    
+    static func decode(_ e: Extractor) throws -> RLMGenre {
+        return try RLMGenre(
+            id:   e <|  "id",
+            name: e <|  "name"
+        )
     }
     
-    class RLMVideos: Object {
-        class RLMVideo: Object {
-            dynamic var key = ""
-        }
-        let results = List<RLMVideo>()
+    required convenience init(id: Int, name: String) {
+        self.init()
+        self.id   = id
+        self.name = name
     }
+ 
+}
+
+////////////
+
+
+final class RLMMovie: Object, Movieable, Decodable {
     
-    class RLMCredits: Object {
+    final class RLMVideos: Object, Decodable {
         
-        class RLMCast: Object {
+        final class RLMVideo: Object, Decodable {
+            
+            dynamic var key = ""
+            
+            static func decode(_ e: Extractor) throws -> RLMVideo {
+                return try RLMVideo(
+                    key: e <| "key"
+                )
+            }
+            
+            // なぜかこれを定義しないとエラー(decodeと共存できない)！
+            required convenience init(key: String) {
+                self.init()
+                self.key = key
+            }
+            
+        }
+        
+        var results = List<RLMVideo>()
+        
+        static func decode(_ e: Extractor) throws -> RLMVideos {
+            
+            let results = List<RLMVideo>()
+            let tmp: [RLMVideo] = try! e <|| "results"
+            tmp.forEach {
+                results.append($0)
+            }
+            
+            return RLMVideos(results: results)
+            
+        }
+        
+        required convenience init(results: List<RLMVideo>) {
+            self.init()
+            self.results = results
+        }
+        
+    }
+    
+    
+    final class RLMCredits: Object, Decodable {
+        
+        final class RLMCast: Object, Decodable {
+            
             dynamic var name  = ""
             dynamic var order = 0
+            
+            static func decode(_ e: Extractor) throws -> RLMCast {
+                return try RLMCast(
+                    name: e <| "name",
+                    order: e <| "order"
+                )
+            }
+            
+            required convenience init(name: String, order: Int) {
+                self.init()
+                self.name = name
+                self.order = order
+            }
+            
         }
         
-        class RLMCrew: Object {
+        
+        final class RLMCrew: Object, Decodable {
+            
             dynamic var job  = ""
             dynamic var name = ""
+            
+            static func decode(_ e: Extractor) throws -> RLMCrew {
+                return try RLMCrew(
+                    job: e <| "job",
+                    name: e <| "name"
+                )
+            }
+            
+            required convenience init(job: String, name: String) {
+                self.init()
+                self.job  = job
+                self.name = name
+            }
+            
         }
         
         var casts =  List<RLMCast>()
         var crews =  List<RLMCrew>()
         
+        
+        static func decode(_ e: Extractor) throws -> RLMCredits {
+            
+            let casts = List<RLMCast>()
+            let tmp1: [RLMCast] = try! e <|| "cast"
+            tmp1.forEach {
+                casts.append($0)
+            }
+            let crews = List<RLMCrew>()
+            let tmp2: [RLMCrew] = try! e <|| "crew"
+            tmp2.forEach {
+                crews.append($0)
+            }
+            
+            return RLMCredits(casts: casts, crews: crews)
+            
+        }
+        
+        required convenience init(casts: List<RLMCast>, crews: List<RLMCrew>) {
+            self.init()
+            self.casts = casts
+            self.crews = crews
+        }
+ 
     }
+    
     
     // searchでも取れるやつ
     dynamic var id           = 0
@@ -156,6 +250,7 @@ class RLMMovie: Object {
     let genres               = List<RLMGenre>()
     dynamic var vote_average: Float = 0
     dynamic var vote_count   = 0
+    
     // movie/{movie_id}/videos で取れるやつ
     let videos               = List<RLMVideos>()
     let credits              = List<RLMCredits>()
@@ -167,6 +262,43 @@ class RLMMovie: Object {
         return "id"
     }
     
+    /*
+    static func decode(_ e: Extractor) throws -> RLMMovie {
+        return try RLMMovie (
+            id:           e <|  "id",
+            title:        e <|  "title",
+            poster_path:  e <|? "poster_path",
+            // genres:       e <|| "genres",
+            vote_average: e <|  "vote_average",
+            vote_count:   e <|  "vote_count"
+            // videos:       e <|  "videos",
+            // credits:      e <|  "credits"
+        )
+    }
+    */
+    
+    static func decode(_ e: Extractor) throws -> RLMMovie {
+        return try RLMMovie(
+            id:           e <|  "id"
+        )
+    }
+    
+    required convenience init(id: Int) {
+        self.init()
+        self.id = id
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
