@@ -13,10 +13,6 @@ final class MovieDetailViewController: UIViewController {
     @IBOutlet weak var rateStackView:   UIStackView!
 
     
-    // セルタップからか、Realmから直接か...わからんが、
-    // とりあえず「映画1本ぶん」のモデル
-    // var movie: Movieable?
-    
     // 上記の、Realmナイズされたモデル
     var myRLMMovie: RLMMovie!
     
@@ -45,52 +41,25 @@ final class MovieDetailViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         // Thread.sleep(forTimeInterval: 3)
-        addFavorite()
+        // addFavorite()
     }
     
     // will・didDisappear、ブレイク打っても突入しないんだが、デバッグできないのか？？
-   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
     private func addFavorite() {
-        
-//        guard let movie = self.movie else { return }
-        
         try! Realm().write {
-            
-            /*
-            // RLMMovie == nil → 検索結果から遷移してきた   = 新たにRLMObjectを作る
-            // RLMMovie != nil → お気に入りから遷移してきた = 既存のRLMObjectを使う
-            
-            if self.myRLMMovie == nil {
-                self.myRLMMovie = RLMMovie()
-            }
-            
-            myRLMMovie.id = movie.id
-            myRLMMovie.title = movie.title
-            myRLMMovie.poster_path = movie.poster_path
-            
-            //myRLMMovie.genres = movie.genres
-            
-            myRLMMovie.vote_average = movie.vote_average
-            myRLMMovie.vote_count = movie.vote_count
-            
-            // myRLMMovie.videos = movie.videos
-            // myRLMMovie.credits = movie.credits
-            
-            try! Realm().add(self.myRLMMovie)
-            
+            // これ、update = trueって明示しないと落ちる。
+            // よって、defaultはfalseってことか...
+            // true = 既存のオブジェクトを参照し、存在すればそれに対しアップデートをかける。
+            // false = 既存のオブジェクトを参照しようとせず、新たに作る。
+            // もちろんそのとき、既にあるprimary key で作成しようとすると実行時エラーとなる。
+            try! Realm().add(self.myRLMMovie, update: true)
             print("保存した")
-            */
-            
-            try! Realm().add(self.myRLMMovie)
-            print("保存した")
-
         }
-
     }
     
 
@@ -106,25 +75,10 @@ final class MovieDetailViewController: UIViewController {
             manager.request(id: self.movieID!) { result in
                 self.myRLMMovie = result
                 print(self.myRLMMovie)
+                self.render()
             }
         }
     }
-    
-    
-    /*
-    func TMDBconnect() {
-
-        TMDB_OMDBidManager().request(id: self.tmdb_movie.id) { res1 in
-
-            OMDB_APIManager().request(id: res1.imdb_id,
-                                      { res2 in
-                                        self.movie = res2
-                                        print(self.movie)
-                                        self.render()
-            }, self.showAlert)
-        }
-    }
-    */
 
 
     ///////////////////////////////////
@@ -141,58 +95,21 @@ final class MovieDetailViewController: UIViewController {
 
     }
 
+    
     func render() {
 
-        /*
-        if let imagePath = self.tmdb_movie.poster_path {
+        if let imagePath = self.myRLMMovie.poster_path {
             let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
             self.posterImageView.kf.setImage(with: url)
         }
 
-        self.titleLabel.text    = self.tmdb_movie.name
-        self.directorLabel.text = self.movie.director
-        self.genresLabel.text   = genre()
-        self.actorsLabel.text   = self.movie.actors
-        self.plotLabel.text     = self.movie.plot
-
-        renderStars()
-        */
+        self.titleLabel.text    = self.myRLMMovie.title
+        self.directorLabel.text = self.myRLMMovie.credits.crews[0].name
+        self.genresLabel.text   = self.myRLMMovie.genres[0].name
+        self.actorsLabel.text   = self.myRLMMovie.credits.casts[0].name
+        
     }
 
-    /*
-    func genre() -> String {
-
-        var result: String = ""
-
-        // Genre 1
-        if let genre1 = self.tmdb_movie.genres.first {
-            result += SearchMovieViewController.genreIdToName(genre1)
-        }
-
-        // Genre 2
-        if self.tmdb_movie.genres.count >= 2 {
-            result += ", " + SearchMovieViewController.genreIdToName(self.tmdb_movie.genres[1])
-        }
-
-        return result
-
-    }
-     */
-
-    /*
-    func renderStars() {
-
-        let rateScore: Int? = Double(self.movie.rate).map{ Int($0 + 0.5) }
-
-        rateScore.map { rate in
-            var rate = rate
-            self.rateStackView.subviews.forEach { starImg in
-                starImg.alpha = rate > 0 ? 1 : 0
-                rate -= 1
-            }
-        }
-    }
-    */
 
 }
 

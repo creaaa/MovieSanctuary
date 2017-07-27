@@ -16,7 +16,7 @@ class WelcomeViewController: UIViewController {
         
         super.viewDidLoad()
         
-        print("きた")
+        print("おら！おとはす", self.tabBarController?.selectedIndex)
         
         tableView.delegate   = self
         tableView.dataSource = self

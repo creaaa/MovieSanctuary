@@ -12,29 +12,6 @@ protocol Movieable {
 }
 
 
-/*
-final class Genre: Object, Decodable {
-    
-    var id   = 0
-    var name = ""
-    
-    static func decode(_ e: Extractor) throws -> Genre {
-        return try Genre(
-            id:   e <|  "id",
-            name: e <|  "name"
-        )
-    }
-    
-    required convenience init(id: Int, name: String) {
-        self.init()
-        self.id   = id
-        self.name = name
-    }
-    
-}
-*/
-
-
 struct SearchMovieResult: Decodable {
     
     struct Movie: Decodable, Movieable {
@@ -42,7 +19,7 @@ struct SearchMovieResult: Decodable {
         var id:           Int
         var title:        String
         var poster_path:  String?
-        var genres: List<RLMGenre>
+        var genres:       List<RLMGenre>
         var vote_average: Float
         var vote_count:   Int
         

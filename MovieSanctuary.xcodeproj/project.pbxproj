@@ -41,7 +41,6 @@
 		448B66DB1F293E4B0002833B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448B66D91F293E4B0002833B /* RealmSwift.framework */; };
 		448B66DC1F293E4B0002833B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448B66DA1F293E4B0002833B /* Realm.framework */; };
 		448B66DF1F2942CE0002833B /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448B66DE1F2942CE0002833B /* MovieDetailViewController.swift */; };
-		448B66E11F2953C10002833B /* Boke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448B66E01F2953C10002833B /* Boke.swift */; };
 		44982C8A1F030F19007B9EAA /* DetailPagebackGroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44982C891F030F19007B9EAA /* DetailPagebackGroundView.swift */; };
 		44982C8C1F0313BC007B9EAA /* MyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44982C8B1F0313BC007B9EAA /* MyLabel.swift */; };
 		4498B87D1EF32F3B00D19F6F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 44A220E51EF1BC42004D9E8C /* Settings.bundle */; };
@@ -95,7 +94,6 @@
 		448B66D91F293E4B0002833B /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		448B66DA1F293E4B0002833B /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		448B66DE1F2942CE0002833B /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
-		448B66E01F2953C10002833B /* Boke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boke.swift; sourceTree = "<group>"; };
 		44982C891F030F19007B9EAA /* DetailPagebackGroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPagebackGroundView.swift; sourceTree = "<group>"; };
 		44982C8B1F0313BC007B9EAA /* MyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyLabel.swift; sourceTree = "<group>"; };
 		44A220E51EF1BC42004D9E8C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../Settings.bundle; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 			children = (
 				44547B831F28761C00FB493B /* ConciseMovie.swift */,
 				44547B771F27BFE800FB493B /* Movie.swift */,
-				448B66E01F2953C10002833B /* Boke.swift */,
 			);
 			name = POJO;
 			sourceTree = "<group>";
@@ -447,7 +444,6 @@
 				445C369C1F26707900B7D920 /* CollectionViewCell.swift in Sources */,
 				44982C8C1F0313BC007B9EAA /* MyLabel.swift in Sources */,
 				44C0F6751EFC60AF008D575C /* ViewControllerExtension.swift in Sources */,
-				448B66E11F2953C10002833B /* Boke.swift in Sources */,
 				445C369A1F26707900B7D920 /* WelcomeViewController.swift in Sources */,
 				44547B741F27A64600FB493B /* MovieListViewController.swift in Sources */,
 				44E3BE491EE7C12100466CF5 /* TableViewCell.swift in Sources */,
