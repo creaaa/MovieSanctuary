@@ -15,10 +15,18 @@ final class MovieDetailViewController: UIViewController {
     
     // セルタップからか、Realmから直接か...わからんが、
     // とりあえず「映画1本ぶん」のモデル
-    var movie: Movieable?
+    // var movie: Movieable?
     
     // 上記の、Realmナイズされたモデル
     var myRLMMovie: RLMMovie!
+    
+    
+    // 遷移元の画面が「検索結果一覧VC」だった場合は、ここに映画IDがセットされるため、
+    // このIDを元に search/movie APIをコールします。
+    // 逆に、ここがnilの場合、遷移元はお気に入り一覧VCだったことになります。
+    // その場合は、↑の myRLMMovie に値が入ります。
+    var movieID: Int?
+    
 
     ////////////////////////
     // MARK: - Life Cycle
@@ -29,13 +37,19 @@ final class MovieDetailViewController: UIViewController {
         super.viewDidLoad()
         
         /* if セルタップからの遷移なら */
-        connectForMovieDetail()
+        if let _ = self.movieID {
+            connectForMovieDetail()
+        }
         
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        // Thread.sleep(forTimeInterval: 5)
+        Thread.sleep(forTimeInterval: 10)
         addFavorite()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        try! Realm().deleteAll()
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,10 +58,11 @@ final class MovieDetailViewController: UIViewController {
 
     private func addFavorite() {
         
-        guard let movie = self.movie else { return }
+//        guard let movie = self.movie else { return }
         
         try! Realm().write {
             
+            /*
             // RLMMovie == nil → 検索結果から遷移してきた   = 新たにRLMObjectを作る
             // RLMMovie != nil → お気に入りから遷移してきた = 既存のRLMObjectを使う
             
@@ -70,9 +85,12 @@ final class MovieDetailViewController: UIViewController {
             try! Realm().add(self.myRLMMovie)
             
             print("保存した")
+            */
             
+            try! Realm().add(self.myRLMMovie)
+            print("保存した")
+
         }
-        
 
     }
     
@@ -86,12 +104,9 @@ final class MovieDetailViewController: UIViewController {
         let manager = MovieDetailManager()
         
         DispatchQueue.global().async {
-            manager.request(id: (self.movie?.id)!) { result in
-                
-                print(result)
-                
-                // self.movies.append(result)
-                
+            manager.request(id: self.movieID!) { result in
+                self.myRLMMovie = result
+                print(self.myRLMMovie)
             }
         }
     }

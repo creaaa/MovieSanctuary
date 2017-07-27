@@ -213,8 +213,8 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
         let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil)
         let vc         = storyboard.instantiateInitialViewController() as! MovieDetailViewController
         
-        vc.movie   = self.movies[indexPath.row]
-        // vc.movieID = self.movies[indexPath.row].id
+        // もし、遷移元(この画面)が「検索結果一覧VC」だったら
+        vc.movieID = self.movies[indexPath.row].id
         
         self.navigationController?.pushViewController(vc, animated: true)
    

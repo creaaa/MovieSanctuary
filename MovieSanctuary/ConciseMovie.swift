@@ -35,14 +35,13 @@ final class Genre: Object, Decodable {
 */
 
 
-struct ConciseMovie: Decodable {
+struct SearchMovieResult: Decodable {
     
     struct Movie: Decodable, Movieable {
         
         var id:           Int
         var title:        String
         var poster_path:  String?
-        // var genres:       [Genre]
         var genres: List<RLMGenre>
         var vote_average: Float
         var vote_count:   Int
@@ -75,11 +74,8 @@ struct ConciseMovie: Decodable {
             )
         }
         
-        
+        /*
         var genreName: [String] {
-            
-            
-            
             
             var results: [String] = []
             
@@ -116,13 +112,14 @@ struct ConciseMovie: Decodable {
             return results
             
         }
+        */
         
     }
 
     let results: [Movie]
 
-    static func decode(_ e: Extractor) throws -> ConciseMovie {
-        return try ConciseMovie (
+    static func decode(_ e: Extractor) throws -> SearchMovieResult {
+        return try SearchMovieResult(
             results: e <|| ["results"]
         )
     }

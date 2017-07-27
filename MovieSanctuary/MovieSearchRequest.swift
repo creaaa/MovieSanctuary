@@ -39,7 +39,7 @@ struct MovieSearchManager {
     
     struct StandardRequest: MovieSearchRequest {
         
-        typealias Response = ConciseMovie // HimotokiのDecodable準拠なデータモデル
+        typealias Response = SearchMovieResult // HimotokiのDecodable準拠なデータモデル
         let query: String
         var path:  String {
             return "/3/search/movie"
