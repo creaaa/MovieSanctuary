@@ -13,11 +13,14 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var rateStackView:   UIStackView!
 
     // APIコールに用いられる、映画のユニークID
-    var movieID: Int!
+    // var movieID: Int!
     
     // セルタップからか、Realmから直接か...わからんが、
     // とりあえず「映画1本ぶん」のモデル
-    var mobie: Movie?
+    var movie: Movieable?
+    
+    // 上記の、Realmナイズされたモデル
+    var myRLMMovie: RLMMovie!
 
     ////////////////////////
     // MARK: - Life Cycle
@@ -28,23 +31,51 @@ class MovieDetailViewController: UIViewController {
         super.viewDidLoad()
         
         /* if idが存在するなら(= セルタップからの遷移なら) */
-        
         connectForMovieDetail()
-        
         
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        Thread.sleep(forTimeInterval: 5)
+        addFavorite()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
-    
-    @IBAction func saveButtonTapped(_ sender: UIButton) {
+    private func addFavorite() {
         
+        guard let movie = self.movie else { return }
         
+        try! Realm().write {
+            
+            // RLMMovie == nil → 検索結果から遷移してきた   = 新たにRLMObjectを作る
+            // RLMMovie != nil → お気に入りから遷移してきた = 既存のRLMObjectを使う
+            if self.myRLMMovie == nil {
+                self.myRLMMovie = RLMMovie()
+            }
+            
+            myRLMMovie.id = movie.id
+            myRLMMovie.title = movie.title
+            myRLMMovie.poster_path = movie.poster_path
+            
+            //myRLMMovie.genres = movie.genres
+            
+            myRLMMovie.vote_average = movie.vote_average
+            myRLMMovie.vote_count = movie.vote_count
+            
+            // myRLMMovie.videos = movie.videos
+            // myRLMMovie.credits = movie.credits
+            
+            try! Realm().add(self.myRLMMovie)
+            
+            print("保存した")
+            
+        }
         
+
     }
-    
     
 
     //////////////////////////
@@ -56,7 +87,7 @@ class MovieDetailViewController: UIViewController {
         let manager = MovieDetailManager()
         
         DispatchQueue.global().async {
-            manager.request(id: self.movieID) { result in
+            manager.request(id: (self.movie?.id)!) { result in
                 
                 print(result)
                 

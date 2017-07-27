@@ -6,20 +6,20 @@ import Realm
 import RealmSwift
 
 
-/*
+
 // *** 詳細版モデル *** ///
-struct Movie: Decodable {
+struct Movie: Decodable, Movieable {
     
-    struct Genre: Decodable {
-        let id:   Int
-        let name: String
-        static func decode(_ e: Extractor) throws -> Genre {
-            return try Genre(
-                id:   e <|  "id",
-                name: e <|  "name"
-            )
-        }
-    }
+//    struct Genre: Decodable {
+//        let id:   Int
+//        let name: String
+//        static func decode(_ e: Extractor) throws -> Genre {
+//            return try Genre(
+//                id:   e <| "id",
+//                name: e <| "name"
+//            )
+//        }
+//    }
 
     // movie/{movie_id}/videos で取れるやつ
     struct Videos: Decodable {
@@ -99,17 +99,20 @@ struct Movie: Decodable {
             id:           e <|  "id",
             title:        e <|  "title",
             poster_path:  e <|? "poster_path",
+            
+            // 
             genres:       e <|| "genres",
+            
+            
             vote_average: e <|  "vote_average",
             vote_count:   e <|  "vote_count",
-            
             videos:       e <|  "videos",
             credits:      e <|  "credits"
             
         )
     }
 }
-*/
+
 
 /////////////////////////////////////////////////////////
 
@@ -118,46 +121,52 @@ struct Movie: Decodable {
 class RLMMovie: Object {
     
     class RLMGenre: Object {
+        dynamic var id   = 0
+        dynamic var name = ""
     }
     
     class RLMVideos: Object {
         class RLMVideo: Object {
+            dynamic var key = ""
         }
+        let results = List<RLMVideo>()
     }
     
     class RLMCredits: Object {
+        
         class RLMCast: Object {
+            dynamic var name  = ""
+            dynamic var order = 0
         }
         
         class RLMCrew: Object {
+            dynamic var job  = ""
+            dynamic var name = ""
         }
+        
+        var casts =  List<RLMCast>()
+        var crews =  List<RLMCrew>()
+        
     }
     
     // searchでも取れるやつ
-    dynamic var id:           Int
-    dynamic var title:        String
-    dynamic var poster_path:  String?
-    dynamic var genres:       [RLMGenre]
-    dynamic var vote_average: Float
-    dynamic var vote_count:   Int
-    
+    dynamic var id           = 0
+    dynamic var title        = ""
+    dynamic var poster_path:   String?
+    let genres               = List<RLMGenre>()
+    dynamic var vote_average: Float = 0
+    dynamic var vote_count   = 0
     // movie/{movie_id}/videos で取れるやつ
-    dynamic var videos:       RLMVideos
-    dynamic var credits:      RLMCredits
+    let videos               = List<RLMVideos>()
+    let credits              = List<RLMCredits>()
     
-    
-    
+    /**
+     id をプライマリーキーとして設定
+     */
+    override static func primaryKey() -> String? {
+        return "id"
+    }
     
 }
-
-
-
-
-
-
-
-
-
-
 
 

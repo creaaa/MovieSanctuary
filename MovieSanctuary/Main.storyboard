@@ -223,7 +223,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jTQ-Km-O1N" userLabel="Contents">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="378"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="378.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="I6k-a0-hnY">
                                                 <rect key="frame" x="166" y="61" width="201" height="134"/>
@@ -266,7 +266,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xtj-PH-HW7" userLabel="RateContainer">
-                                                <rect key="frame" x="8" y="302" width="359" height="56"/>
+                                                <rect key="frame" x="8" y="302.5" width="359" height="56"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vHv-GS-AUs">
                                                         <rect key="frame" x="10" y="10" width="339" height="36"/>
@@ -320,19 +320,11 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IMDb Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtD-SB-q7D">
-                                                <rect key="frame" x="8" y="264.5" width="80" height="17.5"/>
+                                                <rect key="frame" x="8" y="265" width="80" height="17.5"/>
                                                 <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Fq-De-TR0">
-                                                <rect key="frame" x="329" y="23" width="30" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="☆"/>
-                                                <connections>
-                                                    <action selector="saveButtonTapped:" destination="w0h-j8-nDv" eventType="touchUpInside" id="5Yr-rE-lhx"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="xtj-PH-HW7" secondAttribute="trailing" constant="8" id="102-go-zny"/>
