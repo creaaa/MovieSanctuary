@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ozJ-eQ-ILc">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
@@ -23,7 +23,7 @@
             <constraints>
                 <constraint firstItem="ozJ-eQ-ILc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Thq-kb-Hev"/>
                 <constraint firstAttribute="trailing" secondItem="ozJ-eQ-ILc" secondAttribute="trailing" id="Vy9-hv-QXb"/>
-                <constraint firstAttribute="bottom" secondItem="ozJ-eQ-ILc" secondAttribute="bottom" constant="49" id="W8Y-60-zhn"/>
+                <constraint firstAttribute="bottom" secondItem="ozJ-eQ-ILc" secondAttribute="bottom" id="W8Y-60-zhn"/>
                 <constraint firstItem="ozJ-eQ-ILc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="cpb-gI-zKD"/>
             </constraints>
             <connections>

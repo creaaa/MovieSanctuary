@@ -60,8 +60,21 @@ final class MovieListViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
         
-        if self.tabBarController?.selectedIndex == 1 {
-            connectForMovieSearch(query: "Zootopia")
+        
+        // テーブル内のモデル取得方法の分岐
+        
+        if self.tabBarController?.selectedIndex == 0 {
+            
+            let realm = try! Realm()
+            let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
+            
+            // Results<RLMMovie> → [Movieable]
+            res.forEach {self.movies.append($0) }
+            
+        }
+        // ウェルカム画面内検索からの遷移なら、そのクエリを元にAPIコール
+        else if self.tabBarController?.selectedIndex == 1 {
+            connectForMovieSearch(query: "Saw")
         }
         
     }
