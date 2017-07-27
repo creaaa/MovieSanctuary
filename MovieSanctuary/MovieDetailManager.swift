@@ -52,6 +52,8 @@ struct MovieDetailManager {
         }
     }
     
+    
+    // スタンダードなリクエスト
     func request(id: Int, _ completion: @escaping (StandardRequest.Response) -> Void) {
         
         let request = StandardRequest(movieID: id)
@@ -65,4 +67,5 @@ struct MovieDetailManager {
             }
         }
     }
+    
 }

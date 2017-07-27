@@ -56,7 +56,20 @@ struct MovieSearchManager {
         }
     }
     
+    struct UpcomingRequest: MovieDetailRequest {
+        
+        typealias Response = SearchMovieResult // HimotokiのDecodable準拠なデータモデル
+        var path:    String {
+            return "/3/movie/upcoming"
+        }
+        var parameters: Any? {
+            return [
+                "api_key": APIkey.TMDB_APIkey
+            ]
+        }
+    }
     
+    // スタンダード(クエリ検索)
     func request(query: String, page: Int, _ completion: @escaping (StandardRequest.Response) -> Void) {
         
         let request = StandardRequest(query: query, page: page)
@@ -71,6 +84,25 @@ struct MovieSearchManager {
             }
         }
     }
+    
+    // upcoming
+    func request(_ completion: @escaping (StandardRequest.Response) -> Void) {
+        
+        let request = UpcomingRequest()
+        
+        Session.send(request) { result in
+            switch result {
+            case .success(let response):
+                print(response)
+                completion(response)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    
 }
 
 

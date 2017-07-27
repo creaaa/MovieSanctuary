@@ -75,6 +75,7 @@ final class MovieDetailViewController: UIViewController {
         
         let manager = MovieDetailManager()
         
+        // スタンダード
         DispatchQueue.global().async {
             manager.request(id: movieID) { result in
                 self.myRLMMovie = result
@@ -82,6 +83,7 @@ final class MovieDetailViewController: UIViewController {
                 self.render()
             }
         }
+        
     }
 
     ///////////////////////////////////

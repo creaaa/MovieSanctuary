@@ -180,7 +180,9 @@ final class MovieListViewController: UIViewController {
         }
         
         let manager = MovieSearchManager()
-                
+        
+        // クエリ検索
+        /*
         DispatchQueue.global().async {
             manager.request(query: query, page: page) { result in
                 
@@ -192,6 +194,17 @@ final class MovieListViewController: UIViewController {
                 self.resultView.tableView.reloadData()
             }
         }
+        */
+        
+        DispatchQueue.global().async {
+            manager.request { result in
+                result.results.forEach {
+                    self.movies.append($0)
+                }
+                self.resultView.tableView.reloadData()
+            }
+        }
+        
     }
     
     var query: String!
