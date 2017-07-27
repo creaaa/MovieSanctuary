@@ -40,22 +40,26 @@ struct MovieSearchManager {
     struct StandardRequest: MovieSearchRequest {
         
         typealias Response = SearchMovieResult // HimotokiのDecodable準拠なデータモデル
+        
         let query: String
+        let page:  Int
+        
         var path:  String {
             return "/3/search/movie"
         }
         var parameters: Any? {
             return [
                 "api_key": APIkey.TMDB_APIkey,
-                "query"  : query
+                "query"  : query,
+                "page"   : page
             ]
         }
     }
     
     
-    func request(query: String, _ completion: @escaping (StandardRequest.Response) -> Void) {
+    func request(query: String, page: Int, _ completion: @escaping (StandardRequest.Response) -> Void) {
         
-        let request = StandardRequest(query: query)
+        let request = StandardRequest(query: query, page: page)
         
         Session.send(request) { result in
             switch result {

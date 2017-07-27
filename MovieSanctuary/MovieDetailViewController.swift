@@ -39,6 +39,10 @@ final class MovieDetailViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    deinit {
+        print("消滅した")
+    }
 
     func addFavorite() {
         try! Realm().write {

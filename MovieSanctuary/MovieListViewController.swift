@@ -110,6 +110,10 @@ final class MovieListViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    deinit {
+        print("消滅した")
+    }
+    
     ////////////////////////////////////
     // MARK: - Configure & Render View
     ////////////////////////////////////
@@ -162,7 +166,7 @@ final class MovieListViewController: UIViewController {
     
     // API Connection
     
-    func connectForMovieSearch(query: String) {
+    func connectForMovieSearch(query: String, page: Int = 1) {
         
         guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
             print("no network. try later...")
@@ -178,12 +182,20 @@ final class MovieListViewController: UIViewController {
         let manager = MovieSearchManager()
                 
         DispatchQueue.global().async {
-            manager.request(query: query) { result in
-                self.movies = result.results
+            manager.request(query: query, page: page) { result in
+                
+                // self.movies = result.results
+                
+                result.results.forEach {
+                    self.movies.append($0)
+                }
                 self.resultView.tableView.reloadData()
             }
         }
     }
+    
+    var query: String!
+    var page = 1    
     
 }
 
@@ -200,24 +212,16 @@ extension MovieListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        /*
+        // デフォルトでは20件を取得
         // infitite scroll
-        if movies.count >= 20 && movies.count - indexPath.row <= 4 {
-            
-            self.APIManager.page += 1
-            
-            if let mng = self.APIManager as? TMDB_Genre_Manager {
-                connect(btnTag: mng.genreID)
-            } else if let _ = self.APIManager as? TMDB_APIManager {
-                connect()
-            }
-            
-            print("current page", self.APIManager)
+        if self.movies.count >= 20 && self.movies.count - indexPath.row <= 4 {
+            print("無限スクロール発動！")
+            self.page += 1
+            connectForMovieSearch(query: self.query, page: self.page)
             
         } else {
             print(indexPath.row)
         }
-        */
         
         return configureCell(tableView, indexPath)
         
@@ -260,17 +264,6 @@ extension MovieListViewController: UITableViewDataSource {
                 
                 reload()
                 
-                /*
-                // 整合性を保つ
-                // Results<RLMMovie> → [Movieable]
-                
-                self.movies = []
-                
-                res.forEach {self.movies.append($0) }
-                
-                self.resultView.tableView.reloadData()
-                */
-                
             }
             
         }
@@ -294,15 +287,7 @@ extension MovieListViewController:  UITableViewDelegate {
         
         let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil)
         let vc         = storyboard.instantiateInitialViewController() as! MovieDetailViewController
-        
-        /*
-         // FIXME: もし、遷移元(この画面)が「検索結果一覧VC」だったら
-         // 本来はここ 0ではなく、1です。お間違えなきよう...
-         if self.tabBarController?.selectedIndex == 0 {
-         vc.movieID = self.movies[indexPath.row].id
-         }
-         */
-        
+   
         vc.connectForMovieDetail(movieID: self.movies[indexPath.row].id)
         
         self.navigationController?.pushViewController(vc, animated: true)

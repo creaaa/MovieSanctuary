@@ -31,6 +31,15 @@ class WelcomeViewController: UIViewController {
         
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    deinit {
+        print("消滅した")
+    }
+    
+    
     
     enum FetchImgError: Error {
         case urlCreationFailed
@@ -223,7 +232,8 @@ extension WelcomeViewController: UISearchBarDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         let vc         = storyboard.instantiateViewController(withIdentifier: "SearchResult") as! MovieListViewController
-                
+        vc.query = searchBar.text!
+        
         vc.connectForMovieSearch(query: searchBar.text!)
         
         self.navigationController?.pushViewController(vc, animated: true)
