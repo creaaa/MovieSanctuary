@@ -44,8 +44,6 @@ final class MovieListViewController: UIViewController {
         
         super.viewDidLoad()
         
-        print("おら！リスト", self.tabBarController?.selectedIndex)
-
         // Realmのパス
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
@@ -59,7 +57,9 @@ final class MovieListViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
         
-        connectForMovieSearch(query: "Zootopia")
+        if self.tabBarController?.selectedIndex == 1 {
+            connectForMovieSearch(query: "Zootopia")
+        }
         
     }
     
@@ -137,6 +137,7 @@ final class MovieListViewController: UIViewController {
             }
         }
     }
+    
 }
 
 
@@ -199,6 +200,7 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
         let vc         = storyboard.instantiateInitialViewController() as! MovieDetailViewController
         
         // FIXME: もし、遷移元(この画面)が「検索結果一覧VC」だったら
+        // 本来はここ 0ではなく、1です。お間違えなきよう...
         if self.tabBarController?.selectedIndex == 0 {
             vc.movieID = self.movies[indexPath.row].id
         }

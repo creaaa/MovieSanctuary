@@ -16,8 +16,6 @@ class WelcomeViewController: UIViewController {
         
         super.viewDidLoad()
         
-        print("おら！おとはす", self.tabBarController?.selectedIndex)
-        
         tableView.delegate   = self
         tableView.dataSource = self
         
@@ -214,7 +212,27 @@ extension WelcomeViewController: UICollectionViewDelegate, UICollectionViewDataS
 
 extension WelcomeViewController: UISearchBarDelegate {
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let vc         = storyboard.instantiateViewController(withIdentifier: "SearchResult") as! MovieListViewController
+        
+        //vc.movieID = self.movies[indexPath.row].id
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        // 遷移後、searchBarTextDidEndEditingも呼ばれる
+        
+    }
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder() // これでDidEndEditingが呼ばれる
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        print("呼ばれた")
+    }
     
 }
 
