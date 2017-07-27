@@ -44,7 +44,7 @@ final class MovieDetailViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        Thread.sleep(forTimeInterval: 3)
+        // Thread.sleep(forTimeInterval: 3)
         addFavorite()
     }
     

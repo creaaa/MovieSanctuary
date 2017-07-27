@@ -261,8 +261,8 @@ final class RLMMovie: Object, Movieable, Decodable {
     // なんかここ、オプショナル型じゃないと実行時エラー！
     // property must be marked as optional... みたいなメッセージ見たら、
     // ここをオプショナルにすると通る...はず。
-    var videos: RLMVideos!   = RLMVideos()
-    var credits              = List<RLMCredits>()
+    var videos:  RLMVideos!  = RLMVideos()
+    var credits: RLMCredits! = RLMCredits()
     
     /**
      id をプライマリーキーとして設定
@@ -296,14 +296,10 @@ final class RLMMovie: Object, Movieable, Decodable {
         }
         
         // videos
-        //let videos = List<RLMVideos>()
-        
         let tmpVideos: RLMVideos = try! e <| "videos"
         
-//        tmpVideos.forEach {
-//            videos.append($0)
-//        }
-//        
+        // credits(cast&crew)
+        let tmpCredits: RLMCredits = try! e <| "credits"
         
         return try RLMMovie(
             
@@ -314,13 +310,14 @@ final class RLMMovie: Object, Movieable, Decodable {
             vote_count:   e <|  "vote_count",
             // ↑ ここまではよい。
             genres: genres,
-            videos: tmpVideos
+            videos: tmpVideos,
+            credits: tmpCredits
         )
     }
     
     required convenience init(id: Int, title: String, poster_path: String?,
                               vote_average: Float, vote_count: Int,
-                              genres: List<RLMGenre>, videos: RLMVideos) {
+                              genres: List<RLMGenre>, videos: RLMVideos, credits: RLMCredits) {
         self.init()
         self.id = id
         self.title = title
@@ -328,9 +325,9 @@ final class RLMMovie: Object, Movieable, Decodable {
         self.vote_average = vote_average
         self.vote_count = vote_count
         //
-        self.genres = genres
-        self.videos = videos
-
+        self.genres  = genres
+        self.videos  = videos
+        self.credits = credits
     }
     
 }
