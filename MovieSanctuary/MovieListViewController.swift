@@ -50,9 +50,12 @@ final class MovieListViewController: UIViewController {
         self.view.addSubview(self.resultView)
         
         // tableViewがナビゲーションバーに食い込まないようにする設定
-        let edgeInsets = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
-        resultView.tableView.contentInset          = edgeInsets
-        resultView.tableView.scrollIndicatorInsets = edgeInsets
+        if self.tabBarController?.selectedIndex == 0 {
+            let edgeInsets = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+            resultView.tableView.contentInset          = edgeInsets
+            resultView.tableView.scrollIndicatorInsets = edgeInsets
+        }
+        
         
         self.navigationController?.navigationBar.titleTextAttributes
             = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
