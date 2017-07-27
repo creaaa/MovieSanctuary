@@ -12,6 +12,7 @@ protocol Movieable {
 
 
 struct Genre: Decodable {
+    
     let id:   Int
     let name: String
     
@@ -136,8 +137,5 @@ struct ConciseMovie: Decodable {
         )
     }
 }
-
-
-
 
 

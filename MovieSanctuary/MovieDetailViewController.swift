@@ -2,7 +2,7 @@
 import UIKit
 import RealmSwift
 
-class MovieDetailViewController: UIViewController {
+final class MovieDetailViewController: UIViewController {
 
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel:      UILabel!
@@ -12,8 +12,6 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var plotLabel:       UILabel!
     @IBOutlet weak var rateStackView:   UIStackView!
 
-    // APIコールに用いられる、映画のユニークID
-    // var movieID: Int!
     
     // セルタップからか、Realmから直接か...わからんが、
     // とりあえず「映画1本ぶん」のモデル
@@ -30,13 +28,13 @@ class MovieDetailViewController: UIViewController {
         
         super.viewDidLoad()
         
-        /* if idが存在するなら(= セルタップからの遷移なら) */
+        /* if セルタップからの遷移なら */
         connectForMovieDetail()
         
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        Thread.sleep(forTimeInterval: 5)
+        // Thread.sleep(forTimeInterval: 5)
         addFavorite()
     }
     
@@ -52,6 +50,7 @@ class MovieDetailViewController: UIViewController {
             
             // RLMMovie == nil → 検索結果から遷移してきた   = 新たにRLMObjectを作る
             // RLMMovie != nil → お気に入りから遷移してきた = 既存のRLMObjectを使う
+            
             if self.myRLMMovie == nil {
                 self.myRLMMovie = RLMMovie()
             }
