@@ -44,12 +44,14 @@ final class MovieDetailViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        Thread.sleep(forTimeInterval: 10)
-        addFavorite()
+        //Thread.sleep(forTimeInterval: 3)
+        //addFavorite()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        try! Realm().deleteAll()
+    // will・didDisappear、ブレイク打っても突入しないんだが、デバッグできないのか？？
+    override func viewWillDisappear(_ animated: Bool) {
+        // try! Realm().deleteAll()
+        super.viewWillDisappear(animated)
     }
     
     override func didReceiveMemoryWarning() {

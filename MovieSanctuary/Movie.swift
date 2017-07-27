@@ -254,7 +254,7 @@ final class RLMMovie: Object, Movieable, Decodable {
     dynamic var id           = 0
     dynamic var title        = ""
     dynamic var poster_path:   String?
-    let genres               = List<RLMGenre>()
+    var genres: List<RLMGenre> = List<RLMGenre>()
     dynamic var vote_average: Float = 0.0
     dynamic var vote_count   = 0
     
@@ -285,26 +285,38 @@ final class RLMMovie: Object, Movieable, Decodable {
     */
     
     static func decode(_ e: Extractor) throws -> RLMMovie {
+        
+        // genres
+        let genres: List<RLMGenre> = List<RLMGenre>()
+        let tmpGenres: [RLMGenre] = try! e <|| "genres"
+        tmpGenres.forEach {
+            genres.append($0)
+        }
+        
         return try RLMMovie(
             
             id:           e <|  "id",
             title:        e <|  "title",
             poster_path:  e <|? "poster_path",
             vote_average: e <|  "vote_average",
-            vote_count:   e <|  "vote_count"
+            vote_count:   e <|  "vote_count",
             // ↑ ここまではよい。
+            genres: genres
             
         )
     }
     
     required convenience init(id: Int, title: String, poster_path: String?,
-                              vote_average: Float, vote_count: Int) {
+                              vote_average: Float, vote_count: Int,
+                              genres: List<RLMGenre>) {
         self.init()
         self.id = id
         self.title = title
         self.poster_path = poster_path
         self.vote_average = vote_average
         self.vote_count = vote_count
+        //
+        self.genres = genres
     }
     
 }
