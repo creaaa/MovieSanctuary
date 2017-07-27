@@ -141,6 +141,12 @@ final class MovieListViewController: UIViewController {
     
     func connectForMovieSearch(query: String) {
         
+        guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
+            print("no network. try later...")
+            showAlert(title: "No network", message: "try again later...")
+            return
+        }
+        
         guard self.movies.count <= 90 else {
             print("can't get data over 100")
             return
@@ -197,7 +203,7 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
     // need this if you use xib for cell
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        // dequeue(withIdentifier:indexPath) causes infinite roop...😨 so use this;
+        // dequeue(withIdentifier:indexPath) causes infinite roop...😨 so use this.
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell") as! TableViewCell
         
         return cell.bounds.height
@@ -205,23 +211,27 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        print("タッチ")
         
         guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
-                print("no network. try later...")
-                showAlert(title: "No network", message: "try again later...")
-                return
+            print("no network. try later...")
+            showAlert(title: "No network", message: "try again later...")
+            return
         }
-        
-        print("タッチ")
         
         let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil)
         let vc         = storyboard.instantiateInitialViewController() as! MovieDetailViewController
         
+        /*
         // FIXME: もし、遷移元(この画面)が「検索結果一覧VC」だったら
         // 本来はここ 0ではなく、1です。お間違えなきよう...
         if self.tabBarController?.selectedIndex == 0 {
             vc.movieID = self.movies[indexPath.row].id
         }
+        */
+        
+        vc.connectForMovieDetail()
         
         self.navigationController?.pushViewController(vc, animated: true)
    

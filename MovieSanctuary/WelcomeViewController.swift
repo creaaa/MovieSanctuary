@@ -214,6 +214,12 @@ extension WelcomeViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
+        guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
+            print("no network. try later...")
+            showAlert(title: "No network", message: "try again later...")
+            return
+        }
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         let vc         = storyboard.instantiateViewController(withIdentifier: "SearchResult") as! MovieListViewController
