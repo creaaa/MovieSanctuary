@@ -13,7 +13,9 @@ class WelcomeViewController: UIViewController {
 
     // これが本チャンです。たぶん。
     // var movies: [[SearchMovieResult.Movie]] = [[],[],[],[]]
-    var movies: [[Movieable]] = [[],[],[],[]]
+    
+    // これ、こうしないとダメ！ []だと最初のnumberOfRowを通過できない！！
+    var movies: [[Movieable]] = [[], [], [], []]
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -113,7 +115,7 @@ class WelcomeViewController: UIViewController {
         }
     }
     
-    // セクション2: MADE4U
+    // セクション2: MADE4U (ここだけResponseがRLMMovieを使っているため、描写処理が他と違う！要警戒！！)
     private func connectForMade4U() {
         
         let manager = MovieDetailManager()
@@ -121,8 +123,8 @@ class WelcomeViewController: UIViewController {
         DispatchQueue.global().async {
             manager.request(id: 550) { result in
                 self.movies[2] = [result]
-                print("おら！", self.movies[2])
-                print("いまや: ", self.movies[2].count)
+                // print("おら！", self.movies[2])
+                print("いまや: ", self.movies[2].count) // 一個。あたりまえ。
                 // self.tableView.reloadData()
             }
         }
@@ -256,7 +258,14 @@ extension WelcomeViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         print("おれのtag: \(collectionView.tag)")
         
-        // 最後はこっちになる
+        if collectionView.tag == 2 {
+            // この書き方だと最初にバグる。なんかいい方法教えてくれ
+            // let res = (self.movies[2] as! [RLMMovie])[0].recommendations.results.count
+            
+            return 20
+            
+        }
+        
         let result = self.movies[collectionView.tag].count
         return result
         
@@ -280,11 +289,22 @@ extension WelcomeViewController: UICollectionViewDelegate, UICollectionViewDataS
                 }
             
             case 2:
-            
-                item.titleLabel.text = (self.movies[2] as! RLMMovie).recommendations.results[indexPath.row].title
-            
-            
-
+                
+                // ここにある2つの if は、こうしないと最初のここのコールで落ちるから、苦肉の策。
+                if self.movies[2].count > 0 {
+                    
+                    let myRLMMovie = (self.movies[2] as! [RLMMovie])[0]
+                    
+                    if myRLMMovie.recommendations.results.count != 0 {
+                        item.titleLabel.text = myRLMMovie.recommendations.results[indexPath.row].title
+                    }
+                    
+                    if let posterPath = myRLMMovie.recommendations.results[indexPath.row].poster_path {
+                        let url = URL(string: "https://image.tmdb.org/t/p/original/" + posterPath)
+                        item.imageView.kf.setImage(with: url)
+                    }
+                    
+                }
             
             
             default:
