@@ -20,30 +20,10 @@ struct MovieDetailManager {
         var parameters: Any? {
             return [
                 "api_key":            APIkey.TMDB_APIkey,
-                "append_to_response": "videos,credits" // recommendations
+                "append_to_response": "videos,credits,recommendations"
             ]
         }
     }
-    
-    /*
-    // movie/recommendation
-    // 2. recommendationなリクエスト
-    struct RecommendationRequest: TMDbRequest {
-        
-        typealias Response = RLMMovie // HimotokiのDecodable準拠なデータモデル
-        let movieID: Int
-        var path:    String {
-            return "/3/movie/" + movieID.description + "/recommendations"
-        }
-        var parameters: Any? {
-            return [
-                "api_key":            APIkey.TMDB_APIkey,
-                "append_to_response": "videos,credits" // recommendations
-            ]
-        }
-    }
-    */
-    
     
     // スタンダードなリクエスト
     func request(id: Int, _ completion: @escaping (StandardRequest.Response) -> Void) {

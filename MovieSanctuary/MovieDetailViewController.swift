@@ -78,9 +78,17 @@ final class MovieDetailViewController: UIViewController {
         // スタンダード
         DispatchQueue.global().async {
             manager.request(id: movieID) { result in
+                
                 self.myRLMMovie = result
-                print(self.myRLMMovie)
+                
+                // print(self.myRLMMovie)
+                
+                print("1件め", self.myRLMMovie.recommendations.results[0].id)
+                print("2件め", self.myRLMMovie.recommendations.results[1].id)
+                print("3件め", self.myRLMMovie.recommendations.results[2].id)
+                
                 self.render()
+                
             }
         }
         

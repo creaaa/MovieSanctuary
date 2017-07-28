@@ -12,30 +12,6 @@ protocol Movieable {
 }
 
 
-/*
-extension Movieable where Self: RealmSwift.Object {
-    
-    func delMyself() {
-        try! Realm().write {
-            try! Realm().delete(self)
-        }
-    }
-    
-}
-*/
-
-extension Movieable where Self: Object {
-    
-    func delMyself() {
-        try! Realm().write {
-            try! Realm().delete(self)
-        }
-    }
-    
-}
-
-
-
 struct SearchMovieResult: Decodable {
     
     struct Movie: Decodable, Movieable {

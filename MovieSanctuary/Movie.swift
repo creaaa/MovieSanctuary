@@ -244,17 +244,65 @@ final class RLMCredits: Object, Decodable {
     
 }
 
+// 5. Recommendations用
+
+final class RLMRecommendation: Object, Decodable {
+    
+    dynamic var id           = 0
+    dynamic var title        = ""
+    dynamic var poster_path: String?
+    
+    static func decode(_ e: Extractor) throws -> RLMRecommendation {
+        return try RLMRecommendation(
+            id:          e <|  "id",
+            title:       e <|  "title",
+            poster_path: e <|? "poster_path"
+        )
+    }
+
+    required convenience init(id: Int, title: String, poster_path: String?) {
+        self.init()
+        self.id          = id
+        self.title       = title
+        self.poster_path = poster_path
+    }
+    
+}
+
+
+final class RLMRecommendations: Object, Decodable {
+    
+    var results = List<RLMRecommendation>()
+    
+    static func decode(_ e: Extractor) throws -> RLMRecommendations {
+        
+        let recommendations = List<RLMRecommendation>()
+        
+        let tmp: [RLMRecommendation] = try! e <|| "results"
+        tmp.forEach { recommendations.append($0) }
+        
+        return RLMRecommendations(recommendations: recommendations)
+        
+    }
+    
+    required convenience init(recommendations: List<RLMRecommendation>) {
+        self.init()
+        self.results = recommendations
+    }
+    
+}
+
 
 // 大ボスです。
 final class RLMMovie: Object, Movieable, Decodable {
 
     // searchでも取れるやつ
-    dynamic var id           = 0
-    dynamic var title        = ""
+    dynamic var id             = 0
+    dynamic var title          = ""
     dynamic var poster_path:   String?
     var genres: List<RLMGenre> = List<RLMGenre>()
-    dynamic var vote_average: Float = 0.0
-    dynamic var vote_count   = 0
+    dynamic var vote_average:  Float = 0.0
+    dynamic var vote_count     = 0
     
     // movie/{movie_id}/videos で取れるやつ
     
@@ -264,6 +312,9 @@ final class RLMMovie: Object, Movieable, Decodable {
     var videos:  RLMVideos!  = RLMVideos()
     var credits: RLMCredits! = RLMCredits()
     
+    // 7/27 recomendations 追加しまーす
+    var recommendations: RLMRecommendations! = RLMRecommendations()
+    
     /**
      id をプライマリーキーとして設定
      */
@@ -271,20 +322,6 @@ final class RLMMovie: Object, Movieable, Decodable {
         return "id"
     }
     
-    /*
-    static func decode(_ e: Extractor) throws -> RLMMovie {
-        return try RLMMovie (
-            id:           e <|  "id",
-            title:        e <|  "title",
-            poster_path:  e <|? "poster_path",
-            // genres:       e <|| "genres",
-            vote_average: e <|  "vote_average",
-            vote_count:   e <|  "vote_count"
-            // videos:       e <|  "videos",
-            // credits:      e <|  "credits"
-        )
-    }
-    */
     
     static func decode(_ e: Extractor) throws -> RLMMovie {
         
@@ -301,6 +338,9 @@ final class RLMMovie: Object, Movieable, Decodable {
         // credits(cast&crew)
         let tmpCredits: RLMCredits = try! e <| "credits"
         
+        // recommendations
+        let tmpRecommendations: RLMRecommendations = try! e <| "recommendations"
+        
         return try RLMMovie(
             
             id:           e <|  "id",
@@ -308,16 +348,19 @@ final class RLMMovie: Object, Movieable, Decodable {
             poster_path:  e <|? "poster_path",
             vote_average: e <|  "vote_average",
             vote_count:   e <|  "vote_count",
-            // ↑ ここまではよい。
-            genres: genres,
-            videos: tmpVideos,
-            credits: tmpCredits
+            
+            genres:          genres,
+            videos:          tmpVideos,
+            credits:         tmpCredits,
+            recommendations: tmpRecommendations
+            
         )
     }
     
     required convenience init(id: Int, title: String, poster_path: String?,
                               vote_average: Float, vote_count: Int,
-                              genres: List<RLMGenre>, videos: RLMVideos, credits: RLMCredits) {
+                              genres: List<RLMGenre>, videos: RLMVideos,
+                              credits: RLMCredits, recommendations: RLMRecommendations) {
         self.init()
         self.id = id
         self.title = title
@@ -325,9 +368,10 @@ final class RLMMovie: Object, Movieable, Decodable {
         self.vote_average = vote_average
         self.vote_count = vote_count
         //
-        self.genres  = genres
-        self.videos  = videos
-        self.credits = credits
+        self.genres          = genres
+        self.videos          = videos
+        self.credits         = credits
+        self.recommendations = recommendations
     }
     
 }

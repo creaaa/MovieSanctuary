@@ -184,14 +184,6 @@
 			name = movie/;
 			sourceTree = "<group>";
 		};
-		44483C111F2ADD0B009DAC5B /* search/movie/ */ = {
-			isa = PBXGroup;
-			children = (
-				44547B851F2876FC00FB493B /* MovieSearchRequest.swift */,
-			);
-			name = search/movie/;
-			sourceTree = "<group>";
-		};
 		44547B711F27A49C00FB493B /* Neo */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,7 +226,7 @@
 		44547B7D1F27C62300FB493B /* search/ */ = {
 			isa = PBXGroup;
 			children = (
-				44483C111F2ADD0B009DAC5B /* search/movie/ */,
+				44547B851F2876FC00FB493B /* MovieSearchRequest.swift */,
 			);
 			name = search/;
 			sourceTree = "<group>";
