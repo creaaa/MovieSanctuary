@@ -12,7 +12,8 @@ class WelcomeViewController: UIViewController {
     var img: UIImage?
 
     // これが本チャンです。たぶん。
-    var movies: [[SearchMovieResult.Movie]] = [[],[],[],[]]
+    // var movies: [[SearchMovieResult.Movie]] = [[],[],[],[]]
+    var movies: [[Movieable]] = [[],[],[],[]]
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -32,6 +33,8 @@ class WelcomeViewController: UIViewController {
 
         // tableView.reloadData()  // viewDidLoad = まだappearしてないので、書かなくてもよい
         
+        connectForNowShowing()
+        connectForMade4U()
         connectForDiscover()
         connectForAction()
         
@@ -55,8 +58,6 @@ class WelcomeViewController: UIViewController {
         
     func fetchImgFromUrlStr(urlStr: String) throws -> UIImage? {
         
-        
-        
         guard let url  = URL(string: urlStr) else {
             throw FetchImgError.urlCreationFailed
         }
@@ -76,8 +77,26 @@ class WelcomeViewController: UIViewController {
 
     // API Connection
     
+    // セクション0: NOW SHOWING
+    private func connectForNowShowing() {
+        
+        let manager = MovieDetailManager()
+        
+        DispatchQueue.global().async {
+            manager.request { result in
+                self.movies[0] = result.results
+                // print("おら！", self.movies[1])
+                // print("いまや: ", self.movies[1].count)
+                
+                // FIXME: そもそもこのコールバックは、 .successのときしか実行されない
+                // reloadDataのロジック、ちゃんとなおせ
+                // self.tableView.reloadData()
+            }
+        }
+    }
+    
     // セクション1: MASTERPIECE
-    func connectForDiscover() {
+    private func connectForDiscover() {
         
         let manager = DiscoverManager()
         
@@ -89,22 +108,38 @@ class WelcomeViewController: UIViewController {
                 
                 // FIXME: そもそもこのコールバックは、 .successのときしか実行されない
                 // reloadDataのロジック、ちゃんとなおせ
-                self.tableView.reloadData()
+                // self.tableView.reloadData()
             }
         }
     }
     
+    // セクション2: MADE4U
+    private func connectForMade4U() {
+        
+        let manager = MovieDetailManager()
+        
+        DispatchQueue.global().async {
+            manager.request(id: 550) { result in
+                self.movies[2] = [result]
+                print("おら！", self.movies[2])
+                print("いまや: ", self.movies[2].count)
+                // self.tableView.reloadData()
+            }
+        }
+        
+    }
+    
     // セクション3: GENRE -> ACTION
-    func connectForAction() {
+    private func connectForAction() {
         
         let manager = DiscoverManager()
         
         DispatchQueue.global().async {
-            manager.request(genre: .Animation) { result in
+            manager.request(genre: .Adventure) { result in
                 self.movies[3] = result.results
-                print("おら！", self.movies[3])
-                print("いまや: ", self.movies[3].count)
-                // self.tableView.reloadData()
+                // print("おら！", self.movies[3])
+                // print("いまや: ", self.movies[3].count)
+                self.tableView.reloadData()
             }
         }
         
@@ -164,7 +199,7 @@ extension WelcomeViewController: UITableViewDelegate, UITableViewDataSource {
         label.text = {
             switch section {
                 case 0:
-                    return "NOW ON AIR"
+                    return "NOW SHOWING"
                 case 1:
                     return "MASTERPIECE"
                 case 2:
@@ -232,30 +267,29 @@ extension WelcomeViewController: UICollectionViewDelegate, UICollectionViewDataS
         // UICollectionViewCell
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: "Item",
                                                       for: indexPath) as! CollectionViewCell
+        
+        switch collectionView.tag {
+            
+            case let tag where (0...1).contains(tag) || (3...3).contains(tag):
                 
-        if case collectionView.tag = 1 {
+                item.titleLabel.text = self.movies[tag][indexPath.row].title
+                
+                if let posterPath = self.movies[tag][indexPath.row].poster_path {
+                    let url = URL(string: "https://image.tmdb.org/t/p/original/" + posterPath)
+                    item.imageView.kf.setImage(with: url)
+                }
             
-            // print("アイテムNo: \(indexPath.row)")
+            case 2:
             
-            if let posterPath = self.movies[1][indexPath.row].poster_path {
-                let url = URL(string: "https://image.tmdb.org/t/p/original/" + posterPath)
-                item.imageView.kf.setImage(with: url)
-            }
+                item.titleLabel.text = (self.movies[2] as! RLMMovie).recommendations.results[indexPath.row].title
             
+            
+
+            
+            
+            default:
+                break
         }
-        
-        
-        if case collectionView.tag = 3 {
-            
-            // print("アイテムNo: \(indexPath.row)")
-            
-            if let posterPath = self.movies[3][indexPath.row].poster_path {
-                let url = URL(string: "https://image.tmdb.org/t/p/original/" + posterPath)
-                item.imageView.kf.setImage(with: url)
-            }
-            
-        }
-        
         
         return item
         

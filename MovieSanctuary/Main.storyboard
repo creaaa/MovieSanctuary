@@ -63,8 +63,8 @@
                                                                             <constraint firstAttribute="width" constant="100" id="gT1-bZ-HRY"/>
                                                                         </constraints>
                                                                     </imageView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyV-D5-8cg">
-                                                                        <rect key="frame" x="29" y="118.5" width="43" height="21.5"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyV-D5-8cg">
+                                                                        <rect key="frame" x="48" y="117.5" width="5" height="22"/>
                                                                         <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="17"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <nil key="highlightedColor"/>
@@ -82,6 +82,7 @@
                                                             <size key="customSize" width="100" height="149.5"/>
                                                             <connections>
                                                                 <outlet property="imageView" destination="EKt-2j-qcq" id="SGt-sw-LHN"/>
+                                                                <outlet property="titleLabel" destination="uyV-D5-8cg" id="6Bh-Gm-Ocy"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
