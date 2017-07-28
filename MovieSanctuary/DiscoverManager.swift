@@ -7,25 +7,28 @@ import Himotoki
 
 enum Genre: Int {
     
-    case Adventure   = 12
-    case Fantasy     = 14
-    case Animation   = 16
-    case Drama       = 18
-    case Horror      = 27
-    case Action      = 28
-    case Comedy      = 35
-    case History     = 36
-    case Western     = 37
-    case Thriller    = 53
-    case Crime       = 80
-    case Documentary = 99
+    case adventure   = 12
+    case fantasy     = 14
+    case animation   = 16
+    case drama       = 18
+    case horror      = 27
+    case action      = 28
+    case comedy      = 35
+    case history     = 36
+    case western     = 37
+    case thriller    = 53
+    case crime       = 80
+    case documentary = 99
     case SF          = 878
-    case Mystery     = 9648
-    case Music       = 10402
-    case Romance     = 10749
-    case Family      = 10751
-    case War         = 10752
+    case mystery     = 9648
+    case music       = 10402
+    case romance     = 10749
+    case family      = 10751
+    case war         = 10752
     case TVMovie     = 10770
+    
+    static let genres: [Genre] = [.adventure, .fantasy, .horror, .action,
+                                  .comedy, .history, .romance, .family]
     
 }
 
@@ -50,7 +53,7 @@ struct DiscoverManager {
     }
     
     // discover/movie
-    // セクション【4-11】: 各ジャンル で使われる
+    // セクション【3-10】: 各ジャンル で使われる
     struct GenreRequest: TMDbRequest {
         
         // このAPIの問題は、ジャンルIDを複数指定した時、全部一緒くたにしてresultsを返すこと。

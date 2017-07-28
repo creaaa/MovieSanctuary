@@ -23,6 +23,8 @@ class WelcomeViewController: UIViewController {
         
         super.viewDidLoad()
         
+
+        
         tableView.delegate   = self
         tableView.dataSource = self
         
@@ -38,7 +40,9 @@ class WelcomeViewController: UIViewController {
         connectForNowShowing()
         connectForMade4U()
         connectForDiscover()
-        connectForAction()
+        
+        // connectForAction()
+        connectForGenre()
         
     }
     
@@ -132,6 +136,7 @@ class WelcomeViewController: UIViewController {
     }
     
     // セクション3: GENRE -> ACTION
+    /*
     private func connectForAction() {
         
         let manager = DiscoverManager()
@@ -146,6 +151,44 @@ class WelcomeViewController: UIViewController {
         }
         
     }
+    */
+    
+    // セクション3-10: GENRE
+    private func connectForGenre() {
+        
+        let manager = DiscoverManager()
+        
+        DispatchQueue.global().async {
+            
+            var i = 3
+            
+            Genre.genres.forEach {
+                manager.request(genre: $0) { result in
+                    
+                    // ジャンル1なら[3], ジャンル8なら[10]...
+                    self.movies[i] = result.results
+                    
+                    // print("おら！", self.movies[3])
+                    // print("いまや: ", self.movies[3].count)
+                    
+                    i += 1
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+        
+    }
+
+    
+//    private func makeAllGenres() -> [Genre] {
+//        
+//        
+//        
+//    }
     
     
 }
@@ -291,7 +334,7 @@ extension WelcomeViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         switch collectionView.tag {
             
-            case let tag where (0...1).contains(tag) || (3...3).contains(tag):
+            case let tag where (0...1).contains(tag) || (3...10).contains(tag):
                 
                 item.titleLabel.text = self.movies[tag][indexPath.row].title
                 
