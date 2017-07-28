@@ -53,6 +53,7 @@ final class MovieListViewController: UIViewController {
         self.view.addSubview(self.resultView)
         
         // tableViewがナビゲーションバーに食い込まないようにする設定
+        // (お気に入り画面として使うときだけ食い込むため、そのときのみ矯正)
         if self.tabBarController?.selectedIndex == 0 {
             let edgeInsets = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
             resultView.tableView.contentInset          = edgeInsets
@@ -78,16 +79,6 @@ final class MovieListViewController: UIViewController {
             self.navigationItem.leftBarButtonItem = editButtonItem
             
         }
-        
-        // 検索からの遷移時(↓のコード)は、前の画面で呼ぶことにしました
-        /*
-        else if self.tabBarController?.selectedIndex == 1 {
-            connectForMovieSearch(query: "Saw")
-        }
-        */
-        
-        
-        
         
     }
     
@@ -164,8 +155,10 @@ final class MovieListViewController: UIViewController {
     // MARK: - API connection
     //////////////////////////
     
-    // API Connection
+    var query: String!
+    var page = 1
     
+    // API Connection
     func connectForMovieSearch(query: String, page: Int = 1) {
         
         guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
@@ -182,20 +175,17 @@ final class MovieListViewController: UIViewController {
         let manager = MovieSearchManager()
         
         // クエリ検索
-        /*
         DispatchQueue.global().async {
             manager.request(query: query, page: page) { result in
-                
-                // self.movies = result.results
-                
                 result.results.forEach {
                     self.movies.append($0)
                 }
                 self.resultView.tableView.reloadData()
             }
         }
-        */
         
+        // upcomingのときはこう呼ぶよ。いらんのであとで消してね。
+        /*
         DispatchQueue.global().async {
             manager.request { result in
                 result.results.forEach {
@@ -204,11 +194,8 @@ final class MovieListViewController: UIViewController {
                 self.resultView.tableView.reloadData()
             }
         }
-        
+        */
     }
-    
-    var query: String!
-    var page = 1    
     
 }
 
@@ -265,22 +252,16 @@ extension MovieListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
         if case .delete = editingStyle {
-            
             let realm = try! Realm()
-            
             try! realm.write {
-            
                 let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
                 realm.delete(res[indexPath.row])
-                
                 reload()
-                
             }
-            
         }
     }
-    
     
 }
 
