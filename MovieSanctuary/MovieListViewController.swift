@@ -10,6 +10,8 @@ import SystemConfiguration
 
 final class MovieListViewController: UIViewController {
     
+    let realm = try! Realm()
+    
     // Model
     
     // このVCがタブ2で使われる場合: お気に入り追加した映画たちが入る(Realmから取得、APIコールなし)
@@ -69,8 +71,7 @@ final class MovieListViewController: UIViewController {
         // この画面がお気に入り画面なら
         if self.tabBarController?.selectedIndex == 0 {
             
-            let realm = try! Realm()
-            let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
+            let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
             
             // Results<RLMMovie> → [Movieable]
             res.forEach {self.movies.append($0) }
@@ -138,7 +139,7 @@ final class MovieListViewController: UIViewController {
     
     func reload() {
         
-        let res: Results<RLMMovie> = try! Realm().objects(RLMMovie.self)
+        let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
 
         // 整合性を保つ
         // Results<RLMMovie> → [Movieable]
@@ -184,17 +185,6 @@ final class MovieListViewController: UIViewController {
             }
         }
         
-        // upcomingのときはこう呼ぶよ。いらんのであとで消してね。
-        /*
-        DispatchQueue.global().async {
-            manager.request { result in
-                result.results.forEach {
-                    self.movies.append($0)
-                }
-                self.resultView.tableView.reloadData()
-            }
-        }
-        */
     }
     
 }
@@ -254,10 +244,9 @@ extension MovieListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if case .delete = editingStyle {
-            let realm = try! Realm()
-            try! realm.write {
-                let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
-                realm.delete(res[indexPath.row])
+            try! self.realm.write {
+                let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
+                self.realm.delete(res[indexPath.row])
                 reload()
             }
         }
