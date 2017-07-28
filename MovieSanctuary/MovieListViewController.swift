@@ -10,7 +10,7 @@ import SystemConfiguration
 
 final class MovieListViewController: UIViewController {
     
-    let realm = try! Realm()
+    var realm: Realm!  // = try! Realm()
     
     // Model
     
@@ -71,6 +71,8 @@ final class MovieListViewController: UIViewController {
         // この画面がお気に入り画面なら
         if self.tabBarController?.selectedIndex == 0 {
             
+            self.realm = try! Realm()
+
             let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
             
             // Results<RLMMovie> → [Movieable]

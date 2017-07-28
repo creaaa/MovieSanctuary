@@ -197,6 +197,7 @@
 		44547B711F27A49C00FB493B /* Neo */ = {
 			isa = PBXGroup;
 			children = (
+				445C369D1F2670F600B7D920 /* Main.storyboard */,
 				44547B7B1F27C22A00FB493B /* APIManager */,
 				44547B761F27BFD600FB493B /* POJO */,
 				445C368A1F266FA600B7D920 /* Welcome VC */,
@@ -246,7 +247,6 @@
 			isa = PBXGroup;
 			children = (
 				445C369F1F267F4900B7D920 /* Memo.txt */,
-				445C369D1F2670F600B7D920 /* Main.storyboard */,
 				445C36951F26707900B7D920 /* Helper.swift */,
 				445C36971F26707900B7D920 /* WelcomeViewControllerCell.swift */,
 				445C36981F26707900B7D920 /* CollectionViewCell.swift */,
