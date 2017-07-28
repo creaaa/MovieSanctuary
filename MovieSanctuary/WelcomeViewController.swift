@@ -14,8 +14,8 @@ class WelcomeViewController: UIViewController {
     // これが本チャンです。たぶん。
     // var movies: [[SearchMovieResult.Movie]] = [[],[],[],[]]
     
-    // これ、こうしないとダメ！ []だと最初のnumberOfRowを通過できない！！
-    var movies: [[Movieable]] = [[], [], [], []]
+    // これ、こうしないとダメ！ []だと最初のnumberOfRowを通過できない！！ /*11*/
+    var movies: [[Movieable]] = [[], [], [], [], [],[],[],[],[],[],[]]
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -154,7 +154,7 @@ class WelcomeViewController: UIViewController {
 extension WelcomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     // NOW ON AIR, MASTERPIECE, MADE 4 YOU
-    func numberOfSections(in tableView: UITableView) -> Int { return 4 }
+    func numberOfSections(in tableView: UITableView) -> Int { return 11 }
     
     // 1個
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 1 }
@@ -200,20 +200,31 @@ extension WelcomeViewController: UITableViewDelegate, UITableViewDataSource {
         let label = UILabel(frame: .zero)
         label.text = {
             switch section {
+                
                 case 0:
                     return "NOW SHOWING"
                 case 1:
                     return "MASTERPIECE"
                 case 2:
                     return "MADE 4 YOU"
+                
                 case 3:
-                    return "ACTION"
-                /*
+                    return "ADVENTURE"
                 case 4:
-                    return "SUSPENSE"
+                    return "FANTASY"
                 case 5:
-                    return "KIDS"
-                */
+                    return "HORROR"
+                case 6:
+                    return "ACTION"
+                case 7:
+                    return "COMEDY"
+                case 8:
+                    return "MYSTERY"
+                case 9:
+                    return "ROMANCE"
+                case 10:
+                    return "FAMILY"
+
                 default:
                     fatalError()
             }
@@ -259,6 +270,7 @@ extension WelcomeViewController: UICollectionViewDelegate, UICollectionViewDataS
         print("おれのtag: \(collectionView.tag)")
         
         if collectionView.tag == 2 {
+            
             // この書き方だと最初にバグる。なんかいい方法教えてくれ
             // let res = (self.movies[2] as! [RLMMovie])[0].recommendations.results.count
             
