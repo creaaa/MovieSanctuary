@@ -266,8 +266,8 @@ extension MovieListViewController: UITableViewDataSource {
 }
 
 
-extension MovieListViewController:  UITableViewDelegate {
-    
+extension MovieListViewController: UITableViewDelegate {
+        
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         print("タッチ")
@@ -281,7 +281,7 @@ extension MovieListViewController:  UITableViewDelegate {
         let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil)
         let vc         = storyboard.instantiateInitialViewController() as! MovieDetailViewController
    
-        vc.connectForMovieDetail(movieID: self.movies[indexPath.row].id)
+        vc.connectForMovieDetail(type: .standard(self.movies[indexPath.row].id))
         
         self.navigationController?.pushViewController(vc, animated: true)
         

@@ -51,6 +51,8 @@ struct SearchMovieResult: Decodable {
             )
         }
         
+        
+        
         /*
         var genreName: [String] {
             

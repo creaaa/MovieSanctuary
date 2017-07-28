@@ -6,6 +6,7 @@ import Himotoki
 
 /* Manager */
 
+
 struct MovieSearchManager {
     
     struct StandardRequest: TMDbRequest {
@@ -27,20 +28,6 @@ struct MovieSearchManager {
         }
     }
     
-    /*
-    struct NowPlayingRequest: MovieDetailRequest {
-        
-        typealias Response = SearchMovieResult // HimotokiのDecodable準拠なデータモデル
-        var path: String {
-            return "/3/movie/now_playing"
-        }
-        var parameters: Any? {
-            return [
-                "api_key": APIkey.TMDB_APIkey
-            ]
-        }
-    }
-    */
     
     // スタンダード(クエリ検索)
     func request(query: String, page: Int, _ completion: @escaping (StandardRequest.Response) -> Void) {

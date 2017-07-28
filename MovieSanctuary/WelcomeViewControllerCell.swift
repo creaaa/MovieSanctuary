@@ -20,7 +20,7 @@ extension WelcomeViewControllerCell {
         
         collectionView.delegate   = dataSourceDelegate
         collectionView.dataSource = dataSourceDelegate
-        collectionView.tag = row
+        collectionView.tag        = row
         
         // Stops collection view if it was scrolling
         collectionView.setContentOffset(collectionView.contentOffset, animated: false)

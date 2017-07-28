@@ -5,13 +5,18 @@ import Himotoki
 
 /* Manager */
 
+enum MovieRequestType {
+    case standard(Int) // スタンダード  なリクエスト
+    case now_playing   // Now Playing なリクエスト
+}
+
 
 struct MovieDetailManager {
     
     // movie/{movie_id}/
     // 1. スタンダードなリクエスト
-    struct StandardRequest: TMDbRequest {
-        typealias Response = RLMMovie // HimotokiのDecodable準拠なデータモデル
+    struct StandardRequest:   TMDbRequest {
+        typealias Response  = RLMMovie // HimotokiのDecodable準拠なデータモデル
         let movieID: Int
         var path:    String {
             return "/3/movie/" + movieID.description

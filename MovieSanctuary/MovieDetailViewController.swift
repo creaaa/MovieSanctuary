@@ -71,17 +71,25 @@ final class MovieDetailViewController: UIViewController {
     // MARK: - API connection
     //////////////////////////
 
-    func connectForMovieDetail(movieID: Int) {
+    func connectForMovieDetail(type: MovieRequestType) {
         
         let manager = MovieDetailManager()
         
         // スタンダード
         DispatchQueue.global().async {
-            manager.request(id: movieID) { result in
-                self.myRLMMovie = result
-                print(self.myRLMMovie)
-                self.render()
+            
+            switch type {
+                case .standard(let movieID):
+                    manager.request(id: movieID) { result in
+                        self.myRLMMovie = result
+                        print(self.myRLMMovie)
+                        self.render()
+                    }
+                case .now_playing:
+                    // このViewControllerで使われる限りは、now_playingでコールされることはない
+                    fatalError()
             }
+            
         }
         
     }

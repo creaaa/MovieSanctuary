@@ -2,6 +2,7 @@
 // https://ashfurrow.com/blog/putting-a-uicollectionview-in-a-uitableviewcell-in-swift/
 
 import UIKit
+import Kingfisher
 
 class WelcomeViewController: UIViewController {
 
@@ -10,6 +11,9 @@ class WelcomeViewController: UIViewController {
 
     var img: UIImage?
 
+    // これが本チャンです。たぶん。
+    var movies: [[SearchMovieResult.Movie]] = [[],[],[]]
+    
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -28,6 +32,8 @@ class WelcomeViewController: UIViewController {
 
         self.img = try! fetchImgFromUrlStr(urlStr: "https://pbs.twimg.com/media/Cwf3zVcUUAA61Wi.jpg")
         // tableView.reloadData()  // viewDidLoad = まだappearしてないので、書かなくてもよい
+        
+        connectForDiscover()
         
     }
     
@@ -67,45 +73,40 @@ class WelcomeViewController: UIViewController {
     
 
     // API Connection
-    /*
-    func connectForMovieSearch(query: String) {
+    
+    func connectForDiscover() {
         
-        guard self.movies.count <= 90 else {
-            print("can't get data over 100")
-            return
-        }
-        
-        let manager = MovieSearchManager()
+        let manager = DiscoverManager()
         
         DispatchQueue.global().async {
-            manager.request(query: query) { result in
-                self.movies.append(result)
-                
-                // self.resultView.tableView.reloadData()
-                
+            manager.request { result in
+                self.movies[1] = result.results
+                print("おら！", self.movies[1])
+                print("いまや: ", self.movies[1].count)
+                self.tableView.reloadData()
             }
         }
+        
     }
-    */
     
 }
 
 
 extension WelcomeViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int { return 6 }
+    // NOW ON AIR, MASTERPIECE, MADE 4 YOU
+    func numberOfSections(in tableView: UITableView) -> Int { return 3 }
     
-    // 10個
+    // 1個
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 1 }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",
-                                                 for: indexPath) as! WelcomeViewControllerCell
-        
-        // ↑ 実はこのas! サブクラスが持つプロパティを使いたい、とかじゃなければ別にやらんでもよい。
+        // ↓ 実はこのas! サブクラスが持つプロパティを使いたい、とかじゃなければ別にやらんでもよい。
         // 問題なく描画される。@IBOutletを持つ場合でもいける。。奇妙やけど。まぁやめとこう
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",
+                                                 for: indexPath) as! WelcomeViewControllerCell
         return cell
         
     }
@@ -114,14 +115,12 @@ extension WelcomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = cell as? WelcomeViewControllerCell else { return }
         
-        cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
+        cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.section)
         
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
         guard let tableViewCell = cell as? WelcomeViewControllerCell else { return }
-        
         storedOffsets[indexPath.row] = tableViewCell.collectionViewOffset
     }
     
@@ -142,22 +141,25 @@ extension WelcomeViewController: UITableViewDelegate, UITableViewDataSource {
         let label = UILabel(frame: .zero)
         label.text = {
             switch section {
-            case 0:
-                return "NOW ON AIR"
-            case 1:
-                return "MASTERPIECE"
-            case 2:
-                return "MADE 4 YOU"
-            case 3:
-                return "ACTION"
-            case 4:
-                return "SUSPENSE"
-            case 5:
-                return "KIDS"
-            default:
-                fatalError()
+                case 0:
+                    return "NOW ON AIR"
+                case 1:
+                    return "MASTERPIECE"
+                case 2:
+                    return "MADE 4 YOU"
+                /*
+                case 3:
+                    return "ACTION"
+                case 4:
+                    return "SUSPENSE"
+                case 5:
+                    return "KIDS"
+                */
+                default:
+                    fatalError()
             }
         }()
+        
         label.font = UIFont(name: "Quicksand", size: 18)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -193,18 +195,43 @@ extension WelcomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension WelcomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    // 20個
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.model[collectionView.tag].count
+        
+        print("おれのtag: \(collectionView.tag)")
+        
+        // 最後はこっちになる
+        let result = self.movies[collectionView.tag].count
+        return result
+        
+        /*
+        switch section {
+        case 0:
+            return 20
+        default:
+            fatalError()
+        }
+        */
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+
         // UICollectionViewCell
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: "Item",
                                                       for: indexPath) as! CollectionViewCell
         
-        // item.backgroundColor = model[collectionView.tag][indexPath.item]
+        if case indexPath.section = 0 {
+                        
+            if let posterPath = self.movies[1][indexPath.row].poster_path {
+                let url = URL(string: "https://image.tmdb.org/t/p/original/" + posterPath)
+                item.imageView.kf.setImage(with: url)
+            }
+            
+            item.imageView.kf.setImage(with: <#T##Resource?#>)
+            
+        }
+        
+
         
         item.imageView.image = self.img
         
