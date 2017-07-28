@@ -30,7 +30,7 @@ class WelcomeViewController: UIViewController {
         
         self.navigationItem.titleView = searchBar
 
-        self.img = try! fetchImgFromUrlStr(urlStr: "https://pbs.twimg.com/media/Cwf3zVcUUAA61Wi.jpg")
+        // self.img = try! fetchImgFromUrlStr(urlStr: "https://pbs.twimg.com/media/Cwf3zVcUUAA61Wi.jpg")
         // tableView.reloadData()  // viewDidLoad = まだappearしてないので、書かなくてもよい
         
         connectForDiscover()
@@ -54,6 +54,8 @@ class WelcomeViewController: UIViewController {
     }
         
     func fetchImgFromUrlStr(urlStr: String) throws -> UIImage? {
+        
+        
         
         guard let url  = URL(string: urlStr) else {
             throw FetchImgError.urlCreationFailed
@@ -219,21 +221,17 @@ extension WelcomeViewController: UICollectionViewDelegate, UICollectionViewDataS
         // UICollectionViewCell
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: "Item",
                                                       for: indexPath) as! CollectionViewCell
-        
+                
         if case indexPath.section = 0 {
-                        
+            
+            print("アイテムNo: \(indexPath.row)")
+            
             if let posterPath = self.movies[1][indexPath.row].poster_path {
                 let url = URL(string: "https://image.tmdb.org/t/p/original/" + posterPath)
                 item.imageView.kf.setImage(with: url)
             }
             
-            item.imageView.kf.setImage(with: <#T##Resource?#>)
-            
         }
-        
-
-        
-        item.imageView.image = self.img
         
         return item
         
