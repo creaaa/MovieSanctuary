@@ -12,7 +12,7 @@ class WelcomeViewController: UIViewController {
     var img: UIImage?
 
     // これが本チャンです。たぶん。
-    var movies: [[SearchMovieResult.Movie]] = [[],[],[]]
+    var movies: [[SearchMovieResult.Movie]] = [[],[],[],[]]
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -30,10 +30,10 @@ class WelcomeViewController: UIViewController {
         
         self.navigationItem.titleView = searchBar
 
-        // self.img = try! fetchImgFromUrlStr(urlStr: "https://pbs.twimg.com/media/Cwf3zVcUUAA61Wi.jpg")
         // tableView.reloadData()  // viewDidLoad = まだappearしてないので、書かなくてもよい
         
         connectForDiscover()
+        connectForAction()
         
     }
     
@@ -76,6 +76,7 @@ class WelcomeViewController: UIViewController {
 
     // API Connection
     
+    // セクション1: MASTERPIECE
     func connectForDiscover() {
         
         let manager = DiscoverManager()
@@ -83,13 +84,32 @@ class WelcomeViewController: UIViewController {
         DispatchQueue.global().async {
             manager.request { result in
                 self.movies[1] = result.results
-                print("おら！", self.movies[1])
-                print("いまや: ", self.movies[1].count)
+                // print("おら！", self.movies[1])
+                // print("いまや: ", self.movies[1].count)
+                
+                // FIXME: そもそもこのコールバックは、 .successのときしか実行されない
+                // reloadDataのロジック、ちゃんとなおせ
                 self.tableView.reloadData()
+            }
+        }
+    }
+    
+    // セクション3: GENRE -> ACTION
+    func connectForAction() {
+        
+        let manager = DiscoverManager()
+        
+        DispatchQueue.global().async {
+            manager.request(genre: .Animation) { result in
+                self.movies[3] = result.results
+                print("おら！", self.movies[3])
+                print("いまや: ", self.movies[3].count)
+                // self.tableView.reloadData()
             }
         }
         
     }
+    
     
 }
 
@@ -97,7 +117,7 @@ class WelcomeViewController: UIViewController {
 extension WelcomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     // NOW ON AIR, MASTERPIECE, MADE 4 YOU
-    func numberOfSections(in tableView: UITableView) -> Int { return 3 }
+    func numberOfSections(in tableView: UITableView) -> Int { return 4 }
     
     // 1個
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 1 }
@@ -149,9 +169,9 @@ extension WelcomeViewController: UITableViewDelegate, UITableViewDataSource {
                     return "MASTERPIECE"
                 case 2:
                     return "MADE 4 YOU"
-                /*
                 case 3:
                     return "ACTION"
+                /*
                 case 4:
                     return "SUSPENSE"
                 case 5:
@@ -205,15 +225,6 @@ extension WelcomeViewController: UICollectionViewDelegate, UICollectionViewDataS
         let result = self.movies[collectionView.tag].count
         return result
         
-        /*
-        switch section {
-        case 0:
-            return 20
-        default:
-            fatalError()
-        }
-        */
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -222,9 +233,9 @@ extension WelcomeViewController: UICollectionViewDelegate, UICollectionViewDataS
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: "Item",
                                                       for: indexPath) as! CollectionViewCell
                 
-        if case indexPath.section = 0 {
+        if case collectionView.tag = 1 {
             
-            print("アイテムNo: \(indexPath.row)")
+            // print("アイテムNo: \(indexPath.row)")
             
             if let posterPath = self.movies[1][indexPath.row].poster_path {
                 let url = URL(string: "https://image.tmdb.org/t/p/original/" + posterPath)
@@ -232,6 +243,19 @@ extension WelcomeViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
             
         }
+        
+        
+        if case collectionView.tag = 3 {
+            
+            // print("アイテムNo: \(indexPath.row)")
+            
+            if let posterPath = self.movies[3][indexPath.row].poster_path {
+                let url = URL(string: "https://image.tmdb.org/t/p/original/" + posterPath)
+                item.imageView.kf.setImage(with: url)
+            }
+            
+        }
+        
         
         return item
         
