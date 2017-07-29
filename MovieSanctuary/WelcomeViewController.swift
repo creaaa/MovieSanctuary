@@ -185,7 +185,8 @@ extension WelcomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         label.text = headerTitle[section]
         
-        label.font = UIFont(name: "Quicksand", size: 18)
+        label.font = UIFont(name: (UIApplication.shared.delegate as! AppDelegate).font, size: 18)
+        
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         

@@ -31,6 +31,42 @@ struct SearchMovieResult: Decodable {
                 switch id {
                     case 12:
                         return RLMGenre(id: id, name: "Adventure")
+                    case 14:
+                        return RLMGenre(id: id, name: "fantasy")
+                    case 16:
+                        return RLMGenre(id: id, name: "animation")
+                    case 18:
+                        return RLMGenre(id: id, name: "drama")
+                    case 27:
+                        return RLMGenre(id: id, name: "horror")
+                    case 28:
+                        return RLMGenre(id: id, name: "action")
+                    case 35:
+                        return RLMGenre(id: id, name: "comedy")
+                    case 36:
+                        return RLMGenre(id: id, name: "history")
+                    case 37:
+                        return RLMGenre(id: id, name: "western")
+                    case 53:
+                        return RLMGenre(id: id, name: "thriller")
+                    case 80:
+                        return RLMGenre(id: id, name: "crime")
+                    case 99:
+                        return RLMGenre(id: id, name: "documentary")
+                    case 878:
+                        return RLMGenre(id: id, name: "SF")
+                    case 9648:
+                        return RLMGenre(id: id, name: "mystery")
+                    case 10402:
+                        return RLMGenre(id: id, name: "music")
+                    case 10749:
+                        return RLMGenre(id: id, name: "romance")
+                    case 10751:
+                        return RLMGenre(id: id, name: "family")
+                    case 10752:
+                        return RLMGenre(id: id, name: "war")
+                    case 10770:
+                        return RLMGenre(id: id, name: "TVMovie")
                     default:
                         return RLMGenre(id: id, name: "Adventure")
                 }
@@ -50,48 +86,6 @@ struct SearchMovieResult: Decodable {
                 vote_count:   e <|  "vote_count"
             )
         }
-        
-        
-        
-        /*
-        var genreName: [String] {
-            
-            var results: [String] = []
-            
-            var dict = [
-                12:    "Adventure",
-                14:    "Fantasy",
-                16:    "Animation",
-                18:    "Drama",
-                27:    "Horror",
-                28:    "Action",
-                35:    "Comedy",
-                36:    "History",
-                37:    "Western",
-                53:    "Thriller",
-                80:    "Crime",
-                99:    "Documentary",
-                878:   "Science Fiction",
-                9648:  "Mystery",
-                10402: "Music",
-                10749: "Romance",
-                10751: "Family",
-                10752: "War",
-                10770: "TV Movie"
-            ]
-            
-            /*
-            (0..<self.genres.count).forEach {
-                if let val = dict[genres[$0]] {
-                    results.append(val)
-                }
-            }
-            */
-            
-            return results
-            
-        }
-        */
         
     }
 

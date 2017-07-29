@@ -64,7 +64,7 @@ final class MovieListViewController: UIViewController {
         
         
         self.navigationController?.navigationBar.titleTextAttributes
-            = [NSFontAttributeName: UIFont(name: "Quicksand", size: 15)!]
+            = [NSFontAttributeName: UIFont(name: (UIApplication.shared.delegate as! AppDelegate).font, size: 15)!]
         
         
         // テーブル内のモデル取得方法の分岐
