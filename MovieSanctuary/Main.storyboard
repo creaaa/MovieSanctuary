@@ -14,7 +14,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Movie Sanctuary-->
+        <!--Welcome View Controller-->
         <scene sceneID="hz2-fe-jV2">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="s4w-rV-qZ3" customClass="WelcomeViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
@@ -110,7 +110,7 @@
                             <constraint firstItem="Tin-IH-eOs" firstAttribute="top" secondItem="PK3-iq-8NI" secondAttribute="bottom" id="mh7-IW-n8V"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Movie Sanctuary" id="thy-yG-pc4">
+                    <navigationItem key="navigationItem" id="thy-yG-pc4">
                         <barButtonItem key="backBarButtonItem" title="Back" id="JAs-HM-jNq"/>
                     </navigationItem>
                     <connections>
@@ -121,10 +121,10 @@
             </objects>
             <point key="canvasLocation" x="-4306.3999999999996" y="-581.55922038980509"/>
         </scene>
-        <!--Movie Sanctuary-->
+        <!--Movie List View Controller-->
         <scene sceneID="UuO-3Q-CeW">
             <objects>
-                <viewController storyboardIdentifier="SearchResult" title="Movie Sanctuary" id="hMh-6r-kYZ" customClass="MovieListViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchResult" id="hMh-6r-kYZ" customClass="MovieListViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IoU-od-0pN"/>
                         <viewControllerLayoutGuide type="bottom" id="Ovn-Xj-I5J"/>
@@ -132,7 +132,6 @@
                     <view key="view" contentMode="scaleToFill" id="w6W-hY-SgE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
@@ -217,10 +216,10 @@
             </objects>
             <point key="canvasLocation" x="-5274.3999999999996" y="136.28185907046478"/>
         </scene>
-        <!--Movie Sanctuary-->
+        <!--Movie Detail View Controller-->
         <scene sceneID="kaT-C7-yy3">
             <objects>
-                <viewController storyboardIdentifier="MovieDetail" title="Movie Sanctuary" automaticallyAdjustsScrollViewInsets="NO" id="w0h-j8-nDv" customClass="MovieDetailViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetail" automaticallyAdjustsScrollViewInsets="NO" id="w0h-j8-nDv" customClass="MovieDetailViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ezR-k6-XZ0"/>
                         <viewControllerLayoutGuide type="bottom" id="0OQ-df-FLy"/>

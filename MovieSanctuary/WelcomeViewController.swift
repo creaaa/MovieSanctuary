@@ -64,8 +64,9 @@ class WelcomeViewController: UIViewController {
             }
             
             if let textField = searchBar.subviews[0].subviews[2] as? UITextField {
-                textField.textColor = .white
-                textField.font = UIFont(name: "Montserrat", size: 14)
+                textField.textColor       = .white
+                textField.clearButtonMode = .never
+                textField.font            = UIFont(name: "Montserrat", size: 14)
             }
         }
         
@@ -358,6 +359,7 @@ extension WelcomeViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
         searchBar.resignFirstResponder() // これでDidEndEditingが呼ばれる
     }
     
