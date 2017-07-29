@@ -62,9 +62,11 @@ final class MovieListViewController: UIViewController {
             resultView.tableView.scrollIndicatorInsets = edgeInsets
         }
         
-        
-        self.navigationController?.navigationBar.titleTextAttributes
-            = [NSFontAttributeName: UIFont(name: (UIApplication.shared.delegate as! AppDelegate).font, size: 15)!]
+        let title       = UILabel(frame: .zero)
+        title.textColor = .white
+        title.font      = UIFont(name: "Montserrat", size: 18)
+        title.text      = "Movie Sanctuary"
+        self.navigationItem.titleView = title
         
         
         // テーブル内のモデル取得方法の分岐

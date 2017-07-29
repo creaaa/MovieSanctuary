@@ -103,11 +103,11 @@
             condition = "section == 0"
             continueAfterRunningActions = "No"
             filePath = "MovieSanctuary/WelcomeViewController.swift"
-            timestampString = "523002394.429621"
+            timestampString = "523004893.071602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -119,11 +119,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieSanctuary/WelcomeViewController.swift"
-            timestampString = "523001483.697202"
+            timestampString = "523004893.071602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "WelcomeViewController"
             landmarkType = "4">
          </BreakpointContent>
@@ -141,6 +141,22 @@
             startingLineNumber = "23"
             endingLineNumber = "23"
             landmarkName = "setCollectionViewDataSourceDelegate(_:forRow:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieSanctuary/AppDelegate.swift"
+            timestampString = "523004754.487177"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

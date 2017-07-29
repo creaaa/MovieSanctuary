@@ -29,6 +29,15 @@ class WelcomeViewController: UIViewController {
         searchBar.delegate          = self
         
         self.navigationItem.titleView = searchBar
+        
+        /*
+        let title       = UILabel(frame: .zero)
+        title.textColor = .white
+        title.font      = UIFont(name: "Montserrat", size: 18)
+        title.text      = "Movie Sanctuary"
+        self.navigationItem.titleView = title
+        */
+        
         // tableView.reloadData()  // viewDidLoad = まだappearしてないので、書かなくてもよい
         
         // ネットワークチェック
