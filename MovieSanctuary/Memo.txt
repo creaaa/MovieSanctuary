@@ -4,3 +4,25 @@ CollectionViewのItemには制約付けなくても、OK、ぴったんこにな
 
 標準で曇りガラスがかかっているビュー → ナビゲーションバー、タブバー、ツールバー。
 曇りガラス効果をなくすには、 tabBar.isTranlucent = false とかにすればよい
+
+・ナビゲーションバー上のタイトルの決定法則
+
+1 > あれば、VC上のタイトル
+2 > あれば、VC上の「ナビゲーションアイテム」のタイトル(優先度高)
+
+
+ナビゲーションバー上の標準の戻るボタンのタイトルが何になるかは、
+「ナビゲーションアイテム」のタイトルに依存する。
+(もちろん left bar button itemとかわざわざ用意する必要はない。)
+
+[Back]とかに変えたい場合は? →
+
+・コード
+let backButtonItem = UIBarButtonItem(title: "ほげ", style: .Plain, target: nil, action: nil)
+navigationItem.backBarButtonItem = backButtonItem
+
+・SB
+1. 遷移元で、わざわざ「ナビゲーションアイテム」を配置する。
+このペインに「Back Button」という項目があるので、ここで設定。便利。
+ただしナビゲーションバーを配置した場合は、タイトルも同様に明示的に入力しないと、空文字になってしまうのでこっちも入れておく。
+

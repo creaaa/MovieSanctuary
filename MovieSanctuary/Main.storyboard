@@ -64,7 +64,7 @@
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="uyV-D5-8cg">
-                                                                        <rect key="frame" x="48" y="119.5" width="5" height="20"/>
+                                                                        <rect key="frame" x="48" y="118.5" width="5" height="21"/>
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <nil key="highlightedColor"/>
@@ -133,6 +133,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Movie Sanctuary" id="f7D-Sj-Rg8" userLabel="Back">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Tan-zj-Z3S"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmo-wf-4Y3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -184,7 +187,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XYH-Rn-ahi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="pYw-VQ-m9u"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Uu-aY-2uD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="9Uu-aY-2uD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -203,7 +206,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2vz-yF-YDw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="W8S-am-ot7"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yd2-Ks-7T0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yd2-Ks-7T0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
