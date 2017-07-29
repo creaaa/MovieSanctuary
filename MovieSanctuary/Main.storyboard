@@ -164,7 +164,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="d2j-DZ-m19">
             <objects>
-                <tabBarController id="OkS-PB-yAd" sceneMemberID="viewController">
+                <tabBarController id="OkS-PB-yAd" customClass="TabBarController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="9lg-gc-Aj4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

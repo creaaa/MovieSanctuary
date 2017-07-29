@@ -28,30 +28,7 @@ class WelcomeViewController: UIViewController {
         searchBar.searchBarStyle    = .minimal
         searchBar.delegate          = self
 
-        
-//        if let button = searchBar.subviews[0].subviews[0] as? UIButton {
-//            button.setTitleColor(.white, for: .normal)
-//            button.setTitleShadowColor(.red, for: .normal)
-//            button.titleLabel?.font = UIFont(name: "Quicksand", size: 14)
-//        }
-//
-//        if let textField = searchBar.subviews[0].subviews[1] as? UITextField {
-//            //textField.clearButtonMode = .never
-//            textField.font            = UIFont(name: "Quicksand", size: 14)
-//            textField.textColor       = .white
-//            // can't set placeholder here yet; do in viewDidAppear
-//        }
-    
-        
         self.navigationItem.titleView = searchBar
-        
-        /*
-        let title       = UILabel(frame: .zero)
-        title.textColor = .white
-        title.font      = UIFont(name: "Montserrat", size: 18)
-        title.text      = "Movie Sanctuary"
-        self.navigationItem.titleView = title
-        */
         
         // tableView.reloadData()  // viewDidLoad = まだappearしてないので、書かなくてもよい
         

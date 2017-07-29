@@ -11,18 +11,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // ナビゲーションバーのタイトル
-        
         UINavigationBar.appearance().titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.white,
              NSFontAttributeName: UIFont(name: self.font, size: 18) as Any
         ]
-        
-        
-//        let title = UILabel(frame: .zero)
-//        title.textColor = .white
-//        title.font = UIFont(name: font, size: 18)
-//        title.text = "Movie Sanctuary"
-        
         
         // ナビゲーションバーの背景色
         // (なんとサーチバーのテキストまで黒くなる...)
@@ -35,7 +27,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ],
             for: .normal)
         
+        
+        
+        /*
+        // タブバー
+        UITabBar.appearance().tintColor = .black
+        
+        // タブバーのアイコン(フォーカス(=選択された状態)時)
+        UITabBar.appearance().tintColor = UIColor(red:0.13, green:0.55, blue:0.83, alpha:1.0)
+        */
+        
+        
+        // タブバーのテキストのラベル
+        UITabBarItem.appearance().setTitleTextAttributes(
+            [ NSFontAttributeName: UIFont(name: font, size: 10) as Any,
+              NSForegroundColorAttributeName: UIColor(red:0.13, green:0.55, blue:0.83, alpha:1.0) as Any
+            ]
+            , for: .normal)
+        
         return true
+        
     }
 
 }
