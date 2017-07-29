@@ -102,6 +102,10 @@ final class MovieListViewController: UIViewController {
         super.viewDidAppear(animated)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -135,6 +139,20 @@ final class MovieListViewController: UIViewController {
         if let imagePath = self.movies[indexPath.row].poster_path {
             let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
             cell.posterImageView.kf.setImage(with: url)
+        }
+        
+        if self.movies[indexPath.row].vote_average != 0.0 {
+            cell.voteAverageLabel.text = Int(self.movies[indexPath.row].vote_average * 10).description + "%"
+        } else {
+            cell.voteAverageImageView.isHidden = true
+            cell.voteAverageLabel.isHidden     = true
+        }
+        
+        if self.movies[indexPath.row].vote_count != 0 {
+            cell.voteCountLabel.text = self.movies[indexPath.row].vote_count.description
+        } else {
+            cell.voteCountImageView.isHidden = true
+            cell.voteCountLabel.isHidden     = true
         }
         
         return cell
