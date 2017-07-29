@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        title.text = "Movie Sanctuary"
         
         
-        
         // ナビゲーションバーの背景色
         // (なんとサーチバーのテキストまで黒くなる...)
         UINavigationBar.appearance().barTintColor = .black

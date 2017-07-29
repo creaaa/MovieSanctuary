@@ -103,11 +103,11 @@
             condition = "section == 0"
             continueAfterRunningActions = "No"
             filePath = "MovieSanctuary/WelcomeViewController.swift"
-            timestampString = "523004893.071602"
+            timestampString = "523047602.179043"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
+            startingLineNumber = "328"
+            endingLineNumber = "328"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -119,11 +119,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieSanctuary/WelcomeViewController.swift"
-            timestampString = "523004893.071602"
+            timestampString = "523047602.179043"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "WelcomeViewController"
             landmarkType = "4">
          </BreakpointContent>
@@ -147,7 +147,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieSanctuary/AppDelegate.swift"
@@ -157,6 +157,22 @@
             startingLineNumber = "17"
             endingLineNumber = "17"
             landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieSanctuary/WelcomeViewController.swift"
+            timestampString = "523047560.154794"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

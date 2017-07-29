@@ -27,6 +27,21 @@ class WelcomeViewController: UIViewController {
         searchBar.showsCancelButton = true
         searchBar.searchBarStyle    = .minimal
         searchBar.delegate          = self
+
+        
+//        if let button = searchBar.subviews[0].subviews[0] as? UIButton {
+//            button.setTitleColor(.white, for: .normal)
+//            button.setTitleShadowColor(.red, for: .normal)
+//            button.titleLabel?.font = UIFont(name: "Quicksand", size: 14)
+//        }
+//
+//        if let textField = searchBar.subviews[0].subviews[1] as? UITextField {
+//            //textField.clearButtonMode = .never
+//            textField.font            = UIFont(name: "Quicksand", size: 14)
+//            textField.textColor       = .white
+//            // can't set placeholder here yet; do in viewDidAppear
+//        }
+    
         
         self.navigationItem.titleView = searchBar
         
@@ -56,6 +71,28 @@ class WelcomeViewController: UIViewController {
         connectForGenre()
         
     }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        if let searchBar = self.navigationController?.navigationBar.subviews[1] as? UISearchBar {
+            
+            // 2個目のサブビュー、ビジュアルデバッグ画面では絶対[0]なのに、
+            // printデバッグすると[1]だった。つまりビジュアルデバッガがウソをついてた。クソが
+            if let button = searchBar.subviews[0].subviews[1] as? UIButton {
+                button.setTitleColor(.white, for: .normal)
+            }
+            
+            if let textField = searchBar.subviews[0].subviews[2] as? UITextField {
+                textField.textColor = .white
+                textField.font = UIFont(name: "Montserrat", size: 14)
+            }
+        }
+        
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
