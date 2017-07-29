@@ -18,6 +18,10 @@ final class MovieListViewController: UIViewController {
     // このVCがキーワード検索で使われる場合: 検索結果の映画たちが入る(APIコールあり)
     var movies: [Movieable] = []
     
+    // 無限スクロールを連続コールしないための変数
+    var isFetching = false
+    
+    
     // ここ、fileprivateだったのに、internalにしちゃった理由はなに??
     // → もう片方のタブからここを操作したかったから。
     // やばかったら元に戻す。
@@ -197,6 +201,15 @@ final class MovieListViewController: UIViewController {
             return
         }
         
+        // 連続コールされないための処理
+        guard self.isFetching == false else {
+            print("連続コールすんなや")
+            return
+        }
+        
+        // 処理スタート！
+        self.isFetching = true
+        
         let manager = MovieSearchManager()
         
         // クエリ検索
@@ -206,6 +219,7 @@ final class MovieListViewController: UIViewController {
                     self.movies.append($0)
                 }
                 self.resultView.tableView.reloadData()
+                self.isFetching = false
             }
         }
     }
