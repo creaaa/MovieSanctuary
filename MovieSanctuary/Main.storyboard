@@ -121,10 +121,10 @@
             </objects>
             <point key="canvasLocation" x="-4306.3999999999996" y="-581.55922038980509"/>
         </scene>
-        <!--Movie List View Controller-->
+        <!--Movie Sanctuary-->
         <scene sceneID="UuO-3Q-CeW">
             <objects>
-                <viewController storyboardIdentifier="SearchResult" id="hMh-6r-kYZ" customClass="MovieListViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchResult" title="Movie Sanctuary" id="hMh-6r-kYZ" customClass="MovieListViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IoU-od-0pN"/>
                         <viewControllerLayoutGuide type="bottom" id="Ovn-Xj-I5J"/>
@@ -216,10 +216,10 @@
             </objects>
             <point key="canvasLocation" x="-5274.3999999999996" y="136.28185907046478"/>
         </scene>
-        <!--Movie Detail View Controller-->
+        <!--Movie Sanctuary-->
         <scene sceneID="kaT-C7-yy3">
             <objects>
-                <viewController storyboardIdentifier="MovieDetail" automaticallyAdjustsScrollViewInsets="NO" id="w0h-j8-nDv" customClass="MovieDetailViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetail" title="Movie Sanctuary" automaticallyAdjustsScrollViewInsets="NO" id="w0h-j8-nDv" customClass="MovieDetailViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ezR-k6-XZ0"/>
                         <viewControllerLayoutGuide type="bottom" id="0OQ-df-FLy"/>

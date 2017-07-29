@@ -29,14 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             for: .normal)
         
         
-        
-        /*
-        // タブバー
-        UITabBar.appearance().tintColor = .black
-        
-        // タブバーのアイコン(フォーカス(=選択された状態)時)
-        UITabBar.appearance().tintColor = UIColor(red:0.13, green:0.55, blue:0.83, alpha:1.0)
-        */
+        // タブバー (appearanceでは変更できないっぽい? 各VCの中でやれ)
+        // self.tabBarController?.tabBar.barTintColor = .black
+
+        // タブバーのアイコン(選択時)
+        UITabBar.appearance().tintColor = .white
+ 
         
         
         // タブバーのテキストのラベル

@@ -2,3 +2,5 @@
 CollectionViewのItemには制約付けなくても、OK、ぴったんこになる
 (CollectionViewの方の設定で、Itemのサイズが68と指定されているため)
 
+標準で曇りガラスがかかっているビュー → ナビゲーションバー、タブバー、ツールバー。
+曇りガラス効果をなくすには、 tabBar.isTranlucent = false とかにすればよい

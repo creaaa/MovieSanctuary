@@ -30,8 +30,13 @@ class WelcomeViewController: UIViewController {
         searchBar.delegate          = self
 
         self.navigationItem.titleView = searchBar
+        // 半透明をやめ、一体化させたいならこれ書けばよい。タブバーも同様。
+        // (なんかいまいちだったんでやっぱやめた)
+        // self.navigationController?.navigationBar.isTranslucent = false
         
-        // tableView.reloadData()  // viewDidLoad = まだappearしてないので、書かなくてもよい
+        
+        // viewDidLoad = まだappearしてないので、書かなくてもよい
+        // tableView.reloadData()
         
         // ネットワークチェック
         guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {

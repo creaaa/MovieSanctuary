@@ -61,7 +61,7 @@ final class MovieListViewController: UIViewController {
         // tableViewがナビゲーションバーに食い込まないようにする設定
         // (お気に入り画面として使うときだけ食い込むため、そのときのみ矯正)
         if self.tabBarController?.selectedIndex == 0 {
-            let edgeInsets = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+            let edgeInsets = UIEdgeInsets(top: 64, left: 0, bottom: 49, right: 0)
             resultView.tableView.contentInset          = edgeInsets
             resultView.tableView.scrollIndicatorInsets = edgeInsets
         }
@@ -220,7 +220,7 @@ final class MovieListViewController: UIViewController {
                     self.movies.append($0)
                 }
                 self.resultView.tableView.reloadData()
-                self.isFetching = false
+                self.isFetching = false // これfailureのときには実行されないからやばい....。
             }
         }
     }

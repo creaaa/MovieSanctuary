@@ -27,12 +27,6 @@ final class MovieDetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItem =
             UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addFavorite))
         
-        let title       = UILabel(frame: .zero)
-        title.textColor = .white
-        title.font      = UIFont(name: "Montserrat", size: 18)
-        title.text      = "Movie Sanctuary"
-        self.navigationItem.titleView = title
-        
     }
 
     override func viewDidAppear(_ animated: Bool) {
