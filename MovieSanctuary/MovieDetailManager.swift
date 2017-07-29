@@ -45,7 +45,7 @@ struct MovieDetailManager {
         
     }
     
-    // スタンダードなリクエスト
+    // スタンダードなリクエスト(映画ポスターセル、もしくは検索結果セルをタップして詳細画面に遷移する時にコールされる)
     func request(id: Int, _ completion: @escaping (StandardRequest.Response) -> Void) {
         
         let request = StandardRequest(movieID: id)

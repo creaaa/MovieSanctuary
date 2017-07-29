@@ -45,25 +45,6 @@ struct MovieSearchManager {
         }
     }
     
-    // now_playing
-    /*
-    func request(_ completion: @escaping (StandardRequest.Response) -> Void) {
-        
-        let request = NowPlayingRequest()
-        
-        Session.send(request) { result in
-            switch result {
-            case .success(let response):
-                print(response)
-                completion(response)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    */
-    
 }
-
 
 

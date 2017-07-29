@@ -27,7 +27,7 @@ enum Genre: Int {
     case war         = 10752
     case TVMovie     = 10770
     
-    static let genres: [Genre] = [.adventure, .fantasy, .horror, .action,
+    static let genres: [Genre] = [.adventure, .fantasy, .horror,.action,
                                   .comedy, .history, .romance, .family]
     
 }
@@ -44,9 +44,11 @@ struct DiscoverManager {
             return "/3/discover/movie/"
         }
         var parameters: Any? {
+            let cond =
+                arc4random_uniform(2) % 2 == 0 ? "vote_average.desc" : "popularity.desc"
             return [
                 "api_key": APIkey.TMDB_APIkey,
-                "sort_by": "vote_average.desc"
+                "sort_by": cond
             ]
         }
         
@@ -66,17 +68,19 @@ struct DiscoverManager {
             return "/3/discover/movie/"
         }
         var parameters: Any? {
+            let cond =
+                arc4random_uniform(2) % 2 == 0 ? "vote_average.desc" : "popularity.desc"
             return [
                 "api_key":     APIkey.TMDB_APIkey,
                 "with_genres": genre.rawValue,
-                "sort_by":     "vote_average.desc"
+                "sort_by":     cond
             ]
         }
         
     }
     
-    
-    // MASTERPIECEなリクエスト
+        
+    // セクション[1]: MASTERPIECEなリクエスト
     func request(completion: @escaping (MasterpieceRequest.Response) -> Void) {
         
         let request = MasterpieceRequest()
@@ -89,10 +93,11 @@ struct DiscoverManager {
                 print(error)
             }
         }
+        
     }
     
     
-    // 各ジャンルなリクエスト
+    // セクション[3-10]: 各ジャンルなリクエスト
     func request(genre: Genre, completion: @escaping (MasterpieceRequest.Response) -> Void) {
         
         let request = GenreRequest(genre: genre)
@@ -108,5 +113,4 @@ struct DiscoverManager {
     }
     
 }
-
 

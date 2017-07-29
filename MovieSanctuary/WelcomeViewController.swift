@@ -6,24 +6,19 @@ import Kingfisher
 
 class WelcomeViewController: UIViewController {
 
-    let model: [[UIColor]] = generateRandomData()
-    var storedOffsets      = [Int : CGFloat]()
+    var storedOffsets = [Int : CGFloat]()
 
     var img: UIImage?
 
-    // これが本チャンです。たぶん。
-    // var movies: [[SearchMovieResult.Movie]] = [[],[],[],[]]
-    
     // これ、こうしないとダメ！ []だと最初のnumberOfRowを通過できない！！ /*11*/
     var movies: [[Movieable]] = [[], [], [], [], [],[],[],[],[],[],[]]
     
     @IBOutlet weak var tableView: UITableView!
 
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-
         
         tableView.delegate   = self
         tableView.dataSource = self
@@ -34,14 +29,14 @@ class WelcomeViewController: UIViewController {
         searchBar.delegate          = self
         
         self.navigationItem.titleView = searchBar
-
         // tableView.reloadData()  // viewDidLoad = まだappearしてないので、書かなくてもよい
         
+        // グループ作っても意味なかった。なぜなら各タスク内でさらに非同期処理コールしてるので、
+        // タスクはソッコー「終わった」扱いになり、すぐ notify されちまう。
+        // かわりにタスク終了カウンタをつけることにした。
         connectForNowShowing()
-        connectForMade4U()
         connectForDiscover()
-        
-        // connectForAction()
+        connectForMade4U()
         connectForGenre()
         
     }
@@ -55,33 +50,16 @@ class WelcomeViewController: UIViewController {
     }
     
     
-    
-    enum FetchImgError: Error {
-        case urlCreationFailed
-        case dataCreationFailed
-        case imageCreationFailed
-    }
-        
-    func fetchImgFromUrlStr(urlStr: String) throws -> UIImage? {
-        
-        guard let url  = URL(string: urlStr) else {
-            throw FetchImgError.urlCreationFailed
-        }
-        
-        guard let data = try? Data(contentsOf: url) else {
-            throw FetchImgError.dataCreationFailed
-        }
-        
-        guard let image = UIImage(data: data) else {
-            throw FetchImgError.imageCreationFailed
-        }
-        
-        return image
-        
-    }
-    
-
     // API Connection
+    
+    var taskDoneCount = 0 {
+        didSet {
+            if taskDoneCount >= 11 {
+                print("全タスクdone!")
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     // セクション0: NOW SHOWING
     private func connectForNowShowing() {
@@ -91,14 +69,10 @@ class WelcomeViewController: UIViewController {
         DispatchQueue.global().async {
             manager.request { result in
                 self.movies[0] = result.results
-                // print("おら！", self.movies[1])
-                // print("いまや: ", self.movies[1].count)
-                
-                // FIXME: そもそもこのコールバックは、 .successのときしか実行されない
-                // reloadDataのロジック、ちゃんとなおせ
-                // self.tableView.reloadData()
+                self.taskDoneCount += 1
             }
         }
+        
     }
     
     // セクション1: MASTERPIECE
@@ -109,17 +83,13 @@ class WelcomeViewController: UIViewController {
         DispatchQueue.global().async {
             manager.request { result in
                 self.movies[1] = result.results
-                // print("おら！", self.movies[1])
-                // print("いまや: ", self.movies[1].count)
-                
-                // FIXME: そもそもこのコールバックは、 .successのときしか実行されない
-                // reloadDataのロジック、ちゃんとなおせ
-                // self.tableView.reloadData()
+                self.taskDoneCount += 1
             }
         }
     }
     
-    // セクション2: MADE4U (ここだけResponseがRLMMovieを使っているため、描写処理が他と違う！要警戒！！)
+    // セクション2: MADE4U
+    // (ここだけResponseがRLMMovieを使っているため、描写処理が他と違う！要警戒！！)
     private func connectForMade4U() {
         
         let manager = MovieDetailManager()
@@ -127,31 +97,11 @@ class WelcomeViewController: UIViewController {
         DispatchQueue.global().async {
             manager.request(id: 550) { result in
                 self.movies[2] = [result]
-                // print("おら！", self.movies[2])
-                print("いまや: ", self.movies[2].count) // 一個。あたりまえ。
-                // self.tableView.reloadData()
+                self.taskDoneCount += 1
             }
         }
         
     }
-    
-    // セクション3: GENRE -> ACTION
-    /*
-    private func connectForAction() {
-        
-        let manager = DiscoverManager()
-        
-        DispatchQueue.global().async {
-            manager.request(genre: .Adventure) { result in
-                self.movies[3] = result.results
-                // print("おら！", self.movies[3])
-                // print("いまや: ", self.movies[3].count)
-                self.tableView.reloadData()
-            }
-        }
-        
-    }
-    */
     
     // セクション3-10: GENRE
     private func connectForGenre() {
@@ -159,37 +109,17 @@ class WelcomeViewController: UIViewController {
         let manager = DiscoverManager()
         
         DispatchQueue.global().async {
-            
             var i = 3
-            
             Genre.genres.forEach {
                 manager.request(genre: $0) { result in
-                    
                     // ジャンル1なら[3], ジャンル8なら[10]...
                     self.movies[i] = result.results
-                    
-                    // print("おら！", self.movies[3])
-                    // print("いまや: ", self.movies[3].count)
-                    
                     i += 1
-                    
                 }
-                
+                self.taskDoneCount += 1
             }
-            
         }
-        
-        
-        
     }
-
-    
-//    private func makeAllGenres() -> [Genre] {
-//        
-//        
-//        
-//    }
-    
     
 }
 
@@ -241,37 +171,12 @@ extension WelcomeViewController: UITableViewDelegate, UITableViewDataSource {
         view.backgroundColor = .black
         
         let label = UILabel(frame: .zero)
-        label.text = {
-            switch section {
-                
-                case 0:
-                    return "NOW SHOWING"
-                case 1:
-                    return "MASTERPIECE"
-                case 2:
-                    return "MADE 4 YOU"
-                
-                case 3:
-                    return "ADVENTURE"
-                case 4:
-                    return "FANTASY"
-                case 5:
-                    return "HORROR"
-                case 6:
-                    return "ACTION"
-                case 7:
-                    return "COMEDY"
-                case 8:
-                    return "MYSTERY"
-                case 9:
-                    return "ROMANCE"
-                case 10:
-                    return "FAMILY"
-
-                default:
-                    fatalError()
-            }
-        }()
+        
+        let headerTitle = ["NOW SHOWING", "MASTERPIECE", "MADE 4 YOU", "ADVENTURE",
+                           "FANTASY", "HORROR", "ACTION", "COMEDY",
+                           "MYSTERY", "ROMANCE", "FAMILY"]
+        
+        label.text = headerTitle[section]
         
         label.font = UIFont(name: "Quicksand", size: 18)
         label.textColor = .white
@@ -286,45 +191,62 @@ extension WelcomeViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    /*
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
-    }
-    */
-    
-    /// footer
-    /*
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "ffff"
-    }
- 
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 30
-    }
-    */
-    
 }
 
 
-extension WelcomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension WelcomeViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        // print("Collection view at row \(collectionView.tag) selected index path \(indexPath)")
+        
+        guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
+            print("no network. try later...")
+            showAlert(title: "No network", message: "try again later...")
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil)
+        let vc         = storyboard.instantiateInitialViewController() as! MovieDetailViewController
+        
+        let movieID: Int
+        
+        // 2だけ RLMMovieを使ってるだけで取り方が違うんだ。すべては俺の罪だ
+        if collectionView.tag != 2 {
+            movieID = self.movies[collectionView.tag][indexPath.row].id
+        } else {
+            movieID = (self.movies[2] as! [RLMMovie])[0].recommendations.results[indexPath.row].id
+        }
+        
+        vc.connectForMovieDetail(type: .standard(movieID))
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+}
+
+
+extension WelcomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         print("おれのtag: \(collectionView.tag)")
         
         if collectionView.tag == 2 {
-            
             // この書き方だと最初にバグる。なんかいい方法教えてくれ
             // let res = (self.movies[2] as! [RLMMovie])[0].recommendations.results.count
-            
-            return 20
-            
+            if self.movies.count > 2 && (self.movies[2] as! [RLMMovie]).count > 0 {
+                return (self.movies[2] as! [RLMMovie])[0].recommendations.results.count
+            } else {
+                return 0
+            }
+        } else {
+            let result = self.movies[collectionView.tag].count
+            return result
         }
         
-        let result = self.movies[collectionView.tag].count
-        return result
-        
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
@@ -370,10 +292,6 @@ extension WelcomeViewController: UICollectionViewDelegate, UICollectionViewDataS
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Collection view at row \(collectionView.tag) selected index path \(indexPath)")
-    }
-    
 }
 
 
@@ -389,7 +307,7 @@ extension WelcomeViewController: UISearchBarDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let vc         = storyboard.instantiateViewController(withIdentifier: "SearchResult") as! MovieListViewController
+        let vc   = storyboard.instantiateViewController(withIdentifier: "SearchResult") as! MovieListViewController
         vc.query = searchBar.text!
         
         vc.connectForMovieSearch(query: searchBar.text!)
@@ -409,9 +327,4 @@ extension WelcomeViewController: UISearchBarDelegate {
     }
     
 }
-
-
-
-
-
 
