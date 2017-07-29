@@ -2,6 +2,7 @@
 // https://ashfurrow.com/blog/putting-a-uicollectionview-in-a-uitableviewcell-in-swift/
 
 import UIKit
+import Foundation
 import Kingfisher
 
 class WelcomeViewController: UIViewController {
@@ -293,7 +294,13 @@ extension WelcomeViewController: UICollectionViewDataSource {
                 
                 if let posterPath = self.movies[tag][indexPath.row].poster_path {
                     let url = URL(string: "https://image.tmdb.org/t/p/original/" + posterPath)
-                    item.imageView.kf.setImage(with: url)
+                    
+                    // item.imageView.kf.setImage(with: url)
+                    
+                    item.imageView.kf.setImage(with: url,
+                                               placeholder: #imageLiteral(resourceName: "noimage"),
+                                               options: [.transition(.fade(0.3))]
+                    )
                 }
             
             case 2:
@@ -309,11 +316,12 @@ extension WelcomeViewController: UICollectionViewDataSource {
                     
                     if let posterPath = myRLMMovie.recommendations.results[indexPath.row].poster_path {
                         let url = URL(string: "https://image.tmdb.org/t/p/original/" + posterPath)
-                        item.imageView.kf.setImage(with: url)
+                        item.imageView.kf.setImage(with: url,
+                                                   placeholder: #imageLiteral(resourceName: "noimage"),
+                                                   options: [.transition(.fade(0.3))]
+                        )
                     }
-                    
                 }
-            
             
             default:
                 break

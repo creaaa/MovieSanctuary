@@ -137,8 +137,11 @@ final class MovieListViewController: UIViewController {
         }
  
         if let imagePath = self.movies[indexPath.row].poster_path {
+            
             let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
-            cell.posterImageView.kf.setImage(with: url)
+            cell.posterImageView.kf.setImage(with: url,
+                                             placeholder: #imageLiteral(resourceName: "noimage"),
+                                             options: [.transition(.fade(0.3))])
         }
         
         if self.movies[indexPath.row].vote_average != 0.0 {
