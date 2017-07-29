@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // self.tabBarController?.tabBar.barTintColor = .black
 
         // タブバーのアイコン(選択時)
-        UITabBar.appearance().tintColor = .white
+        // UITabBar.appearance().tintColor = .white
  
         
         

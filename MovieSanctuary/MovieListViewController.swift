@@ -60,23 +60,16 @@ final class MovieListViewController: UIViewController {
         
         // tableViewがナビゲーションバーに食い込まないようにする設定
         // (お気に入り画面として使うときだけ食い込むため、そのときのみ矯正)
-        if self.tabBarController?.selectedIndex == 0 {
+        if self.tabBarController?.selectedIndex == 1 {
             let edgeInsets = UIEdgeInsets(top: 64, left: 0, bottom: 49, right: 0)
             resultView.tableView.contentInset          = edgeInsets
             resultView.tableView.scrollIndicatorInsets = edgeInsets
         }
         
-        /*
-        let title       = UILabel(frame: .zero)
-        title.textColor = .white
-        title.font      = UIFont(name: "Montserrat", size: 18)
-        title.text      = "Movie Sanctuary"
-        self.navigationItem.titleView = title
-        */
-        
+       
         // テーブル内のモデル取得方法の分岐
         // この画面がお気に入り画面なら
-        if self.tabBarController?.selectedIndex == 0 {
+        if self.tabBarController?.selectedIndex == 1 {
             
             self.realm = try! Realm()
 
