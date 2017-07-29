@@ -30,9 +30,3 @@ extension WelcomeViewControllerCell {
     }
     
 }
-
-
-
-
-
-

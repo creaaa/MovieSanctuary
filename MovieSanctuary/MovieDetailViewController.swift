@@ -71,13 +71,13 @@ final class MovieDetailViewController: UIViewController {
     // MARK: - API connection
     //////////////////////////
 
+    // 結局使ってません。
     func connectForMovieDetail(type: MovieRequestType) {
         
         let manager = MovieDetailManager()
         
         // スタンダード
         DispatchQueue.global().async {
-            
             switch type {
                 case .standard(let movieID):
                     manager.request(id: movieID) { result in
@@ -89,11 +89,10 @@ final class MovieDetailViewController: UIViewController {
                     // このViewControllerで使われる限りは、now_playingでコールされることはない
                     fatalError()
             }
-            
         }
-        
     }
 
+    
     ///////////////////////////////////
     // MARK: - Configure & Render View
     ///////////////////////////////////

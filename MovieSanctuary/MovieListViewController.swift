@@ -153,7 +153,6 @@ final class MovieListViewController: UIViewController {
     }
     
     
-    
     //////////////////////////
     // MARK: - API connection
     //////////////////////////
@@ -186,15 +185,9 @@ final class MovieListViewController: UIViewController {
                 self.resultView.tableView.reloadData()
             }
         }
-        
     }
-    
 }
 
-
-////////////
-// MARK: -
-////////////
 
 extension MovieListViewController: UITableViewDataSource {
     
@@ -260,8 +253,6 @@ extension MovieListViewController: UITableViewDataSource {
 extension MovieListViewController: UITableViewDelegate {
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        print("タッチ")
         
         guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
             print("no network. try later...")

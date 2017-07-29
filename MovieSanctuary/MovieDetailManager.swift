@@ -5,6 +5,7 @@ import Himotoki
 
 /* Manager */
 
+// 結局使ってません。
 enum MovieRequestType {
     case standard(Int) // スタンダード  なリクエスト
     case now_playing   // Now Playing なリクエスト
