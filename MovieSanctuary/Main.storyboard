@@ -220,7 +220,7 @@
         <!--Movie Sanctuary-->
         <scene sceneID="kaT-C7-yy3">
             <objects>
-                <viewController title="Movie Sanctuary" automaticallyAdjustsScrollViewInsets="NO" id="w0h-j8-nDv" customClass="MovieDetailViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetail" title="Movie Sanctuary" automaticallyAdjustsScrollViewInsets="NO" id="w0h-j8-nDv" customClass="MovieDetailViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ezR-k6-XZ0"/>
                         <viewControllerLayoutGuide type="bottom" id="0OQ-df-FLy"/>
@@ -233,10 +233,10 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jTQ-Km-O1N" userLabel="Contents">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="379.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="378.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="I6k-a0-hnY">
-                                                <rect key="frame" x="166" y="62" width="201" height="134"/>
+                                                <rect key="frame" x="166" y="61" width="201" height="134"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    " textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Lg-s4-li1" customClass="MyLabel" customModule="MovieSanctuary" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="201" height="21.5"/>
@@ -269,47 +269,47 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4Q-yy-9rl" userLabel="Story" customClass="MyLabel" customModule="MovieSanctuary" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="226" width="359" height="19"/>
+                                                <rect key="frame" x="8" y="225" width="359" height="19"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xtj-PH-HW7" userLabel="RateContainer">
-                                                <rect key="frame" x="8" y="303.5" width="359" height="56"/>
+                                                <rect key="frame" x="8" y="302.5" width="359" height="56"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vHv-GS-AUs">
-                                                        <rect key="frame" x="10" y="11" width="339" height="36"/>
+                                                        <rect key="frame" x="10" y="10" width="339" height="36"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stars" translatesAutoresizingMaskIntoConstraints="NO" id="M7A-Gl-Ovj">
-                                                                <rect key="frame" x="0.0" y="0.5" width="34" height="36"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="34" height="36"/>
                                                             </imageView>
                                                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stars" translatesAutoresizingMaskIntoConstraints="NO" id="KMS-hJ-fIE">
-                                                                <rect key="frame" x="34" y="0.5" width="34" height="36"/>
+                                                                <rect key="frame" x="34" y="0.0" width="34" height="36"/>
                                                             </imageView>
                                                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stars" translatesAutoresizingMaskIntoConstraints="NO" id="KL4-ro-z5d">
-                                                                <rect key="frame" x="68" y="0.5" width="33.5" height="36"/>
+                                                                <rect key="frame" x="68" y="0.0" width="33.5" height="36"/>
                                                             </imageView>
                                                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stars" translatesAutoresizingMaskIntoConstraints="NO" id="UYc-uL-RvF">
-                                                                <rect key="frame" x="101.5" y="0.5" width="34" height="36"/>
+                                                                <rect key="frame" x="101.5" y="0.0" width="34" height="36"/>
                                                             </imageView>
                                                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stars" translatesAutoresizingMaskIntoConstraints="NO" id="j2X-Rx-bnN">
-                                                                <rect key="frame" x="135.5" y="0.5" width="34" height="36"/>
+                                                                <rect key="frame" x="135.5" y="0.0" width="34" height="36"/>
                                                             </imageView>
                                                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stars" translatesAutoresizingMaskIntoConstraints="NO" id="mzF-r2-b18">
-                                                                <rect key="frame" x="169.5" y="0.5" width="34" height="36"/>
+                                                                <rect key="frame" x="169.5" y="0.0" width="34" height="36"/>
                                                             </imageView>
                                                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stars" translatesAutoresizingMaskIntoConstraints="NO" id="gwM-JY-cbY">
-                                                                <rect key="frame" x="203.5" y="0.5" width="34" height="36"/>
+                                                                <rect key="frame" x="203.5" y="0.0" width="34" height="36"/>
                                                             </imageView>
                                                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stars" translatesAutoresizingMaskIntoConstraints="NO" id="a9F-wI-kUY">
-                                                                <rect key="frame" x="237.5" y="0.5" width="33.5" height="36"/>
+                                                                <rect key="frame" x="237.5" y="0.0" width="33.5" height="36"/>
                                                             </imageView>
                                                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stars" translatesAutoresizingMaskIntoConstraints="NO" id="hhW-wg-T6p">
-                                                                <rect key="frame" x="271" y="0.5" width="34" height="36"/>
+                                                                <rect key="frame" x="271" y="0.0" width="34" height="36"/>
                                                             </imageView>
                                                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stars" translatesAutoresizingMaskIntoConstraints="NO" id="XiD-ou-UJZ">
-                                                                <rect key="frame" x="305" y="0.5" width="34" height="36"/>
+                                                                <rect key="frame" x="305" y="0.0" width="34" height="36"/>
                                                             </imageView>
                                                         </subviews>
                                                     </stackView>
@@ -330,7 +330,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IMDb Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtD-SB-q7D">
-                                                <rect key="frame" x="8" y="266" width="80" height="17.5"/>
+                                                <rect key="frame" x="8" y="265" width="80" height="17.5"/>
                                                 <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>

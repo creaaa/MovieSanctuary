@@ -31,6 +31,13 @@ class WelcomeViewController: UIViewController {
         self.navigationItem.titleView = searchBar
         // tableView.reloadData()  // viewDidLoad = まだappearしてないので、書かなくてもよい
         
+        // ネットワークチェック
+        guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
+            print("no network. try later...")
+            showAlert(title: "No network", message: "try again later...")
+            return
+        }
+        
         // グループ作っても意味なかった。なぜなら各タスク内でさらに非同期処理コールしてるので、
         // タスクはソッコー「終わった」扱いになり、すぐ notify されちまう。
         // かわりにタスク終了カウンタをつけることにした。
@@ -206,8 +213,8 @@ extension WelcomeViewController: UICollectionViewDelegate {
             return
         }
         
-        let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil)
-        let vc         = storyboard.instantiateInitialViewController() as! MovieDetailViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "MovieDetail") as! MovieDetailViewController
         
         let movieID: Int
         

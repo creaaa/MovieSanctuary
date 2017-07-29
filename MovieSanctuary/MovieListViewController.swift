@@ -260,8 +260,8 @@ extension MovieListViewController: UITableViewDelegate {
             return
         }
         
-        let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil)
-        let vc         = storyboard.instantiateInitialViewController() as! MovieDetailViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "MovieDetail") as! MovieDetailViewController
    
         vc.connectForMovieDetail(type: .standard(self.movies[indexPath.row].id))
         
