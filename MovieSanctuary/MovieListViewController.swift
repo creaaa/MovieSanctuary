@@ -76,7 +76,7 @@ final class MovieListViewController: UIViewController {
             let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
             
             // Results<RLMMovie> → [Movieable]
-            res.forEach {self.movies.append($0) }
+            res.forEach { self.movies.append($0) }
             
             // 編集ボタン
             self.navigationItem.leftBarButtonItem = editButtonItem

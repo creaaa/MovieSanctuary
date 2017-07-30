@@ -48,7 +48,8 @@ struct DiscoverManager {
                 arc4random_uniform(2) % 2 == 0 ? "vote_average.desc" : "popularity.desc"
             return [
                 "api_key": APIkey.TMDB_APIkey,
-                "sort_by": cond
+                "sort_by": cond,
+                "vote_count.gte" : 100
             ]
         }
         
@@ -73,7 +74,8 @@ struct DiscoverManager {
             return [
                 "api_key":     APIkey.TMDB_APIkey,
                 "with_genres": genre.rawValue,
-                "sort_by":     cond
+                "sort_by":     cond,
+                "vote_count.gte" : 100
             ]
         }
         
