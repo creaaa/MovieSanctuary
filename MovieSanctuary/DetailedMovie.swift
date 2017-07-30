@@ -102,7 +102,7 @@ final class RLMCrew: Object, Decodable {
     
     static func decode(_ e: Extractor) throws -> RLMCrew {
         return try RLMCrew(
-            job: e <| "job",
+            job:  e <| "job",
             name: e <| "name"
         )
     }
@@ -119,8 +119,8 @@ final class RLMCrew: Object, Decodable {
 
 final class RLMCredits: Object, Decodable {
     
-    var casts =  List<RLMCast>()
-    var crews =  List<RLMCrew>()
+    var casts = List<RLMCast>()
+    var crews = List<RLMCrew>()
     
     static func decode(_ e: Extractor) throws -> RLMCredits {
         
@@ -207,12 +207,12 @@ final class RLMRecommendations: Object, Decodable {
 final class RLMMovie: Object, Movieable, Decodable {
 
     // searchでも取れるやつ
-    dynamic var id             = 0
-    dynamic var title          = ""
-    dynamic var poster_path:   String?
-    var genres: List<RLMGenre> = List<RLMGenre>()
-    dynamic var vote_average:  Float = 0.0
-    dynamic var vote_count     = 0
+    dynamic var id                     = 0
+    dynamic var title                  = ""
+    dynamic var poster_path: String?
+            var genres: List<RLMGenre> = List<RLMGenre>()
+    dynamic var vote_average: Float    = 0.0
+    dynamic var vote_count             = 0
     
     // movie/{movie_id}/videos で取れるやつ
     
@@ -243,7 +243,7 @@ final class RLMMovie: Object, Movieable, Decodable {
         }
         
         // videos
-        let tmpVideos: RLMVideos = try! e <| "videos"
+        let tmpVideos:  RLMVideos = try! e <| "videos"
         
         // credits(cast&crew)
         let tmpCredits: RLMCredits = try! e <| "credits"
