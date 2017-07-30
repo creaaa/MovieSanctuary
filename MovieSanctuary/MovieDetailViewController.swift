@@ -117,8 +117,15 @@ final class MovieDetailViewController: UIViewController {
 
         self.titleLabel.text    = self.myRLMMovie.title
         self.directorLabel.text = self.myRLMMovie.credits.crews[0].name
-        self.genresLabel.text   = self.myRLMMovie.genres[0].name
-        self.actorsLabel.text   = self.myRLMMovie.credits.casts[0].name
+        
+        /* おちる　なおせ
+        self.genresLabel.text =
+            self.myRLMMovie.genres.map { $0.name }
+                .dropLast(self.myRLMMovie.genres.map { $0.name }.count - 2)
+                .joined(separator: ", ")
+        */
+        
+        self.actorsLabel.text = self.myRLMMovie.credits.casts[0].name
         
     }
 

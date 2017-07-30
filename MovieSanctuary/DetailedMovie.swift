@@ -31,18 +31,21 @@ final class RLMGenre: Object, Decodable {
 
 final class RLMVideo: Object, Decodable {
     
-    dynamic var key = ""
+    dynamic var key  = ""
+    dynamic var name = ""
     
     static func decode(_ e: Extractor) throws -> RLMVideo {
         return try RLMVideo(
-            key: e <| "key"
+            key:  e <| "key",
+            name: e <| "name"
         )
     }
     
     // なぜかこれを定義しないとエラー(decodeと共存できない)！
-    required convenience init(key: String) {
+    required convenience init(key: String, name: String) {
         self.init()
-        self.key = key
+        self.key  = key
+        self.name = name
     }
  
 }
