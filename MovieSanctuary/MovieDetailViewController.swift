@@ -4,6 +4,8 @@ import RealmSwift
 
 final class MovieDetailViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel:      UILabel!
     @IBOutlet weak var directorLabel:   UILabel!
@@ -23,6 +25,9 @@ final class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        self.tableView.delegate   = self
+        self.tableView.dataSource = self
         
         self.navigationItem.rightBarButtonItem =
             UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addFavorite))
@@ -130,3 +135,72 @@ final class MovieDetailViewController: UIViewController {
     }
 
 }
+
+
+extension MovieDetailViewController: UITableViewDelegate {
+    
+}
+
+extension MovieDetailViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        switch indexPath.section {
+            case 0...2:
+                
+                let cell = UITableViewCell(style: .value1, reuseIdentifier: "Cell")
+                
+                cell.textLabel?.text       = "unk"
+                cell.textLabel?.textColor = .gray
+                
+                cell.detailTextLabel?.text = "tnk"
+                cell.detailTextLabel?.textColor = .black
+                
+                
+                
+                return cell
+            
+            default:
+                fatalError()
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        switch section {
+            case 0:
+                return 5
+            default:
+                return 1
+        }
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        return "HOGE"
+    }
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
