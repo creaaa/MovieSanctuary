@@ -310,7 +310,7 @@ extension WelcomeViewController: UICollectionViewDataSource {
                 }
             
                 item.voteAverageLabel.text =
-                    (self.movies[tag][indexPath.row].vote_average * 10).description + "%"
+                    Int(self.movies[tag][indexPath.row].vote_average * 10).description + "%"
                 item.voteCountLabel.text = (self.movies[tag][indexPath.row].vote_count).description
             
             case 2:
@@ -333,7 +333,7 @@ extension WelcomeViewController: UICollectionViewDataSource {
                     }
                     
                     item.voteAverageLabel.text =
-                        (myRLMMovie.vote_average * 10).description + "%"
+                        Int(myRLMMovie.vote_average * 10).description + "%"
                     item.voteCountLabel.text = (myRLMMovie.vote_count).description
                 }
             
