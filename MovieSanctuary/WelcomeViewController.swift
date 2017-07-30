@@ -332,9 +332,11 @@ extension WelcomeViewController: UICollectionViewDataSource {
                         )
                     }
                     
+                    /*
                     item.voteAverageLabel.text =
-                        Int(myRLMMovie.vote_average * 10).description + "%"
+                        Int(myRLMMovie.recommendations.results[indexPath.row]. * 10).description + "%"
                     item.voteCountLabel.text = (myRLMMovie.vote_count).description
+                    */
                 }
             
             default:
