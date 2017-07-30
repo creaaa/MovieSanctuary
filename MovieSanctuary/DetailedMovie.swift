@@ -225,6 +225,15 @@ final class RLMMovie: Object, Movieable, Decodable {
     // 7/27 recomendations 追加しまーす
     var recommendations: RLMRecommendations! = RLMRecommendations()
     
+    // 7/30 さらに追加
+    dynamic var overview: String?
+    dynamic var release_date = ""
+    var runtime: Int?
+    dynamic var budget  = 0
+    dynamic var revenue = 0
+    dynamic var homepage: String?
+    
+    
     /**
      id をプライマリーキーとして設定
      */
@@ -262,16 +271,28 @@ final class RLMMovie: Object, Movieable, Decodable {
             genres:          genres,
             videos:          tmpVideos,
             credits:         tmpCredits,
-            recommendations: tmpRecommendations
+            recommendations: tmpRecommendations,
             
+            // 7/30 added
+            overview:     e <|? "overview",
+            release_date: e <|  "release_date",
+            runtime:      e <|? "runtime",
+            budget:       e <|  "budget",
+            revenue:      e <|  "revenue",
+            homepage:     e <|? "homepage"
+
         )
     }
     
     required convenience init(id: Int, title: String, poster_path: String?,
                               vote_average: Float, vote_count: Int,
                               genres: List<RLMGenre>, videos: RLMVideos,
-                              credits: RLMCredits, recommendations: RLMRecommendations) {
+                              credits: RLMCredits, recommendations: RLMRecommendations,
+                              overview: String?, release_date: String, runtime: Int?,
+                              budget: Int, revenue: Int, homepage: String?) {
+        
         self.init()
+        
         self.id = id
         self.title = title
         self.poster_path = poster_path
@@ -282,6 +303,14 @@ final class RLMMovie: Object, Movieable, Decodable {
         self.videos          = videos
         self.credits         = credits
         self.recommendations = recommendations
+        //
+        self.overview        = overview
+        self.release_date    = release_date
+        self.runtime         = runtime
+        self.budget          = budget
+        self.revenue         = revenue
+        self.homepage        = homepage
+        
     }
     
 }
