@@ -71,7 +71,7 @@ final class MovieDetailViewController: UIViewController {
     // MARK: - API connection
     //////////////////////////
 
-    // 結局使ってません。
+    
     func connectForMovieDetail(type: MovieRequestType) {
         
         let manager = MovieDetailManager()

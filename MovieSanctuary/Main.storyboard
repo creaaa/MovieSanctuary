@@ -258,7 +258,7 @@
         <!--Movie Sanctuary-->
         <scene sceneID="kaT-C7-yy3">
             <objects>
-                <viewController storyboardIdentifier="MovieDetail" title="Movie Sanctuary" automaticallyAdjustsScrollViewInsets="NO" id="w0h-j8-nDv" customClass="MovieDetailViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Movie Sanctuary" automaticallyAdjustsScrollViewInsets="NO" id="w0h-j8-nDv" customClass="MovieDetailViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ezR-k6-XZ0"/>
                         <viewControllerLayoutGuide type="bottom" id="0OQ-df-FLy"/>
@@ -421,7 +421,65 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wOW-ZR-PmF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2442" y="-190"/>
+            <point key="canvasLocation" x="-2374" y="-190"/>
+        </scene>
+        <!--Neo Detail VC-->
+        <scene sceneID="Y9b-xJ-gQ1">
+            <objects>
+                <viewController storyboardIdentifier="MovieDetail" title="Neo Detail VC" automaticallyAdjustsScrollViewInsets="NO" id="SQU-Ir-rk9" customClass="MovieDetailViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CHJ-sX-Lcc"/>
+                        <viewControllerLayoutGuide type="bottom" id="GKP-r8-ccs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QoW-CW-WpN" userLabel="View">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="2000"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rXu-Lo-JrM">
+                                <rect key="frame" x="0.0" y="64" width="375" height="1936"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QNr-2h-eoa" userLabel="Contents">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="829"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDF-be-cMW">
+                                                <rect key="frame" x="8" y="8" width="359" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="bDF-be-cMW" firstAttribute="top" secondItem="QNr-2h-eoa" secondAttribute="topMargin" id="d1P-Gl-k9W"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="bDF-be-cMW" secondAttribute="trailing" id="q80-Uj-5Uw"/>
+                                            <constraint firstAttribute="bottom" secondItem="bDF-be-cMW" secondAttribute="bottom" constant="800" id="yxT-IR-Oz9"/>
+                                            <constraint firstItem="bDF-be-cMW" firstAttribute="leading" secondItem="QNr-2h-eoa" secondAttribute="leadingMargin" id="zhC-6M-Df3"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="QNr-2h-eoa" firstAttribute="top" secondItem="rXu-Lo-JrM" secondAttribute="top" id="0du-Pm-vU8"/>
+                                    <constraint firstItem="QNr-2h-eoa" firstAttribute="leading" secondItem="rXu-Lo-JrM" secondAttribute="leading" id="I52-iV-xEd"/>
+                                    <constraint firstAttribute="trailing" secondItem="QNr-2h-eoa" secondAttribute="trailing" id="Jmw-c6-Ozq"/>
+                                    <constraint firstItem="QNr-2h-eoa" firstAttribute="width" secondItem="rXu-Lo-JrM" secondAttribute="width" id="X2O-RZ-b5B"/>
+                                    <constraint firstAttribute="bottom" secondItem="QNr-2h-eoa" secondAttribute="bottom" id="s32-gR-Fc1"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="rXu-Lo-JrM" firstAttribute="leading" secondItem="QoW-CW-WpN" secondAttribute="leading" id="Afh-Kz-AGP"/>
+                            <constraint firstAttribute="trailing" secondItem="rXu-Lo-JrM" secondAttribute="trailing" id="CE3-Hp-fza"/>
+                            <constraint firstItem="GKP-r8-ccs" firstAttribute="top" secondItem="rXu-Lo-JrM" secondAttribute="bottom" id="MsX-8n-ESw"/>
+                            <constraint firstItem="rXu-Lo-JrM" firstAttribute="top" secondItem="CHJ-sX-Lcc" secondAttribute="bottom" id="Phc-er-r7I"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="2000"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bnc-SM-9bt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1542" y="-190"/>
         </scene>
     </scenes>
     <resources>
