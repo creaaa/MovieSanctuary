@@ -309,6 +309,10 @@ extension WelcomeViewController: UICollectionViewDataSource {
                     )
                 }
             
+                item.voteAverageLabel.text =
+                    (self.movies[tag][indexPath.row].vote_average * 10).description + "%"
+                item.voteCountLabel.text = (self.movies[tag][indexPath.row].vote_count).description
+            
             case 2:
                 
                 // ここにある2つの if は、こうしないと最初のここのコールで落ちるから、苦肉の策。
@@ -327,10 +331,15 @@ extension WelcomeViewController: UICollectionViewDataSource {
                                                    options: [.transition(.fade(0.3))]
                         )
                     }
+                    
+                    item.voteAverageLabel.text =
+                        (myRLMMovie.vote_average * 10).description + "%"
+                    item.voteCountLabel.text = (myRLMMovie.vote_count).description
                 }
             
             default:
-                break
+                fatalError("Never executed")
+            
         }
         
         return item
