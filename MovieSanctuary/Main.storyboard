@@ -509,10 +509,10 @@
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonCell" id="RH3-dz-QI7" customClass="PersonTableViewCell" customModule="MovieSanctuary" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="55" width="375" height="61"/>
+                                                        <rect key="frame" x="0.0" y="55.5" width="375" height="61"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RH3-dz-QI7" id="K2H-6g-Gcp">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noimage" translatesAutoresizingMaskIntoConstraints="NO" id="Ukb-BE-XDx">

@@ -213,27 +213,35 @@ extension MovieDetailViewController: UITableViewDataSource {
                 cell.textLabel?.textColor = .gray
                 cell.textLabel?.font = UIFont(name: "Montserrat", size: 12)
                 
-                switch indexPath.row {
-                    case 0:
-                         cell.detailTextLabel?.text = self.myRLMMovie.release_date
-                    case 1:
-                        cell.detailTextLabel?.text = self.myRLMMovie.runtime?.description
-                    case 2:
-                        cell.detailTextLabel?.text = self.myRLMMovie.genres.first?.name
-                    case 3:
-                        cell.detailTextLabel?.text =
-                            self.myRLMMovie.budget != 0 ? self.myRLMMovie.budget.description : ""
-                    case 4:
-                        cell.detailTextLabel?.text =
-                            self.myRLMMovie.revenue != 0 ? self.myRLMMovie.revenue.description : ""
-                    default:
-                        fatalError()
+                // これしないと、初回にエラーで落ちる
+                if let movie = self.myRLMMovie {
+                    
+                    let formatter = NumberFormatter()
+                    formatter.numberStyle = .decimal
+                    formatter.groupingSeparator = ","
+                    formatter.groupingSize = 3
+                    
+                    switch indexPath.row {
+                        case 0:
+                             cell.detailTextLabel?.text = movie.release_date
+                        case 1:
+                            cell.detailTextLabel?.text =
+                                (movie.runtime?.description).map { $0 + " mins"}
+                        case 2:
+                            cell.detailTextLabel?.text = movie.genres.first?.name
+                        case 3:
+                            cell.detailTextLabel?.text =
+                                self.myRLMMovie.budget != 0 ?
+                                    formatter.string(from: movie.budget as NSNumber).map{"$ \($0)"} : ""
+                        case 4:
+                            cell.detailTextLabel?.text =
+                                self.myRLMMovie.revenue != 0 ?
+                                    formatter.string(from: movie.revenue as NSNumber).map{"$ \($0)"} : ""
+
+                        default:
+                            fatalError()
+                    }
                 }
-                
-                
-                
-                
-                
                 
                 cell.detailTextLabel?.textColor = .black
                 cell.detailTextLabel?.font = UIFont(name: "Montserrat", size: 14)
