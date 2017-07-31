@@ -252,10 +252,12 @@ extension MovieDetailViewController: UITableViewDataSource {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "PersonCell", for: indexPath) as! PersonTableViewCell
 
-                // ぬるぽ
-                let predicate = NSPredicate(format: "job CONTAINS %@", "director")
-                cell.nameLabel.text = self.myRLMMovie.credits.crews.filter(predicate).first?.job
-                
+                // ぬるぽ！！このnullチェックマジ忘れる！！超注意！
+                if let movie = self.myRLMMovie {
+                    let predicate = NSPredicate(format: "job == 'director'")
+                    // よべない
+                    cell.nameLabel.text = movie.credits.crews.filter(predicate).first?.job
+                }
                 
                 
                 return cell
