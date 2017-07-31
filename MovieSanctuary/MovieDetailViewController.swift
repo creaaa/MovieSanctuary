@@ -1,6 +1,7 @@
 
 import UIKit
 import RealmSwift
+import Kingfisher
 
 final class MovieDetailViewController: UIViewController {
 
@@ -14,6 +15,9 @@ final class MovieDetailViewController: UIViewController {
     @IBOutlet weak var plotLabel:       UILabel!
     @IBOutlet weak var rateStackView:   UIStackView!
 
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    
+    
     
     // 上記の、Realmナイズされたモデル
     var myRLMMovie: RLMMovie!
@@ -29,14 +33,26 @@ final class MovieDetailViewController: UIViewController {
         self.tableView.delegate   = self
         self.tableView.dataSource = self
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 60
+        
         self.navigationItem.rightBarButtonItem =
             UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addFavorite))
         
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        // Thread.sleep(forTimeInterval: 3)
-        // addFavorite()
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        
+        // このサイトがまじで神だった。。。
+        // http://blog.ch3cooh.jp/entry/20160108/1452249000
+        // ちなみにこのconstant, 決め打ちで200とかやるとスクロールおかしくなる。どうなってんの
+        // いや、ほんとまじ助かった...
+        self.tableViewHeight.constant = self.tableView.contentSize.height
+        
     }
     
     // will・didDisappear、ブレイク打っても突入しないんだが、デバッグできないのか？？
@@ -144,13 +160,14 @@ extension MovieDetailViewController: UITableViewDelegate {
 extension MovieDetailViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {
-            case 0...2:
+            
+            case 0:
                 
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: "Cell")
                 
@@ -160,10 +177,19 @@ extension MovieDetailViewController: UITableViewDataSource {
                 cell.detailTextLabel?.text = "tnk"
                 cell.detailTextLabel?.textColor = .black
                 
-                
-                
                 return cell
             
+            case 1...3:
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "PersonCell", for: indexPath) as! PersonTableViewCell
+                
+//                if let imagePath = self.myRLMMovie.poster_path {
+//                    let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
+//                    cell.personImageView.kf.setImage(with: url)
+//                }
+            
+                return cell
+        
             default:
                 fatalError()
         }
@@ -175,6 +201,8 @@ extension MovieDetailViewController: UITableViewDataSource {
         switch section {
             case 0:
                 return 5
+            case 3:
+                return 1
             default:
                 return 1
         }
@@ -184,9 +212,19 @@ extension MovieDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        return "HOGE"
+        switch section {
+            case 0:
+                return nil
+            case 1:
+                return "Director"
+            case 2:
+                return "Screenplay"
+            case 3:
+                return "Casts"
+            default:
+                fatalError()
+        }
     }
-    
     
 }
 
