@@ -10,7 +10,7 @@ import SystemConfiguration
 
 final class MovieListViewController: UIViewController {
     
-    var realm: Realm!  // = try! Realm()
+    var realm = try! Realm()
     
     // Model
     
@@ -67,21 +67,21 @@ final class MovieListViewController: UIViewController {
         }
         
        
-        // テーブル内のモデル取得方法の分岐
-        // この画面がお気に入り画面なら
-        if self.tabBarController?.selectedIndex == 1 {
-            
-            self.realm = try! Realm()
-
-            let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
-            
-            // Results<RLMMovie> → [Movieable]
-            res.forEach { self.movies.append($0) }
-            
-            // 編集ボタン
-            self.navigationItem.leftBarButtonItem = editButtonItem
-            
-        }
+//        // テーブル内のモデル取得方法の分岐
+//        // この画面がお気に入り画面なら
+//        if self.tabBarController?.selectedIndex == 1 {
+//            
+//            self.realm = try! Realm()
+//
+//            let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
+//            
+//            // Results<RLMMovie> → [Movieable]
+//            res.forEach { self.movies.append($0) }
+//            
+//            // 編集ボタン
+//            self.navigationItem.leftBarButtonItem = editButtonItem
+//            
+//        }
         
     }
     
@@ -93,11 +93,67 @@ final class MovieListViewController: UIViewController {
         if let indexPath = self.resultView.tableView.indexPathForSelectedRow {
             self.resultView.tableView.deselectRow(at: indexPath, animated: true)
         }
+    
+//        // テーブル内のモデル取得方法の分岐
+//        // この画面がお気に入り画面なら
+//        
+//        // これバグ！！！！！！
+//        //
+//        if self.tabBarController?.selectedIndex == 1 {
+//            
+//            
+////            self.realm = try! Realm()
+////            let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
+////            self.movies = []
+////            
+////            // Results<RLMMovie> → [Movieable]
+////            res.forEach { self.movies.append($0) }
+//            
+//            // 編集ボタン
+//            self.navigationItem.leftBarButtonItem = editButtonItem
+//            
+////            self.resultView.tableView.reloadData()
+//            
+//            reload()
+//            
+//        }
         
     }
     
+    
+
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // テーブル内のモデル取得方法の分岐
+        // この画面がお気に入り画面なら
+        
+        // これview "DID" appearのほうにかかないと不具合おこす！なぜか！！
+        // タブ0からタブ1に遷移する時、まだselectIndex = 0だからだ！！
+        //　でもdidAppearになった時点だと、selectIndex = 1になり、ここが発動する、という寸法
+        // 俺の罪だ...
+        if self.tabBarController?.selectedIndex == 1 {
+            
+            
+            //            self.realm = try! Realm()
+            //            let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
+            //            self.movies = []
+            //
+            //            // Results<RLMMovie> → [Movieable]
+            //            res.forEach { self.movies.append($0) }
+            
+            // 編集ボタン
+            self.navigationItem.leftBarButtonItem = editButtonItem
+            
+            //            self.resultView.tableView.reloadData()
+            
+            reload()
+            
+        }
+        
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -176,6 +232,11 @@ final class MovieListViewController: UIViewController {
         res.forEach {self.movies.append($0) }
         
         self.resultView.tableView.reloadData()
+        
+        
+        
+        
+
         
     }
     

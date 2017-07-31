@@ -43,6 +43,7 @@ final class MovieDetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItem =
             UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addFavorite))
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: nil)
     }
 
     override func viewDidLayoutSubviews() {
@@ -399,8 +400,15 @@ extension MovieDetailViewController: UICollectionViewDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "MovieDetail") as! MovieDetailViewController
         
-        vc.navigationItem.backBarButtonItem?.title = ""
+        //vc.navigationItem.backBarButtonItem?.title = ""
         
+        // まじか！！！ここでrecommendationsがnilで落ちてる。
+        // ちゃんとcollectionセルたち表示されてるのに　ちょっと意味わからんですね
+        // recommendationsの配列、なぜか[1]から始まってる！
+        // それで[0]のセルタップしたとき落ちてる、あやしい
+        
+        // po self.myRLMMovie するとちゃんと, recommendationsちゃんとあるのに
+        // po self.myRLMMovie.recommendations すると nil は？？？？？？
         vc.connectForMovieDetail(type: .standard(self.myRLMMovie.recommendations.results[indexPath.row].id))
         
         
