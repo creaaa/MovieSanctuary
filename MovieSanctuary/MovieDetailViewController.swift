@@ -21,6 +21,12 @@ final class MovieDetailViewController: UIViewController {
     
     @IBOutlet weak var voteAverageLabel: UILabel!
     @IBOutlet weak var voteCountLabel: UILabel!
+    @IBOutlet weak var overviewLabel: UILabel!
+    
+    
+    
+    
+    
     
     @IBOutlet weak var posterImageViewHeight: NSLayoutConstraint!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
@@ -156,10 +162,17 @@ final class MovieDetailViewController: UIViewController {
         if let imagePath = self.myRLMMovie.poster_path {
             let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
             self.posterImageView.kf.setImage(with: url,
-                                             placeholder: #imageLiteral(resourceName: "noimage"),
-                                             options: [.transition(.fade(0.3))])
+                                             placeholder: nil,
+                                             options: [.transition(.fade(0.4)), .forceTransition])
         }
         
+        self.voteAverageLabel.text = Int(self.myRLMMovie.vote_average * 10).description + "%"
+        self.voteCountLabel.text   = self.myRLMMovie.vote_count.description
+        
+        self.overviewLabel.text = self.myRLMMovie.overview
+        
+        self.tableView.reloadData()
+        self.collectionView.reloadData()
         
         /* おちる　なおせ
         self.genresLabel.text =
@@ -200,7 +213,28 @@ extension MovieDetailViewController: UITableViewDataSource {
                 cell.textLabel?.textColor = .gray
                 cell.textLabel?.font = UIFont(name: "Montserrat", size: 12)
                 
-                cell.detailTextLabel?.text = "tnk"
+                switch indexPath.row {
+                    case 0:
+                         cell.detailTextLabel?.text = self.myRLMMovie.release_date
+                    case 1:
+                        cell.detailTextLabel?.text = self.myRLMMovie.runtime?.description
+                    case 2:
+                        cell.detailTextLabel?.text = self.myRLMMovie.genres.first?.name
+                    case 3:
+                        cell.detailTextLabel?.text =
+                            self.myRLMMovie.budget != 0 ? self.myRLMMovie.budget.description : ""
+                    case 4:
+                        cell.detailTextLabel?.text =
+                            self.myRLMMovie.revenue != 0 ? self.myRLMMovie.revenue.description : ""
+                    default:
+                        fatalError()
+                }
+                
+                
+                
+                
+                
+                
                 cell.detailTextLabel?.textColor = .black
                 cell.detailTextLabel?.font = UIFont(name: "Montserrat", size: 14)
                 
