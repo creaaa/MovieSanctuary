@@ -294,7 +294,7 @@ extension MovieListViewController: UITableViewDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "MovieDetail") as! MovieDetailViewController
    
-        // vc.connectForMovieDetail(type: .standard(self.movies[indexPath.row].id))
+        vc.connectForMovieDetail(type: .standard(self.movies[indexPath.row].id))
         
         self.navigationController?.pushViewController(vc, animated: true)
         

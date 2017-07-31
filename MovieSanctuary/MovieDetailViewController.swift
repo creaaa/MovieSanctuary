@@ -174,15 +174,6 @@ final class MovieDetailViewController: UIViewController {
         self.tableView.reloadData()
         self.collectionView.reloadData()
         
-        /* おちる　なおせ
-        self.genresLabel.text =
-            self.myRLMMovie.genres.map { $0.name }
-                .dropLast(self.myRLMMovie.genres.map { $0.name }.count - 2)
-                .joined(separator: ", ")
-        */
-        
-        
-        
     }
 
 }
@@ -228,7 +219,20 @@ extension MovieDetailViewController: UITableViewDataSource {
                             cell.detailTextLabel?.text =
                                 (movie.runtime?.description).map { $0 + " mins"}
                         case 2:
-                            cell.detailTextLabel?.text = movie.genres.first?.name
+                            
+                            var genreText: String = ""
+                            
+                            if movie.genres.count >= 1 {
+                                genreText.append(movie.genres[0].name)
+                            }
+                            
+                            if movie.genres.count >= 2 {
+                                genreText.append(", ")
+                                genreText.append(movie.genres[1].name)
+                            }
+                            
+                            cell.detailTextLabel?.text = genreText
+                        
                         case 3:
                             cell.detailTextLabel?.text =
                                 self.myRLMMovie.budget != 0 ?
@@ -254,9 +258,35 @@ extension MovieDetailViewController: UITableViewDataSource {
 
                 // ぬるぽ！！このnullチェックマジ忘れる！！超注意！
                 if let movie = self.myRLMMovie {
-                    let predicate = NSPredicate(format: "job == 'director'")
-                    // よべない
-                    cell.nameLabel.text = movie.credits.crews.filter(predicate).first?.job
+                    
+                    // for row 1 & 2
+                    var crews: [RLMCrew] = []
+                    movie.credits.crews.forEach {
+                        crews.append($0)
+                    }
+                    // for row 3
+                    var casts: [RLMCast] = []
+                    movie.credits.casts.forEach {
+                        casts.append($0)
+                    }
+                    
+                    switch indexPath.section {
+                        case 1:
+                            let directors = crews.filter{ $0.job == "Director" }
+                            print(directors)
+                            cell.nameLabel.text = directors[indexPath.row].name
+                        case 2:
+                            let screenplays =
+                                crews.filter{ $0.job == "Screenplay" || $0.job == "Writer" }
+                                print(screenplays)
+                                cell.nameLabel.text = screenplays[indexPath.row].name
+                        case 3:
+                            cell.nameLabel.text = casts[indexPath.row].name
+                        default:
+                            fatalError()
+                    }
+                    
+                    
                 }
                 
                 
@@ -273,10 +303,49 @@ extension MovieDetailViewController: UITableViewDataSource {
         switch section {
             case 0:
                 return 5
+            case 1:
+//                return 1
+            
+                guard let movie = self.myRLMMovie else { return 0 }
+                
+                var crews: [RLMCrew] = []
+                movie.credits.crews.forEach {
+                    crews.append($0)
+                }
+                
+                let directors =
+                    crews.filter{ $0.job == "Director" }
+                return directors.count
+            
+            
+            // Screenplay&Writer
+            case 2:
+                // return 5
+            
+                guard let movie = self.myRLMMovie else { return 0 }
+                
+                var crews: [RLMCrew] = []
+                movie.credits.crews.forEach {
+                    crews.append($0)
+                }
+                
+                let screenplays =
+                    crews.filter{ $0.job == "Screenplay" || $0.job == "Writer" }
+                return screenplays.count
+            
+            
             case 3:
-                return 1
+                // return 5
+                guard let movie = self.myRLMMovie else { return 0 }
+                
+                if movie.credits.casts.count >= 5 {
+                    return 5
+                } else {
+                    return movie.credits.casts.count
+                }
+            
             default:
-                return 1
+                fatalError()
         }
         
     }
