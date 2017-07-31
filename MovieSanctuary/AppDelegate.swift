@@ -10,10 +10,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // ナビゲーションバーのタイトル(きいてないぽい)
+        // ナビゲーションバーのタイトル
         UINavigationBar.appearance().titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.white,
-             NSFontAttributeName: UIFont(name: self.font, size: 18) as Any
+             NSFontAttributeName: UIFont(name: self.font, size: 18) as Any,
+             
         ]
         
         

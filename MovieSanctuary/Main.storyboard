@@ -179,7 +179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmo-wf-4Y3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3361" y="-582"/>
+            <point key="canvasLocation" x="-3562" y="-582"/>
         </scene>
         <!--Movie Sanctuary-->
         <scene sceneID="caw-TH-jpu">
@@ -426,10 +426,10 @@
             </objects>
             <point key="canvasLocation" x="-1378" y="1227"/>
         </scene>
-        <!--Neo Detail VC-->
+        <!--Movie Detail View Controller-->
         <scene sceneID="Y9b-xJ-gQ1">
             <objects>
-                <viewController storyboardIdentifier="MovieDetail" title="Neo Detail VC" automaticallyAdjustsScrollViewInsets="NO" id="SQU-Ir-rk9" customClass="MovieDetailViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetail" automaticallyAdjustsScrollViewInsets="NO" id="SQU-Ir-rk9" customClass="MovieDetailViewController" customModule="MovieSanctuary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CHJ-sX-Lcc"/>
                         <viewControllerLayoutGuide type="bottom" id="GKP-r8-ccs"/>
@@ -442,16 +442,17 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="875"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QNr-2h-eoa" userLabel="Contents">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="890.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1075.5"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noimage" translatesAutoresizingMaskIntoConstraints="NO" id="Z2n-nl-hdN">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z2n-nl-hdN">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="395"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="pVV-Ex-iQW"/>
+                                                    <constraint firstAttribute="height" constant="395" id="pVV-Ex-iQW"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJ6-7F-iuE" userLabel="Score View">
-                                                <rect key="frame" x="0.0" y="210" width="375" height="60"/>
+                                                <rect key="frame" x="0.0" y="395" width="375" height="60"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="euP-uz-PFD">
                                                         <rect key="frame" x="8" y="10" width="359" height="40"/>
@@ -495,13 +496,13 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="かなりいい感じ" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fht-HX-TsM">
-                                                <rect key="frame" x="8" y="270" width="359" height="20.5"/>
+                                                <rect key="frame" x="8" y="455" width="359" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="61" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="OFN-6e-C8h">
-                                                <rect key="frame" x="0.0" y="290.5" width="375" height="300"/>
+                                                <rect key="frame" x="0.0" y="475.5" width="375" height="300"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="300" id="dOk-ud-Atj"/>
@@ -546,7 +547,7 @@
                                                 </prototypes>
                                             </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H9t-0c-J2G" userLabel="Hdr">
-                                                <rect key="frame" x="0.0" y="590.5" width="375" height="40"/>
+                                                <rect key="frame" x="0.0" y="775.5" width="375" height="40"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOU MAY ALSO LIKE..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DeD-eb-kxG">
                                                         <rect key="frame" x="13" y="15" width="150" height="17"/>
@@ -567,7 +568,7 @@
                                                 </constraints>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fPY-ap-7mI">
-                                                <rect key="frame" x="0.0" y="630.5" width="375" height="260"/>
+                                                <rect key="frame" x="0.0" y="815.5" width="375" height="260"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="260" id="lp1-AG-EaH"/>
@@ -659,7 +660,7 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="Z2n-nl-hdN" firstAttribute="top" secondItem="QNr-2h-eoa" secondAttribute="top" id="01h-7G-i5u"/>
-                                            <constraint firstItem="hJ6-7F-iuE" firstAttribute="top" secondItem="Z2n-nl-hdN" secondAttribute="bottom" constant="10" id="0CI-LO-FUE"/>
+                                            <constraint firstItem="hJ6-7F-iuE" firstAttribute="top" secondItem="Z2n-nl-hdN" secondAttribute="bottom" id="0CI-LO-FUE"/>
                                             <constraint firstItem="hJ6-7F-iuE" firstAttribute="leading" secondItem="QNr-2h-eoa" secondAttribute="leading" id="0rF-fN-EcB"/>
                                             <constraint firstItem="H9t-0c-J2G" firstAttribute="top" secondItem="OFN-6e-C8h" secondAttribute="bottom" id="3Ey-Ub-To2"/>
                                             <constraint firstItem="H9t-0c-J2G" firstAttribute="leading" secondItem="QNr-2h-eoa" secondAttribute="leading" id="9OD-8Y-BYU"/>
@@ -701,13 +702,17 @@
                     <size key="freeformSize" width="375" height="939"/>
                     <connections>
                         <outlet property="collectionView" destination="fPY-ap-7mI" id="1UW-kh-LWY"/>
+                        <outlet property="posterImageView" destination="Z2n-nl-hdN" id="bND-hw-SOg"/>
+                        <outlet property="posterImageViewHeight" destination="pVV-Ex-iQW" id="bEA-Wq-0Yd"/>
                         <outlet property="tableView" destination="OFN-6e-C8h" id="PcD-fE-cku"/>
                         <outlet property="tableViewHeight" destination="dOk-ud-Atj" id="vXj-IC-2pY"/>
+                        <outlet property="voteAverageLabel" destination="9f1-j9-DB8" id="g5z-mS-oDa"/>
+                        <outlet property="voteCountLabel" destination="O3d-5X-eWp" id="BQ5-HK-tMe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bnc-SM-9bt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2322.4000000000001" y="-190.25487256371815"/>
+            <point key="canvasLocation" x="-2690" y="-190"/>
         </scene>
     </scenes>
     <resources>

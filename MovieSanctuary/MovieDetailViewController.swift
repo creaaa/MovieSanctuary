@@ -8,14 +8,21 @@ final class MovieDetailViewController: UIViewController {
     @IBOutlet weak var tableView:       UITableView!
     @IBOutlet weak var collectionView:  UICollectionView!
     
-    @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var titleLabel:      UILabel!
-    @IBOutlet weak var directorLabel:   UILabel!
-    @IBOutlet weak var genresLabel:     UILabel!
-    @IBOutlet weak var actorsLabel:     UILabel!
-    @IBOutlet weak var plotLabel:       UILabel!
-    @IBOutlet weak var rateStackView:   UIStackView!
+    // @IBOutlet weak var posterImageView: UIImageView!
+    //@IBOutlet weak var titleLabel:      UILabel!
+    //@IBOutlet weak var directorLabel:   UILabel!
+    //@IBOutlet weak var genresLabel:     UILabel!
+    //@IBOutlet weak var actorsLabel:     UILabel!
+    //@IBOutlet weak var plotLabel:       UILabel!
+    //@IBOutlet weak var rateStackView:   UIStackView!
 
+    
+    @IBOutlet weak var posterImageView: UIImageView!
+    
+    @IBOutlet weak var voteAverageLabel: UILabel!
+    @IBOutlet weak var voteCountLabel: UILabel!
+    
+    @IBOutlet weak var posterImageViewHeight: NSLayoutConstraint!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     
@@ -30,6 +37,8 @@ final class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        print("おら！", UIApplication.shared.keyWindow?.bounds.height)
         
         self.view.backgroundColor = .white
         
@@ -47,16 +56,25 @@ final class MovieDetailViewController: UIViewController {
         
     }
 
-    
     override func viewDidLayoutSubviews() {
+    
+        let screenHeight = UIApplication.shared.keyWindow?.bounds.height
+        screenHeight.map {
+            // (64: ステバー+ナビバー) - (49: タブバー) - (60: スコアビュー)
+            print("くそ", $0 - 64 - 49 - 60)
+            self.posterImageViewHeight.constant = $0 - 64 - 49 - 60
+        }
+            
         
         // このサイトがまじで神だった。。。
         // http://blog.ch3cooh.jp/entry/20160108/1452249000
         // ちなみにこのconstant, 決め打ちで200とかやるとスクロールおかしくなる。どうなってんの
         // いや、ほんとまじ助かった...
         self.tableViewHeight.constant = self.tableView.contentSize.height
-        
+    
     }
+    
+
     
     // will・didDisappear、ブレイク打っても突入しないんだが、デバッグできないのか？？
     
@@ -133,19 +151,15 @@ final class MovieDetailViewController: UIViewController {
     
     func render() {
 
-        
-        
-        
-        /*
+        self.title = self.myRLMMovie.title
+
         if let imagePath = self.myRLMMovie.poster_path {
             let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
-            self.posterImageView.kf.setImage(with: url)
+            self.posterImageView.kf.setImage(with: url,
+                                             placeholder: #imageLiteral(resourceName: "noimage"),
+                                             options: [.transition(.fade(0.3))])
         }
-        */
         
-        
-        self.titleLabel.text    = self.myRLMMovie.title
-        self.directorLabel.text = self.myRLMMovie.credits.crews[0].name
         
         /* おちる　なおせ
         self.genresLabel.text =
@@ -154,7 +168,7 @@ final class MovieDetailViewController: UIViewController {
                 .joined(separator: ", ")
         */
         
-        self.actorsLabel.text = self.myRLMMovie.credits.casts[0].name
+        
         
     }
 
