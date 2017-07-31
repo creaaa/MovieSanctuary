@@ -31,7 +31,6 @@
 		447476121EF21D7600455293 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4474760F1EF21D7600455293 /* LaunchScreen.storyboard */; };
 		447968331F2BD1230091ACD1 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447968321F2BD1230091ACD1 /* Errors.swift */; };
 		4479683D1F2C5E760091ACD1 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479683C1F2C5E760091ACD1 /* ViewControllerExtension.swift */; };
-		447968411F2C60C50091ACD1 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4479683F1F2C60A40091ACD1 /* Montserrat-Medium.ttf */; };
 		447968421F2C60C50091ACD1 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 447968401F2C60A40091ACD1 /* Montserrat-Regular.ttf */; };
 		448841CB1EEB53F0006758B7 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448841CA1EEB53F0006758B7 /* Kingfisher.framework */; };
 		448B66DB1F293E4B0002833B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448B66D91F293E4B0002833B /* RealmSwift.framework */; };
@@ -75,7 +74,6 @@
 		4474760F1EF21D7600455293 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		447968321F2BD1230091ACD1 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		4479683C1F2C5E760091ACD1 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
-		4479683F1F2C60A40091ACD1 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		447968401F2C60A40091ACD1 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		448841CA1EEB53F0006758B7 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		448B66D91F293E4B0002833B /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				44E3BE3A1EE7127C00466CF5 /* Quicksand-Regular.ttf */,
-				4479683F1F2C60A40091ACD1 /* Montserrat-Medium.ttf */,
 				447968401F2C60A40091ACD1 /* Montserrat-Regular.ttf */,
 			);
 			name = Fonts;
@@ -359,7 +356,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				44E3BE3B1EE713F000466CF5 /* Quicksand-Regular.ttf in Resources */,
-				447968411F2C60C50091ACD1 /* Montserrat-Medium.ttf in Resources */,
 				447968421F2C60C50091ACD1 /* Montserrat-Regular.ttf in Resources */,
 				445C36A01F267F4900B7D920 /* Memo.txt in Resources */,
 				447476121EF21D7600455293 /* LaunchScreen.storyboard in Resources */,
