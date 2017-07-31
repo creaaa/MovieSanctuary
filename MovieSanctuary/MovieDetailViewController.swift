@@ -399,7 +399,7 @@ extension MovieDetailViewController: UICollectionViewDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "MovieDetail") as! MovieDetailViewController
         
-        
+        vc.navigationItem.backBarButtonItem?.title = ""
         
         vc.connectForMovieDetail(type: .standard(self.myRLMMovie.recommendations.results[indexPath.row].id))
         
