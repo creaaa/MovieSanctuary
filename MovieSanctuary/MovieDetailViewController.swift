@@ -251,19 +251,13 @@ extension MovieDetailViewController: UITableViewDataSource {
             case 1...3:
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "PersonCell", for: indexPath) as! PersonTableViewCell
+
+                // ぬるぽ
+                let predicate = NSPredicate(format: "job CONTAINS %@", "director")
+                cell.nameLabel.text = self.myRLMMovie.credits.crews.filter(predicate).first?.job
                 
-                /*
-                cell.selectionStyle = .none
-                cell.detailTextLabel?.font = UIFont(name: "Montserrat", size: 14)
-                cell.personImageView.layer.masksToBounds = true
-                cell.personImageView.layer.cornerRadius  = cell.personImageView.frame.width / 2
-                */
                 
-//                if let imagePath = self.myRLMMovie.poster_path {
-//                    let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
-//                    cell.personImageView.kf.setImage(with: url)
-//                }
-            
+                
                 return cell
         
             default:
