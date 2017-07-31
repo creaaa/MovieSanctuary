@@ -105,18 +105,21 @@ final class RLMCrew: Object, Decodable {
     
     dynamic var job  = ""
     dynamic var name = ""
+    dynamic var profile_path: String?
     
     static func decode(_ e: Extractor) throws -> RLMCrew {
         return try RLMCrew(
             job:  e <| "job",
-            name: e <| "name"
+            name: e <| "name",
+            profile_path: e <|? "profile_path"
         )
     }
     
-    required convenience init(job: String, name: String) {
+    required convenience init(job: String, name: String, profile_path: String?) {
         self.init()
         self.job  = job
         self.name = name
+        self.profile_path = profile_path
     }
     
 }

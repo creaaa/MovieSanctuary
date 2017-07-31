@@ -272,13 +272,31 @@ extension MovieDetailViewController: UITableViewDataSource {
                     
                     switch indexPath.section {
                         case 1:
+                            
                             let directors = crews.filter{ $0.job == "Director" }
                             print(directors)
+                            
+                            if let profilePath = directors[indexPath.row].profile_path {
+                                let url = URL(string: "https://image.tmdb.org/t/p/original/" + profilePath)
+                                cell.personImageView.kf.setImage(with: url,
+                                                                 placeholder: nil,
+                                                                 options: [.transition(.fade(0.4)), .forceTransition])
+                            }
+                            
                             cell.nameLabel.text = directors[indexPath.row].name
+                        
                         case 2:
                             let screenplays =
                                 crews.filter{ $0.job == "Screenplay" || $0.job == "Writer" }
                                 print(screenplays)
+                            
+                            if let profilePath = screenplays[indexPath.row].profile_path {
+                                let url = URL(string: "https://image.tmdb.org/t/p/original/" + profilePath)
+                                cell.personImageView.kf.setImage(with: url,
+                                                                 placeholder: nil,
+                                                                 options: [.transition(.fade(0.4)), .forceTransition])
+                            }
+                            
                                 cell.nameLabel.text = screenplays[indexPath.row].name
                         case 3:
                             
@@ -412,10 +430,19 @@ extension MovieDetailViewController: UICollectionViewDataSource {
         
         // ポスター画像
         if let imagePath = movie.recommendations.results[indexPath.row].poster_path {
-            let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
-            cell.posterImageView.kf.setImage(with: url,
-                                             placeholder: nil,
-                                             options: [.transition(.fade(0.4)), .forceTransition])
+            
+            // おちる！！！！！！
+            if let encodedPath = imagePath.addingPercentEncoding(withAllowedCharacters: .alphanumerics) {
+            
+                if let url = URL(string: "https://image.tmdb.org/t/p/original" + encodedPath) {
+                print("あああ！", Thread.isMainThread)
+                cell.posterImageView.kf.setImage(with: url,
+                                                 placeholder: nil,
+                                                 options: [.transition(.fade(0.4)), .forceTransition])
+                }
+            
+            }
+            
         }
         
         cell.titleLabel.text = movie.recommendations.results[indexPath.row].title
