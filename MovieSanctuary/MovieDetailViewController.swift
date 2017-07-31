@@ -31,12 +31,17 @@ final class MovieDetailViewController: UIViewController {
         
         super.viewDidLoad()
         
-        // あらかじめストーリーボードで CollectionView の View セクションの Tag に 1 を設定しておく
-        let cv = self.view.viewWithTag(1) as! UICollectionView
-        // FlowLayout を取得して　sectionHeadersPinToVisibleBounds を true にする
-        let fl = cv.collectionViewLayout as! UICollectionViewFlowLayout
-        // sectionHeadersPinToVisibleBounds は flowlayout にしかない
-        fl.sectionHeadersPinToVisibleBounds = true
+//        // あらかじめストーリーボードで CollectionView の View セクションの Tag に 1 を設定しておく
+//        let cv = self.view.viewWithTag(1) as! UICollectionView
+//        // FlowLayout を取得して　sectionHeadersPinToVisibleBounds を true にする
+//        let fl = cv.collectionViewLayout as! UICollectionViewFlowLayout
+//        // sectionHeadersPinToVisibleBounds は flowlayout にしかない
+//        fl.sectionHeadersPinToVisibleBounds = true
+
+        
+//        self.collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
+//        
+//        
         
         
         self.view.backgroundColor = .white
@@ -261,6 +266,8 @@ extension MovieDetailViewController: UICollectionViewDataSource {
         
     }
     
+    
+    /*
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         /*
@@ -288,15 +295,20 @@ extension MovieDetailViewController: UICollectionViewDataSource {
         return reusableview!
         
     }
-    
-//    
-//    // ヘッダーのサイズを設定する
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewFlowLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//        let size = CGSize(width: 375, height: 50)
-//        return size
-//    }
+    */
     
     
+    /*
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let headerReusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header", for: indexPath) as UICollectionReusableView
+        
+        headerReusableView.backgroundColor = .blue
+        
+        return headerReusableView
+        
+    }
+    */
     
     
 }
