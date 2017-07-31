@@ -50,7 +50,7 @@ final class MovieDetailViewController: UIViewController {
         let screenHeight = UIApplication.shared.keyWindow?.bounds.height
         screenHeight.map {
             // (64: ステバー+ナビバー) - (49: タブバー) - (60: スコアビュー)
-            print("くそ", $0 - 64 - 49 - 60)
+            // print("画像高さ", $0 - 64 - 49 - 60)
             self.posterImageViewHeight.constant = $0 - 64 - 49 - 60
         }
             
@@ -388,6 +388,33 @@ extension MovieDetailViewController: UITableViewDataSource {
 
 extension MovieDetailViewController: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
+            print("no network. try later...")
+            showAlert(title: "No network", message: "try again later...")
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "MovieDetail") as! MovieDetailViewController
+        
+        
+        
+        vc.connectForMovieDetail(type: .standard(self.myRLMMovie.recommendations.results[indexPath.row].id))
+        
+        
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    
+
+        
+
+    
+
 }
 
 extension MovieDetailViewController: UICollectionViewDataSource {

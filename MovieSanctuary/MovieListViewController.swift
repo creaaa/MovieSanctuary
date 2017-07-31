@@ -124,12 +124,18 @@ final class MovieListViewController: UIViewController {
         
         if let genre1 = self.movies[indexPath.row].genres.first {
             cell.genre1Label.text = genre1.name
+            if cell.genre1Label.text == "Science Fiction" {
+               cell.genre1Label.text = "SF"
+            }
         } else {
             cell.genre1Label.isHidden = true
         }
         
         if self.movies[indexPath.row].genres.count >= 2 {
             cell.genre2Label.text = self.movies[indexPath.row].genres[1].name
+            if cell.genre2Label.text == "Science Fiction" {
+                cell.genre2Label.text = "SF"
+            }
         } else {
             cell.genre2Label.isHidden = true
         }

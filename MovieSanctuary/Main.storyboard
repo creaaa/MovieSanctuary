@@ -150,7 +150,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="thy-yG-pc4">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="JAs-HM-jNq"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="JAs-HM-jNq"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="PK3-iq-8NI" id="ZCu-RZ-deS"/>
@@ -173,7 +173,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
                     <navigationItem key="navigationItem" title="Movie Sanctuary" id="f7D-Sj-Rg8" userLabel="Back">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="Tan-zj-Z3S"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="Tan-zj-Z3S"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
