@@ -9,10 +9,10 @@ class DetailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var voteCountLabel:   UILabel!
     
     override func awakeFromNib() {
-        self.posterImageView = nil
-        self.titleLabel = nil
-        self.voteAverageLabel = nil
-        self.voteCountLabel = nil
+        self.posterImageView.image = nil
+        self.titleLabel.text = nil
+        self.voteAverageLabel.text = nil
+        self.voteCountLabel.text = nil
     }
     
 }

@@ -8,25 +8,10 @@ final class MovieDetailViewController: UIViewController {
     @IBOutlet weak var tableView:       UITableView!
     @IBOutlet weak var collectionView:  UICollectionView!
     
-    // @IBOutlet weak var posterImageView: UIImageView!
-    //@IBOutlet weak var titleLabel:      UILabel!
-    //@IBOutlet weak var directorLabel:   UILabel!
-    //@IBOutlet weak var genresLabel:     UILabel!
-    //@IBOutlet weak var actorsLabel:     UILabel!
-    //@IBOutlet weak var plotLabel:       UILabel!
-    //@IBOutlet weak var rateStackView:   UIStackView!
-
-    
     @IBOutlet weak var posterImageView: UIImageView!
-    
     @IBOutlet weak var voteAverageLabel: UILabel!
     @IBOutlet weak var voteCountLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
-    
-    
-    
-    
-    
     
     @IBOutlet weak var posterImageViewHeight: NSLayoutConstraint!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
@@ -43,8 +28,6 @@ final class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        print("おら！", UIApplication.shared.keyWindow?.bounds.height)
         
         self.view.backgroundColor = .white
         
@@ -171,17 +154,15 @@ final class MovieDetailViewController: UIViewController {
         
         self.overviewLabel.text = self.myRLMMovie.overview
         
-        self.collectionView.reloadData()
         self.tableView.reloadData()
+        self.collectionView.reloadData()
         
     }
-
-}
-
-
-extension MovieDetailViewController: UITableViewDelegate {
     
 }
+
+
+extension MovieDetailViewController: UITableViewDelegate {}
 
 extension MovieDetailViewController: UITableViewDataSource {
     
@@ -401,6 +382,9 @@ extension MovieDetailViewController: UITableViewDataSource {
     
 }
 
+/////////////////////
+// Collection View //
+/////////////////////
 
 extension MovieDetailViewController: UICollectionViewDelegate {
     
@@ -409,16 +393,14 @@ extension MovieDetailViewController: UICollectionViewDelegate {
 extension MovieDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // return 10
         
         guard let movie  = self.myRLMMovie,
               movie.recommendations.results.count > 0 else { return 0 }
         
-        // else { return 0 }
-        
         return movie.recommendations.results.count
         
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -430,23 +412,14 @@ extension MovieDetailViewController: UICollectionViewDataSource {
         
         // ポスター画像
         if let imagePath = movie.recommendations.results[indexPath.row].poster_path {
-            
-            // おちる！！！！！！
-            // エンコードするとだめ
-            // if let encodedPath = imagePath.addingPercentEncoding(withAllowedCharacters: .alphanumerics) {
-            
             if let url = URL(string: "https://image.tmdb.org/t/p/original" + imagePath) {
-                    print("あああ！", Thread.isMainThread)
-                    print(url)
-                        
-                    cell.posterImageView.kf.setImage(with: url,
-                                                     placeholder: nil,
-                                                     options: [.transition(.fade(0.4)), .forceTransition])
+                cell.posterImageView.kf.setImage(with: url,
+                                                 placeholder: nil,
+                                                 options: [.transition(.fade(0.4)), .forceTransition])
             }
         }
         
-        
-        cell.titleLabel.text = movie.recommendations.results[indexPath.row].title
+        cell.titleLabel.text       = movie.recommendations.results[indexPath.row].title
         cell.voteAverageLabel.text = Int(movie.recommendations.results[indexPath.row].vote_average * 10).description + "%"
         cell.voteCountLabel.text   = movie.recommendations.results[indexPath.row].vote_count.description
         
