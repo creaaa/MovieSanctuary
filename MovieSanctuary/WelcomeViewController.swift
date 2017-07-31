@@ -299,9 +299,8 @@ extension WelcomeViewController: UICollectionViewDataSource {
                 item.titleLabel.text = self.movies[tag][indexPath.row].title
                 
                 if let posterPath = self.movies[tag][indexPath.row].poster_path {
-                    let url = URL(string: "https://image.tmdb.org/t/p/original/" + posterPath)
                     
-                    // item.imageView.kf.setImage(with: url)
+                    let url = URL(string: "https://image.tmdb.org/t/p/original/" + posterPath)
                     
                     item.imageView.kf.setImage(with: url,
                                                placeholder: #imageLiteral(resourceName: "noimage"),
