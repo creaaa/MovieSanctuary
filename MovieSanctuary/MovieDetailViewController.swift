@@ -31,19 +31,6 @@ final class MovieDetailViewController: UIViewController {
         
         super.viewDidLoad()
         
-//        // あらかじめストーリーボードで CollectionView の View セクションの Tag に 1 を設定しておく
-//        let cv = self.view.viewWithTag(1) as! UICollectionView
-//        // FlowLayout を取得して　sectionHeadersPinToVisibleBounds を true にする
-//        let fl = cv.collectionViewLayout as! UICollectionViewFlowLayout
-//        // sectionHeadersPinToVisibleBounds は flowlayout にしかない
-//        fl.sectionHeadersPinToVisibleBounds = true
-
-        
-//        self.collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
-//        
-//        
-        
-        
         self.view.backgroundColor = .white
         
         self.tableView.delegate   = self
@@ -60,9 +47,6 @@ final class MovieDetailViewController: UIViewController {
         
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        
-    }
     
     override func viewDidLayoutSubviews() {
         
@@ -86,7 +70,6 @@ final class MovieDetailViewController: UIViewController {
 
     func addFavorite() {
         try! Realm().write {
-            
             // これ、update = trueって明示しないと落ちる。
             // よって、defaultはfalseってことか...
             // true = 既存のオブジェクトを参照し、存在すればそれに対しアップデートをかける。
@@ -233,7 +216,7 @@ extension MovieDetailViewController: UITableViewDataSource {
         
         switch section {
             case 0:
-                return nil
+                return "Info"
             case 1:
                 return "Director"
             case 2:
@@ -272,58 +255,7 @@ extension MovieDetailViewController: UICollectionViewDataSource {
         
     }
     
-    
-    /*
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        /*
-        var header: UICollectionReusableView? = nil
-        if (kind == UICollectionElementKindSectionHeader) {
-            header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MyHeader", for: indexPath)
-            
-        }
-        return header!
-        */
-        
-        var reusableview: UICollectionReusableView? = nil
-        // ヘッダーの時のみ処理する
-        if kind == UICollectionElementKindSectionHeader {
-            
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header", for: indexPath)
-            
-            let lbl = UILabel(frame: CGRect(x: 5, y: 5, width: 375, height: 50))
-            lbl.text = "HEADER!"
-            headerView.addSubview(lbl)
-            reusableview = headerView
-            
-        }
-        
-        return reusableview!
-        
-    }
-    */
-    
-    
-    /*
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        let headerReusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header", for: indexPath) as UICollectionReusableView
-        
-        headerReusableView.backgroundColor = .blue
-        
-        return headerReusableView
-        
-    }
-    */
-    
-    
 }
-
-
-
-
-
-
 
 
 
