@@ -281,6 +281,14 @@ extension MovieDetailViewController: UITableViewDataSource {
                                 print(screenplays)
                                 cell.nameLabel.text = screenplays[indexPath.row].name
                         case 3:
+                            
+                            if let profilePath = casts[indexPath.row].profile_path {
+                                let url = URL(string: "https://image.tmdb.org/t/p/original/" + profilePath)
+                                cell.personImageView.kf.setImage(with: url,
+                                                                 placeholder: nil,
+                                                                 options: [.transition(.fade(0.4)), .forceTransition])
+                            }
+                            
                             cell.nameLabel.text = casts[indexPath.row].name
                         default:
                             fatalError()

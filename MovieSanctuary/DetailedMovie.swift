@@ -78,20 +78,23 @@ final class RLMVideos: Object, Decodable {
 
 final class RLMCast: Object, Decodable {
     
-    dynamic var name  = ""
-    dynamic var order = 0
+    dynamic var name         = ""
+    dynamic var order        = 0
+    dynamic var profile_path: String?
     
     static func decode(_ e: Extractor) throws -> RLMCast {
         return try RLMCast(
-            name: e <| "name",
-            order: e <| "order"
+            name:         e <|  "name",
+            order:        e <|  "order",
+            profile_path: e <|? "profile_path"
         )
     }
     
-    required convenience init(name: String, order: Int) {
+    required convenience init(name: String, order: Int, profile_path: String?) {
         self.init()
         self.name = name
         self.order = order
+        self.profile_path = profile_path
     }
     
 }
