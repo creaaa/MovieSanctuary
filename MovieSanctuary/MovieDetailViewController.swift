@@ -133,11 +133,17 @@ final class MovieDetailViewController: UIViewController {
     
     func render() {
 
+        
+        
+        
+        /*
         if let imagePath = self.myRLMMovie.poster_path {
             let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
             self.posterImageView.kf.setImage(with: url)
         }
-
+        */
+        
+        
         self.titleLabel.text    = self.myRLMMovie.title
         self.directorLabel.text = self.myRLMMovie.credits.crews[0].name
         
@@ -172,18 +178,30 @@ extension MovieDetailViewController: UITableViewDataSource {
             case 0:
                 
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: "Cell")
+                cell.selectionStyle = .none
                 
-                cell.textLabel?.text       = "unk"
+                let titleLabels = ["Release Date", "Runtime", "Genre", "Budget", "Revenue"]
+                
+                cell.textLabel?.text      = titleLabels[indexPath.row]
                 cell.textLabel?.textColor = .gray
+                cell.textLabel?.font = UIFont(name: "Montserrat", size: 12)
                 
                 cell.detailTextLabel?.text = "tnk"
                 cell.detailTextLabel?.textColor = .black
+                cell.detailTextLabel?.font = UIFont(name: "Montserrat", size: 14)
                 
                 return cell
             
             case 1...3:
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "PersonCell", for: indexPath) as! PersonTableViewCell
+                
+                /*
+                cell.selectionStyle = .none
+                cell.detailTextLabel?.font = UIFont(name: "Montserrat", size: 14)
+                cell.personImageView.layer.masksToBounds = true
+                cell.personImageView.layer.cornerRadius  = cell.personImageView.frame.width / 2
+                */
                 
 //                if let imagePath = self.myRLMMovie.poster_path {
 //                    let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)

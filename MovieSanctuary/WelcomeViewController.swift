@@ -256,7 +256,7 @@ extension WelcomeViewController: UICollectionViewDelegate {
             movieID = (self.movies[2] as! [RLMMovie])[0].recommendations.results[indexPath.row].id
         }
         
-        // vc.connectForMovieDetail(type: .standard(movieID))
+        vc.connectForMovieDetail(type: .standard(movieID))
         
         self.navigationController?.pushViewController(vc, animated: true)
         
