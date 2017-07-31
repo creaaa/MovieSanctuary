@@ -31,6 +31,14 @@ final class MovieDetailViewController: UIViewController {
         
         super.viewDidLoad()
         
+        // あらかじめストーリーボードで CollectionView の View セクションの Tag に 1 を設定しておく
+        let cv = self.view.viewWithTag(1) as! UICollectionView
+        // FlowLayout を取得して　sectionHeadersPinToVisibleBounds を true にする
+        let fl = cv.collectionViewLayout as! UICollectionViewFlowLayout
+        // sectionHeadersPinToVisibleBounds は flowlayout にしかない
+        fl.sectionHeadersPinToVisibleBounds = true
+        
+        
         self.view.backgroundColor = .white
         
         self.tableView.delegate   = self
@@ -255,22 +263,38 @@ extension MovieDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
+        /*
         var header: UICollectionReusableView? = nil
-        
         if (kind == UICollectionElementKindSectionHeader) {
             header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MyHeader", for: indexPath)
             
         }
         return header!
+        */
+        
+        var reusableview: UICollectionReusableView? = nil
+        // ヘッダーの時のみ処理する
+        if kind == UICollectionElementKindSectionHeader {
+            
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header", for: indexPath)
+            
+            let lbl = UILabel(frame: CGRect(x: 5, y: 5, width: 375, height: 50))
+            lbl.text = "HEADER!"
+            headerView.addSubview(lbl)
+            reusableview = headerView
+            
+        }
+        
+        return reusableview!
         
     }
     
-    
-    // ヘッダーのサイズを設定する
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewFlowLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let size = CGSize(width: 375, height: 50)
-        return size
-    }
+//    
+//    // ヘッダーのサイズを設定する
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewFlowLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        let size = CGSize(width: 375, height: 50)
+//        return size
+//    }
     
     
     
