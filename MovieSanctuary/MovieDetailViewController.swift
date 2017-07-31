@@ -5,7 +5,8 @@ import Kingfisher
 
 final class MovieDetailViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView:       UITableView!
+    @IBOutlet weak var collectionView:  UICollectionView!
     
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel:      UILabel!
@@ -30,8 +31,13 @@ final class MovieDetailViewController: UIViewController {
         
         super.viewDidLoad()
         
+        self.view.backgroundColor = .white
+        
         self.tableView.delegate   = self
         self.tableView.dataSource = self
+        
+        self.collectionView.delegate   = self
+        self.collectionView.dataSource = self
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 60
@@ -228,6 +234,48 @@ extension MovieDetailViewController: UITableViewDataSource {
     
 }
 
+
+extension MovieDetailViewController: UICollectionViewDelegate {
+    
+}
+
+extension MovieDetailViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item", for: indexPath)
+        
+        return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        var header: UICollectionReusableView? = nil
+        
+        if (kind == UICollectionElementKindSectionHeader) {
+            header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MyHeader", for: indexPath)
+            
+        }
+        return header!
+        
+    }
+    
+    
+    // ヘッダーのサイズを設定する
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewFlowLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let size = CGSize(width: 375, height: 50)
+        return size
+    }
+    
+    
+    
+    
+}
 
 
 
