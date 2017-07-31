@@ -522,8 +522,8 @@
                                                                         <constraint firstAttribute="height" constant="40" id="aFX-He-i9r"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Person Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFT-Pa-WEt">
-                                                                    <rect key="frame" x="58" y="19" width="309" height="21"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFT-Pa-WEt">
+                                                                    <rect key="frame" x="58" y="29.5" width="309" height="0.0"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -580,7 +580,7 @@
                                                     <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Item" id="tVL-LE-sRy">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Item" id="tVL-LE-sRy" customClass="DetailCollectionViewCell" customModule="MovieSanctuary" customModuleProvider="target">
                                                         <rect key="frame" x="10" y="10" width="120" height="240"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -594,12 +594,12 @@
                                                                         <constraint firstAttribute="width" constant="120" id="h6o-sk-auZ"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yop-Ew-bob" userLabel="Name">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yop-Ew-bob" userLabel="Name">
                                                                     <rect key="frame" x="0.0" y="185" width="120" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="ph6-tZ-ebh"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -654,6 +654,12 @@
                                                             <constraint firstAttribute="trailing" secondItem="noy-s2-g1f" secondAttribute="trailing" id="qZh-ah-uPX"/>
                                                             <constraint firstItem="noy-s2-g1f" firstAttribute="leading" secondItem="tVL-LE-sRy" secondAttribute="leading" id="w9U-TD-LsO"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <outlet property="posterImageView" destination="TZR-sD-D9C" id="0wh-Nd-Yha"/>
+                                                            <outlet property="titleLabel" destination="yop-Ew-bob" id="b3L-uo-aAb"/>
+                                                            <outlet property="voteAverageLabel" destination="g5l-VZ-y3b" id="zlk-jD-pTx"/>
+                                                            <outlet property="voteCountLabel" destination="J5A-ff-oDz" id="WFW-D5-fJf"/>
+                                                        </connections>
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>

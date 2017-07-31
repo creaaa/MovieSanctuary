@@ -383,12 +383,36 @@ extension MovieDetailViewController: UICollectionViewDelegate {
 extension MovieDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        // return 10
+        
+        guard let movie  = self.myRLMMovie,
+              movie.recommendations.results.count > 0 else { return 0 }
+        
+        // else { return 0 }
+        
+        return movie.recommendations.results.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item", for: indexPath) as! DetailCollectionViewCell
+        
+        guard let movie = self.myRLMMovie else { return cell }
+        
+        ///////////////
+        
+        // ポスター画像
+        if let imagePath = movie.recommendations.results[indexPath.row].poster_path {
+            let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
+            cell.posterImageView.kf.setImage(with: url,
+                                             placeholder: nil,
+                                             options: [.transition(.fade(0.4)), .forceTransition])
+        }
+        
+        cell.titleLabel.text = movie.recommendations.results[indexPath.row].title
+        cell.voteAverageLabel.text = Int(movie.recommendations.results[indexPath.row].vote_average * 10).description + "%"
+        cell.voteCountLabel.text   = movie.recommendations.results[indexPath.row].vote_count.description
         
         return cell
         

@@ -38,6 +38,7 @@
 		448B66DF1F2942CE0002833B /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448B66DE1F2942CE0002833B /* MovieDetailViewController.swift */; };
 		44982C8A1F030F19007B9EAA /* DetailPagebackGroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44982C891F030F19007B9EAA /* DetailPagebackGroundView.swift */; };
 		4498B87D1EF32F3B00D19F6F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 44A220E51EF1BC42004D9E8C /* Settings.bundle */; };
+		44A5E4A81F2F946300FCF1FD /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A5E4A71F2F946300FCF1FD /* DetailCollectionViewCell.swift */; };
 		44C0F6731EFC5CF2008D575C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C0F6721EFC5CF2008D575C /* SystemConfiguration.framework */; };
 		44D943141EE22865004EF6A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D943131EE22865004EF6A3 /* AppDelegate.swift */; };
 		44E3BE3B1EE713F000466CF5 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44E3BE3A1EE7127C00466CF5 /* Quicksand-Regular.ttf */; };
@@ -81,6 +82,7 @@
 		448B66DE1F2942CE0002833B /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		44982C891F030F19007B9EAA /* DetailPagebackGroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPagebackGroundView.swift; sourceTree = "<group>"; };
 		44A220E51EF1BC42004D9E8C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../Settings.bundle; sourceTree = "<group>"; };
+		44A5E4A71F2F946300FCF1FD /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		44C0F6721EFC5CF2008D575C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		44D943101EE22865004EF6A3 /* MovieSanctuary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSanctuary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D943131EE22865004EF6A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				44743A841F2E91A00062DA03 /* PersonTableViewCell.swift */,
+				44A5E4A71F2F946300FCF1FD /* DetailCollectionViewCell.swift */,
 				448B66DE1F2942CE0002833B /* MovieDetailViewController.swift */,
 			);
 			name = "MovieDetail VC";
@@ -408,6 +411,7 @@
 				44E3BE491EE7C12100466CF5 /* TableViewCell.swift in Sources */,
 				44547B781F27BFE800FB493B /* DetailedMovie.swift in Sources */,
 				44483C141F2AF82A009DAC5B /* DiscoverManager.swift in Sources */,
+				44A5E4A81F2F946300FCF1FD /* DetailCollectionViewCell.swift in Sources */,
 				44E3BE441EE73BB100466CF5 /* SearchView.swift in Sources */,
 				44547B841F28761C00FB493B /* SearchedMovie.swift in Sources */,
 				445C36991F26707900B7D920 /* Helper.swift in Sources */,
