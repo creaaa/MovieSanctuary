@@ -245,6 +245,12 @@ extension MovieDetailViewController: UITableViewDataSource {
         }
     }
     
+    // groupedなテーブルのheader / footerの余白調整
+    // http://qiita.com/usagimaru/items/9e821ec0c3d9028f8527 ← 神
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+    
 }
 
 
