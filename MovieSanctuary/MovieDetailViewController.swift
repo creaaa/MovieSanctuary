@@ -171,8 +171,8 @@ final class MovieDetailViewController: UIViewController {
         
         self.overviewLabel.text = self.myRLMMovie.overview
         
-        self.tableView.reloadData()
         self.collectionView.reloadData()
+        self.tableView.reloadData()
         
     }
 
@@ -432,18 +432,19 @@ extension MovieDetailViewController: UICollectionViewDataSource {
         if let imagePath = movie.recommendations.results[indexPath.row].poster_path {
             
             // おちる！！！！！！
-            if let encodedPath = imagePath.addingPercentEncoding(withAllowedCharacters: .alphanumerics) {
+            // エンコードするとだめ
+            // if let encodedPath = imagePath.addingPercentEncoding(withAllowedCharacters: .alphanumerics) {
             
-                if let url = URL(string: "https://image.tmdb.org/t/p/original" + encodedPath) {
-                print("あああ！", Thread.isMainThread)
-                cell.posterImageView.kf.setImage(with: url,
-                                                 placeholder: nil,
-                                                 options: [.transition(.fade(0.4)), .forceTransition])
-                }
-            
+            if let url = URL(string: "https://image.tmdb.org/t/p/original" + imagePath) {
+                    print("あああ！", Thread.isMainThread)
+                    print(url)
+                        
+                    cell.posterImageView.kf.setImage(with: url,
+                                                     placeholder: nil,
+                                                     options: [.transition(.fade(0.4)), .forceTransition])
             }
-            
         }
+        
         
         cell.titleLabel.text = movie.recommendations.results[indexPath.row].title
         cell.voteAverageLabel.text = Int(movie.recommendations.results[indexPath.row].vote_average * 10).description + "%"
