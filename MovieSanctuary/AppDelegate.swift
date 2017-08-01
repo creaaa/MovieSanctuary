@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // UITabBar.appearance().tintColor = .white
  
         
-        
         // タブバーのテキストのラベル
         UITabBarItem.appearance().setTitleTextAttributes(
             [ NSFontAttributeName: UIFont(name: font, size: 10) as Any,

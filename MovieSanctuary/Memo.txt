@@ -26,3 +26,18 @@ navigationItem.backBarButtonItem = backButtonItem
 このペインに「Back Button」という項目があるので、ここで設定。便利。
 ただしナビゲーションバーを配置した場合は、タイトルも同様に明示的に入力しないと、空文字になってしまうのでこっちも入れておく。
 
+////////////////////
+
+// rootViewControllerに戻る
+navigationController?.popToViewController(navigationController!.viewControllers[0], animated: true)
+// または
+navigationController?.popToRootViewControllerAnimated(true)
+
+// rootViewControllerの1つ先のViewControllerに戻る
+navigationController?.popToViewController(navigationController!.viewControllers[1], animated: true)
+
+// rootViewControllerの2つ先のViewControllerに戻る
+navigationController?.popToViewController(navigationController!.viewControllers[2], animated: true)
+
+// 一つ前のViewControllerに戻る
+navigationController?.popViewControllerAnimated(true)

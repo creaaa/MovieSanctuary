@@ -53,19 +53,15 @@ final class MovieListViewController: UIViewController {
         
         self.view.addSubview(self.resultView)
         
-        // tableViewがナビゲーションバーに食い込まないようにする設定
-        // (お気に入り画面として使うときだけ食い込むため、そのときのみ矯正)
-        if self.tabBarController?.selectedIndex == 1 {
-            let edgeInsets = UIEdgeInsets(top: 64, left: 0, bottom: 49, right: 0)
-            resultView.tableView.contentInset          = edgeInsets
-            resultView.tableView.scrollIndicatorInsets = edgeInsets
-        }
-
         // この画面が検索結果表示なら  → 1  となる
         // この画面がお気に入り画面なら → 0  となる
         // 0(=お気に入り画面)のときだけleft buttonを表示。
         if self.navigationController?.viewControllers.index(of: self) == 0 {
             self.navigationItem.leftBarButtonItem = editButtonItem
+            // tableViewがナビゲーションバーに食い込まないようにする設定
+            let edgeInsets = UIEdgeInsets(top: 64, left: 0, bottom: 49, right: 0)
+            resultView.tableView.contentInset          = edgeInsets
+            resultView.tableView.scrollIndicatorInsets = edgeInsets
         }
         
         // 1 = 検索結果の表示画面として使われるときだけ、APIコール
@@ -91,75 +87,12 @@ final class MovieListViewController: UIViewController {
     }
     
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     deinit {
         print("消滅した")
-    }
-    
-    
-    ////////////////////////////////////
-    // MARK: - Configure & Render View
-    ////////////////////////////////////
-    
-    fileprivate func configureCell(_ tableView: UITableView, _ indexPath: IndexPath) -> TableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(with: TableViewCell.self, for: indexPath)
-        
-        cell.titleLabel.text = self.movies[indexPath.row].title
-        
-        if let genre1 = self.movies[indexPath.row].genres.first {
-            cell.genre1Label.text = genre1.name
-            if cell.genre1Label.text == "Science Fiction" {
-               cell.genre1Label.text = "SF"
-            }
-        } else {
-            cell.genre1Label.isHidden = true
-        }
-        
-        if self.movies[indexPath.row].genres.count >= 2 {
-            cell.genre2Label.text = self.movies[indexPath.row].genres[1].name
-            if cell.genre2Label.text == "Science Fiction" {
-                cell.genre2Label.text = "SF"
-            }
-        } else {
-            cell.genre2Label.isHidden = true
-        }
- 
-        if let imagePath = self.movies[indexPath.row].poster_path {
-            
-            let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
-            cell.posterImageView.kf.setImage(with: url,
-                                             placeholder: #imageLiteral(resourceName: "noimage"),
-                                             options: [.transition(.fade(0.3))])
-        }
-        
-        if self.movies[indexPath.row].vote_average != 0.0 {
-            cell.voteAverageLabel.text = Int(self.movies[indexPath.row].vote_average * 10).description + "%"
-        } else {
-            cell.voteAverageImageView.isHidden = true
-            cell.voteAverageLabel.isHidden     = true
-        }
-        
-        if self.movies[indexPath.row].vote_count != 0 {
-            cell.voteCountLabel.text = self.movies[indexPath.row].vote_count.description
-        } else {
-            cell.voteCountImageView.isHidden = true
-            cell.voteCountLabel.isHidden     = true
-        }
-        
-        return cell
-        
     }
     
     
@@ -232,7 +165,10 @@ extension MovieListViewController: UITableViewDataSource {
         
         // デフォルトでは20件を取得
         // infitite scroll
-        if self.movies.count >= 20 && self.movies.count - indexPath.row <= 4 {
+        if self.movies.count >= 20 &&
+            self.movies.count - indexPath.row <= 4 &&
+            // お気に入り画面(= 0)の中ではAPIコールしちゃダメよ。
+            self.navigationController?.viewControllers.index(of: self) == 1 {
             print("無限スクロール発動！")
             self.page += 1
             connectForMovieSearch(query: self.query, page: self.page)
@@ -244,14 +180,11 @@ extension MovieListViewController: UITableViewDataSource {
         
     }
     
-    // need this if you use xib for cell
+    // need this if you use xib for cell(← マジだった。auto sizing できないみたい。)
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         // dequeue(withIdentifier:indexPath) causes infinite roop...😨 so use this.
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell") as! TableViewCell
-        
         return cell.bounds.height
-        
     }
     
     /* delete */
@@ -270,7 +203,6 @@ extension MovieListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
         if case .delete = editingStyle {
             try! self.realm.write {
                 let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
@@ -278,6 +210,59 @@ extension MovieListViewController: UITableViewDataSource {
                 reload()
             }
         }
+    }
+    
+    ////////////////////////////////////
+    // MARK: - Configure
+    ////////////////////////////////////
+    
+    fileprivate func configureCell(_ tableView: UITableView, _ indexPath: IndexPath) -> TableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(with: TableViewCell.self, for: indexPath)
+        
+        cell.titleLabel.text = self.movies[indexPath.row].title
+        
+        if let genre1 = self.movies[indexPath.row].genres.first {
+            cell.genre1Label.text = genre1.name
+            if cell.genre1Label.text == "Science Fiction" {
+                cell.genre1Label.text = "SF"
+            }
+        } else {
+            cell.genre1Label.isHidden = true
+        }
+        
+        if self.movies[indexPath.row].genres.count >= 2 {
+            cell.genre2Label.text = self.movies[indexPath.row].genres[1].name
+            if cell.genre2Label.text == "Science Fiction" {
+                cell.genre2Label.text = "SF"
+            }
+        } else {
+            cell.genre2Label.isHidden = true
+        }
+        
+        if let imagePath = self.movies[indexPath.row].poster_path {
+            let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
+            cell.posterImageView.kf.setImage(with: url,
+                                             placeholder: #imageLiteral(resourceName: "noimage"),
+                                             options: [.transition(.fade(0.3))])
+        }
+        
+        if self.movies[indexPath.row].vote_average != 0.0 {
+            cell.voteAverageLabel.text = Int(self.movies[indexPath.row].vote_average * 10).description + "%"
+        } else {
+            cell.voteAverageImageView.isHidden = true
+            cell.voteAverageLabel.isHidden     = true
+        }
+        
+        if self.movies[indexPath.row].vote_count != 0 {
+            cell.voteCountLabel.text = self.movies[indexPath.row].vote_count.description
+        } else {
+            cell.voteCountImageView.isHidden = true
+            cell.voteCountLabel.isHidden     = true
+        }
+        
+        return cell
+        
     }
     
 }
@@ -288,7 +273,6 @@ extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
-            print("no network. try later...")
             showAlert(title: "No network", message: "try again later...")
             return
         }
