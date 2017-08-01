@@ -52,7 +52,7 @@ final class RLMVideo: Object, Decodable {
 
 final class RLMVideos: Object, Decodable {
     
-    var results = List<RLMVideo>()
+    let results = List<RLMVideo>()
     
     static func decode(_ e: Extractor) throws -> RLMVideos {
         
@@ -66,11 +66,9 @@ final class RLMVideos: Object, Decodable {
         
     }
     
-    required convenience init(results: List<RLMVideo>) {
-        self.init()
-        self.results = results
+    convenience init(results: List<RLMVideo>) {
+        self.init(results: results)
     }
-    
 }
 
 
