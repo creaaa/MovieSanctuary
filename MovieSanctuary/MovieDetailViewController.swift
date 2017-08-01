@@ -14,7 +14,7 @@ final class MovieDetailViewController: UIViewController {
     @IBOutlet weak var overviewLabel:    UILabel!
     
     @IBOutlet weak var posterImageViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var tableViewHeight:       NSLayoutConstraint!
     
     
     // 上記の、Realmナイズされたモデル
@@ -49,6 +49,9 @@ final class MovieDetailViewController: UIViewController {
         // 次のpushVCのバーに表示される "< back" ボタンのラベルは、遷移元で定義せねばなりません。
         // ここの記述は、 3→3の遷移時、遷移後のほうのVCの戻るボタンのラベルを空白にするため書いてます。
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: nil)
+        
+        connectForMovieDetail()
+        
     }
 
     override func viewDidLayoutSubviews() {
@@ -102,44 +105,33 @@ final class MovieDetailViewController: UIViewController {
     // MARK: - API connection
     //////////////////////////
 
-    func connectForMovieDetail(type: MovieRequestType) {
+    func connectForMovieDetail() {
         
         let manager = MovieDetailManager()
         
-        // スタンダード
         DispatchQueue.global().async {
-            switch type {
-                case .standard(let movieID):
-                    manager.request(id: movieID) { result in
-                        self.myRLMMovie = result
-                        print(self.myRLMMovie)
-                        self.render()
-                    }
-                case .now_playing:
-                    // このViewControllerで使われる限りは、now_playingでコールされることはない
-                    fatalError()
+            
+            // このコールバックは .success時のみに実行される...つまり
+            // .failureだったら、myRLMMovie = nil の可能性がある、ということ！やばい
+            
+            manager.request(id: self.movieID) { result in
+                self.myRLMMovie = result
+                print(self.myRLMMovie)
+                self.render()
             }
         }
+        
     }
 
     
     ///////////////////////////////////
     // MARK: - Configure & Render View
     ///////////////////////////////////
-
-    func showAlert() {
-
-        let alert = UIAlertController(title: "No data", message: "No data for this movie", preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-
-        self.present(alert, animated: true, completion: nil)
-
-    }
-
     
     func render() {
 
+        guard let movie = self.myRLMMovie else { return }
+        
         self.title = self.myRLMMovie.title
 
         if let imagePath = self.myRLMMovie.poster_path {
@@ -407,7 +399,7 @@ extension MovieDetailViewController: UICollectionViewDelegate {
         
         // po self.myRLMMovie するとちゃんと, recommendationsちゃんとあるのに
         // po self.myRLMMovie.recommendations すると nil は？？？？？？
-        vc.connectForMovieDetail(type: .standard(self.myRLMMovie.recommendations.results[indexPath.row].id))
+        // vc.connectForMovieDetail(type: .standard(self.myRLMMovie.recommendations.results[indexPath.row].id))
         // ↑のコールバックで遷移、とかにしないとやばくないか。
         self.navigationController?.pushViewController(vc, animated: true)
         
