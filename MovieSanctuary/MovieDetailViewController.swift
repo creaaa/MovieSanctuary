@@ -400,7 +400,6 @@ extension MovieDetailViewController: UICollectionViewDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "MovieDetail") as! MovieDetailViewController
         
-        //vc.navigationItem.backBarButtonItem?.title = ""
         
         // まじか！！！ここでrecommendationsがnilで落ちてる。
         // ちゃんとcollectionセルたち表示されてるのに　ちょっと意味わからんですね
@@ -410,9 +409,7 @@ extension MovieDetailViewController: UICollectionViewDelegate {
         // po self.myRLMMovie するとちゃんと, recommendationsちゃんとあるのに
         // po self.myRLMMovie.recommendations すると nil は？？？？？？
         vc.connectForMovieDetail(type: .standard(self.myRLMMovie.recommendations.results[indexPath.row].id))
-        
-        
-        
+        // ↑のコールバックで遷移、とかにしないとやばくないか。
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -446,6 +443,7 @@ extension MovieDetailViewController: UICollectionViewDataSource {
         ///////////////
         
         // ポスター画像
+        // ここでも落ちた。
         if let imagePath = movie.recommendations.results[indexPath.row].poster_path {
             if let url = URL(string: "https://image.tmdb.org/t/p/original" + imagePath) {
                 cell.posterImageView.kf.setImage(with: url,
