@@ -43,7 +43,8 @@ final class MovieDetailViewController: UIViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 60
         
-        // お気に入り → 詳細画面 の場合なら、Favボタンが必要なわけない
+        // お気に入り → 詳細画面 の場合なら、Favボタンが必要なわけない,,,
+        // ただし、詳細 → 詳細 の場合ならいる。のでこれ直せ。↓
         if self.tabBarController?.selectedIndex == 0 {
         self.navigationItem.rightBarButtonItem =
             UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addFavorite))
@@ -363,10 +364,19 @@ extension MovieDetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
-            print("no network. try later...")
             showAlert(title: "No network", message: "try again later...")
             return
         }
+        
+        // そもそもセルアイテムをタップできる時点で recommendationsがnilなわけないと思うのだが。。。
+        // いかんせん不可解なエラーが出てるので、防御的に書く
+        guard let movie = self.myRLMMovie,
+            // この書き方、recommendationsがnilだった場合に実行時エラー引き起こさないのか?意味あるか??
+              let rcm = movie.recommendations else {
+                print("まさかの！")
+                return
+        }
+        
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "MovieDetail") as! MovieDetailViewController
@@ -381,6 +391,9 @@ extension MovieDetailViewController: UICollectionViewDelegate {
         // po self.myRLMMovie.recommendations すると nil は？？？？？？
         // vc.connectForMovieDetail(type: .standard(self.myRLMMovie.recommendations.results[indexPath.row].id))
         // ↑のコールバックで遷移、とかにしないとやばくないか。
+        
+        vc.movieID = rcm.results[indexPath.row].id
+        
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -393,9 +406,10 @@ extension MovieDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         guard let movie = self.myRLMMovie,
-              movie.recommendations.results.count > 0 else { return 0 }
+            // この書き方、recommendationsがnilだった場合に実行時エラー引き起こさないのか?意味あるか??
+              let rcm = movie.recommendations else { return 0 }
         
-        return movie.recommendations.results.count
+        return rcm.results.count
         
     }
     
@@ -404,12 +418,13 @@ extension MovieDetailViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item", for: indexPath) as! DetailCollectionViewCell
         
-        guard let movie = self.myRLMMovie else { return cell }
+        guard let movie = self.myRLMMovie,
+              let rcm = movie.recommendations else { return cell }
         
         ///////////////
         
         // ここでも落ちた。
-        if let imagePath = movie.recommendations.results[indexPath.row].poster_path {
+        if let imagePath = rcm.results[indexPath.row].poster_path {
             if let url = URL(string: "https://image.tmdb.org/t/p/original" + imagePath) {
                 cell.posterImageView.kf.setImage(with: url,
                                                  placeholder: nil,
@@ -417,9 +432,9 @@ extension MovieDetailViewController: UICollectionViewDataSource {
             }
         }
         
-        cell.titleLabel.text       = movie.recommendations.results[indexPath.row].title
-        cell.voteAverageLabel.text = Int(movie.recommendations.results[indexPath.row].vote_average * 10).description + "%"
-        cell.voteCountLabel.text   = movie.recommendations.results[indexPath.row].vote_count.description
+        cell.titleLabel.text       = rcm.results[indexPath.row].title
+        cell.voteAverageLabel.text = Int(rcm.results[indexPath.row].vote_average * 10).description + "%"
+        cell.voteCountLabel.text   = rcm.results[indexPath.row].vote_count.description
         
         return cell
         

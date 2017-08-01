@@ -7,7 +7,7 @@ class OverviewLabel: UILabel {
 
     // paddingをあんまりかけすぎると、文章が途中でしれっとなくなる(auto sizingなlabelであることには変わりないが)
     @IBInspectable var padding: UIEdgeInsets =
-        UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
     override func drawText(in rect: CGRect) {
         let newRect = UIEdgeInsetsInsetRect(rect, padding)
