@@ -28,4 +28,30 @@ extension UIViewController {
         
     }
     
+    func pushViewController(_ viewController: UIViewController, animated: Bool, completion: @escaping (Void) -> Void)
+    {
+        self.navigationController?.pushViewController(viewController, animated: animated)
+        
+        guard animated, let coordinator = transitionCoordinator else {
+            completion()
+            return
+        }
+        
+        coordinator.animate(alongsideTransition: nil) { _ in completion() }
+    }
+    
+    func popViewController(animated: Bool, completion: @escaping () -> Void)
+    {
+        self.navigationController?.popViewController(animated: true)
+        
+        guard animated, let coordinator = transitionCoordinator else {
+            completion()
+            return
+        }
+        
+        coordinator.animate(alongsideTransition: nil) { _ in completion() }
+    }
+    
+    
+    
 }

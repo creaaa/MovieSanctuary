@@ -32,6 +32,9 @@ final class MovieDetailViewController: UIViewController {
         
         super.viewDidLoad()
         
+        // Realmのパス
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
         self.view.backgroundColor = .white
         
         self.tableView.delegate   = self
@@ -93,7 +96,10 @@ final class MovieDetailViewController: UIViewController {
         // false = 既存のオブジェクトを参照しようとせず、新たに作る。
         // もちろんそのとき、既にあるprimary key で作成しようとすると実行時エラーとなる。
         do {
+            
+            
             let realm = try Realm()
+            
             try realm.write {
                 realm.add(self.myRLMMovie, update: true)
                 showAlert(title: "Saved!")
@@ -365,25 +371,34 @@ extension MovieDetailViewController: UICollectionViewDelegate {
         
         guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
             showAlert(title: "No network", message: "try again later...")
+            self.navigationController?.popViewController(animated: true)
             return
         }
         
         // そもそもセルアイテムをタップできる時点で recommendationsがnilなわけないと思うのだが。。。
-        // いかんせん不可解なエラーが出てるので、防御的に書く
-        guard let movie = self.myRLMMovie,
-            // この書き方、recommendationsがnilだった場合に実行時エラー引き起こさないのか?意味あるか?? 
-                // → あった。recommendationsがnilの場合、else節が実行される
-              let rcm = movie.recommendations else {
-                // まさかのここ発動した
-                
-                // とりあえずの対処法...
-                // アラート出して、popさせてこの画面から離脱させる...
-                
-                print("まさかの！")
-                return
+        // いかんせん不可解なエラーが出てるので、防御的に書く。
+        // デバッガビリティ高めるため、ここ、わざと冗長的に書いてます...
+        guard let movie = self.myRLMMovie else {
+            showAlert(title: "couldn't open page", message: "try again later.")
+            self.navigationController?.popViewController(animated: true)
+            return
         }
-        
-        
+        // この書き方、recommendationsがnilだった場合に実行時エラー引き起こさないのか?意味あるか??
+        // → あった。recommendationsがnilの場合、else節が実行される
+        // とりあえずの対処法...
+        // アラート出して、popさせてこの画面から離脱させる...
+        // ↑のguard節ではなく、ここがやばいっぽいな。recommendataionsがnilになる
+        guard let rcm = movie.recommendations else {
+            
+            // self.navigationController?.popViewController(animated: true)
+            // showAlert(title: "couldn't open page", message: "try again later.")
+            
+            popViewController(animated: true, completion: showAlertRemotely)
+            
+            return
+            
+        }
+     
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "MovieDetail") as! MovieDetailViewController
         
@@ -404,6 +419,21 @@ extension MovieDetailViewController: UICollectionViewDelegate {
         
     }
 
+    
+    func showAlertRemotely() {
+
+        // nilになってしまう...detailVCがもう開放されているからってことか..?
+        // ちがう。VC自体はまだ生存しているが、navigationControllerが既にnil...
+        
+//        let idx: Int? = self.navigationController?.viewControllers.index(of: self)
+//        
+//        if let vc = self.navigationController?.viewControllers[idx!-1] as? WelcomeViewController {
+//            vc.showAlert(title: "un", message: "unn")
+//        }
+        
+    }
+    
+    
 }
 
 

@@ -154,6 +154,10 @@ class WelcomeViewController: UIViewController {
         }
     }
     
+    override func showAlert(title: String, message: String) {
+        super.showAlert(title: title, message: message)
+    }
+    
 }
 
 
@@ -260,6 +264,7 @@ extension WelcomeViewController: UICollectionViewDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
+    
 }
 
 
