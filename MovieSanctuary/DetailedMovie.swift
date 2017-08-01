@@ -80,7 +80,7 @@ final class RLMCast: Object, Decodable {
     
     dynamic var name         = ""
     dynamic var order        = 0
-    dynamic var profile_path: String?
+    dynamic var profile_path:  String?
     
     static func decode(_ e: Extractor) throws -> RLMCast {
         return try RLMCast(
@@ -351,8 +351,6 @@ final class RLMMovie: Object, Movieable, Decodable {
     }
     
 }
-
-
 
 
 

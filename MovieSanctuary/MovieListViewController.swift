@@ -85,7 +85,44 @@ final class MovieListViewController: UIViewController {
         }
         
         if self.navigationController?.viewControllers.index(of: self) == 0  {
+            
             // reload()
+            
+            let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
+            self.movies = []
+            
+//            res.forEach { [weak self] el in
+//                let elm = el as Movieable
+//                self!.movies.append(elm)
+//            }
+            
+            /*
+            self.movies.append(
+                RLMMovie(id: 1,
+                         title: "",
+                         poster_path: "",
+                         vote_average: 1,
+                         vote_count: 1, genres: List<RLMGenre>(),
+                         videos: List<RLMVideos>(),
+                         credits: List<RLMCredits>(),
+                         recommendations: List<RLMRecommendations>(),
+                         overview: "",
+                         release_date: "",
+                         runtime: 1,
+                         budget: 1,
+                         revenue: 1,
+                         homepage: ""
+                )
+            )
+            */
+            
+            for elm in res {
+                self.movies.append(elm)
+            }
+            
+            self.resultView.tableView.reloadData()
+            
+            
         }
         
     }
@@ -108,15 +145,25 @@ final class MovieListViewController: UIViewController {
         
         let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
         
+        /*
+        let f = res[0]  // RLMMovie
+        let ff = f as! Movieable // Movieable
+        */
+        
         // 整合性を保つ
         // Results<RLMMovie> → [Movieable]
         self.movies = []
-        res.forEach {self.movies.append($0) }
+        res.forEach {
+            let elm = $0 as Movieable
+            self.movies.append(elm)
+        }
+        
         
         self.resultView.tableView.reloadData()
 
     }
     */
+    
     
     //////////////////////////
     // MARK: - API connection
@@ -218,6 +265,18 @@ extension MovieListViewController: UITableViewDataSource {
                 let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
                 self.realm.delete(res[indexPath.row])
                 // reload()
+                
+                
+                
+                // let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
+                self.movies = []
+                res.forEach {
+                    let elm = $0 as Movieable
+                    self.movies.append(elm)
+                }
+                
+                self.resultView.tableView.reloadData()
+                
             }
         }
     }

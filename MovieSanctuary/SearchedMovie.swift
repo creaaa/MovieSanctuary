@@ -6,7 +6,7 @@ protocol Movieable {
     var id:           Int     { get set }
     var title:        String  { get set }
     var poster_path:  String? { get set }
-    var genres: List<RLMGenre>{ get }
+    var genres: List<RLMGenre>{ get     }
     var vote_average: Float   { get set }
     var vote_count:   Int     { get set }
 }

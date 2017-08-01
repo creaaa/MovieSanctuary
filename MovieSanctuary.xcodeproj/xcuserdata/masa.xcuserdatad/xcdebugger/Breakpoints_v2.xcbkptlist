@@ -134,11 +134,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieSanctuary/MovieListViewController.swift"
-            timestampString = "523309692.858044"
+            timestampString = "523318843.243881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
             landmarkName = "MovieListViewController"
             landmarkType = "4">
          </BreakpointContent>
@@ -150,11 +150,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieSanctuary/MovieListViewController.swift"
-            timestampString = "523309692.858044"
+            timestampString = "523318843.243881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "connectForMovieSearch(query:page:)"
             landmarkType = "7">
          </BreakpointContent>
