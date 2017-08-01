@@ -7,7 +7,7 @@ import Kingfisher
 
 class WelcomeViewController: UIViewController {
 
-    var storedOffsets = [Int : CGFloat]()
+    var storedOffsets = [Int:CGFloat]()
 
     var img: UIImage?
 
@@ -40,7 +40,6 @@ class WelcomeViewController: UIViewController {
         
         // ネットワークチェック
         guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
-            print("no network. try later...")
             showAlert(title: "No network", message: "try again later...")
             return
         }
@@ -181,16 +180,20 @@ extension WelcomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
         guard let cell = cell as? WelcomeViewControllerCell else { return }
-        
         cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.section)
+        // ↓ この行いつのまにか消えてた...だから効かなかったんだよ
+        // チュートリでは storedOffsets[indexPath.row]だが、このアプリは [indexPath.section]ね。わかるな??
+        print(self.storedOffsets)
         
+        cell.collectionViewOffset = storedOffsets[indexPath.section] ?? 0
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let tableViewCell = cell as? WelcomeViewControllerCell else { return }
-        storedOffsets[indexPath.row] = tableViewCell.collectionViewOffset
+        guard let tableViewCell           = cell as? WelcomeViewControllerCell else { return }
+        // ↓ ここも[indexPath.row]から[indexPath.section]になおすのを忘れずに
+        self.storedOffsets[indexPath.section] = tableViewCell.collectionViewOffset
+        print("いま消えました: \(self.storedOffsets)")
     }
     
     
