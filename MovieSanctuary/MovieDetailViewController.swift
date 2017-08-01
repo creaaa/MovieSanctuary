@@ -110,10 +110,8 @@ final class MovieDetailViewController: UIViewController {
         let manager = MovieDetailManager()
         
         DispatchQueue.global().async {
-            
             // このコールバックは .success時のみに実行される...つまり
             // .failureだったら、myRLMMovie = nil の可能性がある、ということ！やばい
-            
             manager.request(id: self.movieID) { result in
                 self.myRLMMovie = result
                 print(self.myRLMMovie)
@@ -180,51 +178,46 @@ extension MovieDetailViewController: UITableViewDataSource {
                 cell.textLabel?.textColor = .gray
                 cell.textLabel?.font = UIFont(name: "Montserrat", size: 12)
                 
-                // これしないと、初回にエラーで落ちる
-                if let movie = self.myRLMMovie {
-                    
-                    let formatter = NumberFormatter()
-                    formatter.numberStyle = .decimal
-                    formatter.groupingSeparator = ","
-                    formatter.groupingSize = 3
-                    
-                    switch indexPath.row {
-                        case 0:
-                             cell.detailTextLabel?.text = movie.release_date
-                        case 1:
-                            cell.detailTextLabel?.text =
-                                (movie.runtime?.description).map { $0 + " mins"}
-                        case 2:
-                            
-                            var genreText: String = ""
-                            
-                            if movie.genres.count >= 1 {
-                                genreText.append(movie.genres[0].name)
-                            }
-                            
-                            if movie.genres.count >= 2 {
-                                genreText.append(", ")
-                                genreText.append(movie.genres[1].name)
-                            }
-                            
-                            cell.detailTextLabel?.text = genreText
-                        
-                        case 3:
-                            cell.detailTextLabel?.text =
-                                self.myRLMMovie.budget != 0 ?
-                                    formatter.string(from: movie.budget as NSNumber).map{"$ \($0)"} : ""
-                        case 4:
-                            cell.detailTextLabel?.text =
-                                self.myRLMMovie.revenue != 0 ?
-                                    formatter.string(from: movie.revenue as NSNumber).map{"$ \($0)"} : ""
-
-                        default:
-                            fatalError()
-                    }
-                }
-                
                 cell.detailTextLabel?.textColor = .black
                 cell.detailTextLabel?.font = UIFont(name: "Montserrat", size: 14)
+                
+                // これしないと、初回にエラーで落ちる
+                guard let movie = self.myRLMMovie else { return cell }
+                
+                let formatter = NumberFormatter()
+                formatter.numberStyle = .decimal
+                formatter.groupingSeparator = ","
+                formatter.groupingSize = 3
+                
+                switch indexPath.row {
+                case 0:
+                    cell.detailTextLabel?.text = movie.release_date
+                case 1:
+                    cell.detailTextLabel?.text =
+                        (movie.runtime?.description).map { $0 + " mins"}
+                case 2:
+                    var genreText: String = ""
+                    if movie.genres.count >= 1 {
+                        genreText.append(movie.genres[0].name)
+                    }
+                    if movie.genres.count >= 2 {
+                        genreText.append(", ")
+                        genreText.append(movie.genres[1].name)
+                    }
+                    cell.detailTextLabel?.text = genreText
+                case 3:
+                    cell.detailTextLabel?.text =
+                        self.myRLMMovie.budget != 0 ?
+                            formatter.string(from: movie.budget as NSNumber).map{"$ \($0)"} : ""
+                case 4:
+                    cell.detailTextLabel?.text =
+                        self.myRLMMovie.revenue != 0 ?
+                            formatter.string(from: movie.revenue as NSNumber).map{"$ \($0)"} : ""
+                default:
+                    fatalError()
+                }
+//                cell.detailTextLabel?.textColor = .black
+//                cell.detailTextLabel?.font = UIFont(name: "Montserrat", size: 14)
                 
                 return cell
             
@@ -232,66 +225,53 @@ extension MovieDetailViewController: UITableViewDataSource {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "PersonCell", for: indexPath) as! PersonTableViewCell
 
-                // ぬるぽ！！このnullチェックマジ忘れる！！超注意！
-                if let movie = self.myRLMMovie {
+                // これないと初回エラー
+                guard let movie = self.myRLMMovie else { return cell }
                     
-                    // for row 1 & 2
-                    var crews: [RLMCrew] = []
-                    movie.credits.crews.forEach {
-                        crews.append($0)
-                    }
-                    // for row 3
-                    var casts: [RLMCast] = []
-                    movie.credits.casts.forEach {
-                        casts.append($0)
-                    }
-                    
-                    switch indexPath.section {
-                        case 1:
-                            
-                            let directors = crews.filter{ $0.job == "Director" }
-                            print(directors)
-                            
-                            if let profilePath = directors[indexPath.row].profile_path {
-                                let url = URL(string: "https://image.tmdb.org/t/p/original/" + profilePath)
-                                cell.personImageView.kf.setImage(with: url,
-                                                                 placeholder: nil,
-                                                                 options: [.transition(.fade(0.4)), .forceTransition])
-                            }
-                            
-                            cell.nameLabel.text = directors[indexPath.row].name
-                        
-                        case 2:
-                            let screenplays =
-                                crews.filter{ $0.job == "Screenplay" || $0.job == "Writer" }
-                                print(screenplays)
-                            
-                            if let profilePath = screenplays[indexPath.row].profile_path {
-                                let url = URL(string: "https://image.tmdb.org/t/p/original/" + profilePath)
-                                cell.personImageView.kf.setImage(with: url,
-                                                                 placeholder: nil,
-                                                                 options: [.transition(.fade(0.4)), .forceTransition])
-                            }
-                            
-                                cell.nameLabel.text = screenplays[indexPath.row].name
-                        case 3:
-                            
-                            if let profilePath = casts[indexPath.row].profile_path {
-                                let url = URL(string: "https://image.tmdb.org/t/p/original/" + profilePath)
-                                cell.personImageView.kf.setImage(with: url,
-                                                                 placeholder: nil,
-                                                                 options: [.transition(.fade(0.4)), .forceTransition])
-                            }
-                            
-                            cell.nameLabel.text = casts[indexPath.row].name
-                        default:
-                            fatalError()
-                    }
-                    
-                    
+                // for section 1 & 2
+                var crews: [RLMCrew] = []
+                movie.credits.crews.forEach {
+                    crews.append($0)
                 }
                 
+                // for section 3
+                var casts: [RLMCast] = []
+                movie.credits.casts.forEach {
+                    casts.append($0)
+                }
                 
+                switch indexPath.section {
+                case 1:
+                    let directors = crews.filter{ $0.job == "Director" }
+                    if let profilePath = directors[indexPath.row].profile_path {
+                        let url = URL(string: "https://image.tmdb.org/t/p/original/" + profilePath)
+                        cell.personImageView.kf.setImage(with: url,
+                                                         placeholder: nil,
+                                                         options: [.transition(.fade(0.4)), .forceTransition])
+                    }
+                    cell.nameLabel.text = directors[indexPath.row].name
+                case 2:
+                    let screenplays =
+                        crews.filter{ $0.job == "Screenplay" || $0.job == "Writer" }
+                    if let profilePath = screenplays[indexPath.row].profile_path {
+                        let url = URL(string: "https://image.tmdb.org/t/p/original/" + profilePath)
+                        cell.personImageView.kf.setImage(with: url,
+                                                         placeholder: nil,
+                                                         options: [.transition(.fade(0.4)), .forceTransition])
+                    }
+                    cell.nameLabel.text = screenplays[indexPath.row].name
+                case 3:
+                    if let profilePath = casts[indexPath.row].profile_path {
+                        let url = URL(string: "https://image.tmdb.org/t/p/original/" + profilePath)
+                        cell.personImageView.kf.setImage(with: url,
+                                                         placeholder: nil,
+                                                         options: [.transition(.fade(0.4)), .forceTransition])
+                    }
+                    cell.nameLabel.text = casts[indexPath.row].name
+                default:
+                    fatalError()
+                }
+
                 return cell
         
             default:
@@ -300,17 +280,18 @@ extension MovieDetailViewController: UITableViewDataSource {
         
     }
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch section {
             case 0:
                 return 5
             case 1:
-//                return 1
-            
+                // これないと初回エラー。
                 guard let movie = self.myRLMMovie else { return 0 }
                 
                 var crews: [RLMCrew] = []
+                
                 movie.credits.crews.forEach {
                     crews.append($0)
                 }
