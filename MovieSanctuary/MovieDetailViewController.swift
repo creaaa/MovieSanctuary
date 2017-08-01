@@ -17,9 +17,12 @@ final class MovieDetailViewController: UIViewController {
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     
-    
     // 上記の、Realmナイズされたモデル
     var myRLMMovie: RLMMovie!
+    
+    // 2 → 3遷移時、前画面から受け渡されてくる
+    // ↑の変数もありながらもう1個作るのかよ...って思うが、仕方ない...
+    var movieID: Int!
     
     ////////////////////////
     // MARK: - Life Cycle

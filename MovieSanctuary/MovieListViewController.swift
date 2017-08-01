@@ -142,6 +142,8 @@ final class MovieListViewController: UIViewController {
         let manager = MovieSearchManager()
         
         // クエリ検索
+        // このコールバックは.success時に発動する。。。つまり、
+        // .failureのときは moviesは空のまま(nilにはならないが)、ってことだ。。。
         DispatchQueue.global().async {
             manager.request(query: query, page: page) { result in
                 result.results.forEach {
@@ -279,8 +281,10 @@ extension MovieListViewController: UITableViewDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "MovieDetail") as! MovieDetailViewController
-   
-        vc.connectForMovieDetail(type: .standard(self.movies[indexPath.row].id))
+        
+        vc.movieID = self.movies[indexPath.row].id
+        
+        //vc.connectForMovieDetail(type: .standard(self.movies[indexPath.row].id))
         
         self.navigationController?.pushViewController(vc, animated: true)
         
