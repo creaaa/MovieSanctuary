@@ -96,7 +96,11 @@ final class MovieListViewController: UIViewController {
     }
     
     
-    deinit { print("消滅した") }
+    deinit {
+        self.resultView.tableView = nil
+        
+        print("消滅した")
+    }
     
     
     fileprivate func reload() {

@@ -122,7 +122,6 @@ final class MovieDetailViewController: UIViewController {
                 self.render()
             }
         }
-        
     }
 
     
@@ -349,6 +348,7 @@ extension MovieDetailViewController: UITableViewDataSource {
     // groupedなテーブルのheader / footerの余白調整
     // http://qiita.com/usagimaru/items/9e821ec0c3d9028f8527 ← 神
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
         return CGFloat.leastNormalMagnitude
     }
     
@@ -371,8 +371,14 @@ extension MovieDetailViewController: UICollectionViewDelegate {
         // そもそもセルアイテムをタップできる時点で recommendationsがnilなわけないと思うのだが。。。
         // いかんせん不可解なエラーが出てるので、防御的に書く
         guard let movie = self.myRLMMovie,
-            // この書き方、recommendationsがnilだった場合に実行時エラー引き起こさないのか?意味あるか??
+            // この書き方、recommendationsがnilだった場合に実行時エラー引き起こさないのか?意味あるか?? 
+                // → あった。recommendationsがnilの場合、else節が実行される
               let rcm = movie.recommendations else {
+                // まさかのここ発動した
+                
+                // とりあえずの対処法...
+                // アラート出して、popさせてこの画面から離脱させる...
+                
                 print("まさかの！")
                 return
         }
