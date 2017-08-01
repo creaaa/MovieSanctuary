@@ -8,6 +8,7 @@ class DetailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var voteAverageLabel: UILabel!
     @IBOutlet weak var voteCountLabel:   UILabel!
     
+    // 万死に値するnil化の罪　一生深く心に刻め
     override func awakeFromNib() {
         self.posterImageView.image = nil
         self.titleLabel.text = nil

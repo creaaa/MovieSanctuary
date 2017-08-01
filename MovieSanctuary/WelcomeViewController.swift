@@ -236,10 +236,7 @@ extension WelcomeViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        // print("Collection view at row \(collectionView.tag) selected index path \(indexPath)")
-        
         guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
-            print("no network. try later...")
             showAlert(title: "No network", message: "try again later...")
             return
         }
@@ -249,7 +246,7 @@ extension WelcomeViewController: UICollectionViewDelegate {
         
         let movieID: Int
         
-        // 2だけ RLMMovieを使ってるだけで取り方が違うんだ。すべては俺の罪だ
+        // 2()だけ RLMMovieを使ってるだけで取り方が違うんだ。すべては俺の罪だ
         if collectionView.tag != 2 {
             movieID = self.movies[collectionView.tag][indexPath.row].id
         } else {
@@ -360,11 +357,11 @@ extension WelcomeViewController: UISearchBarDelegate {
         }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
         let vc   = storyboard.instantiateViewController(withIdentifier: "SearchResult") as! MovieListViewController
+        
         vc.query = searchBar.text!
         
-        vc.connectForMovieSearch(query: searchBar.text!)
+        // vc.connectForMovieSearch(query: searchBar.text!)
         
         self.navigationController?.pushViewController(vc, animated: true)
         

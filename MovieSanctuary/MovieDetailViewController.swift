@@ -77,6 +77,7 @@ final class MovieDetailViewController: UIViewController {
     }
 
     func addFavorite() {
+        
         try! Realm().write {
             // これ、update = trueって明示しないと落ちる。
             // よって、defaultはfalseってことか...
@@ -91,9 +92,7 @@ final class MovieDetailViewController: UIViewController {
                 let vc = navVC.viewControllers.first as? MovieListViewController else {
                 return
             }
-            
-            vc.reload()
-            
+                        
         }
     }
     

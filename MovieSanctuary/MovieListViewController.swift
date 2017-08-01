@@ -33,11 +33,6 @@ final class MovieListViewController: UIViewController {
         resultView.tableView.delegate   = self
         resultView.tableView.dataSource = self
         
-        /*
-         let xib = UINib(nibName: "TableViewCell", bundle: nil)
-         resultView.tableView.register(xib, forCellReuseIdentifier: "Cell")
-         */
-        
         resultView.tableView.register(nibCell: TableViewCell.self)
         
         return resultView
@@ -65,23 +60,18 @@ final class MovieListViewController: UIViewController {
             resultView.tableView.contentInset          = edgeInsets
             resultView.tableView.scrollIndicatorInsets = edgeInsets
         }
+
+        // この画面が検索結果表示なら  → 1  となる
+        // この画面がお気に入り画面なら → 0  となる
+        // 0(=お気に入り画面)のときだけleft buttonを表示。
+        if self.navigationController?.viewControllers.index(of: self) == 0 {
+            self.navigationItem.leftBarButtonItem = editButtonItem
+        }
         
-       
-//        // テーブル内のモデル取得方法の分岐
-//        // この画面がお気に入り画面なら
-//        if self.tabBarController?.selectedIndex == 1 {
-//            
-//            self.realm = try! Realm()
-//
-//            let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
-//            
-//            // Results<RLMMovie> → [Movieable]
-//            res.forEach { self.movies.append($0) }
-//            
-//            // 編集ボタン
-//            self.navigationItem.leftBarButtonItem = editButtonItem
-//            
-//        }
+        // 1 = 検索結果の表示画面として使われるときだけ、APIコール
+        if self.navigationController?.viewControllers.index(of: self) == 1 {
+            // connectForMovieSearch(query: self.query) // page = 1 を暗黙的に渡している
+        }
         
     }
     
@@ -93,67 +83,16 @@ final class MovieListViewController: UIViewController {
         if let indexPath = self.resultView.tableView.indexPathForSelectedRow {
             self.resultView.tableView.deselectRow(at: indexPath, animated: true)
         }
-    
-//        // テーブル内のモデル取得方法の分岐
-//        // この画面がお気に入り画面なら
-//        
-//        // これバグ！！！！！！
-//        //
-//        if self.tabBarController?.selectedIndex == 1 {
-//            
-//            
-////            self.realm = try! Realm()
-////            let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
-////            self.movies = []
-////            
-////            // Results<RLMMovie> → [Movieable]
-////            res.forEach { self.movies.append($0) }
-//            
-//            // 編集ボタン
-//            self.navigationItem.leftBarButtonItem = editButtonItem
-//            
-////            self.resultView.tableView.reloadData()
-//            
-//            reload()
-//            
-//        }
+        
+        if self.navigationController?.viewControllers.index(of: self) == 0  {
+            reload()
+        }
         
     }
     
     
-
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        // テーブル内のモデル取得方法の分岐
-        // この画面がお気に入り画面なら
-        
-        // これview "DID" appearのほうにかかないと不具合おこす！なぜか！！
-        // タブ0からタブ1に遷移する時、まだselectIndex = 0だからだ！！
-        //　でもdidAppearになった時点だと、selectIndex = 1になり、ここが発動する、という寸法
-        // 俺の罪だ...
-        if self.tabBarController?.selectedIndex == 1 {
-            
-            
-            //            self.realm = try! Realm()
-            //            let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
-            //            self.movies = []
-            //
-            //            // Results<RLMMovie> → [Movieable]
-            //            res.forEach { self.movies.append($0) }
-            
-            // 編集ボタン
-            self.navigationItem.leftBarButtonItem = editButtonItem
-            
-            //            self.resultView.tableView.reloadData()
-            
-            reload()
-            
-        }
-        
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -168,11 +107,12 @@ final class MovieListViewController: UIViewController {
         print("消滅した")
     }
     
+    
     ////////////////////////////////////
     // MARK: - Configure & Render View
     ////////////////////////////////////
     
-    func configureCell(_ tableView: UITableView, _ indexPath: IndexPath) -> TableViewCell {
+    fileprivate func configureCell(_ tableView: UITableView, _ indexPath: IndexPath) -> TableViewCell {
         
         let cell = tableView.dequeueReusableCell(with: TableViewCell.self, for: indexPath)
         
@@ -222,7 +162,8 @@ final class MovieListViewController: UIViewController {
         
     }
     
-    func reload() {
+    
+    fileprivate func reload() {
         
         let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
 
@@ -232,12 +173,7 @@ final class MovieListViewController: UIViewController {
         res.forEach {self.movies.append($0) }
         
         self.resultView.tableView.reloadData()
-        
-        
-        
-        
 
-        
     }
     
     
@@ -245,14 +181,13 @@ final class MovieListViewController: UIViewController {
     // MARK: - API connection
     //////////////////////////
     
-    var query: String!
+    var query: String! // 1 → 2遷移時、画面1から渡ってくる
     var page = 1
     
     // API Connection
     func connectForMovieSearch(query: String, page: Int = 1) {
         
         guard MovieListViewController.isNetworkAvailable(host_name: "https://api.themoviedb.org/") else {
-            print("no network. try later...")
             showAlert(title: "No network", message: "try again later...")
             return
         }
