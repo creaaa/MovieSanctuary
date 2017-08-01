@@ -43,8 +43,11 @@ final class MovieDetailViewController: UIViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 60
         
+        // お気に入り → 詳細画面 の場合なら、Favボタンが必要なわけない
+        if self.tabBarController?.selectedIndex == 0 {
         self.navigationItem.rightBarButtonItem =
             UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addFavorite))
+        }
         
         // 次のpushVCのバーに表示される "< back" ボタンのラベルは、遷移元で定義せねばなりません。
         // ここの記述は、 3→3の遷移時、遷移後のほうのVCの戻るボタンのラベルを空白にするため書いてます。
@@ -299,12 +302,7 @@ extension MovieDetailViewController: UITableViewDataSource {
                 let directors =
                     crews.filter{ $0.job == "Director" }
                 return directors.count
-            
-            
-            // Screenplay&Writer
-            case 2:
-                // return 5
-            
+            case 2:  // Screenplay&Writer
                 guard let movie = self.myRLMMovie else { return 0 }
                 
                 var crews: [RLMCrew] = []
@@ -315,10 +313,7 @@ extension MovieDetailViewController: UITableViewDataSource {
                 let screenplays =
                     crews.filter{ $0.job == "Screenplay" || $0.job == "Writer" }
                 return screenplays.count
-            
-            
             case 3:
-                // return 5
                 guard let movie = self.myRLMMovie else { return 0 }
                 
                 if movie.credits.casts.count >= 5 {
@@ -358,6 +353,7 @@ extension MovieDetailViewController: UITableViewDataSource {
     
 }
 
+
 /////////////////////
 // Collection View //
 /////////////////////
@@ -388,20 +384,15 @@ extension MovieDetailViewController: UICollectionViewDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
-    
-    
-
-        
-
-    
 
 }
+
 
 extension MovieDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        guard let movie  = self.myRLMMovie,
+        guard let movie = self.myRLMMovie,
               movie.recommendations.results.count > 0 else { return 0 }
         
         return movie.recommendations.results.count
@@ -417,7 +408,6 @@ extension MovieDetailViewController: UICollectionViewDataSource {
         
         ///////////////
         
-        // ポスター画像
         // ここでも落ちた。
         if let imagePath = movie.recommendations.results[indexPath.row].poster_path {
             if let url = URL(string: "https://image.tmdb.org/t/p/original" + imagePath) {
@@ -436,11 +426,5 @@ extension MovieDetailViewController: UICollectionViewDataSource {
     }
     
 }
-
-
-
-
-
-
 
 

@@ -66,7 +66,7 @@ final class MovieListViewController: UIViewController {
         
         // 1 = 検索結果の表示画面として使われるときだけ、APIコール
         if self.navigationController?.viewControllers.index(of: self) == 1 {
-            // connectForMovieSearch(query: self.query) // page = 1 を暗黙的に渡している
+            connectForMovieSearch(query: self.query) // page = 1 を暗黙的に渡している
         }
         
         // 次のpushVCのバーに表示される "< back" ボタンのラベルは、遷移元で定義せねばなりません。
