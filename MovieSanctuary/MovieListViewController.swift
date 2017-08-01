@@ -69,6 +69,10 @@ final class MovieListViewController: UIViewController {
             // connectForMovieSearch(query: self.query) // page = 1 を暗黙的に渡している
         }
         
+        // 次のpushVCのバーに表示される "< back" ボタンのラベルは、遷移元で定義せねばなりません。
+        // ここの記述は、 2→3の遷移時、遷移後のほうのVCの戻るボタンのラベルを空白にするため書いてます。
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: nil)
+        
     }
     
     
@@ -91,9 +95,8 @@ final class MovieListViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    deinit {
-        print("消滅した")
-    }
+    
+    deinit { print("消滅した") }
     
     
     fileprivate func reload() {

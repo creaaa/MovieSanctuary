@@ -81,11 +81,8 @@ class WelcomeViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    deinit {
-        print("消滅した")
-    }
-    
-    
+    deinit { print("消滅した") }
+
     // API Connection
     
     var taskDoneCount = 0 {
@@ -256,7 +253,9 @@ extension WelcomeViewController: UICollectionViewDelegate {
             movieID = (self.movies[2] as! [RLMMovie])[0].recommendations.results[indexPath.row].id
         }
         
-        vc.connectForMovieDetail(type: .standard(movieID))
+        vc.movieID = movieID
+        
+        // vc.connectForMovieDetail(type: .standard(movieID))
         
         self.navigationController?.pushViewController(vc, animated: true)
         

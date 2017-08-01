@@ -41,3 +41,31 @@ navigationController?.popToViewController(navigationController!.viewControllers[
 
 // 一つ前のViewControllerに戻る
 navigationController?.popViewControllerAnimated(true)
+
+
+///
+APIコールは遷移後でやったほうがよい。
+pushViewControllerの前の行で、遷移後のVCのAPIコールメソッド呼んで...ってやってたけど、
+処理追うのが難しくなり、デバッガビリティも下がる。
+パラメータ渡す必要があって、var hoge: Int! とかクソダサい余計な変数増えるかもだけど、
+処理の追いやすさで将来の不毛なデバッグ時間を減らせると思えばよいと思えるはずだ。
+///
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

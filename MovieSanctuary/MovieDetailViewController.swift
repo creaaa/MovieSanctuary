@@ -5,13 +5,13 @@ import Kingfisher
 
 final class MovieDetailViewController: UIViewController {
 
-    @IBOutlet weak var tableView:       UITableView!
-    @IBOutlet weak var collectionView:  UICollectionView!
+    @IBOutlet weak var tableView:        UITableView!
+    @IBOutlet weak var collectionView:   UICollectionView!
     
-    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var posterImageView:  UIImageView!
     @IBOutlet weak var voteAverageLabel: UILabel!
-    @IBOutlet weak var voteCountLabel: UILabel!
-    @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var voteCountLabel:   UILabel!
+    @IBOutlet weak var overviewLabel:    UILabel!
     
     @IBOutlet weak var posterImageViewHeight: NSLayoutConstraint!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
@@ -20,7 +20,7 @@ final class MovieDetailViewController: UIViewController {
     // 上記の、Realmナイズされたモデル
     var myRLMMovie: RLMMovie!
     
-    // 2 → 3遷移時、前画面から受け渡されてくる
+    // 1 → 3遷移時 or 2 → 3遷移時、前画面から受け渡されてくる。
     // ↑の変数もありながらもう1個作るのかよ...って思うが、仕方ない...
     var movieID: Int!
     
@@ -46,6 +46,8 @@ final class MovieDetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItem =
             UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addFavorite))
         
+        // 次のpushVCのバーに表示される "< back" ボタンのラベルは、遷移元で定義せねばなりません。
+        // ここの記述は、 3→3の遷移時、遷移後のほうのVCの戻るボタンのラベルを空白にするため書いてます。
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: nil)
     }
 
@@ -57,46 +59,42 @@ final class MovieDetailViewController: UIViewController {
             // print("画像高さ", $0 - 64 - 49 - 60)
             self.posterImageViewHeight.constant = $0 - 64 - 49 - 60
         }
-            
+        
         
         // このサイトがまじで神だった。。。
         // http://blog.ch3cooh.jp/entry/20160108/1452249000
-        // ちなみにこのconstant, 決め打ちで200とかやるとスクロールおかしくなる。どうなってんの
-        // いや、ほんとまじ助かった...
+        // ちなみにこのconstant, 決め打ちで200とかやるとスクロールおかしくなる
+        // (TableViewのほうにスクロールが奪われ、この画面全体のスクロールが効かなくなる)
+        // いや、ほんとこのサイトまじ助かった...
         self.tableViewHeight.constant = self.tableView.contentSize.height
     
     }
     
 
-    
     // will・didDisappear、ブレイク打っても突入しないんだが、デバッグできないのか？？
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    deinit {
-        print("消滅した")
-    }
+    deinit { print("消滅した") }
 
     func addFavorite() {
-        
-        try! Realm().write {
-            // これ、update = trueって明示しないと落ちる。
-            // よって、defaultはfalseってことか...
-            // true = 既存のオブジェクトを参照し、存在すればそれに対しアップデートをかける。
-            // false = 既存のオブジェクトを参照しようとせず、新たに作る。
-            // もちろんそのとき、既にあるprimary key で作成しようとすると実行時エラーとなる。
-            try! Realm().add(self.myRLMMovie, update: true)
-            print("保存した")
-            
-            // この書き方で大丈夫け??
-            guard let navVC = self.tabBarController?.viewControllers?[0] as? UINavigationController,
-                let vc = navVC.viewControllers.first as? MovieListViewController else {
-                return
+        // これ、update = trueって明示しないと落ちる。
+        // よって、defaultはfalseってことか...
+        // true = 既存のオブジェクトを参照し、存在すればそれに対しアップデートをかける。
+        // false = 既存のオブジェクトを参照しようとせず、新たに作る。
+        // もちろんそのとき、既にあるprimary key で作成しようとすると実行時エラーとなる。
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(self.myRLMMovie, update: true)
+                showAlert(title: "Saved!")
             }
-                        
+        } catch {
+            showAlert(title: "Save failed...", message: "unexpected error happned")
         }
+        
     }
     
 
@@ -104,7 +102,6 @@ final class MovieDetailViewController: UIViewController {
     // MARK: - API connection
     //////////////////////////
 
-    
     func connectForMovieDetail(type: MovieRequestType) {
         
         let manager = MovieDetailManager()
