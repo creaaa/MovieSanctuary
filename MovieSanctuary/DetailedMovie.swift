@@ -228,11 +228,11 @@ final class RLMMovie: Object, Movieable, Decodable {
     // なんかここ、オプショナル型じゃないと実行時エラー！
     // property must be marked as optional... みたいなメッセージ見たら、
     // ここをオプショナルにすると通る...はず。
-    var videos:  RLMVideos!  = RLMVideos()
-    var credits: RLMCredits! = RLMCredits()
+    var videos:  List<RLMVideos>  = List<RLMVideos>()
+    var credits: List<RLMCredits> = List<RLMCredits>()
     
     // 7/27 recomendations 追加しまーす
-    var recommendations: RLMRecommendations! = RLMRecommendations()
+    var recommendations: List<RLMRecommendations> = List<RLMRecommendations>()
     
     // 7/30 さらに追加
     dynamic var overview: String?
@@ -261,13 +261,41 @@ final class RLMMovie: Object, Movieable, Decodable {
         }
         
         // videos
-        let tmpVideos:  RLMVideos = try! e <| "videos"
+        let videos: List<RLMVideos> = List<RLMVideos>()
+        let tmpVideos: RLMVideos  = try! e <| "videos"
+        
+        /*
+        tmpVideos.forEach {
+            videos.append($0)
+        }
+        */
+        
+        videos.append(tmpVideos)
+        
         
         // credits(cast&crew)
-        let tmpCredits: RLMCredits = try! e <| "credits"
+        let credits: List<RLMCredits> = List<RLMCredits>()
+        let tmpCredits: RLMCredits  = try! e <| "credits"
+        /*
+        tmpCredits.forEach {
+            credits.append($0)
+        }
+        */
+        
+        credits.append(tmpCredits)
+        
         
         // recommendations
-        let tmpRecommendations: RLMRecommendations = try! e <| "recommendations"
+        let recommendations: List<RLMRecommendations> = List<RLMRecommendations>()
+        let tmpRecommendations: RLMRecommendations  = try! e <| "recommendations"
+        /*
+        tmpRecommendations.forEach {
+            recommendations.append($0)
+        }
+        */
+        
+        recommendations.append(tmpRecommendations)
+        
         
         return try RLMMovie(
             
@@ -278,9 +306,9 @@ final class RLMMovie: Object, Movieable, Decodable {
             vote_count:   e <|  "vote_count",
             
             genres:          genres,
-            videos:          tmpVideos,
-            credits:         tmpCredits,
-            recommendations: tmpRecommendations,
+            videos:          videos,
+            credits:         credits,
+            recommendations: recommendations,
             
             // 7/30 added
             overview:     e <|? "overview",
@@ -295,8 +323,8 @@ final class RLMMovie: Object, Movieable, Decodable {
     
     required convenience init(id: Int, title: String, poster_path: String?,
                               vote_average: Float, vote_count: Int,
-                              genres: List<RLMGenre>, videos: RLMVideos,
-                              credits: RLMCredits, recommendations: RLMRecommendations,
+                              genres: List<RLMGenre>, videos: List<RLMVideos>,
+                              credits: List<RLMCredits>, recommendations: List<RLMRecommendations>,
                               overview: String?, release_date: String, runtime: Int?,
                               budget: Int, revenue: Int, homepage: String?) {
         

@@ -254,7 +254,7 @@ extension WelcomeViewController: UICollectionViewDelegate {
         if collectionView.tag != 2 {
             movieID = self.movies[collectionView.tag][indexPath.row].id
         } else {
-            movieID = (self.movies[2] as! [RLMMovie])[0].recommendations.results[indexPath.row].id
+            movieID = (self.movies[2] as! [RLMMovie])[0].recommendations[0].results[indexPath.row].id
         }
         
         vc.movieID = movieID
@@ -278,7 +278,7 @@ extension WelcomeViewController: UICollectionViewDataSource {
             // この書き方だと最初にバグる。なんかいい方法教えてくれ
             // let res = (self.movies[2] as! [RLMMovie])[0].recommendations.results.count
             if self.movies.count > 2 && (self.movies[2] as! [RLMMovie]).count > 0 {
-                return (self.movies[2] as! [RLMMovie])[0].recommendations.results.count
+                return (self.movies[2] as! [RLMMovie])[0].recommendations[0].results.count
             } else {
                 return 0
             }
@@ -323,11 +323,11 @@ extension WelcomeViewController: UICollectionViewDataSource {
                     
                     let myRLMMovie = (self.movies[2] as! [RLMMovie])[0]
                     
-                    if myRLMMovie.recommendations.results.count != 0 {
-                        item.titleLabel.text = myRLMMovie.recommendations.results[indexPath.row].title
+                    if myRLMMovie.recommendations[0].results.count != 0 {
+                        item.titleLabel.text = myRLMMovie.recommendations[0].results[indexPath.row].title
                     }
                     
-                    if let posterPath = myRLMMovie.recommendations.results[indexPath.row].poster_path {
+                    if let posterPath = myRLMMovie.recommendations[0].results[indexPath.row].poster_path {
                         let url = URL(string: "https://image.tmdb.org/t/p/original/" + posterPath)
                         item.imageView.kf.setImage(with: url,
                                                    placeholder: #imageLiteral(resourceName: "noimage"),
@@ -336,8 +336,8 @@ extension WelcomeViewController: UICollectionViewDataSource {
                     }
                     
                     item.voteAverageLabel.text =
-                        Int(myRLMMovie.recommendations.results[indexPath.row].vote_average * 10).description + "%"
-                    item.voteCountLabel.text = (myRLMMovie.recommendations.results[indexPath.row].vote_count).description
+                        Int(myRLMMovie.recommendations[0].results[indexPath.row].vote_average * 10).description + "%"
+                    item.voteCountLabel.text = (myRLMMovie.recommendations[0].results[indexPath.row].vote_count).description
                     
                 }
             

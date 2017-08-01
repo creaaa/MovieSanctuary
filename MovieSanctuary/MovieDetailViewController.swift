@@ -24,6 +24,10 @@ final class MovieDetailViewController: UIViewController {
     // ↑の変数もありながらもう1個作るのかよ...って思うが、仕方ない...
     var movieID: Int!
     
+    
+    // 同じRealmをオブジェクトをつかわないと、 
+    
+    
     ////////////////////////
     // MARK: - Life Cycle
     ////////////////////////
@@ -96,6 +100,7 @@ final class MovieDetailViewController: UIViewController {
         // false = 既存のオブジェクトを参照しようとせず、新たに作る。
         // もちろんそのとき、既にあるprimary key で作成しようとすると実行時エラーとなる。
         do {
+            
             
             
             let realm = try Realm()
@@ -239,13 +244,13 @@ extension MovieDetailViewController: UITableViewDataSource {
                     
                 // for section 1 & 2
                 var crews: [RLMCrew] = []
-                movie.credits.crews.forEach {
+                movie.credits[0].crews.forEach {
                     crews.append($0)
                 }
                 
                 // for section 3
                 var casts: [RLMCast] = []
-                movie.credits.casts.forEach {
+                movie.credits[0].casts.forEach {
                     casts.append($0)
                 }
                 
@@ -301,7 +306,7 @@ extension MovieDetailViewController: UITableViewDataSource {
                 
                 var crews: [RLMCrew] = []
                 
-                movie.credits.crews.forEach {
+                movie.credits[0].crews.forEach {
                     crews.append($0)
                 }
                 
@@ -312,7 +317,7 @@ extension MovieDetailViewController: UITableViewDataSource {
                 guard let movie = self.myRLMMovie else { return 0 }
                 
                 var crews: [RLMCrew] = []
-                movie.credits.crews.forEach {
+                movie.credits[0].crews.forEach {
                     crews.append($0)
                 }
                 
@@ -322,10 +327,10 @@ extension MovieDetailViewController: UITableViewDataSource {
             case 3:
                 guard let movie = self.myRLMMovie else { return 0 }
                 
-                if movie.credits.casts.count >= 5 {
+                if movie.credits[0].casts.count >= 5 {
                     return 5
                 } else {
-                    return movie.credits.casts.count
+                    return movie.credits[0].casts.count
                 }
             
             default:
@@ -388,16 +393,17 @@ extension MovieDetailViewController: UICollectionViewDelegate {
         // とりあえずの対処法...
         // アラート出して、popさせてこの画面から離脱させる...
         // ↑のguard節ではなく、ここがやばいっぽいな。recommendataionsがnilになる
-        guard let rcm = movie.recommendations else {
-            
-            // self.navigationController?.popViewController(animated: true)
-            // showAlert(title: "couldn't open page", message: "try again later.")
-            
-            popViewController(animated: true, completion: showAlertRemotely)
-            
-            return
-            
-        }
+        
+//        guard let rcm = movie.recommendations[0] else {
+//            
+//            // self.navigationController?.popViewController(animated: true)
+//            // showAlert(title: "couldn't open page", message: "try again later.")
+//            
+//            popViewController(animated: true, completion: showAlertRemotely)
+//            
+//            return
+//            
+//        }
      
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "MovieDetail") as! MovieDetailViewController
@@ -413,7 +419,10 @@ extension MovieDetailViewController: UICollectionViewDelegate {
         // vc.connectForMovieDetail(type: .standard(self.myRLMMovie.recommendations.results[indexPath.row].id))
         // ↑のコールバックで遷移、とかにしないとやばくないか。
         
-        vc.movieID = rcm.results[indexPath.row].id
+        
+        // かえた！！！！！！！！！！
+        vc.movieID = self.myRLMMovie.recommendations[0].results[indexPath.row].id
+           //rcm.results[indexPath.row].id
         
         self.navigationController?.pushViewController(vc, animated: true)
         
@@ -441,11 +450,13 @@ extension MovieDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        guard let movie = self.myRLMMovie,
+        guard let movie = self.myRLMMovie else { return 0 }
             // この書き方、recommendationsがnilだった場合に実行時エラー引き起こさないのか?意味あるか??
-              let rcm = movie.recommendations else { return 0 }
+              //let rcm = movie.recommendations else { return 0 }
         
-        return rcm.results.count
+        // return rcm.results.count
+        
+        return movie.recommendations[0].results.count
         
     }
     
@@ -454,13 +465,15 @@ extension MovieDetailViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item", for: indexPath) as! DetailCollectionViewCell
         
-        guard let movie = self.myRLMMovie,
-              let rcm = movie.recommendations else { return cell }
+        guard let movie = self.myRLMMovie else { return cell }
+              // let rcm = movie.recommendations else { return cell }
+        
+        
         
         ///////////////
         
         // ここでも落ちた。
-        if let imagePath = rcm.results[indexPath.row].poster_path {
+        if let imagePath = movie.recommendations[0].results[indexPath.row].poster_path {
             if let url = URL(string: "https://image.tmdb.org/t/p/original" + imagePath) {
                 cell.posterImageView.kf.setImage(with: url,
                                                  placeholder: nil,
@@ -468,9 +481,9 @@ extension MovieDetailViewController: UICollectionViewDataSource {
             }
         }
         
-        cell.titleLabel.text       = rcm.results[indexPath.row].title
-        cell.voteAverageLabel.text = Int(rcm.results[indexPath.row].vote_average * 10).description + "%"
-        cell.voteCountLabel.text   = rcm.results[indexPath.row].vote_count.description
+        cell.titleLabel.text       = movie.recommendations[0].results[indexPath.row].title
+        cell.voteAverageLabel.text = Int(movie.recommendations[0].results[indexPath.row].vote_average * 10).description + "%"
+        cell.voteCountLabel.text   = movie.recommendations[0].results[indexPath.row].vote_count.description
         
         return cell
         
