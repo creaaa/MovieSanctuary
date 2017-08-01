@@ -130,21 +130,24 @@ final class MovieDetailViewController: UIViewController {
     
     func render() {
 
-        guard let movie = self.myRLMMovie else { return }
+        guard let movie = self.myRLMMovie else {
+            showAlert(title: "No Movie", message: "failed to find the movie.")
+            return
+        }
         
-        self.title = self.myRLMMovie.title
+        self.title = movie.title
 
-        if let imagePath = self.myRLMMovie.poster_path {
+        if let imagePath = movie.poster_path {
             let url = URL(string: "https://image.tmdb.org/t/p/original/" + imagePath)
             self.posterImageView.kf.setImage(with: url,
                                              placeholder: nil,
                                              options: [.transition(.fade(0.4)), .forceTransition])
         }
         
-        self.voteAverageLabel.text = Int(self.myRLMMovie.vote_average * 10).description + "%"
-        self.voteCountLabel.text   = self.myRLMMovie.vote_count.description
+        self.voteAverageLabel.text = Int(movie.vote_average * 10).description + "%"
+        self.voteCountLabel.text   = movie.vote_count.description
         
-        self.overviewLabel.text = self.myRLMMovie.overview
+        self.overviewLabel.text = movie.overview
         
         self.tableView.reloadData()
         self.collectionView.reloadData()
