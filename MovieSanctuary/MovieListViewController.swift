@@ -10,7 +10,7 @@ import SystemConfiguration
 
 final class MovieListViewController: UIViewController {
     
-    var realm = try! Realm()
+    let realm = try! Realm()
     
     // Model
     
@@ -85,7 +85,7 @@ final class MovieListViewController: UIViewController {
         }
         
         if self.navigationController?.viewControllers.index(of: self) == 0  {
-            reload()
+            // reload()
         }
         
     }
@@ -103,10 +103,11 @@ final class MovieListViewController: UIViewController {
     }
     
     
+    /*
     fileprivate func reload() {
         
         let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
-
+        
         // 整合性を保つ
         // Results<RLMMovie> → [Movieable]
         self.movies = []
@@ -115,7 +116,7 @@ final class MovieListViewController: UIViewController {
         self.resultView.tableView.reloadData()
 
     }
-    
+    */
     
     //////////////////////////
     // MARK: - API connection
@@ -216,7 +217,7 @@ extension MovieListViewController: UITableViewDataSource {
             try! self.realm.write {
                 let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
                 self.realm.delete(res[indexPath.row])
-                reload()
+                // reload()
             }
         }
     }
