@@ -82,6 +82,8 @@ final class MovieDetailViewController: UIViewController {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: nil)
         
         connectForMovieDetail()
+
+        
         
     }
 
