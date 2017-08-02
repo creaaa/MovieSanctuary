@@ -47,7 +47,7 @@ final class RLMVideo: Object, Decodable {
         self.key  = key
         self.name = name
     }
- 
+
 }
 
 final class RLMVideos: Object, Decodable {
@@ -56,19 +56,25 @@ final class RLMVideos: Object, Decodable {
     
     static func decode(_ e: Extractor) throws -> RLMVideos {
         
-        let results = List<RLMVideo>()
+        let videos = RLMVideos()
+        
         let tmp: [RLMVideo] = try! e <|| "results"
         tmp.forEach {
-            results.append($0)
+            videos.results.append($0)
         }
         
-        return RLMVideos(results: results)
+        return videos
         
     }
     
+    /*
     convenience init(results: List<RLMVideo>) {
-        self.init(results: results)
+        self.init()
+        self.results = results
     }
+    */
+    
+    
 }
 
 
