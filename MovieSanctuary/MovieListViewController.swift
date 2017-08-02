@@ -126,6 +126,9 @@ final class MovieListViewController: UIViewController {
             */
             
             // 3.5　よって、、、これは、、、いけた！！！！！！！！！！！！！！！！！
+            reload()
+            /*
+            self.movies = []
             let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
             
             (0..<res.count).forEach {
@@ -133,6 +136,7 @@ final class MovieListViewController: UIViewController {
                 self.movies.append(movie)
             }
             self.resultView.tableView.reloadData()
+            */
             
             
             // 4.リーク
@@ -162,35 +166,24 @@ final class MovieListViewController: UIViewController {
     
     
     deinit {
-        self.resultView.tableView = nil
-        
         print("消滅した")
     }
     
     
-    /*
+    
     fileprivate func reload() {
         
+        self.movies = []
         let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
         
-        /*
-        let f = res[0]  // RLMMovie
-        let ff = f as! Movieable // Movieable
-        */
-        
-        // 整合性を保つ
-        // Results<RLMMovie> → [Movieable]
-        self.movies = []
-        res.forEach {
-            let elm = $0 as Movieable
-            self.movies.append(elm)
+        (0..<res.count).forEach {
+            let movie: RLMMovie = res[$0]
+            self.movies.append(movie)
         }
-        
-        
         self.resultView.tableView.reloadData()
 
     }
-    */
+    
     
     
     //////////////////////////
@@ -292,11 +285,9 @@ extension MovieListViewController: UITableViewDataSource {
             try! self.realm.write {
                 let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
                 self.realm.delete(res[indexPath.row])
-                // reload()
+                reload()
                 
-                
-                
-                // let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
+                /*
                 self.movies = []
                 res.forEach {
                     let elm = $0 as Movieable
@@ -304,6 +295,7 @@ extension MovieListViewController: UITableViewDataSource {
                 }
                 
                 self.resultView.tableView.reloadData()
+                */
                 
             }
         }
