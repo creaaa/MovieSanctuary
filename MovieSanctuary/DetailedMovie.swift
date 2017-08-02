@@ -19,7 +19,6 @@ final class RLMGenre: Object, Decodable {
         )
     }
     
-    
     required convenience init(id: Int, name: String) {
         self.init()
         self.id   = id
@@ -319,11 +318,8 @@ final class RLMMovie: Object, Movieable, Decodable {
         let credits: RLMCredits = try! e <| "credits"
         movie.credits.append(credits)
         
-        
-        // recommendations
         let recommendations: RLMRecommendations  = try! e <| "recommendations"
         movie.recommendations.append(recommendations)
-        
         
         return movie
         

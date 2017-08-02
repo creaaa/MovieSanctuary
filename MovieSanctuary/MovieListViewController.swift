@@ -88,60 +88,73 @@ final class MovieListViewController: UIViewController {
         
         if self.navigationController?.viewControllers.index(of: self) == 0  {
             
-            // let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
             // self.movies = []
             
+            /*** 1. メモリリークしないやつ ***/
+            /*
             // これだとメモリリークしない
-            
             let m = RLMMovie(id: 1, title: "", poster_path: "", vote_average: 1, vote_count: 1, overview: "", release_date: "", runtime: 1, budget: 1, revenue: 1, homepage: "")
+            // まだしてない
+            let g = RLMGenre(id: 100, name: "unnn")
+            m.genres.append(g)
+            // まだしてない
+            // self.unkoRLMs.append(contentsOf: [m])
+            // まだしてない
+            self.movies.append(contentsOf: [m])
             
-            let n = RLMMovie(id: 2, title: "", poster_path: "", vote_average: 1, vote_count: 1, overview: "", release_date: "", runtime: 1, budget: 1, revenue: 1, homepage: "")
+            self.resultView.tableView.reloadData()
+            */
             
-            let fff = [m,n]
-            
-            for e in fff {
-            self.unkoRLMs.append(e)
+            // 2. メモリリークするやつ
+            /*
+            let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
+            res.forEach {
+                self.movies.append($0)
             }
+            self.resultView.tableView.reloadData()
+            */
             
+            // 3.
+            // しない
+            /*
+            let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
+            
+            let r: RLMMovie = res[0] // この型にして...
+            self.movies.append(r)    // appendするとメモリリークしない
+            
+            self.resultView.tableView.reloadData()
+            */
+            
+            // 3.5　よって、、、これは、、、いけた！！！！！！！！！！！！！！！！！
+            let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
+            
+            (0..<res.count).forEach {
+                let movie: RLMMovie = res[$0]
+                self.movies.append(movie)
+            }
             self.resultView.tableView.reloadData()
             
             
-//            res.forEach { [weak self] el in
-//                let elm = el as Movieable
-//                self!.movies.append(elm)
-//            }
-            
+            // 4.リーク
             /*
-            self.movies.append(
-                RLMMovie(id: 1,
-                         title: "",
-                         poster_path: "",
-                         vote_average: 1,
-                         vote_count: 1, genres: List<RLMGenre>(),
-                         videos: List<RLMVideos>(),
-                         credits: List<RLMCredits>(),
-                         recommendations: List<RLMRecommendations>(),
-                         overview: "",
-                         release_date: "",
-                         runtime: 1,
-                         budget: 1,
-                         revenue: 1,
-                         homepage: ""
-                )
-            )
+            let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
+            do {
+                let mapped = try res.map(oreMyMap)
+                self.movies = mapped // [Movieable] を [RLMMovie] で塗り替える形。。。
+                self.resultView.tableView.reloadData()
+            } catch {
+            }
             */
-            
-//            for elm in res {
-//                self.movies.append(elm)
-//            }
-//            
-//            self.resultView.tableView.reloadData()
-            
             
         }
         
     }
     
+    /* // ↑のパターン4で使うヘルパー
+    private func oreMyMap(m: RLMMovie) throws -> RLMMovie {
+        return m
+    }
+    */
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -53,7 +53,9 @@ pushViewControllerの前の行で、遷移後のVCのAPIコールメソッド呼
 
 
 
-
+let declartion cannnot be computed property
+→プロトコルのプロパティをletにすると出る。
+単に「プロトコルにはvarしか使えない」って言えばいいだけなのに、くっそわかりにくい
 
 
 

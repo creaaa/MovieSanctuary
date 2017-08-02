@@ -2,6 +2,7 @@
 import RealmSwift
 import Himotoki
 
+
 protocol Movieable {
     var id:           Int     { get set }
     var title:        String  { get set }
