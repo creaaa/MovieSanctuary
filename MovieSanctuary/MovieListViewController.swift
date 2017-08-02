@@ -18,6 +18,8 @@ final class MovieListViewController: UIViewController {
     // このVCがキーワード検索で使われる場合: 検索結果の映画たちが入る(APIコールあり)
     var movies: [Movieable] = []
     
+    var unkoRLMs: [RLMMovie] = []
+    
     // 無限スクロールを連続コールしないための変数
     var isFetching = false
     
@@ -86,10 +88,23 @@ final class MovieListViewController: UIViewController {
         
         if self.navigationController?.viewControllers.index(of: self) == 0  {
             
-            // reload()
+            // let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
+            // self.movies = []
             
-            let res: Results<RLMMovie> = realm.objects(RLMMovie.self)
-            self.movies = []
+            // これだとメモリリークしない
+            
+            let m = RLMMovie(id: 1, title: "", poster_path: "", vote_average: 1, vote_count: 1, overview: "", release_date: "", runtime: 1, budget: 1, revenue: 1, homepage: "")
+            
+            let n = RLMMovie(id: 2, title: "", poster_path: "", vote_average: 1, vote_count: 1, overview: "", release_date: "", runtime: 1, budget: 1, revenue: 1, homepage: "")
+            
+            let fff = [m,n]
+            
+            for e in fff {
+            self.unkoRLMs.append(e)
+            }
+            
+            self.resultView.tableView.reloadData()
+            
             
 //            res.forEach { [weak self] el in
 //                let elm = el as Movieable
@@ -116,11 +131,11 @@ final class MovieListViewController: UIViewController {
             )
             */
             
-            for elm in res {
-                self.movies.append(elm)
-            }
-            
-            self.resultView.tableView.reloadData()
+//            for elm in res {
+//                self.movies.append(elm)
+//            }
+//            
+//            self.resultView.tableView.reloadData()
             
             
         }
