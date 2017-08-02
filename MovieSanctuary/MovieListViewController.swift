@@ -10,13 +10,6 @@ import SystemConfiguration
 
 final class MovieListViewController: UIViewController {
     
-    
-    @IBOutlet weak var infoButton: UIBarButtonItem!
-    func infoButtonTapped() {
-        print("ファーｗ")
-    }
-    
-    
     let realm = try! Realm()
     
     // Model
@@ -73,15 +66,16 @@ final class MovieListViewController: UIViewController {
             resultView.tableView.scrollIndicatorInsets = edgeInsets
         }
 
-        /*
-        if self.tabBarController?.selectedIndex == 0 {
+        
+        if self.tabBarController?.selectedIndex == 1 {
             self.navigationItem.rightBarButtonItem =
                 UIBarButtonItem(image: #imageLiteral(resourceName: "info"),
                                 style: .done,
                                 target: self,
                                 action: #selector(infoButtonTapped))
+            self.navigationItem.rightBarButtonItem?.tintColor = .white
         }
-        */
+        
         
         if self.navigationController?.viewControllers.index(of: self) == 1 {
             connectForMovieSearch(query: self.query) // page = 1 を暗黙的に渡している
@@ -176,6 +170,7 @@ final class MovieListViewController: UIViewController {
     }
     */
     
+    /*
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // 1 = 検索結果の表示画面として使われるときだけ、APIコール
@@ -189,7 +184,7 @@ final class MovieListViewController: UIViewController {
         }
         
     }
-    
+    */
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -261,6 +256,17 @@ final class MovieListViewController: UIViewController {
             }
         }
     }
+    
+    
+    func infoButtonTapped() {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc         = storyboard.instantiateViewController(withIdentifier: "AboutThisApp") as! UINavigationController
+        present(vc, animated: true, completion: nil)
+        
+    }
+    
+    
 }
 
 
