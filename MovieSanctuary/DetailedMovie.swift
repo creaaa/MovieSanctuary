@@ -261,33 +261,31 @@ final class RLMMovie: Object, Movieable, Decodable {
     
     static func decode(_ e: Extractor) throws -> RLMMovie {
         
-        let movie = RLMMovie()
+//        let movie = RLMMovie()
+//        
+//        // genres
+//        
+//        let genres: [RLMGenre] = try! e <|| "genres"
+//        genres.forEach { movie.genres.append($0) }
+//        
+//        // videos
+//        
+//        let videos: RLMVideos  = try! e <| "videos"
+//        movie.videos.append(videos)
         
-        // genres
-        
-        let genres: [RLMGenre] = try! e <|| "genres"
-        genres.forEach { movie.genres.append($0) }
-        
-        // videos
-        
-        let videos: RLMVideos  = try! e <| "videos"
-        movie.videos.append(videos)
-        
-       /////////////////////////////////
-        
-        
+
         // credits(cast&crew)
         
-        let credits: RLMCredits = try! e <| "credits"
-        movie.credits.append(credits)
+//        let credits: RLMCredits = try! e <| "credits"
+//        movie.credits.append(credits)
+//        
+//        
+//        // recommendations
+//        let recommendations: RLMRecommendations  = try! e <| "recommendations"
+//        movie.recommendations.append(recommendations)
         
         
-        // recommendations
-        let recommendations: RLMRecommendations  = try! e <| "recommendations"
-        movie.recommendations.append(recommendations)
-        
-        
-        return try RLMMovie(
+        let movie = try RLMMovie(
             
             id:           e <|  "id",
             title:        e <|  "title",
@@ -295,11 +293,12 @@ final class RLMMovie: Object, Movieable, Decodable {
             vote_average: e <|  "vote_average",
             vote_count:   e <|  "vote_count",
             
-            
+            /*
             genres:          genres,
             videos:          videos,
             credits:         credits,
             recommendations: recommendations,
+            */
             
             // 7/30 added
             overview:     e <|? "overview",
@@ -310,15 +309,38 @@ final class RLMMovie: Object, Movieable, Decodable {
             homepage:     e <|? "homepage"
 
         )
+        
+        let genres: [RLMGenre] = try! e <|| "genres"
+        genres.forEach { movie.genres.append($0) }
+        
+        let videos: RLMVideos  = try! e <| "videos"
+        movie.videos.append(videos)
+        
+        let credits: RLMCredits = try! e <| "credits"
+        movie.credits.append(credits)
+        
+        
+        // recommendations
+        let recommendations: RLMRecommendations  = try! e <| "recommendations"
+        movie.recommendations.append(recommendations)
+        
+        
+        return movie
+        
     }
     
-    /*
-    required convenience init(id: Int, title: String, poster_path: String?,
-                              vote_average: Float, vote_count: Int,
-                              genres: List<RLMGenre>, videos: List<RLMVideos>,
-                              credits: List<RLMCredits>, recommendations: List<RLMRecommendations>,
-                              overview: String?, release_date: String, runtime: Int?,
-                              budget: Int, revenue: Int, homepage: String?) {
+    
+    required convenience init(id: Int,
+                              title: String,
+                              poster_path: String?,
+                              vote_average: Float,
+                              vote_count: Int,
+                              overview: String?,
+                              release_date: String,
+                              runtime: Int?,
+                              budget: Int,
+                              revenue: Int,
+                              homepage: String?) {
         
         self.init()
         
@@ -327,21 +349,14 @@ final class RLMMovie: Object, Movieable, Decodable {
         self.poster_path = poster_path
         self.vote_average = vote_average
         self.vote_count = vote_count
-        //
-        self.genres          = genres
-        self.videos          = videos
-        self.credits         = credits
-        self.recommendations = recommendations
-        //
         self.overview        = overview
         self.release_date    = release_date
         self.runtime         = runtime
         self.budget          = budget
         self.revenue         = revenue
         self.homepage        = homepage
+        
     }
-    */
-    
     
 }
 
