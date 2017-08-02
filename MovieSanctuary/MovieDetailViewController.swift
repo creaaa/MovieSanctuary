@@ -58,12 +58,13 @@ final class MovieDetailViewController: UIViewController {
         if let vc = self.navigationController?.viewControllers[count-2] {
             switch vc {
             case is WelcomeViewController, is MovieDetailViewController:
-                self.navigationItem.rightBarButtonItem =
-                    UIBarButtonItem(barButtonSystemItem: .save, target: self,
+                if self.tabBarController?.selectedIndex == 0 {
+                    self.navigationItem.rightBarButtonItem =
+                        UIBarButtonItem(barButtonSystemItem: .save, target: self,
                                     action: #selector(addFavorite))
-                // IDを閲覧履歴として保存
-                saveMovieID()
-                
+                    // IDを閲覧履歴として保存
+                    saveMovieID()
+                }
             default:
                 break
             }
