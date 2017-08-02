@@ -71,9 +71,6 @@ extension Nibable {
 }
 
 
-
-
-
 extension UITableViewCell {
     static var identifier: String { return className }
 }

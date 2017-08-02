@@ -40,8 +40,8 @@ extension UIViewController {
         coordinator.animate(alongsideTransition: nil) { _ in completion() }
     }
     
-    func popViewController(animated: Bool, completion: @escaping () -> Void)
-    {
+    func popViewController(animated: Bool, completion: @escaping () -> Void) {
+        
         self.navigationController?.popViewController(animated: true)
         
         guard animated, let coordinator = transitionCoordinator else {
@@ -50,6 +50,7 @@ extension UIViewController {
         }
         
         coordinator.animate(alongsideTransition: nil) { _ in completion() }
+        
     }
     
     

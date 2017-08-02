@@ -14,10 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.white,
              NSFontAttributeName: UIFont(name: self.font, size: 18) as Any,
-             
         ]
-        
-        
+                
         // ナビゲーションバーの背景色
         // (なんとサーチバーのテキストまで黒くなる...)
         UINavigationBar.appearance().barTintColor = .black

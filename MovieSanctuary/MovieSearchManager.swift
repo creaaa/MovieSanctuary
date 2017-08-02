@@ -3,9 +3,7 @@ import APIKit
 import Result
 import Himotoki
 
-
 /* Manager */
-
 
 struct MovieSearchManager {
     
@@ -46,5 +44,4 @@ struct MovieSearchManager {
     }
     
 }
-
 

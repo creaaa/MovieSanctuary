@@ -58,16 +58,3 @@ let declartion cannnot be computed property
 単に「プロトコルにはvarしか使えない」って言えばいいだけなのに、くっそわかりにくい
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-

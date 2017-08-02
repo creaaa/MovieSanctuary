@@ -286,17 +286,6 @@ extension MovieListViewController: UITableViewDataSource {
                 let res: Results<RLMMovie> = self.realm.objects(RLMMovie.self)
                 self.realm.delete(res[indexPath.row])
                 reload()
-                
-                /*
-                self.movies = []
-                res.forEach {
-                    let elm = $0 as Movieable
-                    self.movies.append(elm)
-                }
-                
-                self.resultView.tableView.reloadData()
-                */
-                
             }
         }
     }
@@ -378,7 +367,6 @@ extension MovieListViewController: UITableViewDelegate {
     }
     
 }
-
 
 
 
