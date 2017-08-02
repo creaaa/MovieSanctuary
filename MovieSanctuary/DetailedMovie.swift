@@ -19,6 +19,7 @@ final class RLMGenre: Object, Decodable {
         )
     }
     
+    
     required convenience init(id: Int, name: String) {
         self.init()
         self.id   = id
@@ -132,31 +133,34 @@ final class RLMCrew: Object, Decodable {
 
 final class RLMCredits: Object, Decodable {
     
-    var casts = List<RLMCast>()
-    var crews = List<RLMCrew>()
+    let casts = List<RLMCast>()
+    let crews = List<RLMCrew>()
     
     static func decode(_ e: Extractor) throws -> RLMCredits {
         
-        let casts = List<RLMCast>()
-        let tmp1: [RLMCast] = try! e <|| "cast"
-        tmp1.forEach {
-            casts.append($0)
-        }
-        let crews = List<RLMCrew>()
-        let tmp2: [RLMCrew] = try! e <|| "crew"
-        tmp2.forEach {
-            crews.append($0)
+        let credits = RLMCredits()
+        
+        let casts: [RLMCast] = try! e <|| "cast"
+        casts.forEach {
+            credits.casts.append($0)
         }
         
-        return RLMCredits(casts: casts, crews: crews)
+        let crews: [RLMCrew] = try! e <|| "crew"
+        crews.forEach {
+            credits.crews.append($0)
+        }
+        
+        return credits
         
     }
     
+    /*
     required convenience init(casts: List<RLMCast>, crews: List<RLMCrew>) {
         self.init()
         self.casts = casts
         self.crews = crews
     }
+    */
     
 }
 
@@ -195,24 +199,24 @@ final class RLMRecommendation: Object, Decodable {
 
 final class RLMRecommendations: Object, Decodable {
     
-    var results = List<RLMRecommendation>()
+    let results = List<RLMRecommendation>()
     
     static func decode(_ e: Extractor) throws -> RLMRecommendations {
         
-        let recommendations = List<RLMRecommendation>()
+        let recommendations = RLMRecommendations()
         
-        let tmp: [RLMRecommendation] = try! e <|| "results"
-        tmp.forEach { recommendations.append($0) }
+        let results: [RLMRecommendation] = try! e <|| "results"
+        results.forEach { recommendations.results.append($0) }
         
-        return RLMRecommendations(recommendations: recommendations)
+        return recommendations
         
     }
-    
+    /*
     required convenience init(recommendations: List<RLMRecommendation>) {
         self.init()
         self.results = recommendations
     }
-    
+    */
 }
 
 
@@ -223,7 +227,7 @@ final class RLMMovie: Object, Movieable, Decodable {
     dynamic var id                     = 0
     dynamic var title                  = ""
     dynamic var poster_path: String?
-            var genres: List<RLMGenre> = List<RLMGenre>()
+            let genres                 = List<RLMGenre>()
     dynamic var vote_average: Float    = 0.0
     dynamic var vote_count             = 0
     
@@ -232,11 +236,11 @@ final class RLMMovie: Object, Movieable, Decodable {
     // なんかここ、オプショナル型じゃないと実行時エラー！
     // property must be marked as optional... みたいなメッセージ見たら、
     // ここをオプショナルにすると通る...はず。
-    var videos:  List<RLMVideos>  = List<RLMVideos>()
-    var credits: List<RLMCredits> = List<RLMCredits>()
+    let videos  = List<RLMVideos>()
+    let credits = List<RLMCredits>()
     
     // 7/27 recomendations 追加しまーす
-    var recommendations: List<RLMRecommendations> = List<RLMRecommendations>()
+    let recommendations = List<RLMRecommendations>()
     
     // 7/30 さらに追加
     dynamic var overview: String?
@@ -257,48 +261,30 @@ final class RLMMovie: Object, Movieable, Decodable {
     
     static func decode(_ e: Extractor) throws -> RLMMovie {
         
+        let movie = RLMMovie()
+        
         // genres
-        let genres: List<RLMGenre> = List<RLMGenre>()
-        let tmpGenres: [RLMGenre] = try! e <|| "genres"
-        tmpGenres.forEach {
-            genres.append($0)
-        }
+        
+        let genres: [RLMGenre] = try! e <|| "genres"
+        genres.forEach { movie.genres.append($0) }
         
         // videos
-        let videos: List<RLMVideos> = List<RLMVideos>()
-        let tmpVideos: RLMVideos  = try! e <| "videos"
         
-        /*
-        tmpVideos.forEach {
-            videos.append($0)
-        }
-        */
+        let videos: RLMVideos  = try! e <| "videos"
+        movie.videos.append(videos)
         
-        videos.append(tmpVideos)
+       /////////////////////////////////
         
         
         // credits(cast&crew)
-        let credits: List<RLMCredits> = List<RLMCredits>()
-        let tmpCredits: RLMCredits  = try! e <| "credits"
-        /*
-        tmpCredits.forEach {
-            credits.append($0)
-        }
-        */
         
-        credits.append(tmpCredits)
+        let credits: RLMCredits = try! e <| "credits"
+        movie.credits.append(credits)
         
         
         // recommendations
-        let recommendations: List<RLMRecommendations> = List<RLMRecommendations>()
-        let tmpRecommendations: RLMRecommendations  = try! e <| "recommendations"
-        /*
-        tmpRecommendations.forEach {
-            recommendations.append($0)
-        }
-        */
-        
-        recommendations.append(tmpRecommendations)
+        let recommendations: RLMRecommendations  = try! e <| "recommendations"
+        movie.recommendations.append(recommendations)
         
         
         return try RLMMovie(
@@ -308,6 +294,7 @@ final class RLMMovie: Object, Movieable, Decodable {
             poster_path:  e <|? "poster_path",
             vote_average: e <|  "vote_average",
             vote_count:   e <|  "vote_count",
+            
             
             genres:          genres,
             videos:          videos,
@@ -325,6 +312,7 @@ final class RLMMovie: Object, Movieable, Decodable {
         )
     }
     
+    /*
     required convenience init(id: Int, title: String, poster_path: String?,
                               vote_average: Float, vote_count: Int,
                               genres: List<RLMGenre>, videos: List<RLMVideos>,
@@ -351,8 +339,9 @@ final class RLMMovie: Object, Movieable, Decodable {
         self.budget          = budget
         self.revenue         = revenue
         self.homepage        = homepage
-        
     }
+    */
+    
     
 }
 
