@@ -53,7 +53,6 @@ final class MovieDetailViewController: UIViewController {
         // お気に入り → 詳細画面 の場合なら、Favボタンが必要なわけない,,,
         // ただし、詳細 → 詳細 の場合ならいる。のでこれ直せ。↓
 //        if self.tabBarController?.selectedIndex == 0 {
-        
         let count = (self.navigationController?.viewControllers.count)!
         
         if let vc = self.navigationController?.viewControllers[count-2] {
@@ -62,6 +61,9 @@ final class MovieDetailViewController: UIViewController {
                 self.navigationItem.rightBarButtonItem =
                     UIBarButtonItem(barButtonSystemItem: .save, target: self,
                                     action: #selector(addFavorite))
+                // IDを閲覧履歴として保存
+                saveMovieID()
+                
             default:
                 break
             }
@@ -173,6 +175,28 @@ final class MovieDetailViewController: UIViewController {
         self.collectionView.reloadData()
         
     }
+    
+    
+    private func saveMovieID() {
+        
+        let realm = try! Realm()
+        
+        try! realm.write {
+            
+            let intObj = IntObject(id: self.movieID)
+            
+            let myHistory = RLMHistory()
+            myHistory.history.append(intObj)
+            
+            realm.add(myHistory)
+            
+            print("IDを保管しました")
+            
+        }
+        
+    }
+
+    
     
 }
 

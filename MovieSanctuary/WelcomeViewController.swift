@@ -2,7 +2,7 @@
 // https://ashfurrow.com/blog/putting-a-uicollectionview-in-a-uitableviewcell-in-swift/
 
 import UIKit
-import Foundation
+import RealmSwift
 import Kingfisher
 
 class WelcomeViewController: UIViewController {
@@ -127,8 +127,12 @@ class WelcomeViewController: UIViewController {
         
         let manager = MovieDetailManager()
         
+        let ID = getMovieHistory() ?? 550
+        
+        print("シード: ", ID)
+        
         DispatchQueue.global().async {
-            manager.request(id: 550) { result in
+            manager.request(id: ID) { result in
                 self.movies[2] = [result]
                 self.taskDoneCount += 1
             }
@@ -156,6 +160,44 @@ class WelcomeViewController: UIViewController {
     
     override func showAlert(title: String, message: String) {
         super.showAlert(title: title, message: message)
+    }
+    
+    
+    private func getMovieHistory() -> Int? {
+        
+        /*
+        var result: [Int] = []
+        
+        let realm = try! Realm()
+        let myHistory = realm.objects(RLMHistory.self)[0]
+        
+        myHistory.history.forEach {
+            result.append($0.id)
+        }
+        */
+        
+        let realm = try! Realm()
+        let history = realm.objects(RLMHistory.self).first?.history //List<IntObject>
+        
+        guard let myHistory = history else { return nil }
+        
+        print(myHistory)
+        
+        // 件数
+        let count = UInt32(myHistory.count)
+        
+        // ここ、-1とかになるならやばいな。。。
+        let idx = Int(arc4random_uniform(count))
+        
+        if idx == -1 {
+            print("異常値")
+            return nil
+        }
+        
+        print("選ばれたID: \(myHistory[idx].id)")
+        
+        return myHistory[idx].id
+        
     }
     
 }
