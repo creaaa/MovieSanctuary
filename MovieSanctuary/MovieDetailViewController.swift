@@ -52,9 +52,20 @@ final class MovieDetailViewController: UIViewController {
         
         // お気に入り → 詳細画面 の場合なら、Favボタンが必要なわけない,,,
         // ただし、詳細 → 詳細 の場合ならいる。のでこれ直せ。↓
-        if self.tabBarController?.selectedIndex == 0 {
-        self.navigationItem.rightBarButtonItem =
-            UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addFavorite))
+//        if self.tabBarController?.selectedIndex == 0 {
+        
+        let count = (self.navigationController?.viewControllers.count)!
+        
+        if let vc = self.navigationController?.viewControllers[count-2] {
+            switch vc {
+            case is WelcomeViewController, is MovieDetailViewController:
+                self.navigationItem.rightBarButtonItem =
+                    UIBarButtonItem(barButtonSystemItem: .save, target: self,
+                                    action: #selector(addFavorite))
+            default:
+                break
+            }
+
         }
         
         // 次のpushVCのバーに表示される "< back" ボタンのラベルは、遷移元で定義せねばなりません。
