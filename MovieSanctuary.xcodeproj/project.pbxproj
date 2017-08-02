@@ -28,6 +28,7 @@
 		445C36A01F267F4900B7D920 /* Memo.txt in Resources */ = {isa = PBXBuildFile; fileRef = 445C369F1F267F4900B7D920 /* Memo.txt */; };
 		446803B01F32583C00D87923 /* RLMHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446803AF1F32583C00D87923 /* RLMHistory.swift */; };
 		446803B21F32863400D87923 /* AboutThisAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446803B11F32863400D87923 /* AboutThisAppViewController.swift */; };
+		446803B71F3294E500D87923 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 446803B61F3294E500D87923 /* Settings.bundle */; };
 		44743A851F2E91A00062DA03 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44743A841F2E91A00062DA03 /* PersonTableViewCell.swift */; };
 		447476121EF21D7600455293 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4474760F1EF21D7600455293 /* LaunchScreen.storyboard */; };
 		4479683D1F2C5E760091ACD1 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479683C1F2C5E760091ACD1 /* ViewControllerExtension.swift */; };
@@ -36,7 +37,6 @@
 		448B66DB1F293E4B0002833B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448B66D91F293E4B0002833B /* RealmSwift.framework */; };
 		448B66DC1F293E4B0002833B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448B66DA1F293E4B0002833B /* Realm.framework */; };
 		448B66DF1F2942CE0002833B /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448B66DE1F2942CE0002833B /* MovieDetailViewController.swift */; };
-		4498B87D1EF32F3B00D19F6F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 44A220E51EF1BC42004D9E8C /* Settings.bundle */; };
 		44A5E4A81F2F946300FCF1FD /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A5E4A71F2F946300FCF1FD /* DetailCollectionViewCell.swift */; };
 		44A5E4D31F30585E00FCF1FD /* OverviewLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A5E4D21F30585E00FCF1FD /* OverviewLabel.swift */; };
 		44C0F6731EFC5CF2008D575C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C0F6721EFC5CF2008D575C /* SystemConfiguration.framework */; };
@@ -70,6 +70,7 @@
 		445C369F1F267F4900B7D920 /* Memo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Memo.txt; sourceTree = "<group>"; };
 		446803AF1F32583C00D87923 /* RLMHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMHistory.swift; sourceTree = "<group>"; };
 		446803B11F32863400D87923 /* AboutThisAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutThisAppViewController.swift; sourceTree = "<group>"; };
+		446803B61F3294E500D87923 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		44743A841F2E91A00062DA03 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
 		4474760F1EF21D7600455293 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4479683C1F2C5E760091ACD1 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -78,7 +79,6 @@
 		448B66D91F293E4B0002833B /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		448B66DA1F293E4B0002833B /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		448B66DE1F2942CE0002833B /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
-		44A220E51EF1BC42004D9E8C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../Settings.bundle; sourceTree = "<group>"; };
 		44A5E4A71F2F946300FCF1FD /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		44A5E4D21F30585E00FCF1FD /* OverviewLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewLabel.swift; sourceTree = "<group>"; };
 		44C0F6721EFC5CF2008D575C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -262,6 +262,7 @@
 			children = (
 				4474760F1EF21D7600455293 /* LaunchScreen.storyboard */,
 				44D9431F1EE22865004EF6A3 /* Info.plist */,
+				446803B61F3294E500D87923 /* Settings.bundle */,
 				4902FD931EF4A77900ED50A9 /* Assets.xcassets */,
 				44E3BE391EE7124700466CF5 /* Resources */,
 				44E3BE4E1EE7F44000466CF5 /* Views */,
@@ -275,7 +276,6 @@
 			children = (
 				4479683E1F2C608E0091ACD1 /* Fonts */,
 				44E3BE4D1EE7F42F00466CF5 /* Nib */,
-				44A220E51EF1BC42004D9E8C /* Settings.bundle */,
 				44ECFDFE1EF5E9D6008F8BA2 /* APIkey.swift */,
 			);
 			path = Resources;
@@ -360,13 +360,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				446803B71F3294E500D87923 /* Settings.bundle in Resources */,
 				447968421F2C60C50091ACD1 /* Montserrat-Regular.ttf in Resources */,
 				445C36A01F267F4900B7D920 /* Memo.txt in Resources */,
 				447476121EF21D7600455293 /* LaunchScreen.storyboard in Resources */,
 				44E3BE4A1EE7C12100466CF5 /* TableViewCell.xib in Resources */,
 				440C7BE91EE8CBF70050C90A /* ResultView.xib in Resources */,
 				445C369E1F2670F600B7D920 /* Main.storyboard in Resources */,
-				4498B87D1EF32F3B00D19F6F /* Settings.bundle in Resources */,
 				4902FD941EF4A77900ED50A9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
