@@ -183,6 +183,11 @@ final class MovieDetailViewController: UIViewController {
         
         try! realm.write {
             
+            if realm.objects(RLMHistory.self).count > 5 {
+                print("キャパオーバー")
+                realm.delete(realm.objects(RLMHistory.self))
+            }
+            
             let intObj = IntObject(id: self.movieID)
             
             let myHistory = RLMHistory()

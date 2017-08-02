@@ -156,6 +156,7 @@ class WelcomeViewController: UIViewController {
                 self.taskDoneCount += 1
             }
         }
+        
     }
     
     override func showAlert(title: String, message: String) {
@@ -165,38 +166,25 @@ class WelcomeViewController: UIViewController {
     
     private func getMovieHistory() -> Int? {
         
-        /*
-        var result: [Int] = []
-        
         let realm = try! Realm()
-        let myHistory = realm.objects(RLMHistory.self)[0]
         
-        myHistory.history.forEach {
-            result.append($0.id)
-        }
-        */
+        let sharedRLMHistory = realm.objects(RLMHistory.self)
+        print("一覧: ", sharedRLMHistory)
         
-        let realm = try! Realm()
-        let history = realm.objects(RLMHistory.self).first?.history //List<IntObject>
+        let count = UInt32(sharedRLMHistory.count)
+        // まだ履歴が1件もない場合、OFB例外になるのでエスケープ
+        guard count > 0 else { return nil }
         
-        guard let myHistory = history else { return nil }
-        
-        print(myHistory)
-        
-        // 件数
-        let count = UInt32(myHistory.count)
-        
-        // ここ、-1とかになるならやばいな。。。
         let idx = Int(arc4random_uniform(count))
         
-        if idx == -1 {
+        guard idx > -1 else {
             print("異常値")
             return nil
         }
+    
+        print("選ばれたID: \(sharedRLMHistory[idx].history.first?.id)")
         
-        print("選ばれたID: \(myHistory[idx].id)")
-        
-        return myHistory[idx].id
+        return sharedRLMHistory[idx].history.first?.id
         
     }
     
