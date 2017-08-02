@@ -259,13 +259,11 @@ final class MovieListViewController: UIViewController {
     
     
     func infoButtonTapped() {
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc         = storyboard.instantiateViewController(withIdentifier: "AboutThisApp") as! UINavigationController
+        vc.view.backgroundColor = .white
         present(vc, animated: true, completion: nil)
-        
     }
-    
     
 }
 
