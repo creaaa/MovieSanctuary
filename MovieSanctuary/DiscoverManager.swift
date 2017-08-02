@@ -27,7 +27,7 @@ enum Genre: Int {
     case war         = 10752
     case TVMovie     = 10770
     
-    static let genres: [Genre] = [.adventure, .fantasy, .horror,.action,
+    static let genres: [Genre] = [.adventure, .fantasy, .horror, .action,
                                   .comedy, .history, .romance, .family]
     
 }
