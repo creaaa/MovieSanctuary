@@ -333,6 +333,7 @@
 				TargetAttributes = {
 					44D9430F1EE22865004EF6A3 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = SH42LNFRZ9;
 						ProvisioningStyle = Automatic;
 					};
 				};

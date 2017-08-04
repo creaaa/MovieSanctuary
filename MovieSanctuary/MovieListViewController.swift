@@ -64,6 +64,7 @@ final class MovieListViewController: UIViewController {
             let edgeInsets = UIEdgeInsets(top: 64, left: 0, bottom: 49, right: 0)
             resultView.tableView.contentInset          = edgeInsets
             resultView.tableView.scrollIndicatorInsets = edgeInsets
+            
         }
 
         

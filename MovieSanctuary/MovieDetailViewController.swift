@@ -25,9 +25,6 @@ final class MovieDetailViewController: UIViewController {
     var movieID: Int!
     
     
-    // 同じRealmをオブジェクトをつかわないと、 
-    
-    
     ////////////////////////
     // MARK: - Life Cycle
     ////////////////////////
