@@ -6,8 +6,8 @@
 access to human's achievement
 
 <div>
-	<img src="https://github.com/creaaa/MovieSanctuary/blob/master/Screenshots/ms1min.jpg">
-	<img src="https://github.com/creaaa/MovieSanctuary/blob/master/Screenshots/ms2min.jpg">
-	<img src="https://github.com/creaaa/MovieSanctuary/blob/master/Screenshots/ms3min.jpg">
-	<img src="https://github.com/creaaa/MovieSanctuary/blob/master/Screenshots/ms4min.jpg">
+	<img src="https://github.com/creaaa/MovieSanctuary/blob/master/Screenshots/ms1min.jpg" width="200px" height="300px">
+	<img src="https://github.com/creaaa/MovieSanctuary/blob/master/Screenshots/ms2min.jpg" width="200px" height="300px">
+	<img src="https://github.com/creaaa/MovieSanctuary/blob/master/Screenshots/ms3min.jpg" width="200px" height="300px">
+	<img src="https://github.com/creaaa/MovieSanctuary/blob/master/Screenshots/ms4min.jpg" width="200px" height="300px">
 </div>
