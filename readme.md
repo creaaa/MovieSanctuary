@@ -8,7 +8,8 @@
 Movie Sanctuary is a native iOS app that provides yout with full access to many movies and their info. Each time you lauch the app, different movies will welcome you, which results in it performs happy serendipity. Through this app, we can feel movies close and profound.
 
 <div align="center">
-	<img src="https://github.com/creaaa/Pomodorify/blob/master/Screenshots/pd1.png" width="200px" height="356px" style="margin-right: 20px">
-	<img src="https://github.com/creaaa/Pomodorify/blob/master/Screenshots/pd2.png" width="200px" height="356px" style="margin-left: 20px; margin-right: 20px">
-	<img src="https://github.com/creaaa/Pomodorify/blob/master/Screenshots/pd3.png" width="200px" height="356px" style="margin-left: 20px">
+	<img src="https://github.com/creaaa/MovieSanctuary/blob/master/Screenshots/ms1min.jpg" width="200px" height="356px" style="margin-right: 20px">
+	<img src="https://github.com/creaaa/MovieSanctuary/blob/master/Screenshots/ms2min.jpg" width="200px" height="356px" style="margin-right: 20px">
+	<img src="https://github.com/creaaa/MovieSanctuary/blob/master/Screenshots/ms3min.jpg" width="200px" height="356px" style="margin-right: 20px">
+	<img src="https://github.com/creaaa/MovieSanctuary/blob/master/Screenshots/ms4min.jpg" width="200px" height="356px" style="margin-right: 20px">
 </div>
