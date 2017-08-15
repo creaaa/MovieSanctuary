@@ -5,7 +5,7 @@
 
 ## 🎬 Cool movie database app with wise concierge 🎬
 
-Movie Sanctuary is a native iOS app that provides yout with full access to many movies and their info. Each time you lauch the app, different movies will welcome you, which results in it performs happy serendipity. Through this app, we can feel movies close and profound.
+Movie Sanctuary is a native iOS app that provides you with full access to many movies and their info. Each time you lauch the app, different movies will welcome you, which results in it performs happy serendipity. Through this app, we can feel movies close and profound.
 
 ### Concierge performs a happy serendipity
 
